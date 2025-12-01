@@ -1514,6 +1514,8 @@ The objects of this class are cloneable with this method.
 # Generally, we do not recommend using the R6 classes directly, but rather
 # use the disco() or any method function, for example pc(), instead.
 
+# Requires Tetrad to be installed
+if (FALSE) { # \dontrun{
 # Load data
 set.seed(1405)
 data("tpcExample")
@@ -1522,26 +1524,19 @@ small_dataset <- tpcExample[1:100, ]
 # Recommended:
 my_pc <- pc(engine = "tetrad", test = "conditional_gaussian")
 my_pc(small_dataset)
-#> Error in find_tetrad_jar(): Tetrad directory not found. Please install Tetrad or set the TETRAD_DIR environment variable or tetrad.dir option.
 
 # or
 disco(data = small_dataset, method = my_pc)
-#> Error in find_tetrad_jar(): Tetrad directory not found. Please install Tetrad or set the TETRAD_DIR environment variable or tetrad.dir option.
 
 # Using R6 class:
 s <- TetradSearch$new()
-#> Error in find_tetrad_jar(): Tetrad directory not found. Please install Tetrad or set the TETRAD_DIR environment variable or tetrad.dir option.
 
 s$set_data(small_dataset)
-#> Error: object 's' not found
 s$set_test(method = "conditional_gaussian", alpha = 0.05)
-#> Error: object 's' not found
 s$set_alg("pc")
-#> Error: object 's' not found
 
 g <- s$run_search()
-#> Error: object 's' not found
 
 print(g)
-#> Error: object 'g' not found
+} # }
 ```

@@ -120,12 +120,15 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># use Tetrad PC algorithm with conditional Gaussian test</span></span>
-<span><span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
-<span><span class="va">disco_tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
+<span><span class="co"># Requires Tetrad to be installed</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span>  <span class="va">disco_tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># similarly, one could do</span></span>
-<span><span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="va">tetrad_pc</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/set_knowledge.html">set_knowledge</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span>
-<span><span class="va">disco_tetrad_pc_new</span> <span class="op">&lt;-</span> <span class="fu">tetrad_pc</span><span class="op">(</span><span class="va">tpcExample</span><span class="op">)</span></span>
+<span>  <span class="co"># similarly, one could do</span></span>
+<span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="va">tetrad_pc</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/set_knowledge.html">set_knowledge</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span>
+<span>  <span class="va">disco_tetrad_pc_new</span> <span class="op">&lt;-</span> <span class="fu">tetrad_pc</span><span class="op">(</span><span class="va">tpcExample</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># use causalDisco's own tges algorithm with temporal BIC score</span></span>
 <span><span class="va">cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tges.html">tges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, score <span class="op">=</span> <span class="st">"tbic"</span><span class="op">)</span></span>
