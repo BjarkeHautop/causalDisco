@@ -1,0 +1,212 @@
+# Perform causal discovery using the temporal FCI algorithm (TFCI)
+
+Use a modification of the FCI algorithm that makes use of background
+knowledge in the format of a partial ordering. This may, for instance,
+come about when variables can be assigned to distinct tiers or periods
+(i.e., a temporal ordering).
+
+## Usage
+
+``` r
+tfci_run(
+  data = NULL,
+  knowledge = NULL,
+  order = NULL,
+  alpha = 10^(-1),
+  test = regTest,
+  suffStat = NULL,
+  method = "stable.fast",
+  methodNA = "none",
+  methodOri = "conservative",
+  directed_as_undirected = FALSE,
+  varnames = NULL,
+  ...
+)
+```
+
+## Arguments
+
+- data:
+
+  A data frame with the observed variables. Columns are variables. When
+  using the deprecated `order` argument, variables should be prefixed
+  with their period name (see examples). When using `knowledge`,
+  prefixes are not required.
+
+- knowledge:
+
+  A *knowledge* object describing tiers/periods and optional
+  forbidden/required edges. This replaces the legacy `order` interface
+  and is the preferred way to supply temporal background knowledge.
+
+- order:
+
+  **Deprecated**. A character vector with period-prefixes in their
+  temporal order (e.g., `c("p1", "p2")`). If supplied (and `knowledge`
+  is `NULL`), a temporary `knowledge` object is constructed using
+  [tidyselect::starts_with](https://tidyselect.r-lib.org/reference/starts_with.html)
+  for each prefix. Supplying both `knowledge` and `order` is an error.
+
+- alpha:
+
+  The alpha level used as the per-test significance threshold for
+  conditional independence testing.
+
+- test:
+
+  A conditional independence test. The default `regTest` uses a
+  regression-based information-loss test. Another available option is
+  `corTest` which tests for vanishing partial correlations.
+  User-supplied functions may also be used; see details for the required
+  interface.
+
+- suffStat:
+
+  A sufficient statistic. If supplied, it is passed directly to the test
+  and no statistics are computed from `data`. Its structure depends on
+  the chosen `test`.
+
+- method:
+
+  Skeleton construction method, one of `"stable"`, `"original"`, or
+  `"stable.fast"` (default). See
+  [`skeleton`](https://rdrr.io/pkg/pcalg/man/skeleton.html) for details.
+
+- methodNA:
+
+  Handling of missing values, one of `"none"` (default; error on any
+  `NA`), `"cc"` (complete-case analysis), or `"twd"` (test-wise
+  deletion).
+
+- methodOri:
+
+  Method for handling conflicting separating sets when orienting edges;
+  must be one of `"standard"`, `"conservative"` (the default) or
+  `"maj.rule"`. See [pc](https://rdrr.io/pkg/pcalg/man/pc.html) for
+  further details.
+
+- directed_as_undirected:
+
+  Logical; if `TRUE`, treat any directed edges in `knowledge` as
+  undirected during skeleton learning. This is due to the fact that
+  pcalg does not allow directed edges in `fixedEdges` or `fixedGaps`.
+  Default is `FALSE`.
+
+- varnames:
+
+  Character vector of variable names. Only needed when `data` is not
+  supplied and all information is passed via `suffStat`.
+
+- ...:
+
+  Additional arguments passed to
+  [`skeleton`](https://rdrr.io/pkg/pcalg/man/skeleton.html) during
+  skeleton construction.
+
+## Value
+
+A `caugi` and a `knowledge` (`knowledgeable_caugi`) object.
+
+## Details
+
+The temporal/tiered background information enters several places in the
+TFCI algorithm: (1) In the skeleton construction phase, when looking for
+separating sets \\Z\\ between two variables \\X\\ and \\Y\\, \\Z\\ is
+not allowed to contain variables that are strictly after both \\X\\ and
+\\Y\\ in the temporal order (as specified by the `knowledge` tiers). (2)
+This also applies to the subsequent phase where the algorithm searches
+for possible D-SEP sets. (3) Prior to other orientation steps, any
+cross-tier edges get an arrowhead placed at their latest node.
+
+After this, the usual FCI orientation rules are applied; see
+[udag2pag](https://rdrr.io/pkg/pcalg/man/udag2pag.html) for details.
+
+## Examples
+
+``` r
+### tfci() example ###
+
+data("tpcExample")
+
+kn <- knowledge(
+  tpcExample,
+  tier(
+    child ~ tidyselect::starts_with("child"),
+    youth ~ tidyselect::starts_with("youth"),
+    oldage ~ tidyselect::starts_with("oldage")
+  )
+)
+
+# Recommended path using disco()
+my_tfci <- tfci(engine = "causalDisco", test = "fisher_z", alpha = 0.05)
+
+disco(tpcExample, my_tfci, knowledge = kn)
+#> 
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
+#> 
+#> ── Tiers ──
+#> 
+#>   label 
+#> 1 child 
+#> 2 youth 
+#> 3 oldage
+#> 
+#> ── Variables ──
+#> 
+#>   var       tier  
+#> 1 child_x1  child 
+#> 2 child_x2  child 
+#> 3 youth_x3  youth 
+#> 4 youth_x4  youth 
+#> 5 oldage_x5 oldage
+#> 6 oldage_x6 oldage
+#> 
+
+# or using my_tfci directly
+my_tfci <- my_tfci |> set_knowledge(kn)
+my_tfci(tpcExample)
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
+#> 
+#> ── Tiers ──
+#> 
+#>   label 
+#> 1 child 
+#> 2 youth 
+#> 3 oldage
+#> 
+#> ── Variables ──
+#> 
+#>   var       tier  
+#> 1 child_x1  child 
+#> 2 child_x2  child 
+#> 3 youth_x3  youth 
+#> 4 youth_x4  youth 
+#> 5 oldage_x5 oldage
+#> 6 oldage_x6 oldage
+#> 
+
+# Also possible: using tfci_run()
+tfci_run(tpcExample, test = corTest, knowledge = kn)
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
+#> 
+#> ── Tiers ──
+#> 
+#>   label 
+#> 1 child 
+#> 2 youth 
+#> 3 oldage
+#> 
+#> ── Variables ──
+#> 
+#>   var       tier  
+#> 1 child_x1  child 
+#> 2 child_x2  child 
+#> 3 youth_x3  youth 
+#> 4 youth_x4  youth 
+#> 5 oldage_x5 oldage
+#> 6 oldage_x6 oldage
+#> 
+```
