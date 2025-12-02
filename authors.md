@@ -4,19 +4,27 @@
 
 - **Anne Helby Petersen**. Author, maintainer.
 
+- **Tobias Ellegaard Larsen**. Contributor.
+
+- **Claus Thorn Ekstrøm**. Contributor.
+
+- **Frederik Fabricius-Bjerre**. Author.
+
+- **Bjarke Hautop Kristensen**. Author.
+
 ## Citation
 
 Source:
 [`DESCRIPTION`](https://github.com/annennenne/causalDisco/blob/master/DESCRIPTION)
 
-Petersen A (2025). *causalDisco: Tools for Causal Discovery on
-Observational Data*. R package version 1.0.0.9001,
-<https://github.com/annennenne/causalDisco>.
+Petersen A, Frederik Fabricius-Bjerre, Kristensen B (2025).
+*causalDisco: Tools for Causal Discovery on Observational Data*. R
+package version 0.9.1.9002, <https://github.com/annennenne/causalDisco>.
 
     @Manual{,
       title = {causalDisco: Tools for Causal Discovery on Observational Data},
-      author = {Anne Helby Petersen},
+      author = {Anne Helby Petersen and {Frederik Fabricius-Bjerre} and Bjarke Hautop Kristensen},
       year = {2025},
-      note = {R package version 1.0.0.9001},
+      note = {R package version 0.9.1.9002},
       url = {https://github.com/annennenne/causalDisco},
     }

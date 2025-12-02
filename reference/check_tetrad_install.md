@@ -31,6 +31,5 @@ A list with elements:
 check_tetrad_install()
 #> Installed: FALSE 
 #> Version: NULL 
-#> Message: Tetrad directory not configured. Call install_tetrad()
-#>                        to install it. 
+#> Message: Tetrad directory not configured. Call install_tetrad() to install it. 
 ```

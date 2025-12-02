@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,7 +87,7 @@
 <div class="section level3">
 <h3 id="installing-java--jdk">Installing Java / JDK<a class="anchor" aria-label="anchor" href="#installing-java--jdk"></a>
 </h3>
-<p><code>causalDisco</code> provides an interface to the Java library <a href="https://github.com/cmu-phil/tetrad" class="external-link"><code>Tetrad</code></a> for causal discovery algorithms. To use algorithms from <code>Tetrad</code> you need to install JDK 21 (or newer) <a href="https://www.oracle.com/java/technologies/downloads/" class="external-link">here</a> (or look at Tetrad’s <a href="https://github.com/cmu-phil/tetrad/wiki/Setting-up-Java-for-Tetrad" class="external-link">Java setup guide</a>).</p>
+<p><code>causalDisco</code> provides an interface to the Java library <a href="https://github.com/cmu-phil/tetrad" class="external-link"><code>Tetrad</code></a> for causal discovery algorithms. To use algorithms from <code>Tetrad</code> you need to install JDK 21 (or newer) <a href="https://www.oracle.com/java/technologies/downloads/" class="external-link">here</a> (or look at <code>Tetrad</code>’s <a href="https://github.com/cmu-phil/tetrad/wiki/Setting-up-Java-for-Tetrad" class="external-link">Java setup guide</a>).</p>
 <p>The current supported version of <code>Tetrad</code> can then be installed by calling</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">causalDisco</span><span class="fu">::</span><span class="fu"><a href="reference/install_tetrad.html">install_tetrad</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -139,27 +139,136 @@
 <p><img src="reference/figures/README-plot-1.png" alt="A causal graph with the known tiers indicated by vertical positioning of the nodes." width="100%"></p>
 </div>
 <div class="section level2">
-<h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
+<h2 id="questions">Questions<a class="anchor" aria-label="anchor" href="#questions"></a>
 </h2>
 <ul>
-<li><p>Tetrad does not use tier knowledge correctly yet.</p></li>
-<li><p>Our tges algorithm does not yet support forbidden/required edges from knowledge objects.</p></li>
-<li><p>Piping as done above for Tetrad loses <span class="math inline">knowledge</span>tiers information.</p></li>
-<li><p>List of available tests for <code>pc</code> (and more probably)? Can see “conditional_gaussian”, “mi”, and “fisher_z” exists. What else? I guess the idea was to grab these from the engine dynamically?</p></li>
+<li>Is required/forbidden directional? E.g. is <code>required(A ~ B)</code> the same as <code>required(B ~ A)</code>?</li>
+</ul>
+<p>Documentation at <code><a href="reference/knowledge.html">?knowledge</a></code> seems to suggest it is directional, but it doesn’t seem to be implemented that way?</p>
+</div>
+<div class="section level2">
+<h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
+</h2>
+<div class="section level3">
+<h3 id="bugfixes">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes"></a>
+</h3>
+<ul>
+<li>
+<code>Tetrad</code> does not use required knowledge correctly yet. If giving required edges it says <code>Orienting edge (Knowledge): youth_x3 --&gt; oldage_x5</code> but doesn’t seem to do anything? I can make it return this edge <code>youth_x3 o-o oldage_x5</code> or simply make it miss the edge entirely. See <a href="https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-pc.R#L47" class="external-link">unit tests for pc</a>
+</li>
+</ul>
+<p>Forbidden seems to work correctly.</p>
+<ul>
+<li>
+<code>Tetrad</code> does not use tier knowledge correctly yet. If giving tier knowledge it still returns undirected edges between tiers (see <a href="https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-pc.R#L1" class="external-link">unit tests for pc</a>. Could it be because the graph looks like this:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>violations <span class="ot">&lt;-</span> causalDisco<span class="sc">:::</span><span class="fu">check_tier_violations</span>(edges, kn)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="sc">&gt;</span> violations</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># A tibble: 2 × 5</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  from      edge  to       tier_from tier_to</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        <span class="er">&lt;</span>int<span class="sc">&gt;</span>   <span class="er">&lt;</span>int<span class="sc">&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="dv">1</span> oldage_x5 <span class="sc">---</span>   youth_x3         <span class="dv">3</span>       <span class="dv">2</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="dv">2</span> oldage_x6 <span class="sc">---</span>   youth_x4         <span class="dv">3</span>       <span class="dv">2</span></span></code></pre></div>
+<p>And it only tries to fix it form the other way? I.e. if to and from were swapped? More investigation needed …</p>
+<ul>
+<li>
+<p>Some of our algorithms (<code>tfci</code>, more?) with engine <code>causalDisco</code> does not currently work correctly with tier knowledge</p>
+<ul>
+<li>“tier” knowledge gives bidirectional edges that violate the tiers (see e.g. <a href="https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tfci.R" class="external-link">Unit tests for tfci</a>). and the example output:</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>violations <span class="ot">&lt;-</span> causalDisco<span class="sc">:::</span><span class="fu">check_tier_violations</span>(edges, kn)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="sc">&gt;</span> violations</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co"># A tibble: 4 × 5</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  from     edge  to        tier_from tier_to</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>         <span class="er">&lt;</span>int<span class="sc">&gt;</span>   <span class="er">&lt;</span>int<span class="sc">&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="dv">1</span> child_x2 <span class="ot">&lt;-</span><span class="er">&gt;</span>   oldage_x5         <span class="dv">3</span>       <span class="dv">1</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="dv">2</span> youth_x3 <span class="ot">&lt;-</span><span class="er">&gt;</span>   oldage_x5         <span class="dv">2</span>       <span class="dv">1</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="dv">3</span> youth_x4 <span class="ot">&lt;-</span><span class="er">&gt;</span>   oldage_x5         <span class="dv">2</span>       <span class="dv">1</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="dv">4</span> youth_x4 <span class="ot">&lt;-</span><span class="er">&gt;</span>   oldage_x6         <span class="dv">2</span>       <span class="dv">1</span></span></code></pre></div>
+<p>Probably just the knowledge not knowing how to handle bi-directional edges (since it works with <code>tges</code> on un-directed edges)?</p>
+<ul>
+<li><p>All of our algorithms (I think?) does not work with required edges from knowledge objects (see e.g. <a href="https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tfci.R" class="external-link">Unit tests for tfci</a>). Currently does nothing.</p></li>
+<li><p>Some of our algorithms does not work with forbidden edges from knowledge objects (see e.g. <a href="https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tges.R" class="external-link">Unit tests for tges</a>). It does however work for <code>tfci</code> with engine <code>causalDisco</code> (see <a href="https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tfci.R" class="external-link">Unit tests for tfci</a>).</p></li>
+<li><p>Piping as done above for <code>Tetrad</code> loses <code>$knowledge$tiers</code> information.</p></li>
 <li><p>inst/roxygen-examples/TetradSearch_example.R fails for set.seed(16) (works for seed 1-15) with error:</p></li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl,  : </span></span>
 <span><span class="co">#  java.lang.RuntimeException</span></span></code></pre></div>
 <p>Maybe v7.6.9 fixes it?</p>
+</div>
+<div class="section level3">
+<h3 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
+</h3>
 <ul>
-<li><p>Make vignettes</p></li>
-<li><p>Long term: Move to Tetrad v7.6.9 v7.6.9 removes this entire folder</p></li>
+<li><p>List of available tests for <code>pc</code> (and more probably)? Can see <code>"conditional_gaussian"</code>, <code>"mi"</code>, and <code>"fisher_z"</code> exists. What else?</p></li>
+<li>
+<p>List in documentation of <code>tfci</code>, … what kind of graph it returns. <code>tfci</code> gives a PAG, right? Currently it returns <code>graph_class: UNKNOWN</code></p>
+<ul>
+<li>Either wait/help for <code>caugi</code> to implement different classes</li>
+<li>Or we implement a function that converts <code>caugi</code> output to specific graph classes based on algorithm/edges?</li>
+<li>Update plotting function to work correctly with different graph classes.</li>
 </ul>
-<p><a href="https://github.com/cmu-phil/tetrad/tree/v7.6.8/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/cluster" class="external-link uri">https://github.com/cmu-phil/tetrad/tree/v7.6.8/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/cluster</a></p>
+</li>
+<li><p>Make vignettes</p></li>
+<li><p>Make it clear somewhere what/how knowledge is supported in which algorithms. E.g. <code>pc</code> with engine <code>pcalg</code> only works with forbidden edges from knowledge objects and requires specifying both ways:</p></li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>    <span class="va">tpcExample</span>,</span>
+<span>    <span class="fu">forbidden</span><span class="op">(</span><span class="va">child_x1</span> <span class="op">~</span> <span class="va">youth_x3</span><span class="op">)</span>,</span>
+<span>    <span class="fu">forbidden</span><span class="op">(</span><span class="va">youth_x3</span> <span class="op">~</span> <span class="va">child_x1</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p>It’s documented in <code>?as_pcalg_constaints</code> but should be more visible.</p>
+<p>Maybe make it possible to check documentation of engine via <code>?pcalg</code> and similar for the rest?</p>
+</div>
+<div class="section level3">
+<h3 id="standardization">Standardization<a class="anchor" aria-label="anchor" href="#standardization"></a>
+</h3>
+<ul>
+<li>We are mixing between different things currently:
+<ul>
+<li>
+<code>tibble</code> vs <code>data.frame</code> (e.g. <code>knowledge</code> is <code>tibble</code> and <code>disco()$caugi@edges</code> is <code>data.frame</code>)</li>
+<li>
+<code>S3</code> vs <code>S7</code>
+</li>
+<li>More maybe?</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="adopt-tetrad-v769">Adopt Tetrad v7.6.9<a class="anchor" aria-label="anchor" href="#adopt-tetrad-v769"></a>
+</h3>
+<ul>
+<li>Move to <code>Tetrad</code> v7.6.9. v7.6.9 removes the folder <a href="https://github.com/cmu-phil/tetrad/tree/v7.6.8/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/cluster" class="external-link">algcomparison/algorithm/cluster</a>
+</li>
+</ul>
 <p>Was removed in this commit <a href="https://github.com/cmu-phil/tetrad/commit/295dceef6b83ac08ff0032fb194cf3ee5e429337#diff-adf829223cc59eac11682310f8a77c0ec3cf26a5b4310d75ec8edfaa86dd285b" class="external-link uri">https://github.com/cmu-phil/tetrad/commit/295dceef6b83ac08ff0032fb194cf3ee5e429337#diff-adf829223cc59eac11682310f8a77c0ec3cf26a5b4310d75ec8edfaa86dd285b</a></p>
-<p>Changelog says “and a generalization of GFFC (Generalized Find Factor Clusters) of FOFC and FTFC, providing multiple strategies for discovering latent clusterings from measurement data.”</p>
-<p>so we need to implement this in causalDisco (help?)</p>
+<p><a href="https://github.com/cmu-phil/tetrad/releases" class="external-link">Changelog</a> item 14 says “and a generalization of GFFC (Generalized Find Factor Clusters) of FOFC and FTFC, providing multiple strategies for discovering latent clusterings from measurement data.”</p>
+<p>so we need to implement this in <code>causalDisco</code> (help?)</p>
+</div>
+<div class="section level3">
+<h3 id="features">Features<a class="anchor" aria-label="anchor" href="#features"></a>
+</h3>
+<ul>
+<li><p>Add a <code>seed</code> argument to <code><a href="reference/disco.html">disco()</a></code>?</p></li>
+<li><p>Allow <code><a href="reference/disco.html">disco()</a></code> to not take a knowledge object? Currently for no knowledge you have to pass <code>knowledge = knowledge()</code>. And this is not allowed in some algorithms (e.g. <code>pc</code> with engine <code>pcalg</code>).</p></li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>out_no_kn <span class="ot">&lt;-</span> <span class="fu">disco</span>(<span class="at">data =</span> tpcExample, <span class="at">method =</span> pcalg_pc, <span class="at">knowledge =</span> <span class="fu">knowledge</span>())</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>Error<span class="sc">:</span> <span class="st">`</span><span class="at">labels</span><span class="st">`</span> contained variables that were not <span class="cf">in</span> the knowledge object<span class="sc">:</span> [child_x2, child_x1, youth_x4, youth_x3, oldage_x6, oldage_x5]</span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="cran-todo">CRAN TODO<a class="anchor" aria-label="anchor" href="#cran-todo"></a>
+</h3>
+<ul>
+<li><p>Add a copyright holder (<code>"cph"</code>) in persons field of DESCRIPTION (needed for CRAN, see <a href="https://github.com/DavisVaughan/extrachecks" class="external-link">here</a>)</p></li>
+<li><p>Update Description: field in DESCRIPTION to mention it wraps other packages, …</p></li>
+</ul>
+</div>
 </div>
 <div class="section level2">
 <h2 id="bugs--requests">Bugs &amp; requests<a class="anchor" aria-label="anchor" href="#bugs--requests"></a>
@@ -196,6 +305,9 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Anne Helby Petersen <br><small class="roles"> Author, maintainer </small>   </li>
+<li>Frederik Fabricius-Bjerre <br><small class="roles"> Author </small>   </li>
+<li>Bjarke Hautop Kristensen <br><small class="roles"> Author </small>   </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
@@ -213,7 +325,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Anne Helby Petersen.</p>
+  <p>Developed by Anne Helby Petersen, Frederik Fabricius-Bjerre, Bjarke Hautop Kristensen.</p>
 </div>
 
 <div class="pkgdown-footer-right">

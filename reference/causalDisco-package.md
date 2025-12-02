@@ -26,3 +26,15 @@ Useful links:
 ## Author
 
 **Maintainer**: Anne Helby Petersen <ahpe@sund.ku.dk>
+
+Authors:
+
+- Frederik Fabricius-Bjerre <ffb@di.ku.dk>
+
+- Bjarke Hautop Kristensen <bjarke.kristensen@sund.ku.dk>
+
+Other contributors:
+
+- Tobias Ellegaard Larsen <tobias.ellegaard@sund.ku.dk> \[contributor\]
+
+- Claus Thorn Ekstrøm <ekstrom@sund.ku.dk> \[contributor\]
