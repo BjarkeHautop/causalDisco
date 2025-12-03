@@ -19,7 +19,11 @@ Time to hit the disco 🪩
 
 ### Install `causalDisco`
 
-Install the package from GitHub using `pak`:
+To install `causalDisco` ensure you first have installed Rust and
+Java/JDK as described below.
+
+Then you can install the development version of `causalDisco` from
+GitHub using `pak`:
 
 ``` r
 pak::pkg_install("https://github.com/BjarkeHautop/causalDisco")
@@ -59,8 +63,8 @@ from the packages `causalDisco` itself, the Java library `Tetrad`,
 library(causalDisco)
 #> causalDisco startup:
 #>   Java heap size requested: 2 GB
-#>   Tetrad version: 7.6.8
-#>   Java successfully initialized with 2 GB.
+#>   Tetrad version: not installed
+#>   Tetrad is not installed. Run install_tetrad() to install it.
 #>   To change heap size, set options(java.heap.size = 'Ng') or Sys.setenv(JAVA_HEAP_SIZE = 'Ng') *before* loading.
 #>   Restart R to apply changes.
 
@@ -105,15 +109,24 @@ of the nodes.](reference/figures/README-plot-1.png)
 
 ## Questions
 
-- Is required/forbidden directional? E.g. is `required(A ~ B)` the same
-  as `required(B ~ A)`?
-
-Documentation at
-[`?knowledge`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md)
-seems to suggest it is directional, but it doesn’t seem to be
-implemented that way?
+- …
 
 ## TODO
+
+### Clean up old files
+
+- Remove old files such as `R/amat.R`, `R/compare.R`, `R/confusion.R`, …
+
+### Dependencies
+
+- Currently you can’t install `causalDisco` without having Java/JDK
+  installed. Move all `rJava` stuff to optional and start up only
+  initialize `rJava` if installed?
+
+- Move from `tibble` to `data.table`? See also Standardization
+  subsection.
+
+- Remove old dependencies that are not used anymore (e.g. `MASS`)
 
 ### Bugfixes
 
@@ -130,7 +143,7 @@ Forbidden seems to work correctly.
 - `Tetrad` does not use tier knowledge correctly yet. If giving tier
   knowledge it still returns undirected edges between tiers (see [unit
   tests for
-  pc](https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-pc.R#L1).
+  pc](https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-pc.R#L1)).
   Could it be because the graph looks like this:
 
 ``` r
@@ -143,14 +156,14 @@ violations <- causalDisco:::check_tier_violations(edges, kn)
 2 oldage_x6 ---   youth_x4         3       2
 ```
 
-And it only tries to fix it form the other way? I.e. if to and from were
+And it only tries to fix it from the other way? I.e. if to and from were
 swapped? More investigation needed …
 
 - Some of our algorithms (`tfci`, more?) with engine `causalDisco` does
   not currently work correctly with tier knowledge
 
   - “tier” knowledge gives bidirectional edges that violate the tiers
-    (see e.g. [Unit tests for
+    (see e.g. [unit tests for
     tfci](https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tfci.R)).
     and the example output:
 
@@ -170,26 +183,26 @@ Probably just the knowledge not knowing how to handle bi-directional
 edges (since it works with `tges` on un-directed edges)?
 
 - All of our algorithms (I think?) does not work with required edges
-  from knowledge objects (see e.g. [Unit tests for
+  from knowledge objects (see e.g. [unit tests for
   tfci](https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tfci.R)).
   Currently does nothing.
 
 - Some of our algorithms does not work with forbidden edges from
-  knowledge objects (see e.g. [Unit tests for
+  knowledge objects (see e.g. [unit tests for
   tges](https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tges.R)).
-  It does however work for `tfci` with engine `causalDisco` (see [Unit
+  It does however work for `tfci` with engine `causalDisco` (see [unit
   tests for
   tfci](https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tfci.R)).
 
-- Piping as done above for `Tetrad` loses `$knowledge$tiers`
-  information.
+- Piping as done above for `Tetrad` in the example loses
+  `$knowledge$tiers` information.
 
-- inst/roxygen-examples/TetradSearch_example.R fails for set.seed(16)
-  (works for seed 1-15) with error:
+- `inst/roxygen-examples/TetradSearch_example.R` fails for
+  `set.seed(16)` (works for seed `1-15`) with error:
 
 ``` r
-# Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl,  : 
-#  java.lang.RuntimeException
+Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl,  : 
+java.lang.RuntimeException
 ```
 
 Maybe v7.6.9 fixes it?
@@ -216,16 +229,21 @@ Maybe v7.6.9 fixes it?
 
 ``` r
 kn <- knowledge(
-    tpcExample,
-    forbidden(child_x1 ~ youth_x3),
-    forbidden(youth_x3 ~ child_x1)
-  )
+  tpcExample,
+  forbidden(child_x1 ~ youth_x3),
+  forbidden(youth_x3 ~ child_x1)
+)
 ```
 
 It’s documented in `?as_pcalg_constaints` but should be more visible.
 
 Maybe make it possible to check documentation of engine via `?pcalg` and
 similar for the rest?
+
+#### Inspiration for documentation
+
+See how `mlr3` does it, and see their wiki on roxygen R6 guide
+[here](https://github.com/mlr-org/mlr3/wiki/Roxygen-R6-Guide).
 
 ### Standardization
 
