@@ -16,11 +16,12 @@ disco(data, method, knowledge = NULL)
 
 - method:
 
-  An `disco_method` object representing a causal discovery algorithm.
+  A `disco_method` object representing a causal discovery algorithm.
 
 - knowledge:
 
-  A `knowledge` object
+  A `knowledge` object to be incorporated into the disco method. If
+  `NULL` (default), the method is applied without additional knowledge.
 
 ## Value
 
