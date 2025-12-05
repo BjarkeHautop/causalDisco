@@ -34,6 +34,14 @@ A function of class `"tges"` that takes a single argument `data` (a data
 frame) and returns a `caugi` and `knowledge` (`knowledgeable_caugi`)
 object.
 
+## Details
+
+For specific details on the supported scores, tests, and parameters for
+the engine, see:
+
+- [`causalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/causalDiscoSearch.md)
+  for causalDisco.
+
 ## Examples
 
 ``` r

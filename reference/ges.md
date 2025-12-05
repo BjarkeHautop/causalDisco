@@ -34,8 +34,19 @@ ges(engine = c("tetrad", "pcalg"), score, ...)
 ## Value
 
 A function of class `"ges"` that takes a single argument `data` (a data
-frame) and returns an `caugi` and a `knowledge` (`knowledgeable_caugi`)
+frame) and returns a `caugi` and a `knowledge` (`knowledgeable_caugi`)
 object.
+
+## Details
+
+For specific details on the supported scores, tests, and parameters for
+each engine, see:
+
+- [`TetradSearch`](https://bjarkehautop.github.io/causalDisco/reference/TetradSearch.md)
+  for Tetrad,
+
+- [`pcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/pcalgSearch.md)
+  for pcalg.
 
 ## Examples
 

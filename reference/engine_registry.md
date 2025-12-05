@@ -1,6 +1,6 @@
-# Engine Registry for causalDisco
+# Supported engines for causalDisco
 
-This registry contains the supported engines for causalDisco.
+Available engines: bnlearn, causalDisco, pcalg, tetrad.
 
 ## Usage
 

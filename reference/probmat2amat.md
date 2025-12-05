@@ -81,7 +81,7 @@ arXiv:2202.12813 (2022).
 
 ``` r
 # Make random probability matrix that can be
-# converted into adjancency matrix
+# converted into adjacency matrix
 pmat <- matrix(runif(25, 0, 1), 5, 5)
 diag(pmat) <- 0
 

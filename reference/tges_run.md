@@ -1,4 +1,4 @@
-# Estimate the restricted Markov equivalence class using Temporal Greedy Equivalence Search
+# Restricted Markov Equivalence Class Estimation Using Temporal Greedy Equivalence Search
 
 Perform causal discovery using the temporal greedy equivalence search
 algorithm.

@@ -1,4 +1,4 @@
-# TetradSearch R6 class
+# R6 Interface to Tetrad Search Algorithms
 
 High-level wrapper around the Java-based **Tetrad** causal-discovery
 library. The class lets you choose independence tests, scores, and

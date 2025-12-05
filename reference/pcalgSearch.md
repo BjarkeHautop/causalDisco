@@ -1,4 +1,4 @@
-# Class for pcalg search algorithms
+# R6 Interface to pcalg Search Algorithms
 
 This class implements the search algorithms from the pcalg package. It
 allows to set the data, sufficient statistics, test, score, and

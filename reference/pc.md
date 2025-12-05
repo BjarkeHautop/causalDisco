@@ -1,4 +1,4 @@
-# The Peter-Clark (PC) algorithm for causal discovery
+# The Peter-Clark (PC) Algorithm for Causal Discovery
 
 Run the PC algorithm for causal discovery using one of several engines.
 
@@ -42,7 +42,21 @@ pc(engine = c("tetrad", "pcalg", "bnlearn"), test, alpha = 0.05, ...)
 ## Value
 
 A function of class `"pc"` that takes a single argument `data` (a data
-frame) and returns an `caugi` and a `knowledge` object.
+frame) and returns a `caugi` and a `knowledge` object.
+
+## Details
+
+For specific details on the supported scores, tests, and parameters for
+each engine, see:
+
+- [`TetradSearch`](https://bjarkehautop.github.io/causalDisco/reference/TetradSearch.md)
+  for Tetrad,
+
+- [`pcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/pcalgSearch.md)
+  for pcalg,
+
+- [`bnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/bnlearnSearch.md)
+  for bnlearn.
 
 ## Examples
 

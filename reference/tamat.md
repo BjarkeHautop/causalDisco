@@ -22,7 +22,7 @@ tamat(amat, order, type = NULL)
 
 - type:
 
-  The type of adjancency matrix, must be one of `"pdag"` or `"ag"`. If
+  The type of adjacency matrix, must be one of `"pdag"` or `"ag"`. If
   `NULL` (default), the function first checks for a `tamat_type`
   attribute in the input object and makes sure the output matches that,
   and if no the input does not have this attribute, it is set to

@@ -16,12 +16,12 @@ graph2amat(graph, toFrom = TRUE, type = "pdag")
 
 - toFrom:
 
-  Logical indicating whether the resulting adjancency matrix is
-  "to-from" (default), or "from-to", see details.
+  Logical indicating whether the resulting adjacency matrix is "to-from"
+  (default), or "from-to", see details.
 
 - type:
 
-  The type of adjancency matrix, must be one of `"pdag"` or `"ag"`.
+  The type of adjacency matrix, must be one of `"pdag"` or `"ag"`.
   `"pdag"` should be used for directed graphs, namely DAG, CPDAG, MPDAG,
   TPDAG and PDAG adjacency matrices, i.e. adjacency matrices where
   A(i,j) = A(j,i) = 1 is interpreted as an undirected edge. `"ag"` may

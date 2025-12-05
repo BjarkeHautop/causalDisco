@@ -25,7 +25,7 @@ it is used in the causal discovery function
 
   Imaginary Sample Size (ISS), also referred to as Equivalent Sample
   Size (ESS), determines how much weight is assigned to the prior in
-  terms of the size of animaginary sample supporting it. Increasing the
+  terms of the size of an imaginary sample supporting it. Increasing the
   ISS will increase the density of the estimated graph.
 
 ## Details

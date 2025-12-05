@@ -19,7 +19,9 @@ install_tetrad(
 
 - version:
 
-  Character. The version of Tetrad to install. Default is "7.6.8".
+  Character. The version of Tetrad to install. Default is "7.6.8". Use
+  `options(causalDisco.tetrad.version = "...")` to change the default
+  version.
 
 - dir:
 
