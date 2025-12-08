@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9006</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,6 +46,13 @@
 
         </dt>
         <dd>Disco!!</dd>
+
+        <dt>
+
+          <code><a href="knowledge.html">knowledge()</a></code>
+
+        </dt>
+        <dd>Knowledge Mini-DSL constructor (<code>tier()</code>, <code>forbidden()</code>, <code>required()</code>)</dd>
       </dl></div><div class="section level2">
       <h2 id="causal-discovery-algorithms">Causal Discovery Algorithms<a class="anchor" aria-label="anchor" href="#causal-discovery-algorithms"></a></h2>
 
@@ -97,6 +104,29 @@
 
         </dt>
         <dd>The Temporal Peter-Clark (PC) algorithm for causal discovery</dd>
+      </dl></div><div class="section level2">
+      <h2 id="setup-for-tetrad-engines">Setup for Tetrad Engines<a class="anchor" aria-label="anchor" href="#setup-for-tetrad-engines"></a></h2>
+
+      <div class="section-desc"><p>Functions for installing and verifying the Tetrad Java backend.</p></div>
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="install_tetrad.html">install_tetrad()</a></code>
+
+        </dt>
+        <dd>Install Tetrad GUI</dd>
+
+        <dt>
+
+          <code><a href="check_tetrad_install.html">check_tetrad_install()</a></code>
+
+        </dt>
+        <dd>Check Tetrad Installation</dd>
       </dl></div><div class="section level2">
       <h2 id="r-classes">R6 Classes<a class="anchor" aria-label="anchor" href="#r-classes"></a></h2>
 
@@ -375,6 +405,13 @@
 
         </dt>
         <dd>Plot temporal graph via Latex</dd>
+
+        <dt>
+
+          <code><a href="maketikz.html">maketikz()</a></code>
+
+        </dt>
+        <dd>Generate Latex tikz code for plotting a temporal DAG, PDAG or PAG.</dd>
       </dl></div><div class="section level2">
       <h2 id="printing">Printing<a class="anchor" aria-label="anchor" href="#printing"></a></h2>
 
@@ -399,7 +436,7 @@
         </dt>
         <dd>Print Tetrad check result</dd>
       </dl></div><div class="section level2">
-      <h2 id="tiers-knowledge">Tiers / Knowledge<a class="anchor" aria-label="anchor" href="#tiers-knowledge"></a></h2>
+      <h2 id="tiers-knowledge-helpers">Tiers / Knowledge helpers<a class="anchor" aria-label="anchor" href="#tiers-knowledge-helpers"></a></h2>
 
 
 
@@ -512,13 +549,6 @@
 
         </dt>
         <dd>Set background knowledge into a disco_method</dd>
-
-        <dt>
-
-          <code><a href="knowledge.html">knowledge()</a></code>
-
-        </dt>
-        <dd>Knowledge Mini-DSL constructor (<code>tier()</code>, <code>forbidden()</code>, <code>required()</code>)</dd>
 
         <dt>
 
@@ -769,57 +799,6 @@
         </dt>
         <dd>False Omission Rate</dd>
       </dl></div><div class="section level2">
-      <h2 id="testing-utilities">Testing &amp; Utilities<a class="anchor" aria-label="anchor" href="#testing-utilities"></a></h2>
-
-
-
-      <dl></dl></div><div class="section level2">
-
-
-
-
-      <dl><dt>
-
-          <code><a href="corTest.html">corTest()</a></code>
-
-        </dt>
-        <dd>Test for vanishing partial correlations</dd>
-
-        <dt>
-
-          <code><a href="regTest.html">regTest()</a></code>
-
-        </dt>
-        <dd>Regression-based information loss test</dd>
-
-        <dt>
-
-          <code><a href="average_degree.html">average_degree()</a></code>
-
-        </dt>
-        <dd>Compute average degree for adjacency matrix</dd>
-
-        <dt>
-
-          <code><a href="install_tetrad.html">install_tetrad()</a></code>
-
-        </dt>
-        <dd>Install Tetrad GUI</dd>
-
-        <dt>
-
-          <code><a href="check_tetrad_install.html">check_tetrad_install()</a></code>
-
-        </dt>
-        <dd>Check Tetrad Installation</dd>
-
-        <dt>
-
-          <code><a href="maketikz.html">maketikz()</a></code>
-
-        </dt>
-        <dd>Generate Latex tikz code for plotting a temporal DAG, PDAG or PAG.</dd>
-      </dl></div><div class="section level2">
       <h2 id="miscellaneous">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous"></a></h2>
 
 
@@ -856,6 +835,27 @@
 
         </dt>
         <dd>Simulated data example</dd>
+
+        <dt>
+
+          <code><a href="corTest.html">corTest()</a></code>
+
+        </dt>
+        <dd>Test for vanishing partial correlations</dd>
+
+        <dt>
+
+          <code><a href="regTest.html">regTest()</a></code>
+
+        </dt>
+        <dd>Regression-based information loss test</dd>
+
+        <dt>
+
+          <code><a href="average_degree.html">average_degree()</a></code>
+
+        </dt>
+        <dd>Compute average degree for adjacency matrix</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

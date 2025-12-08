@@ -7,6 +7,11 @@ High-level interface for running causal discovery.
 - [`disco()`](https://bjarkehautop.github.io/causalDisco/reference/disco.md)
   : Disco!!
 
+- [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md)
+  :
+
+  Knowledge Mini-DSL constructor (`tier()`, `forbidden()`, `required()`)
+
 ## Causal Discovery Algorithms
 
 Core search algorithms implemented or wrapped by causalDisco.
@@ -24,6 +29,15 @@ Core search algorithms implemented or wrapped by causalDisco.
   discovery
 - [`tpc()`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md)
   : The Temporal Peter-Clark (PC) algorithm for causal discovery
+
+## Setup for Tetrad Engines
+
+Functions for installing and verifying the Tetrad Java backend.
+
+- [`install_tetrad()`](https://bjarkehautop.github.io/causalDisco/reference/install_tetrad.md)
+  : Install Tetrad GUI
+- [`check_tetrad_install()`](https://bjarkehautop.github.io/causalDisco/reference/check_tetrad_install.md)
+  : Check Tetrad Installation
 
 ## R6 Classes
 
@@ -126,6 +140,9 @@ Low-level functions that execute search algorithms.
 - [`tplot()`](https://bjarkehautop.github.io/causalDisco/reference/tplot.md)
   : Plot temporal graph via Latex
 
+- [`maketikz()`](https://bjarkehautop.github.io/causalDisco/reference/maketikz.md)
+  : Generate Latex tikz code for plotting a temporal DAG, PDAG or PAG.
+
 ## Printing
 
 - [`print(`*`<knowledge>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/print.knowledge.md)
@@ -136,7 +153,7 @@ Low-level functions that execute search algorithms.
 - [`print(`*`<tetrad_check>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/print.tetrad_check.md)
   : Print Tetrad check result
 
-## Tiers / Knowledge
+## Tiers / Knowledge helpers
 
 - [`add_exogenous()`](https://bjarkehautop.github.io/causalDisco/reference/add_exogenous.md)
   [`add_exo()`](https://bjarkehautop.github.io/causalDisco/reference/add_exogenous.md)
@@ -186,11 +203,6 @@ Low-level functions that execute search algorithms.
 
 - [`set_knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/set_knowledge.md)
   : Set background knowledge into a disco_method
-
-- [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md)
-  :
-
-  Knowledge Mini-DSL constructor (`tier()`, `forbidden()`, `required()`)
 
 - [`as_tetrad_knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/as_tetrad_knowledge.md)
   :
@@ -287,21 +299,6 @@ Low-level functions that execute search algorithms.
 - [`FOR()`](https://bjarkehautop.github.io/causalDisco/reference/FOR.md)
   : False Omission Rate
 
-## Testing & Utilities
-
-- [`corTest()`](https://bjarkehautop.github.io/causalDisco/reference/corTest.md)
-  : Test for vanishing partial correlations
-- [`regTest()`](https://bjarkehautop.github.io/causalDisco/reference/regTest.md)
-  : Regression-based information loss test
-- [`average_degree()`](https://bjarkehautop.github.io/causalDisco/reference/average_degree.md)
-  : Compute average degree for adjacency matrix
-- [`install_tetrad()`](https://bjarkehautop.github.io/causalDisco/reference/install_tetrad.md)
-  : Install Tetrad GUI
-- [`check_tetrad_install()`](https://bjarkehautop.github.io/causalDisco/reference/check_tetrad_install.md)
-  : Check Tetrad Installation
-- [`maketikz()`](https://bjarkehautop.github.io/causalDisco/reference/maketikz.md)
-  : Generate Latex tikz code for plotting a temporal DAG, PDAG or PAG.
-
 ## Miscellaneous
 
 - [`causalDisco`](https://bjarkehautop.github.io/causalDisco/reference/causalDisco-package.md)
@@ -313,3 +310,9 @@ Low-level functions that execute search algorithms.
   : Build a lightweight S3 wrapper around a Tetrad PAG string
 - [`tpcExample`](https://bjarkehautop.github.io/causalDisco/reference/tpcExample.md)
   : Simulated data example
+- [`corTest()`](https://bjarkehautop.github.io/causalDisco/reference/corTest.md)
+  : Test for vanishing partial correlations
+- [`regTest()`](https://bjarkehautop.github.io/causalDisco/reference/regTest.md)
+  : Regression-based information loss test
+- [`average_degree()`](https://bjarkehautop.github.io/causalDisco/reference/average_degree.md)
+  : Compute average degree for adjacency matrix
