@@ -33,9 +33,9 @@ pak::pkg_install("https://github.com/BjarkeHautop/causalDisco")
 
 `causalDisco` depends on the package
 [`caugi`](https://github.com/frederikfabriciusbjerre/caugi), which
-requires Rust to be installed on your system. See [this
-guide](https://www.rust-lang.org/tools/install) for instructions on how
-to install Rust.
+requires Rust to be installed on your system. See
+<https://www.rust-lang.org/tools/install> for instructions on how to
+install Rust.
 
 ### Installing Java / JDK
 
@@ -111,13 +111,29 @@ of the nodes.](reference/figures/README-plot-1.png)
 
 ## Questions
 
-- …
+- We say in
+  [`?bnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/bnlearnSearch.md)
+  (and implemented in `bnlearn_search`) various algorithms such as `gs`,
+  `iamb`. However, we don’t have a `gs(), iamb()` function exported
+  (similar to how we have a
+  [`pc()`](https://bjarkehautop.github.io/causalDisco/reference/pc.md)
+  function). Should we add these functions?
+
+Is it a work in progress? If so we need to document this in
+[`?bnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/bnlearnSearch.md)
+(and similar for other functions)?.
 
 ## TODO
 
-### Clean up old files
+### Manging exported functions
 
-- Remove old files such as `R/amat.R`, `R/compare.R`, `R/confusion.R`, …
+- Do we need to export the run functions (`tpc_run`, …) if we recommend
+  user to use
+  [`disco()`](https://bjarkehautop.github.io/causalDisco/reference/disco.md)
+  with the method functions (`tpc`, …)?
+
+- Various helper functions: `as_pcalg_constraints`, …,
+  `is_knowledgeable_caugi`, …, `tetrad_graph`
 
 ### Dependencies
 
@@ -125,62 +141,78 @@ of the nodes.](reference/figures/README-plot-1.png)
   installed. Move all `rJava` stuff to optional and start up only
   initialize `rJava` if installed?
 
-- Move from `tibble` to `data.table`? See also Standardization
-  subsection.
-
-- Remove old dependencies that are not used anymore (e.g. `MASS`)
-
 ### Bugfixes
 
 #### causalDisco issues
 
-- Some of our algorithms (`tfci`, more?) with engine `causalDisco` does
-  not currently work correctly with tier knowledge
-
-  - “tier” knowledge gives bidirectional edges that violate the tiers
-    (see e.g. [unit tests for
-    tfci](https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tfci.R)):
+- `tpc` with engine `causalDisco` does not currently work correctly with
+  tier knowledge
 
 ``` r
 data("tpcExample")
+
 kn <- knowledge(
   tpcExample,
   tier(
-    1 ~ starts_with("old"),
-    2 ~ starts_with("youth"),
-    3 ~ starts_with("child")
+    child ~ starts_with("child"),
+    youth ~ starts_with("youth"),
+    old ~ starts_with("old")
   )
 )
 
-my_tfci <- tfci(engine = "causalDisco", test = "fisher_z")
-output <- disco(tpcExample, my_tfci, knowledge = kn)
+my_tpc <- tpc(engine = "causalDisco", test = "fisher_z")
+
+output <- disco(tpcExample, my_tpc, knowledge = kn)
 edges <- output$caugi@edges
 
 violations <- causalDisco:::check_tier_violations(edges, kn)
 violations
 #> # A tibble: 4 × 5
-#>   from     edge  to        tier_from tier_to
-#>   <chr>    <chr> <chr>         <int>   <int>
-#> 1 child_x2 <->   oldage_x5         3       1
-#> 2 youth_x3 <->   oldage_x5         2       1
-#> 3 youth_x4 <->   oldage_x5         2       1
-#> 4 youth_x4 <->   oldage_x6         2       1
+#>   from      edge  to       tier_from tier_to
+#>   <chr>     <chr> <chr>        <int>   <int>
+#> 1 oldage_x5 -->   child_x2         3       1
+#> 2 oldage_x5 -->   youth_x3         3       2
+#> 3 oldage_x6 -->   youth_x4         3       2
+#> 4 youth_x4  -->   child_x2         2       1
 ```
-
-Probably just the knowledge not knowing how to handle bi-directional
-edges (since it works with e.g. `tges` on un-directed edges)?
 
 - All of our algorithms (I think?) does not work with required edges
   from knowledge objects (see e.g. [unit tests for
   tfci](https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tfci.R)),
-  `tpc`, `tges`, … Currently does nothing.
+  `tpc`, `tges`, … Currently does nothing. Either make it work or throw
+  error/warning if required edges are given.
+
+  - Tried implementing it in the scores (e.g. `TemporalBdeu`) by giving
+    it score -Inf if missing a required edge, but then it runs forever.
+    I.e. adding the following to `local.score`
+
+``` r
+vertex_name <- colnames(pp.dat$data)[vertex]
+req_parents <- kn$edges |>
+dplyr::filter(status == "required", to == vertex_name) |>
+dplyr::pull(from)
+
+parent_names <- colnames(pp.dat$data)[parents]
+missing_required <- !all(req_parents %in% parent_names)
+if (missing_required) {
+  return(-Inf)
+}
+```
+
+The algorithm needs to be modified when having required edges, I think.
+
+- Look into how (if) possible to pass to `pcalg`.
 
 - Piping as done above for `Tetrad` in the example section loses
-  `$knowledge$tiers` information.
+  `$knowledge$tiers` information due to how builders/closures capture
+  knowledge.
+
+  - Fixing requires refactoring the disco_method builder design I think.
 
 #### Tetrad issues
 
-`Tetrad` v7.6.9 might fix some of these issues?
+`Tetrad` v7.6.9 might fix some of these issues? Confirmed same issue on
+v7.6.7 and v7.6.9.
 
 - `Tetrad` does not use tier knowledge correctly yet. If giving tier
   knowledge it still returns undirected edges between tiers (see [unit
@@ -203,30 +235,9 @@ swapped? More investigation needed …
 
 It also breaks on required edges if paired with tier knowledge.
 
-- Running `Tetrad` engine many times gives java.lang.RuntimeException.
-  Try e.g. to run the code below.
-
-``` r
-data("tpcExample")
-# This erros on my machine with error
-# Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl,  : 
-#  java.lang.RuntimeException
-
-
-# Some memory leakage it seems like - is it our fault?
-
-tetrad_pc <- pc(engine = "tetrad", test = "conditional_gaussian", alpha = 0.05)
-
-for (i in 1:1000) {
-  kn <- knowledge(
-    tpcExample,
-    required(child_x1 ~ youth_x3)
-  )
-  output <- disco(data = tpcExample, method = tetrad_pc, knowledge = kn)
-}
-```
-
 ### Documentation
+
+- Make templates.
 
 - Structure the documentation better. See See how `mlr3` does it, and
   see their wiki on roxygen R6 guide

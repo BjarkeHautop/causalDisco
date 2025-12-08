@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9005</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,7 +83,7 @@
 <div class="section level3">
 <h3 id="installing-rust">Installing Rust<a class="anchor" aria-label="anchor" href="#installing-rust"></a>
 </h3>
-<p><code>causalDisco</code> depends on the package <a href="https://github.com/frederikfabriciusbjerre/caugi" class="external-link"><code>caugi</code></a>, which requires Rust to be installed on your system. See <a href="https://www.rust-lang.org/tools/install" class="external-link">this guide</a> for instructions on how to install Rust.</p>
+<p><code>causalDisco</code> depends on the package <a href="https://github.com/frederikfabriciusbjerre/caugi" class="external-link"><code>caugi</code></a>, which requires Rust to be installed on your system. See <a href="https://www.rust-lang.org/tools/install" class="external-link uri">https://www.rust-lang.org/tools/install</a> for instructions on how to install Rust.</p>
 </div>
 <div class="section level3">
 <h3 id="installing-java--jdk">Installing Java / JDK<a class="anchor" aria-label="anchor" href="#installing-java--jdk"></a>
@@ -144,26 +144,26 @@
 <h2 id="questions">Questions<a class="anchor" aria-label="anchor" href="#questions"></a>
 </h2>
 <ul>
-<li>…</li>
+<li>We say in <code><a href="reference/bnlearnSearch.html">?bnlearnSearch</a></code> (and implemented in <code>bnlearn_search</code>) various algorithms such as <code>gs</code>, <code>iamb</code>. However, we don’t have a <code>gs(), iamb()</code> function exported (similar to how we have a <code><a href="reference/pc.html">pc()</a></code> function). Should we add these functions?</li>
 </ul>
+<p>Is it a work in progress? If so we need to document this in <code><a href="reference/bnlearnSearch.html">?bnlearnSearch</a></code> (and similar for other functions)?.</p>
 </div>
 <div class="section level2">
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
 </h2>
 <div class="section level3">
-<h3 id="clean-up-old-files">Clean up old files<a class="anchor" aria-label="anchor" href="#clean-up-old-files"></a>
+<h3 id="manging-exported-functions">Manging exported functions<a class="anchor" aria-label="anchor" href="#manging-exported-functions"></a>
 </h3>
 <ul>
-<li>Remove old files such as <code>R/amat.R</code>, <code>R/compare.R</code>, <code>R/confusion.R</code>, …</li>
+<li><p>Do we need to export the run functions (<code>tpc_run</code>, …) if we recommend user to use <code><a href="reference/disco.html">disco()</a></code> with the method functions (<code>tpc</code>, …)?</p></li>
+<li><p>Various helper functions: <code>as_pcalg_constraints</code>, …, <code>is_knowledgeable_caugi</code>, …, <code>tetrad_graph</code></p></li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="dependencies">Dependencies<a class="anchor" aria-label="anchor" href="#dependencies"></a>
 </h3>
 <ul>
-<li><p>Currently you can’t install <code>causalDisco</code> without having Java/JDK installed. Move all <code>rJava</code> stuff to optional and start up only initialize <code>rJava</code> if installed?</p></li>
-<li><p>Move from <code>tibble</code> to <code>data.table</code>? See also Standardization subsection.</p></li>
-<li><p>Remove old dependencies that are not used anymore (e.g. <code>MASS</code>)</p></li>
+<li>Currently you can’t install <code>causalDisco</code> without having Java/JDK installed. Move all <code>rJava</code> stuff to optional and start up only initialize <code>rJava</code> if installed?</li>
 </ul>
 </div>
 <div class="section level3">
@@ -174,86 +174,89 @@
 </h4>
 <ul>
 <li>
-<p>Some of our algorithms (<code>tfci</code>, more?) with engine <code>causalDisco</code> does not currently work correctly with tier knowledge</p>
-<ul>
-<li>“tier” knowledge gives bidirectional edges that violate the tiers (see e.g. <a href="https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tfci.R" class="external-link">unit tests for tfci</a>):</li>
-</ul>
-</li>
+<code>tpc</code> with engine <code>causalDisco</code> does not currently work correctly with tier knowledge</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">tpcExample</span>,</span>
 <span>  <span class="fu">tier</span><span class="op">(</span></span>
-<span>    <span class="fl">1</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"old"</span><span class="op">)</span>,</span>
-<span>    <span class="fl">2</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span>
-<span>    <span class="fl">3</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span></span>
+<span>    <span class="va">child</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>,</span>
+<span>    <span class="va">youth</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span>
+<span>    <span class="va">old</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"old"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">my_tfci</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tfci.html">tfci</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span><span class="op">)</span></span>
-<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span><span class="va">tpcExample</span>, <span class="va">my_tfci</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
+<span><span class="va">my_tpc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tpc.html">tpc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span><span class="va">tpcExample</span>, <span class="va">my_tpc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
 <span><span class="va">edges</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">caugi</span><span class="op">@</span><span class="va">edges</span></span>
 <span></span>
 <span><span class="va">violations</span> <span class="op">&lt;-</span> <span class="fu">causalDisco</span><span class="fu">:::</span><span class="fu">check_tier_violations</span><span class="op">(</span><span class="va">edges</span>, <span class="va">kn</span><span class="op">)</span></span>
 <span><span class="va">violations</span></span>
 <span><span class="co">#&gt; # A tibble: 4 × 5</span></span>
-<span><span class="co">#&gt;   from     edge  to        tier_from tier_to</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;         &lt;int&gt;   &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 child_x2 &lt;-&gt;   oldage_x5         3       1</span></span>
-<span><span class="co">#&gt; 2 youth_x3 &lt;-&gt;   oldage_x5         2       1</span></span>
-<span><span class="co">#&gt; 3 youth_x4 &lt;-&gt;   oldage_x5         2       1</span></span>
-<span><span class="co">#&gt; 4 youth_x4 &lt;-&gt;   oldage_x6         2       1</span></span></code></pre></div>
-<p>Probably just the knowledge not knowing how to handle bi-directional edges (since it works with e.g. <code>tges</code> on un-directed edges)?</p>
+<span><span class="co">#&gt;   from      edge  to       tier_from tier_to</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;        &lt;int&gt;   &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 oldage_x5 --&gt;   child_x2         3       1</span></span>
+<span><span class="co">#&gt; 2 oldage_x5 --&gt;   youth_x3         3       2</span></span>
+<span><span class="co">#&gt; 3 oldage_x6 --&gt;   youth_x4         3       2</span></span>
+<span><span class="co">#&gt; 4 youth_x4  --&gt;   child_x2         2       1</span></span></code></pre></div>
 <ul>
-<li><p>All of our algorithms (I think?) does not work with required edges from knowledge objects (see e.g. <a href="https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tfci.R" class="external-link">unit tests for tfci</a>), <code>tpc</code>, <code>tges</code>, … Currently does nothing.</p></li>
-<li><p>Piping as done above for <code>Tetrad</code> in the example section loses <code>$knowledge$tiers</code> information.</p></li>
+<li>
+<p>All of our algorithms (I think?) does not work with required edges from knowledge objects (see e.g. <a href="https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tfci.R" class="external-link">unit tests for tfci</a>), <code>tpc</code>, <code>tges</code>, … Currently does nothing. Either make it work or throw error/warning if required edges are given.</p>
+<ul>
+<li>Tried implementing it in the scores (e.g. <code>TemporalBdeu</code>) by giving it score -Inf if missing a required edge, but then it runs forever. I.e. adding the following to <code>local.score</code>
+</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vertex_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pp.dat</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="va">vertex</span><span class="op">]</span></span>
+<span><span class="va">req_parents</span> <span class="op">&lt;-</span> <span class="va">kn</span><span class="op">$</span><span class="va">edges</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">status</span> <span class="op">==</span> <span class="st">"required"</span>, <span class="va">to</span> <span class="op">==</span> <span class="va">vertex_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">from</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">parent_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pp.dat</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="va">parents</span><span class="op">]</span></span>
+<span><span class="va">missing_required</span> <span class="op">&lt;-</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">req_parents</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">parent_names</span><span class="op">)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="va">missing_required</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>The algorithm needs to be modified when having required edges, I think.</p>
+<ul>
+<li><p>Look into how (if) possible to pass to <code>pcalg</code>.</p></li>
+<li>
+<p>Piping as done above for <code>Tetrad</code> in the example section loses <code>$knowledge$tiers</code> information due to how builders/closures capture knowledge.</p>
+<ul>
+<li>Fixing requires refactoring the disco_method builder design I think.</li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section level4">
 <h4 id="tetrad-issues">Tetrad issues<a class="anchor" aria-label="anchor" href="#tetrad-issues"></a>
 </h4>
-<p><code>Tetrad</code> v7.6.9 might fix some of these issues?</p>
+<p><code>Tetrad</code> v7.6.9 might fix some of these issues? Confirmed same issue on v7.6.7 and v7.6.9.</p>
 <ul>
 <li>
 <code>Tetrad</code> does not use tier knowledge correctly yet. If giving tier knowledge it still returns undirected edges between tiers (see <a href="https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-pc.R#L1" class="external-link">unit tests for pc</a>). Could it be because the graph looks like this:</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>violations <span class="ot">&lt;-</span> causalDisco<span class="sc">:::</span><span class="fu">check_tier_violations</span>(edges, kn)</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="sc">&gt;</span> violations</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co"># A tibble: 2 × 5</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  from      edge  to       tier_from tier_to</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        <span class="er">&lt;</span>int<span class="sc">&gt;</span>   <span class="er">&lt;</span>int<span class="sc">&gt;</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="dv">1</span> oldage_x5 <span class="sc">---</span>   youth_x3         <span class="dv">3</span>       <span class="dv">2</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="dv">2</span> oldage_x6 <span class="sc">---</span>   youth_x4         <span class="dv">3</span>       <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>violations <span class="ot">&lt;-</span> causalDisco<span class="sc">:::</span><span class="fu">check_tier_violations</span>(edges, kn)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="sc">&gt;</span> violations</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co"># A tibble: 2 × 5</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>  from      edge  to       tier_from tier_to</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        <span class="er">&lt;</span>int<span class="sc">&gt;</span>   <span class="er">&lt;</span>int<span class="sc">&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="dv">1</span> oldage_x5 <span class="sc">---</span>   youth_x3         <span class="dv">3</span>       <span class="dv">2</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="dv">2</span> oldage_x6 <span class="sc">---</span>   youth_x4         <span class="dv">3</span>       <span class="dv">2</span></span></code></pre></div>
 <p>And it only tries to fix it from the other way? I.e. if to and from were swapped? More investigation needed …</p>
 <p>It also breaks on required edges if paired with tier knowledge.</p>
-<ul>
-<li>Running <code>Tetrad</code> engine many times gives java.lang.RuntimeException. Try e.g. to run the code below.</li>
-</ul>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
-<span><span class="co"># This erros on my machine with error</span></span>
-<span><span class="co"># Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl,  : </span></span>
-<span><span class="co">#  java.lang.RuntimeException</span></span>
-<span></span>
-<span></span>
-<span><span class="co"># Some memory leakage it seems like - is it our fault?</span></span>
-<span></span>
-<span><span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
-<span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>    <span class="va">tpcExample</span>,</span>
-<span>    <span class="fu">required</span><span class="op">(</span><span class="va">child_x1</span> <span class="op">~</span> <span class="va">youth_x3</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
 <h3 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h3>
 <ul>
+<li><p>Make templates.</p></li>
 <li>
 <p>Structure the documentation better. See See how <code>mlr3</code> does it, and see their wiki on roxygen R6 guide <a href="https://github.com/mlr-org/mlr3/wiki/Roxygen-R6-Guide" class="external-link">here</a>.</p>
 <ul>

@@ -23,13 +23,29 @@ A list with elements:
 
 - `version`: Character or NULL, the installed version if found.
 
+- `java_ok`: Logical, whether Java \>= 21.
+
+- `java_version`: Character, the installed Java version.
+
 - `message`: Character, a message describing the status.
 
 ## Examples
 
 ``` r
 check_tetrad_install()
-#> Installed: FALSE 
-#> Version: NULL 
-#> Message: Tetrad directory not configured. Call install_tetrad() to install it. 
+#> $installed
+#> [1] FALSE
+#> 
+#> $version
+#> NULL
+#> 
+#> $java_ok
+#> [1] NA
+#> 
+#> $java_version
+#> NULL
+#> 
+#> $message
+#> [1] "Tetrad directory not configured. Call install_tetrad() to install it."
+#> 
 ```
