@@ -19,8 +19,8 @@ Time to hit the disco 🪩
 
 ### Install `causalDisco`
 
-To install `causalDisco` ensure you first have installed Rust and
-Java/JDK as described below.
+To install `causalDisco` ensure you first have installed Rust as
+described below.
 
 Then you can install the development version of `causalDisco` from
 GitHub using `pak`:
@@ -42,8 +42,15 @@ install Rust.
 `causalDisco` provides an interface to the Java library
 [`Tetrad`](https://github.com/cmu-phil/tetrad) for causal discovery
 algorithms. To use algorithms from `Tetrad` you need to install a Java
-Development Kit (JDK). We recommend Eclipse Temurin (OpenJDK), available
-at <https://adoptium.net>
+Development Kit (JDK) \>= 21. We recommend Eclipse Temurin (OpenJDK),
+available at <https://adoptium.net> for all major operating systems.
+
+We provide a helper function to install Temurin JDK 25 on macOS and
+Windows:
+
+``` r
+causalDisco::install_java()
+```
 
 You may also refer to `Tetrad`’s [Java setup
 guide](https://github.com/cmu-phil/tetrad/wiki/Setting-up-Java-for-Tetrad).
@@ -55,11 +62,32 @@ calling
 causalDisco::install_tetrad()
 ```
 
+To verify everything is set up correctly you can run
+[`check_tetrad_install()`](https://bjarkehautop.github.io/causalDisco/reference/check_tetrad_install.md):
+
+``` r
+causalDisco::check_tetrad_install()
+#> $installed
+#> [1] TRUE
+#> 
+#> $version
+#> [1] "7.6.8"
+#> 
+#> $java_ok
+#> [1] TRUE
+#> 
+#> $java_version
+#> [1] "25.0.1"
+#> 
+#> $message
+#> [1] "Tetrad found (version 7.6.8). Java version 25.0.1 is OK."
+```
+
 ## Example
 
 With `causalDisco` you can currently run causal discovery algorithms
-from the packages `causalDisco` itself, the Java library `Tetrad`,
-`bnlearn`, and `pcalg`.
+from the package `causalDisco` itself, the Java library `Tetrad`, the R
+package `bnlearn`, and the R package `pcalg`.
 
 ``` r
 options(causalDisco.tetrad.version = "7.6.9") # Memory issues are fixed on v7.6.9

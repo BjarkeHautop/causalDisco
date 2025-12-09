@@ -16,17 +16,17 @@ High-level interface for running causal discovery.
 
 Core search algorithms implemented or wrapped by causalDisco.
 
-- [`pc()`](https://bjarkehautop.github.io/causalDisco/reference/pc.md) :
-  The Peter-Clark (PC) Algorithm for Causal Discovery
 - [`fci()`](https://bjarkehautop.github.io/causalDisco/reference/fci.md)
   : The FCI algorithm for causal discovery
 - [`ges()`](https://bjarkehautop.github.io/causalDisco/reference/ges.md)
   : The GES algorithm for causal discovery
-- [`tges()`](https://bjarkehautop.github.io/causalDisco/reference/tges.md)
-  : The Temporal GES algorithm for causal discovery
+- [`pc()`](https://bjarkehautop.github.io/causalDisco/reference/pc.md) :
+  The Peter-Clark (PC) Algorithm for Causal Discovery
 - [`tfci()`](https://bjarkehautop.github.io/causalDisco/reference/tfci.md)
   : The Temporal Fast Causal Inference (FCI) algorithm for causal
   discovery
+- [`tges()`](https://bjarkehautop.github.io/causalDisco/reference/tges.md)
+  : The Temporal GES algorithm for causal discovery
 - [`tpc()`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md)
   : The Temporal Peter-Clark (PC) algorithm for causal discovery
 
@@ -34,6 +34,8 @@ Core search algorithms implemented or wrapped by causalDisco.
 
 Functions for installing and verifying the Tetrad Java backend.
 
+- [`install_java()`](https://bjarkehautop.github.io/causalDisco/reference/install_java.md)
+  : Install Temurin JDK 25
 - [`install_tetrad()`](https://bjarkehautop.github.io/causalDisco/reference/install_tetrad.md)
   : Install Tetrad GUI
 - [`check_tetrad_install()`](https://bjarkehautop.github.io/causalDisco/reference/check_tetrad_install.md)
@@ -54,17 +56,17 @@ Functions for installing and verifying the Tetrad Java backend.
 
 Low-level functions that execute search algorithms.
 
-- [`tpc_run()`](https://bjarkehautop.github.io/causalDisco/reference/tpc_run.md)
-  : Causal Discovery Using the Temporal PC Algorithm (TPC)
-- [`tges_run()`](https://bjarkehautop.github.io/causalDisco/reference/tges_run.md)
-  : Restricted Markov Equivalence Class Estimation Using Temporal Greedy
-  Equivalence Search
 - [`tfci_run()`](https://bjarkehautop.github.io/causalDisco/reference/tfci_run.md)
   : Causal Discovery Using the Temporal FCI (TFCI) Algorithm Use a
   modification of the FCI algorithm that makes use of background
   knowledge in the format of a partial ordering. This may, for instance,
   come about when variables can be assigned to distinct tiers or periods
   (i.e., a temporal ordering).
+- [`tges_run()`](https://bjarkehautop.github.io/causalDisco/reference/tges_run.md)
+  : Restricted Markov Equivalence Class Estimation Using Temporal Greedy
+  Equivalence Search
+- [`tpc_run()`](https://bjarkehautop.github.io/causalDisco/reference/tpc_run.md)
+  : Causal Discovery Using the Temporal PC Algorithm (TPC)
 
 ## Score Functions
 
