@@ -62,10 +62,11 @@ from the packages `causalDisco` itself, the Java library `Tetrad`,
 `bnlearn`, and `pcalg`.
 
 ``` r
+options(causalDisco.tetrad.version = "7.6.9") # Memory issues are fixed on v7.6.9
 library(causalDisco)
 #> causalDisco startup:
 #>   Java heap size requested: 2 GB
-#>   Tetrad version: 7.6.8
+#>   Tetrad version: 7.6.9
 #>   Java successfully initialized with 2 GB.
 #>   To change heap size, set options(java.heap.size = 'Ng') or Sys.setenv(JAVA_HEAP_SIZE = 'Ng') *before* loading.
 #>   Restart R to apply changes.
@@ -228,16 +229,10 @@ output <- disco(data = tpcExample, method = pcalg_ges, knowledge = kn)
 
 #### Tetrad issues
 
+- v7.6.9 of `Tetrad` seems to fix the memory issues.
+
 `Tetrad` v7.6.9 might fix some of these issues? Confirmed same issue on
 v7.6.7 and v7.6.9.
-
-- Fixed memory issue from `rJava` by calling garbage collector in disco
-  if using `Tetrad`. However, first call using `Tetrad` now gives
-
-``` r
-Dec 08, 2025 3:33:40 PM java.util.prefs.FileSystemPreferences loadCache
-WARNING: Prefs file removed in background /home/bjarke/.java/.userPrefs/prefs.xml
-```
 
 - `Tetrad` does not use required correctly
 

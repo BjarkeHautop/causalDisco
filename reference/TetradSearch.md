@@ -22,30 +22,30 @@ the resulting graph or statistics.
   Supply one of the method strings for `set_score()`. Recognised values
   are:
 
-  - `"sem_bic"` – SEM BIC score.
+  - `"sem_bic"` - SEM BIC score.
 
-  - `"ebic"` – Extended BIC score.
+  - `"ebic"` - Extended BIC score.
 
-  - `"bdeu"` – Bayes Dirichlet Equivalent score with uniform priors.
+  - `"bdeu"` - Bayes Dirichlet Equivalent score with uniform priors.
 
-  - `"basis_function_bic"` – BIC score for basis-function models. This
+  - `"basis_function_bic"` - BIC score for basis-function models. This
     is a generalization of the Degenerate Gaussian score.
 
-  - `"conditional_gaussian"` – Mixed discrete/continuous BIC score.
+  - `"conditional_gaussian"` - Mixed discrete/continuous BIC score.
 
-  - `"degenerate_gaussian"` – Degenerate Gaussian BIC score.
+  - `"degenerate_gaussian"` - Degenerate Gaussian BIC score.
 
-  - `"discrete_bic"` – BIC score for discrete data.
+  - `"discrete_bic"` - BIC score for discrete data.
 
-  - `"gic"` – Generalized Information Criterion (GIC) score.
+  - `"gic"` - Generalized Information Criterion (GIC) score.
 
-  - `"mag_degenerate_gaussian_bic"` – MAG Degenerate Gaussian BIC Score.
+  - `"mag_degenerate_gaussian_bic"` - MAG Degenerate Gaussian BIC Score.
 
-  - `"mixed_variable_polynomial"` – Mixed variable polynomial BIC score.
+  - `"mixed_variable_polynomial"` - Mixed variable polynomial BIC score.
 
-  - `"poisson_prior"` – Poisson prior score.
+  - `"poisson_prior"` - Poisson prior score.
 
-  - `"zhang_shen_bound"` – Gaussian Extended BIC score.
+  - `"zhang_shen_bound"` - Gaussian Extended BIC score.
 
 - `test`:
 
@@ -53,89 +53,89 @@ the resulting graph or statistics.
   Supply one of the method strings for `set_test()`. Recognised values
   are:
 
-  - `"chi_square"` – chi-squared test
+  - `"chi_square"` - chi-squared test
 
-  - `"g_square"` – likelihood-ratio \\G^2\\ test
+  - `"g_square"` - likelihood-ratio \\G^2\\ test
 
-  - `"basis_function_lrt"` – basis-function likelihood-ratio
+  - `"basis_function_lrt"` - basis-function likelihood-ratio
 
-  - `"probabilistic"` – Uses BCInference by Cooper and Bui to calculate
+  - `"probabilistic"` - Uses BCInference by Cooper and Bui to calculate
     probabilistic conditional independence judgments.
 
-  - `"fisher_z"` – Fisher \\Z\\ (partial correlation) test
+  - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test
 
-  - `"degenerate_gaussian"` – Degenerate Gaussian test as a likelihood
+  - `"degenerate_gaussian"` - Degenerate Gaussian test as a likelihood
     ratio test
 
-  - `"cci"` – Conditional independence of variable in a continuous data
+  - `"cci"` - Conditional independence of variable in a continuous data
     set using Daudin's method.
 
-  - `"conditional_gaussian"` – Mixed discrete/continuous test
+  - `"conditional_gaussian"` - Mixed discrete/continuous test
 
-  - `"kci"` – Kernel Conditional Independence Test (KCI) by Kun Zhang
+  - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang
 
 - `alg`:
 
   Java object representing the search algorithm. Supply one of the
   method strings for `set_alg()`. Recognised values are:
 
-  - `"boss"` – BOSS algorithm.
+  - `"boss"` - BOSS algorithm.
 
-  - `"boss_fci"` – BOSS-FCI algorithm.
+  - `"boss_fci"` - BOSS-FCI algorithm.
 
-  - `"boss_pod"` – BOSS-POD (BOSS-PAG of DAG) algorithm.
+  - `"boss_pod"` - BOSS-POD (BOSS-PAG of DAG) algorithm.
 
-  - `"ccd"` – Cyclic Causal Discovery.
+  - `"ccd"` - Cyclic Causal Discovery.
 
-  - `"cfci"` – Adjusts FCI to use conservative orientation as in CPC.
+  - `"cfci"` - Adjusts FCI to use conservative orientation as in CPC.
 
-  - `"cpc"` – Conservative PC algorithm.
+  - `"cpc"` - Conservative PC algorithm.
 
-  - `"cstar"` – CStaR algorithm (Causal Stability Ranking).
+  - `"cstar"` - CStaR algorithm (Causal Stability Ranking).
 
-  - `"dagma"` – DAGMA algorithm.
+  - `"dagma"` - DAGMA algorithm.
 
-  - `"direct_lingam"` – DirectLiNGAM algorithm.
+  - `"direct_lingam"` - DirectLiNGAM algorithm.
 
-  - `"fask"` – FASK algorithm.
+  - `"fask"` - FASK algorithm.
 
-  - `"fci"` – FCI algorithm.
+  - `"fci"` - FCI algorithm.
 
-  - `"fges"` – Fast Greedy Equivalence Search (FGES) algorithm.
+  - `"fges"` - Fast Greedy Equivalence Search (FGES) algorithm.
 
-  - `"fges_mb"` – Fast Greedy Equivalence Search with Markov Blanket
+  - `"fges_mb"` - Fast Greedy Equivalence Search with Markov Blanket
     (FGES-MB) algorithm.
 
-  - `"fofc"` – Find One Factor Clusters (FOFC)/MIMBUILD algorithm.
+  - `"fofc"` - Find One Factor Clusters (FOFC)/MIMBUILD algorithm.
 
-  - `"gfci"` – GFCI algorithm. Combines FGES and FCI.
+  - `"gfci"` - GFCI algorithm. Combines FGES and FCI.
 
-  - `"grasp"` – GRaSP (Greedy Relations of Sparsest Permutation)
+  - `"grasp"` - GRaSP (Greedy Relations of Sparsest Permutation)
     algorithm.
 
-  - `"grasp_fci"` – GRaSP-FCI algorithm. Combines GRaSP and FCI.
+  - `"grasp_fci"` - GRaSP-FCI algorithm. Combines GRaSP and FCI.
 
-  - `"ica_lingam"` – ICA LiNGAM algorithm.
+  - `"ica_lingam"` - ICA LiNGAM algorithm.
 
-  - `"ica_lingd"` – ICA-LiNG-D algorithm
+  - `"ica_lingd"` - ICA-LiNG-D algorithm
 
-  - `"fcit"` – FCI Targeted Testing (FCIT) algorithm
+  - `"fcit"` - FCI Targeted Testing (FCIT) algorithm
 
-  - `"pc"` – Peter-Clark (PC) algorithm
+  - `"pc"` - Peter-Clark (PC) algorithm
 
-  - `"pc_max"` – PCMax algorithm
+  - `"pc_max"` - PCMax algorithm
 
-  - `"restricted_boss"` – Restricted BOSS algorithm
+  - `"restricted_boss"` - Restricted BOSS algorithm
 
-  - `"rfci"` – Restricted FCI algorithm
+  - `"rfci"` - Restricted FCI algorithm
 
-  - `"sp"` – Sparsest Permutation algorithm
+  - `"sp"` - Sparsest Permutation algorithm
 
-  - `"sp_fci"` – Sparsest Permutation using FCI
+  - `"sp_fci"` - Sparsest Permutation using FCI
 
-  - `"svar_fci"` – SvarFCI algorithm (for timeseries data)
+  - `"svar_fci"` - SvarFCI algorithm (for timeseries data)
 
-  - `"svar_gfci"` – SvarGFCI algorithm. Similar to SvarFCI, but uses a
+  - `"svar_gfci"` - SvarGFCI algorithm. Similar to SvarFCI, but uses a
     BIC score to search for a skeleton.
 
 - `mc_test`:
@@ -238,173 +238,154 @@ Sets the independence test to use in Tetrad.
 
   (character) Name of the test method (e.g., "chi_square", "fisher_z").
 
-  - `"chi_square"` – chi-squared test
+  - `"chi_square"` - chi-squared test
 
-  - `"g_square"` – likelihood-ratio \\G^2\\ test
+  - `"g_square"` - likelihood-ratio \\G^2\\ test
 
-  - `"basis_function_lrt"` – basis-function likelihood-ratio
+  - `"basis_function_lrt"` - basis-function likelihood-ratio
 
-  - `"probabilistic"` – Uses BCInference by Cooper and Bui to calculate
+  - `"probabilistic"` - Uses BCInference by Cooper and Bui to calculate
     probabilistic conditional independence judgments.
 
-  - `"fisher_z"` – Fisher \\Z\\ (partial correlation) test
+  - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test
 
-  - `"degenerate_gaussian"` – Degenerate Gaussian test as a likelihood
+  - `"degenerate_gaussian"` - Degenerate Gaussian test as a likelihood
     ratio test
 
-  - `"cci"` – Conditional independence of variable in a continuous data
+  - `"cci"` - Conditional independence of variable in a continuous data
     set using Daudin's method.
 
-  - `"conditional_gaussian"` – Mixed discrete/continuous test
+  - `"conditional_gaussian"` - Mixed discrete/continuous test
 
-  - `"kci"` – Kernel Conditional Independence Test (KCI) by Kun Zhang
+  - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang
 
 - `...`:
 
   Additional arguments passed to the private test-setting methods. For
   the following tests, the following parameters are available:
 
-  - `"chi_square"` – chi-squared test
+  - `"chi_square"` - chi-squared test
 
-    - `min_count = 1` – Minimum count for the chi-squared test per cell.
+    - `min_count = 1` - Minimum count for the chi-squared test per cell.
       Increasing this can improve accuracy of the test estimates,
 
-    - `alpha = 0.01` – Significance level for the independence test,
+    - `alpha = 0.01` - Significance level for the independence test,
 
-    - `cell_table_type = "ad"` – The type of cell table to use for
-      optimization:
+    - `cell_table_type = "ad"` - The type of cell table to use for
+      optimization. Available types are: `"ad"` - AD tree, `"count"` -
+      Count sample.
 
-      - `"ad"` – AD tree,
+  - `"g_square"` - likelihood-ratio \\G^2\\ test
 
-      - `"count"` – Count sample.
-
-  - `"g_square"` – likelihood-ratio \\G^2\\ test
-
-    - `min_count = 1` – Minimum count for the independence test.
+    - `min_count = 1` - Minimum count for the independence test.
       Increasing this can improve accuracy of chi square estimates,
 
-    - `alpha = 0.01` – Significance level for the chi-squared test,
+    - `alpha = 0.01` - Significance level for the chi-squared test,
 
-    - `cell_table_type = "ad"` – The type of cell table to use for
-      optimization:
+    - `cell_table_type = "ad"` - The type of cell table to use for
+      optimization. Available types are: `"ad"` - AD tree, `"count"` -
+      Count sample.
 
-      - `"ad"` – AD tree,
+  - `"basis_function_lrt"` - basis-function likelihood-ratio
 
-      - `"count"` – Count sample.
-
-  - `"basis_function_lrt"` – basis-function likelihood-ratio
-
-    - `truncation_limit = 3` – Basis functions 1 through this number
+    - `truncation_limit = 3` - Basis functions 1 through this number
       will be used. The Degenerate Gaussian category indicator variables
       for mixed data are also used,
 
-    - `alpha = 0.01` – Significance level for the likelihood-ratio test,
+    - `alpha = 0.01` - Significance level for the likelihood-ratio test,
 
-    - `singularity_lambda = 0.0` – Small number \>= 0: Add lambda to the
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse,
 
-    - `do_one_equation_only = FALSE` – If TRUE, only one equation should
+    - `do_one_equation_only = FALSE` - If TRUE, only one equation should
       be used when expanding the basis.
 
-  - `"probabilistic"` – Uses BCInference by Cooper and Bui to calculate
+  - `"probabilistic"` - Uses BCInference by Cooper and Bui to calculate
     probabilistic conditional independence judgments.
 
-    - `threshold = FALSE` – Set to TRUE if using the cutoff threshold
+    - `threshold = FALSE` - Set to TRUE if using the cutoff threshold
       for the independence test,
 
-    - `cutoff = 0.5` – Cutoff for the independence test,
+    - `cutoff = 0.5` - Cutoff for the independence test,
 
-    - `prior_ess = 10` – Prior equivalent sample size for the
+    - `prior_ess = 10` - Prior equivalent sample size for the
       independence test. This number is added to the sample size for
       each conditional probability table in the model and is divided
       equally among the cells in the table.
 
-  - `"fisher_z"` – Fisher \\Z\\ (partial correlation) test
+  - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test
 
-    - `alpha = 0.01` – Significance level for the independence test,
+    - `alpha = 0.01` - Significance level for the independence test,
 
-    - `singularity_lambda = 0.0` – Small number \>= 0: Add lambda to the
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
-  - `"degenerate_gaussian"` – Degenerate Gaussian likelihood ratio test
+  - `"degenerate_gaussian"` - Degenerate Gaussian likelihood ratio test
 
-    - `alpha = 0.01` – Significance level for the independence test,
+    - `alpha = 0.01` - Significance level for the independence test,
 
-    - `singularity_lambda = 0.0` – Small number \>= 0: Add lambda to the
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
-  - `"cci"` – Conditional independence of variable in a continuous data
+  - `"cci"` - Conditional independence of variable in a continuous data
     set using Daudin's method.
 
-    - `alpha = 0.01` – Significance level for the independence test,
+    - `alpha = 0.01` - Significance level for the independence test,
 
-    - `scaling_factor = 2` – For Gaussian kernel: The scaling factor \*
+    - `scaling_factor = 2` - For Gaussian kernel: The scaling factor \*
       Silverman bandwidth.
 
-    - `basis_type = "legendre"` – The type of basis function to use.
+    - `basis_type = "legendre"` - The type of basis function to use.
+      Available types are `"polynomial"`, `"hermite1"`, `"hermite2"`,
+      `"legendre"`, or `"chebyshev"`.
 
-      - `"polynomial"`,
-
-      - `"hermite1"`,
-
-      - `"hermite2"`,
-
-      - `"legendre"`,
-
-      - `"chebyshev"`
-
-    - `basis_scale = 0.0` – The scale of the basis function. Variables
+    - `basis_scale = 0.0` - The scale of the basis function. Variables
       are scaled to `[-b, b]` for this b (0 = standardized).
 
-    - `truncation_limit = 3` – Basis functions 1 through this number
+    - `truncation_limit = 3` - Basis functions 1 through this number
       will be used. The Degenerate Gaussian category indicator variables
       for mixed data are also used.
 
-  - `"conditional_gaussian"` – Mixed discrete/continuous test
+  - `"conditional_gaussian"` - Mixed discrete/continuous test
 
-    - `alpha = 0.01` – Significance level for the independence test,
+    - `alpha = 0.01` - Significance level for the independence test,
 
-    - `discretize = TRUE` – If TRUE for the conditional Gaussian
+    - `discretize = TRUE` - If TRUE for the conditional Gaussian
       likelihood, when scoring X –\> D where X is continuous and D
       discrete, one should to simply discretize X for just those cases.
       If FALSE, the integration will be exact,
 
-    - `num_categories_to_discretize = 3` – In case the exact algorithm
+    - `num_categories_to_discretize = 3` - In case the exact algorithm
       is not used for discrete children and continuous parents is not
       used, this parameter gives the number of categories to use for
       this second (discretized) backup copy of the continuous variables,
 
-    - `min_sample_size_per_cell = 4` – Minimum sample size per cell for
+    - `min_sample_size_per_cell = 4` - Minimum sample size per cell for
       the independence test.
 
-  - `"kci"` – Kernel Conditional Independence Test (KCI) by Kun Zhang
+  - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang
 
-    - `alpha = 0.01` – Significance level for the independence test,
+    - `alpha = 0.01` - Significance level for the independence test,
 
-    - `approximate = TRUE` – If TRUE, use the approximate Gamma
+    - `approximate = TRUE` - If TRUE, use the approximate Gamma
       approximation algorithm. If FALSE, use the exact,
 
-    - `scaling_factor = 1` – For Gaussian kernel: The scaling factor \*
+    - `scaling_factor = 1` - For Gaussian kernel: The scaling factor \*
       Silverman bandwidth.
 
-    - `num_bootstraps = 5000` – Number of bootstrap samples to use for
+    - `num_bootstraps = 5000` - Number of bootstrap samples to use for
       the KCI test.
 
-    - `threshold = 1e-3` – Threshold for the KCI test. Threshold to
+    - `threshold = 1e-3` - Threshold for the KCI test. Threshold to
       determine how many eigenvalues to use – the lower the more (0 to
       1).
 
-    - `kernel_type = "gaussian"` – The type of kernel to use.
+    - `kernel_type = "gaussian"` - The type of kernel to use. Available
+      types are `"gaussian"`, `"linear"`, or `"polynomial"`.
 
-      - `"gaussian"`,
+    - `polyd = 5` - The degree of the polynomial kernel, if used.
 
-      - `"linear"`,
-
-      - `"polynomial"`,
-
-    - `polyd = 5` – The degree of the polynomial kernel, if used.
-
-    - `polyc = 1` – The constant of the polynomial kernel, if used.
+    - `polyc = 1` - The constant of the polynomial kernel, if used.
 
 - `mc`:
 
@@ -430,218 +411,207 @@ Sets the scoring function to use in Tetrad.
 
   (character) Name of the score (e.g., "sem_bic", "ebic", "bdeu").
 
-  - `"sem_bic"` – SEM BIC score.
+  - `"sem_bic"` - SEM BIC score.
 
-  - `"ebic"` – Extended BIC score.
+  - `"ebic"` - Extended BIC score.
 
-  - `"bdeu"` – Bayes Dirichlet Equivalent score with uniform priors.
+  - `"bdeu"` - Bayes Dirichlet Equivalent score with uniform priors.
 
-  - `"basis_function_bic"` – BIC score for basis-function models. This
+  - `"basis_function_bic"` - BIC score for basis-function models. This
     is a generalization of the Degenerate Gaussian score.
 
-  - `"conditional_gaussian"` – Mixed discrete/continuous BIC score.
+  - `"conditional_gaussian"` - Mixed discrete/continuous BIC score.
 
-  - `"degenerate_gaussian"` – Degenerate Gaussian BIC score.
+  - `"degenerate_gaussian"` - Degenerate Gaussian BIC score.
 
-  - `"discrete_bic"` – BIC score for discrete data.
+  - `"discrete_bic"` - BIC score for discrete data.
 
-  - `"gic"` – Generalized Information Criterion (GIC) score.
+  - `"gic"` - Generalized Information Criterion (GIC) score.
 
-  - `"mag_degenerate_gaussian_bic"` – MAG Degenerate Gaussian BIC Score.
+  - `"mag_degenerate_gaussian_bic"` - MAG Degenerate Gaussian BIC Score.
 
-  - `"mixed_variable_polynomial"` – Mixed variable polynomial BIC score.
+  - `"mixed_variable_polynomial"` - Mixed variable polynomial BIC score.
 
-  - `"poisson_prior"` – Poisson prior score.
+  - `"poisson_prior"` - Poisson prior score.
 
-  - `"zhang_shen_bound"` – Gaussian Extended BIC score.
+  - `"zhang_shen_bound"` - Gaussian Extended BIC score.
 
 - `...`:
 
   Additional arguments passed to the private score-setting methods. For
   the following scores, the following parameters are available:
 
-  - `sem_bic` – SEM BIC score.
+  - `sem_bic` - SEM BIC score.
 
-    - `penalty_discount = 2` – Penalty discount factor used in BIC =
+    - `penalty_discount = 2` - Penalty discount factor used in BIC =
       2L - ck log N, where c is the penalty. Higher c yield sparser
       graphs,
 
-    - `structure_prior = 0` – The default number of parents for any
+    - `structure_prior = 0` - The default number of parents for any
       conditional probability table. Higher weight is accorded to tables
       with about that number of parents. The prior structure weights are
       distributed according to a binomial distribution,
 
-    - `sem_bic_rule = 1` – The Chickering Rule uses the difference of
+    - `sem_bic_rule = 1` - The Chickering Rule uses the difference of
       BIC scores to add or remove edges. The Nandy et al. rule uses a
       single calculation of a partial correlation in place of the
       likelihood difference,
 
-    - `precompute_covariances = TRUE` – For more than 5000 variables or
+    - `precompute_covariances = TRUE` - For more than 5000 variables or
       so, set this to FALSE in order to calculate covariances on the fly
       from data,
 
-    - `singularity_lambda = 0.0` – Small number \>= 0: Add lambda to the
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse
 
-  - `ebic` – Extended BIC score.
+  - `ebic` - Extended BIC score.
 
-    - `gamma` – The gamma parameter in the EBIC score.
+    - `gamma` - The gamma parameter in the EBIC score.
 
-    - `precompute_covariances = TRUE` – For more than 5000 variables or
+    - `precompute_covariances = TRUE` - For more than 5000 variables or
       so, set this to FALSE in order to calculate covariances on the fly
       from data,
 
-    - `singularity_lambda = 0.0` – Small number \>= 0: Add lambda to the
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
-  - `bdeu` – Bayes Dirichlet Equivalent score with uniform priors.
+  - `bdeu` - Bayes Dirichlet Equivalent score with uniform priors.
 
-    - `sample_prior = 10` – This sets the prior equivalent sample size.
+    - `sample_prior = 10` - This sets the prior equivalent sample size.
       This number is added to the sample size for each conditional
       probability table in the model and is divided equally among the
       cells in the table,
 
-    - `singularity_lambda = 0.0` – Small number \>= 0: Add lambda to the
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
-  - `basis_function_bic` – BIC score for basis-function models. This is
+  - `basis_function_bic` - BIC score for basis-function models. This is
     a generalization of the Degenerate Gaussian score.
 
-    - `truncation_limit = 3` – Basis functions 1 though this number will
+    - `truncation_limit = 3` - Basis functions 1 though this number will
       be used. The Degenerate Gaussian category indicator variables for
       mixed data are also used,
 
-    - `penalty_discount = 2` – Penalty discount. Higher penalty yields
+    - `penalty_discount = 2` - Penalty discount. Higher penalty yields
       sparser graphs,
 
-    - `singularity_lambda = 0.0` – Small number \>= 0: Add lambda to the
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse,
 
-    - `do_one_equation_only = FALSE` – If TRUE, only one equation should
+    - `do_one_equation_only = FALSE` - If TRUE, only one equation should
       be used when expanding the basis.
 
-  - `conditional_gaussian` – Mixed discrete/continuous BIC score.
+  - `conditional_gaussian` - Mixed discrete/continuous BIC score.
 
-    - `penalty_discount = 1` – Penalty discount. Higher penalty yields
+    - `penalty_discount = 1` - Penalty discount. Higher penalty yields
       sparser graphs,
 
-    - `discretize = TRUE` – If TRUE for the conditional Gaussian
+    - `discretize = TRUE` - If TRUE for the conditional Gaussian
       likelihood, when scoring X –\> D where X is continuous and D
       discrete, one should to simply discretize X for just those cases.
       If FALSE, the integration will be exact,
 
-    - `num_categories_to_discretize = 3` – In case the exact algorithm
+    - `num_categories_to_discretize = 3` - In case the exact algorithm
       is not used for discrete children and continuous parents is not
       used, this parameter gives the number of categories to use for
       this second (discretized) backup copy of the continuous variables,
 
-    - `structure_prior = 0` – The default number of parents for any
+    - `structure_prior = 0` - The default number of parents for any
       conditional probability table. Higher weight is accorded to tables
       with about that number of parents. The prior structure weights are
       distributed according to a binomial distribution.
 
-  - `"degenerate_gaussian"` – Degenerate Gaussian BIC score.
+  - `"degenerate_gaussian"` - Degenerate Gaussian BIC score.
 
-    - `penalty_discount = 1` – Penalty discount. Higher penalty yields
+    - `penalty_discount = 1` - Penalty discount. Higher penalty yields
       sparser graphs,
 
-    - `structure_prior = 0` – The default number of parents for any
+    - `structure_prior = 0` - The default number of parents for any
       conditional probability table. Higher weight is accorded to tables
       with about that number of parents. The prior structure weights are
       distributed according to a binomial distribution,
 
-    - `singularity_lambda = 0.0` – Small number \>= 0: Add lambda to the
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
-    - `precompute_covariances = TRUE` – For more than 5000 variables or
+    - `precompute_covariances = TRUE` - For more than 5000 variables or
       so, set this to FALSE in order to calculate covariances on the fly
       from data.
 
-  - `"discrete_bic"` – BIC score for discrete data.
+  - `"discrete_bic"` - BIC score for discrete data.
 
-    - `structure_prior = 0` – The default number of parents for any
+    - `structure_prior = 0` - The default number of parents for any
       conditional probability table. Higher weight is accorded to tables
       with about that number of parents. The prior structure weights are
       distributed according to a binomial distribution.
 
-  - `"gic"` – Generalized Information Criterion (GIC) score.
+  - `"gic"` - Generalized Information Criterion (GIC) score.
 
-    - `penalty_discount = 1` – Penalty discount. Higher penalty yields
+    - `penalty_discount = 1` - Penalty discount. Higher penalty yields
       sparser graphs,
 
-    - `sem_gic_rule = "bic"` – The following rules are available:
+    - `sem_gic_rule = "bic"` - The following rules are available:
+      `"bic"` — \\\ln n\\, `"gic2"` — \\p n^{1/3}\\, `"ric"` — \\2 \ln(p
+      n)\\, `"ricc"` — \\2(\ln(p n) + \ln\ln(p n))\\, `"gic6"` — \\\ln n
+      \ln(p n)\\.
 
-      - `"bic"` – ln n,
-
-      - `"gic2"` – pn^1/3,
-
-      - `"ric"` – 2 ln pn,
-
-      - `"ricc"` – 2(ln pn + ln ln pn),
-
-      - `"gic5"` – ln ln n ln pn,
-
-      - `"gic6"` – ln n ln pn
-
-      ,
-
-    - `precompute_covariances = TRUE` – For more than 5000 variables or
+    - `precompute_covariances = TRUE` - For more than 5000 variables or
       so, set this to FALSE in order to calculate covariances on the fly
       from data,
 
-    - `singularity_lambda = 0.0` – Small number \>= 0: Add lambda to the
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
-  - `"mag_degenerate_gaussian_bic"` – MAG Degenerate Gaussian BIC Score.
+  - `"mag_degenerate_gaussian_bic"` - MAG Degenerate Gaussian BIC Score.
 
-    - `penalty_discount = 1` – Penalty discount. Higher penalty yields
+    - `penalty_discount = 1` - Penalty discount. Higher penalty yields
       sparser graphs,
 
-    - `structure_prior = 0` – The default number of parents for any
+    - `structure_prior = 0` - The default number of parents for any
       conditional probability table. Higher weight is accorded to tables
       with about that number of parents. The prior structure weights are
       distributed according to a binomial distribution,
 
-    - `precompute_covariances = TRUE` – For more than 5000 variables or
+    - `precompute_covariances = TRUE` - For more than 5000 variables or
       so, set this to FALSE in order to calculate covariances on the fly
       from data.
 
-  - `"mixed_variable_polynomial"` – Mixed variable polynomial BIC score.
+  - `"mixed_variable_polynomial"` - Mixed variable polynomial BIC score.
 
-    - `structure_prior = 0` – The default number of parents for any
+    - `structure_prior = 0` - The default number of parents for any
       conditional probability table. Higher weight is accorded to tables
       with about that number of parents. The prior structure weights are
       distributed according to a binomial distribution,
 
-    - `f_degree = 0` – The f degree.
+    - `f_degree = 0` - The f degree.
 
-    - `discretize = FALSE` – If TRUE for the conditional Gaussian
+    - `discretize = FALSE` - If TRUE for the conditional Gaussian
       likelihood, when scoring X –\> D where X is continuous and D
       discrete, one should to simply discretize X for just those cases.
       If FALSE, the integration will be exact.
 
-  - `"poisson_prior"` – Poisson prior score.
+  - `"poisson_prior"` - Poisson prior score.
 
-    - `poission_lambda = 2` – Lambda parameter for the Poisson
+    - `poission_lambda = 2` - Lambda parameter for the Poisson
       distribution (\> 0),
 
-    - `precompute_covariances = TRUE` – For more than 5000 variables or
+    - `precompute_covariances = TRUE` - For more than 5000 variables or
       so, set this to FALSE in order to calculate covariances on the fly
       from data,
 
-    - `singularity_lambda = 0.0` – Small number \>= 0: Add lambda to the
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
-  - `"zhang_shen_bound"` – Gaussian Extended BIC score.
+  - `"zhang_shen_bound"` - Gaussian Extended BIC score.
 
-    - `risk_bound = 0.2` – This is the probability of getting the true
+    - `risk_bound = 0.2` - This is the probability of getting the true
       model if a correct model is discovered. Could underfit.
 
-    - `precompute_covariances = TRUE` – For more than 5000 variables or
+    - `precompute_covariances = TRUE` - For more than 5000 variables or
       so, set this to FALSE in order to calculate covariances on the fly
       from data,
 
-    - `singularity_lambda = 0.0` – Small number \>= 0: Add lambda to the
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
 #### Returns
@@ -669,287 +639,257 @@ Sets the causal discovery algorithm to use in Tetrad.
   Additional parameters passed to the private algorithm-setting methods.
   For the following algorithms, the following parameters are available:
 
-  - `"boss"` – BOSS algorithm.
+  - `"boss"` - BOSS algorithm.
 
-    - `num_starts = 1` – The number of times the algorithm should be
+    - `num_starts = 1` - The number of times the algorithm should be
       started from different initializations. By default, the algorithm
       will be run through at least once using the initialized
       parameters,
 
-    - `use_bes = TRUE` – If TRUE, the algorithm uses the backward
+    - `use_bes = TRUE` - If TRUE, the algorithm uses the backward
       equivalence search from the GES algorithm as one of its steps,
 
-    - `use_data_order = TRUE` – If TRUE, the data variable order should
+    - `use_data_order = TRUE` - If TRUE, the data variable order should
       be used for the first initial permutation,
 
-    - `output_cpdag = TRUE` – If TRUE, the DAG output of the algorithm
+    - `output_cpdag = TRUE` - If TRUE, the DAG output of the algorithm
       is converted to a CPDAG.
 
-  - `"boss_fci"` – BOSS-FCI algorithm.
+  - `"boss_fci"` - BOSS-FCI algorithm.
 
-    - `depth = -1` – Maximum size of conditioning set, Set to -1 for
+    - `depth = -1` - Maximum size of conditioning set, Set to -1 for
       unlimited,
 
-    - `max_disc_path_length = -1` – Maximum length for any
+    - `max_disc_path_length = -1` - Maximum length for any
       discriminating path, Set to -1 for unlimited,
 
-    - `use_bes = TRUE` – If TRUE, the algorithm uses the backward
+    - `use_bes = TRUE` - If TRUE, the algorithm uses the backward
       equivalence search from the GES algorithm as one of its steps,
 
-    - `use_heuristic` – If TRUE, use the max p heuristic version,
+    - `use_heuristic` - If TRUE, use the max p heuristic version,
 
-    - `complete_rule_set_used = TRUE` – FALSE if the (simpler) final
+    - `complete_rule_set_used = TRUE` - FALSE if the (simpler) final
       orientation rules set due to P. Spirtes, guaranteeing arrow
       completeness, should be used; TRUE if the (fuller) set due to J.
       Zhang, should be used guaranteeing additional tail completeness,
 
-    - `guarantee_pag = FALSE` – Ensure the output is a legal PAG (where
+    - `guarantee_pag = FALSE` - Ensure the output is a legal PAG (where
       feasible).
 
-  - `"boss_pod"` – BOSS-POD (BOSS-PAG of DAG) algorithm.
+  - `"boss_pod"` - BOSS-POD (BOSS-PAG of DAG) algorithm.
 
-    - `use_bes = TRUE` – If TRUE, the algorithm uses the backward
+    - `use_bes = TRUE` - If TRUE, the algorithm uses the backward
       equivalence search from the GES algorithm as one of its steps,
 
-    - `use_data_order = TRUE` – If TRUE, the data variable order should
+    - `use_data_order = TRUE` - If TRUE, the data variable order should
       be used for the first initial permutation,
 
-    - `num_starts = 1` – The number of times the algorithm should be
+    - `num_starts = 1` - The number of times the algorithm should be
       started from different initializations. By default, the algorithm
       will be run through at least once using the initialized
       parameters,
 
-    - `complete_rule_set_used = TRUE` – FALSE if the (simpler) final
+    - `complete_rule_set_used = TRUE` - FALSE if the (simpler) final
       orientation rules set due to P. Spirtes, guaranteeing arrow
       completeness, should be used; TRUE if the (fuller) set due to J.
       Zhang, should be used guaranteeing additional tail completeness.
 
-  - `"ccd"` – Cyclic Causal Discovery.
+  - `"ccd"` - Cyclic Causal Discovery.
 
-    - `depth = -1` – Maximum size of conditioning set,
+    - `depth = -1` - Maximum size of conditioning set,
 
-    - `apply_r1 = TRUE` – Set this parameter to FALSE if a chain of
+    - `apply_r1 = TRUE` - Set this parameter to FALSE if a chain of
       directed edges pointing in the same direction, when only the first
       few such orientations are justified based on the data.
 
-  - `"cfci"` – Adjusts FCI to use conservative orientation as in CPC.
+  - `"cfci"` - Adjusts FCI to use conservative orientation as in CPC.
 
-    - `depth = -1` – Maximum size of conditioning set,
+    - `depth = -1` - Maximum size of conditioning set,
 
-    - `max_disc_path_length = -1` – Maximum length for any
+    - `max_disc_path_length = -1` - Maximum length for any
       discriminating path,
 
-    - `complete_rule_set_used = TRUE` – FALSE if the (simpler) final
+    - `complete_rule_set_used = TRUE` - FALSE if the (simpler) final
       orientation rules set due to P. Spirtes, guaranteeing arrow
       completeness, should be used; TRUE if the (fuller) set due to J.
       Zhang, should be used guaranteeing additional tail completeness.
 
-  - `"cpc"` – Conservative PC algorithm.
+  - `"cpc"` - Conservative PC algorithm.
 
-    - `conflict_rule = 1` –
+    - `conflict_rule = 1` - The value of `conflict_rule` determines how
+      collider conflicts are handled. `1` corresponds to the "overwrite"
+      rule as introduced in the pcalg package, see
+      [`pc`](https://rdrr.io/pkg/pcalg/man/pc.html). `2` means that all
+      collider conflicts using bidirected edges should be prioritized,
+      while `3` means that existing colliders should be prioritized,
+      ignoring subsequent conflicting information.
 
-      - `1` – The “overwrite” rule as introduced in the pcalg package,
-        see [`pc`](https://rdrr.io/pkg/pcalg/man/pc.html),
+    - `depth = -1` - Maximum size of conditioning set,
 
-      - `2` – All collider conflicts using bidirected edges should be
-        prioritized,
-
-      - `3` – Existing colliders should be prioritized, ignoring
-        subsequent conflicting information,
-
-    - `depth = -1` – Maximum size of conditioning set,
-
-    - `stable_fas = TRUE` – If TRUE, the "stable" version of the PC
+    - `stable_fas = TRUE` - If TRUE, the "stable" version of the PC
       adjacency search is used, which for k \> 0 fixes the graph for
       depth k + 1 to that of the previous depth k.
 
-    - `guarantee_cpdag = FALSE` – If TRUE, ensure the output is a legal
+    - `guarantee_cpdag = FALSE` - If TRUE, ensure the output is a legal
       CPDAG.
 
-  - `"cstar"` – CStaR algorithm (Causal Stability Ranking).
+  - `"cstar"` - CStaR algorithm (Causal Stability Ranking).
 
-    - `targets = ""` – Target names (comma or space separated),
+    - `targets = ""` - Target names (comma or space separated),
 
-    - `file_out_path = "cstar_out"` – Path to a directory in which
+    - `file_out_path = "cstar_out"` - Path to a directory in which
       results can be stored
 
-    - `selection_min_effect = 0.0` – Minimum effect size for listing
+    - `selection_min_effect = 0.0` - Minimum effect size for listing
       effects in the CStaR table
 
-    - `num_subsamples = 50` – CStaR works by generating subsamples and
+    - `num_subsamples = 50` - CStaR works by generating subsamples and
       summarizing across them; this specifies the number of subsamples
       to generate. Must be \>= 1,
 
-    - `top_bracket = 10` – Top bracket to look for causes in,
+    - `top_bracket = 10` - Top bracket to look for causes in,
 
-    - `parallelized = FALSE` – If TRUE, the algorithm should be
+    - `parallelized = FALSE` - If TRUE, the algorithm should be
       parallelized,
 
-    - `cpdag_algorithm = "restricted_boss"` – The CPDAG algorithm to
-      use:
+    - `cpdag_algorithm = "restricted_boss"` - The CPDAG algorithm to
+      use. `"pc"` corresponds to PC Stable, `"fges"` selects the FGES
+      algorithm, `"boss"` selects the BOSS algorithm, and
+      `"restricted_boss"` selects the restricted BOSS variant.
 
-      - `"pc"` – PC Stable,
-
-      - `"fges"`,
-
-      - `"boss"`,
-
-      - `"restricted_boss"`.
-
-    - `remove_effect_nodes = TRUE` – If TRUE, the effect nodes should be
+    - `remove_effect_nodes = TRUE` - If TRUE, the effect nodes should be
       removed from possible causes,
 
-    - `sample_style = "subsample"` – The sampling style to use:
+    - `sample_style = "subsample"` - The sampling style to use.
+      Available options are `"subsample"` and `"bootstrap"`.
 
-      - `"subsample"`,
+  - `"dagma"` - DAGMA algorithm.
 
-      - `"bootstrap"`.
+    - `lambda1 = 0.05` - Tuning parameter for DAGMA,
 
-  - `"dagma"` – DAGMA algorithm.
+    - `w_threshold = 0.1` - Second tuning parameter for DAGMA,
 
-    - `lambda1 = 0.05` – Tuning parameter for DAGMA,
-
-    - `w_threshold = 0.1` – Second tuning parameter for DAGMA,
-
-    - `cpdag = TRUE` – The algorithm returns a DAG; if this is set to
+    - `cpdag = TRUE` - The algorithm returns a DAG; if this is set to
       TRUE, this DAG is converted to a CPDAG.
 
-  - `"direct_lingam"` – DirectLiNGAM algorithm. No parameters.
+  - `"direct_lingam"` - DirectLiNGAM algorithm. No parameters.
 
-  - `"fask"` – FASK algorithm.
+  - `"fask"` - FASK algorithm.
 
-    - `alpha = 0.05` – Significance level for the independence test,
+    - `alpha = 0.05` - Significance level for the independence test,
 
-    - `depth = -1` – Maximum size of conditioning set,
+    - `depth = -1` - Maximum size of conditioning set,
 
-    - `fask_delta = -0.3` – The bias for orienting with negative
+    - `fask_delta = -0.3` - The bias for orienting with negative
       coefficients (`0` means no bias) for `FASK v1`,
 
-    - `left_right_rule = 1` – The FASK left right rule v2 is default,
+    - `left_right_rule = 1` - The FASK left right rule v2 is default,
       but two other (related) left-right rules are given for relation to
       the literature, and the v1 FASK rule is included for backward
       compatibility,
 
-    - `skew_edge_threshold = 0.3` – For FASK, this includes an adjacency
-      X — Y in the model if \|corr(X, Y \| X \> 0) – corr(X, Y \| Y \>
+    - `skew_edge_threshold = 0.3` - For FASK, this includes an adjacency
+      X — Y in the model if \|corr(X, Y \| X \> 0) - corr(X, Y \| Y \>
       0)\| exceeds some threshold.
 
-  - `"fci"` – FCI algorithm.
+  - `"fci"` - FCI algorithm.
 
-    - `depth = -1` – Maximum size of conditioning set,
+    - `depth = -1` - Maximum size of conditioning set,
 
-    - `stable_fas = TRUE` – If TRUE, the "stable" version of the PC
+    - `stable_fas = TRUE` - If TRUE, the "stable" version of the PC
       adjacency search is used, which for k \> 0 fixes the graph for
       depth k + 1 to that of the previous depth k.
 
-    - `max_disc_path_length = -1` – Maximum length for any
+    - `max_disc_path_length = -1` - Maximum length for any
       discriminating path,
 
-    - `complete_rule_set_used = TRUE` – FALSE if the (simpler) final
+    - `complete_rule_set_used = TRUE` - FALSE if the (simpler) final
       orientation rules set due to P. Spirtes, guaranteeing arrow
       completeness, should be used; TRUE if the (fuller) set due to J.
       Zhang, should be used guaranteeing additional tail completeness.
 
-    - `guarantee_pag = FALSE` – Ensure the output is a legal PAG (where
+    - `guarantee_pag = FALSE` - Ensure the output is a legal PAG (where
       feasible).
 
-  - `"fcit"` – FCI Targeted Testing (FCIT) algorithm
+  - `"fcit"` - FCI Targeted Testing (FCIT) algorithm
 
-    - `use_bes = TRUE` – If TRUE, the algorithm uses the backward
+    - `use_bes = TRUE` - If TRUE, the algorithm uses the backward
       equivalence search from the GES algorithm as one of its steps,
 
-    - `use_data_order = TRUE` – If TRUE, the data variable order should
+    - `use_data_order = TRUE` - If TRUE, the data variable order should
       be used for the first initial permutation,
 
-    - `num_starts = 1` – The number of times the algorithm should be
+    - `num_starts = 1` - The number of times the algorithm should be
       started from different initializations. By default, the algorithm
       will be run through at least once using the initialized
       parameters,
 
-    - `max_disc_path_length = -1` – Maximum length for any
+    - `max_disc_path_length = -1` - Maximum length for any
       discriminating path,
 
-    - `start_with = "BOSS"` – What algorithm to run first to get the
+    - `start_with = "BOSS"` - What algorithm to run first to get the
       initial CPDAG that the rest of the FCIT procedure refines.
+      Available options are: `"BOSS"`, `"GRaSP"`, and `"SP"`.
 
-      - `BOSS`
-
-      - `GRaSP`
-
-      - `SP`
-
-    - `complete_rule_set_used = TRUE` – FALSE if the (simpler) final
+    - `complete_rule_set_used = TRUE` - FALSE if the (simpler) final
       orientation rules set due to P. Spirtes, guaranteeing arrow
       completeness, should be used; TRUE if the (fuller) set due to J.
       Zhang, should be used guaranteeing additional tail completeness,
 
-    - `depth = -1` – Maximum size of conditioning set,
+    - `depth = -1` - Maximum size of conditioning set,
 
-    - `guarantee_pag = FALSE` – Ensure the output is a legal PAG (where
+    - `guarantee_pag = FALSE` - Ensure the output is a legal PAG (where
       feasible).
 
-  - `"fges"` – Fast Greedy Equivalence Search (FGES) algorithm.
+  - `"fges"` - Fast Greedy Equivalence Search (FGES) algorithm.
 
-    - `symmetric_first_step = FALSE` – If TRUE, scores for both X –\> Y
+    - `symmetric_first_step = FALSE` - If TRUE, scores for both X –\> Y
       and X \<– Y will be calculated and the higher score used.
 
-    - `max_degree = -1` – Maximum degree of any node in the graph. Set
+    - `max_degree = -1` - Maximum degree of any node in the graph. Set
       to -1 for unlimited,
 
-    - `parallelized = FALSE` – If TRUE, the algorithm should be
+    - `parallelized = FALSE` - If TRUE, the algorithm should be
       parallelized,
 
-    - `faithfulness_assumed = FALSE` – If TRUE, assume that if \\X
+    - `faithfulness_assumed = FALSE` - If TRUE, assume that if \\X
       \perp\\\\\\\perp Y\\ (by an independence test) then \\X
       \perp\\\\\\\perp Y\\ \| Z for nonempty Z.
 
-  - `"fges_mb"` – Fast Greedy Equivalence Search with Markov Blanket
+  - `"fges_mb"` - Fast Greedy Equivalence Search with Markov Blanket
     (FGES-MB) algorithm.
 
-    - `targets = ""` – Target names (comma or space separated),
+    - `targets = ""` - Target names (comma or space separated),
 
-    - `max_degree = -1` – Maximum degree of any node in the graph. Set
+    - `max_degree = -1` - Maximum degree of any node in the graph. Set
       to -1 for unlimited,
 
-    - `trimming_style = "mb_dags"` – 'Adjacencies' trims to the
-      adjacencies the targets, MB DAGs to the Union(MB(targets)) U
-      targets, semidirected trims to nodes with semidirected paths to
-      the targets. The trimming style to use:
+    - `trimming_style = "mb_dags"` - The trimming style to use: `"none"`
+      applies no trimming. `"adj"` trims to the adjacencies of the
+      targets. `"mb_dags"` trims to Union(MB(targets)) U targets.
+      `"semidir_paths"` trims to nodes with semidirected paths to the
+      targets.
 
-      - `"none"` – No trimming,
-
-      - `"adj"` – Adjacencies,
-
-      - `"mb_dags"` – MB DAGs,
-
-      - `"semidir_paths"` – Semidirected paths,
-
-    - `number_of_expansions = 2` – Number of expansions of the algorithm
+    - `number_of_expansions = 2` - Number of expansions of the algorithm
       away from the target,
 
-    - `faithfulness_assumed = FALSE` – If TRUE, assume that if \\X
+    - `faithfulness_assumed = FALSE` - If TRUE, assume that if \\X
       \perp\\\\\\\perp Y\\ (by an independence test) then \\X
       \perp\\\\\\\perp Y\\ \| Z for nonempty Z.
 
-  - `"fofc"` – Find One Factor Clusters (FOFC)/MIMBUILD algorithm.
+  - `"fofc"` - Find One Factor Clusters (FOFC)/MIMBUILD algorithm.
 
-    - `alpha = 0.001` – Cutoff for p values (alpha),
+    - `alpha = 0.001` - Cutoff for p values (alpha),
 
-    - `penalty_discount = 2.0` – Penalty discount factor used in BIC =
+    - `penalty_discount = 2.0` - Penalty discount factor used in BIC =
       2L - ck log N, where c is the penalty. Higher c yields sparser
       graphs,
 
-    - `tetrad_test = "cca"` – The tetrad test used:
+    - `tetrad_test = "cca"` - The tetrad test used. Available options
+      are: `"cca"` for CCA, `"bt"` for Bollen-Ting, `"wishart"` for
+      Wishart, and `"ark"` for Ark.
 
-      - `"cca"` – CCA,
-
-      - `"bt"` – Bollen-Ting,
-
-      - `"wishart"` – Wishart,
-
-      - `"ark"` – Ark,
-
-    - `include_structure_model = TRUE` – If `TRUE` FOFC goes beyond the
+    - `include_structure_model = TRUE` - If `TRUE` FOFC goes beyond the
       clustering step and calls a MIMBUILD routine (PCA or Bollen,
       chosen via `mimbuild_type`) to learn the causal relationships
       **between** the latent factors. The returned graph then contains
@@ -957,227 +897,221 @@ Sets the causal discovery algorithm to use in Tetrad.
       latent-level structure. When `FALSE` FOFC stops after the
       clustering phase and returns only the measurement model.
 
-    - `precompute_covariances = TRUE` – For more than 5000 variables or
+    - `precompute_covariances = TRUE` - For more than 5000 variables or
       so, set this to FALSE in order to calculate covariances on the fly
       from data.
 
-  - `"gfci"` – GFCI algorithm. Combines FGES and FCI.
+  - `"gfci"` - GFCI algorithm. Combines FGES and FCI.
 
-    - `depth = -1` – Maximum size of conditioning set,
+    - `depth = -1` - Maximum size of conditioning set,
 
-    - `max_degree = -1` – Maximum degree of any node in the graph. Set
+    - `max_degree = -1` - Maximum degree of any node in the graph. Set
       to -1 for unlimited,
 
-    - `max_disc_path_length = -1` – Maximum length for any
+    - `max_disc_path_length = -1` - Maximum length for any
       discriminating path,
 
-    - `complete_rule_set_used = TRUE` – FALSE if the (simpler) final
+    - `complete_rule_set_used = TRUE` - FALSE if the (simpler) final
       orientation rules set due to P. Spirtes, guaranteeing arrow
       completeness, should be used; TRUE if the (fuller) set due to J.
       Zhang, should be used guaranteeing additional tail completeness.
 
-    - `guarantee_pag = FALSE` – Ensure the output is a legal PAG (where
+    - `guarantee_pag = FALSE` - Ensure the output is a legal PAG (where
       feasible).
 
-  - `"grasp"` – GRaSP (Greedy Relations of Sparsest Permutation)
+  - `"grasp"` - GRaSP (Greedy Relations of Sparsest Permutation)
     algorithm.
 
-    - `covered_depth = 4` – The depth of recursion for first search,
+    - `covered_depth = 4` - The depth of recursion for first search,
 
-    - `singular_depth = 1` – Recursion depth for singular tucks,
+    - `singular_depth = 1` - Recursion depth for singular tucks,
 
-    - `nonsingular_depth = 1` – Recursion depth for nonsingular tucks,
+    - `nonsingular_depth = 1` - Recursion depth for nonsingular tucks,
 
-    - `ordered_alg = FALSE` – If TRUE, earlier GRaSP stages should be
+    - `ordered_alg = FALSE` - If TRUE, earlier GRaSP stages should be
       performed before later stages,
 
-    - `raskutti_uhler = FALSE` – If TRUE, use Raskutti and Uhler's
+    - `raskutti_uhler = FALSE` - If TRUE, use Raskutti and Uhler's
       DAG-building method (test); if FALSE, use Grow-Shrink (score).
 
-    - `use_data_order = TRUE` – If TRUE, the data variable order should
+    - `use_data_order = TRUE` - If TRUE, the data variable order should
       be used for the first initial permutation,
 
-    - `num_starts = 1` – The number of times the algorithm should be
+    - `num_starts = 1` - The number of times the algorithm should be
       started from different initializations. By default, the algorithm
       will be run through at least once using the initialized
       parameters.
 
-  - `"grasp_fci"` – GRaSP-FCI algorithm. Combines GRaSP and FCI.
+  - `"grasp_fci"` - GRaSP-FCI algorithm. Combines GRaSP and FCI.
 
-    - `depth = -1` – Maximum size of conditioning set,
+    - `depth = -1` - Maximum size of conditioning set,
 
-    - `stable_fas = TRUE` – If TRUE, the "stable" version of the PC
+    - `stable_fas = TRUE` - If TRUE, the "stable" version of the PC
       adjacency search is used, which for k \> 0 fixes the graph for
       depth k + 1 to that of the previous depth k.
 
-    - `max_disc_path_length = -1` – Maximum length for any
+    - `max_disc_path_length = -1` - Maximum length for any
       discriminating path,
 
-    - `complete_rule_set_used = TRUE` – FALSE if the (simpler) final
+    - `complete_rule_set_used = TRUE` - FALSE if the (simpler) final
       orientation rules set due to P. Spirtes, guaranteeing arrow
       completeness, should be used; TRUE if the (fuller) set due to J.
       Zhang, should be used guaranteeing additional tail completeness,
 
-    - `covered_depth = 4` – The depth of recursion for first search,
+    - `covered_depth = 4` - The depth of recursion for first search,
 
-    - `singular_depth = 1` – Recursion depth for singular tucks,
+    - `singular_depth = 1` - Recursion depth for singular tucks,
 
-    - `nonsingular_depth = 1` – Recursion depth for nonsingular tucks,
+    - `nonsingular_depth = 1` - Recursion depth for nonsingular tucks,
 
-    - `ordered_alg = FALSE` – If TRUE, earlier GRaSP stages should be
+    - `ordered_alg = FALSE` - If TRUE, earlier GRaSP stages should be
       performed before later stages,
 
-    - `raskutti_uhler = FALSE` – If TRUE, use Raskutti and Uhler's
+    - `raskutti_uhler = FALSE` - If TRUE, use Raskutti and Uhler's
       DAG-building method (test); if FALSE, use Grow-Shrink (score).
 
-    - `use_data_order = TRUE` – If TRUE, the data variable order should
+    - `use_data_order = TRUE` - If TRUE, the data variable order should
       be used for the first initial permutation,
 
-    - `num_starts = 1` – The number of times the algorithm should be
+    - `num_starts = 1` - The number of times the algorithm should be
       started from different initializations. By default, the algorithm
       will be run through at least once using the initialized
       parameters,
 
-    - `guarantee_pag = FALSE` – If TRUE, ensure the output is a legal
+    - `guarantee_pag = FALSE` - If TRUE, ensure the output is a legal
       PAG (where feasible).
 
-  - `"ica_lingam"` – ICA LiNGAM algorithm.
+  - `"ica_lingam"` - ICA LiNGAM algorithm.
 
-    - `ica_a = 1.1` – The 'a' parameter of Fast ICA (see Hyvarinen, A.
+    - `ica_a = 1.1` - The 'a' parameter of Fast ICA (see Hyvarinen, A.
       (2001)). It ranges between 1 and 2.
 
-    - `ica_max_iter = 5000` – Maximum number if iterations of the
+    - `ica_max_iter = 5000` - Maximum number if iterations of the
       optimization procedure of ICA.
 
-    - `ica_tolerance = 1e-8` – Fast ICA tolerance parameter.
+    - `ica_tolerance = 1e-8` - Fast ICA tolerance parameter.
 
-    - `threshold_b = 0.1` – The estimated B matrix is thresholded by
+    - `threshold_b = 0.1` - The estimated B matrix is thresholded by
       setting small entries less than this threshold to zero.
 
-  - `"ica_lingd"` – ICA-LiNG-D algorithm
+  - `"ica_lingd"` - ICA-LiNG-D algorithm
 
-    - `ica_a = 1.1` – The 'a' parameter of Fast ICA (see Hyvarinen, A.
+    - `ica_a = 1.1` - The 'a' parameter of Fast ICA (see Hyvarinen, A.
       (2001)). It ranges between 1 and 2.
 
-    - `ica_max_iter = 5000` – Maximum number if iterations of the
+    - `ica_max_iter = 5000` - Maximum number if iterations of the
       optimization procedure of ICA.
 
-    - `ica_tolerance = 1e-8` – Fast ICA tolerance parameter.
+    - `ica_tolerance = 1e-8` - Fast ICA tolerance parameter.
 
-    - `threshold_b = 0.1` – The estimated B matrix is thresholded by
+    - `threshold_b = 0.1` - The estimated B matrix is thresholded by
       setting small entries less than this threshold to zero.
 
-    - `threshold_w` – The estimated W matrix is thresholded by setting
+    - `threshold_w` - The estimated W matrix is thresholded by setting
       small entries less than this threshold to zero.
 
-  - `"pc"` – Peter-Clark (PC) algorithm
+  - `"pc"` - Peter-Clark (PC) algorithm
 
-    - `conflict_rule = 1` –
+    - `conflict_rule = 1` - The value of `conflict_rule` determines how
+      collider conflicts are handled. `1` corresponds to the "overwrite"
+      rule as introduced in the pcalg package, see
+      [`pc`](https://rdrr.io/pkg/pcalg/man/pc.html). `2` means that all
+      collider conflicts using bidirected edges should be prioritized,
+      while `3` means that existing colliders should be prioritized,
+      ignoring subsequent conflicting information.
 
-      - `1` – The “overwrite” rule as introduced in the pcalg package,
-        see [`pc`](https://rdrr.io/pkg/pcalg/man/pc.html),
+    - `depth = -1` - Maximum size of conditioning set,
 
-      - `2` – All collider conflicts using bidirected edges should be
-        prioritized,
-
-      - `3` – Existing colliders should be prioritized, ignoring
-        subsequent conflicting information,
-
-    - `depth = -1` – Maximum size of conditioning set,
-
-    - `stable_fas = TRUE` – If TRUE, the "stable" version of the PC
+    - `stable_fas = TRUE` - If TRUE, the "stable" version of the PC
       adjacency search is used, which for k \> 0 fixes the graph for
       depth k + 1 to that of the previous depth k.
 
-    - `guarantee_cpdag = FALSE` – If TRUE, ensure the output is a legal
+    - `guarantee_cpdag = FALSE` - If TRUE, ensure the output is a legal
       CPDAG.
 
-  - `"pc_max"` – PCMax algorithm
+  - `"pc_max"` - PCMax algorithm
 
-    - `conflict_rule = 1` –
+    - `conflict_rule = 1` - The value of `conflict_rule` determines how
+      collider conflicts are handled. `1` corresponds to the "overwrite"
+      rule as introduced in the pcalg package, see
+      [`pc`](https://rdrr.io/pkg/pcalg/man/pc.html). `2` means that all
+      collider conflicts using bidirected edges should be prioritized,
+      while `3` means that existing colliders should be prioritized,
+      ignoring subsequent conflicting information.
 
-      - `1` – The “overwrite” rule as introduced in the pcalg package,
-        see [`pc`](https://rdrr.io/pkg/pcalg/man/pc.html),
+    - `depth = -1` - Maximum size of conditioning set,
 
-      - `2` – All collider conflicts using bidirected edges should be
-        prioritized,
+    - `use_heuristic = TRUE` - If TRUE, use the max p heuristic version
 
-      - `3` – Existing colliders should be prioritized, ignoring
-        subsequent conflicting information,
-
-    - `depth = -1` – Maximum size of conditioning set,
-
-    - `use_heuristic = TRUE` – If TRUE, use the max p heuristic version
-
-    - `max_disc_path_length = -1` – The maximum path length to use for
+    - `max_disc_path_length = -1` - The maximum path length to use for
       the max p heuristic version. If -1, no limit is used.
 
-    - `stable_fas = TRUE` – If TRUE, the "stable" version of the PC
+    - `stable_fas = TRUE` - If TRUE, the "stable" version of the PC
       adjacency search is used, which for k \> 0 fixes the graph for
       depth k + 1 to that of the previous depth k.
 
-  - `"restricted_boss"` – Restricted BOSS algorithm
+  - `"restricted_boss"` - Restricted BOSS algorithm
 
-    - `targets = ""` – Target names (comma or space separated),
+    - `targets = ""` - Target names (comma or space separated),
 
-    - `use_bes = TRUE` – If TRUE, the algorithm uses the backward
+    - `use_bes = TRUE` - If TRUE, the algorithm uses the backward
       equivalence search from the GES algorithm as one of its steps,
 
-    - `num_starts = 1` – The number of times the algorithm should be
+    - `num_starts = 1` - The number of times the algorithm should be
       started from different initializations. By default, the algorithm
       will be run through at least once using the initialized
       parameters,
 
-    - `allow_internal_randomness = TRUE` – If TRUE, the algorithm allow
+    - `allow_internal_randomness = TRUE` - If TRUE, the algorithm allow
       the algorithm to use certain heuristic random steps. This can
       improve performance, but may make the algorithm non-deterministic.
 
-  - `"rfci"` – Restricted FCI algorithm
+  - `"rfci"` - Restricted FCI algorithm
 
-    - `depth = -1` – Maximum size of conditioning set,
+    - `depth = -1` - Maximum size of conditioning set,
 
-    - `stable_fas = TRUE` – If TRUE, the "stable" version of the PC
+    - `stable_fas = TRUE` - If TRUE, the "stable" version of the PC
       adjacency search is used, which for k \> 0 fixes the graph for
       depth k + 1 to that of the previous depth k.
 
-    - `max_disc_path_length = -1` – Maximum length for any
+    - `max_disc_path_length = -1` - Maximum length for any
       discriminating path,
 
-    - `complete_rule_set_used = TRUE` – FALSE if the (simpler) final
+    - `complete_rule_set_used = TRUE` - FALSE if the (simpler) final
       orientation rules set due to P. Spirtes, guaranteeing arrow
       completeness, should be used; TRUE if the (fuller) set due to J.
       Zhang, should be used guaranteeing additional tail completeness.
 
-    - `guarantee_pag = FALSE` – Ensure the output is a legal PAG (where
+    - `guarantee_pag = FALSE` - Ensure the output is a legal PAG (where
       feasible).
 
-  - `"sp"` – Sparsest Permutation algorithm. No parameters.
+  - `"sp"` - Sparsest Permutation algorithm. No parameters.
 
-  - `"sp_fci"` – Sparsest Permutation using FCI
+  - `"sp_fci"` - Sparsest Permutation using FCI
 
-    - `depth = -1` – Maximum size of conditioning set,
+    - `depth = -1` - Maximum size of conditioning set,
 
-    - `max_disc_path_length = -1` – Maximum length for any
+    - `max_disc_path_length = -1` - Maximum length for any
       discriminating path,
 
-    - `complete_rule_set_used = TRUE` – FALSE if the (simpler) final
+    - `complete_rule_set_used = TRUE` - FALSE if the (simpler) final
       orientation rules set due to P. Spirtes, guaranteeing arrow
       completeness, should be used; TRUE if the (fuller) set due to J.
       Zhang, should be used guaranteeing additional tail completeness,
 
-    - `guarantee_pag = FALSE` – Ensure the output is a legal PAG (where
+    - `guarantee_pag = FALSE` - Ensure the output is a legal PAG (where
       feasible).
 
-  - `"svar_fci"` – SvarFCI algorithm (for timeseries data)
+  - `"svar_fci"` - SvarFCI algorithm (for timeseries data)
 
-    - `penalty_discount = 2` – Penalty discount factor used in BIC =
+    - `penalty_discount = 2` - Penalty discount factor used in BIC =
       2L - ck log N, where c is the penalty. Higher c yields sparser
       graphs.
 
-  - `"svar_gfci"` – SvarGFCI algorithm. Similar to SvarFCI, but uses a
+  - `"svar_gfci"` - SvarGFCI algorithm. Similar to SvarFCI, but uses a
     BIC score to search for a skeleton.
 
-    - `penalty_discount = 2` – Penalty discount factor used in BIC =
+    - `penalty_discount = 2` - Penalty discount factor used in BIC =
       2L - ck log N, where c is the penalty. Higher c yields sparser
       graphs.
 
