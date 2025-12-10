@@ -259,20 +259,14 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">pcalg_ges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ges.html">ges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"pcalg"</span>, score <span class="op">=</span> <span class="st">"sem_bic"</span><span class="op">)</span></span>
-<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">pcalg_ges</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: pcalg::ges() does not take required edges as arguments.</span></span>
-<span><span class="co">#&gt;   They will not be used here.</span></span></code></pre></div>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">pcalg_ges</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="tetrad-issues">Tetrad issues<a class="anchor" aria-label="anchor" href="#tetrad-issues"></a>
 </h4>
 <ul>
-<li>v7.6.9 of <code>Tetrad</code> seems to fix the memory issues.</li>
-</ul>
-<p><code>Tetrad</code> v7.6.9 might fix some of these issues? Confirmed same issue on v7.6.7 and v7.6.9.</p>
-<ul>
-<li>
-<code>Tetrad</code> does not use required correctly</li>
+<li><p>v7.6.9 of <code>Tetrad</code> seems to fix the memory issues.</p></li>
+<li><p><code>Tetrad</code> does not use required correctly</p></li>
 </ul>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
@@ -350,6 +344,30 @@
 <span><span class="co">#&gt; 5: oldage_x5    ---  youth_x3</span></span>
 <span><span class="co">#&gt; 6: oldage_x6    ---  youth_x4</span></span></code></pre></div>
 <p>Added a bunch of <code><a href="https://rdrr.io/r/base/browser.html" class="external-link">browser()</a></code> statements in TetradSearch and the knowledge is correctly passed to Tetrad, so not sure what is going on here.</p>
+<p>Is this expected?</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>    <span class="va">tpcExample</span>,</span>
+<span>    <span class="fu">forbidden</span><span class="op">(</span><span class="va">child_x2</span> <span class="op">~</span> <span class="va">child_x1</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">tetrad_fci</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fci.html">fci</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">tetrad_fci</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
+<span>  <span class="va">edges</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">caugi</span><span class="op">@</span><span class="va">edges</span></span>
+<span>  <span class="va">edges</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt;         from   edge        to</span></span>
+<span><span class="co">#&gt;       &lt;char&gt; &lt;char&gt;    &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:  child_x2    o-o  child_x1</span></span>
+<span><span class="co">#&gt; 2:  child_x2    o-&gt; oldage_x5</span></span>
+<span><span class="co">#&gt; 3:  child_x2    o-o  youth_x4</span></span>
+<span><span class="co">#&gt; 4: oldage_x5    --&gt; oldage_x6</span></span>
+<span><span class="co">#&gt; 5:  youth_x3    o-&gt; oldage_x5</span></span>
+<span><span class="co">#&gt; 6:  youth_x4    --&gt; oldage_x6</span></span></code></pre></div>
+<p>Or should the edge between <code>child_x2</code> and <code>child_x1</code> be <code>--o</code> instead of <code>o--o</code>?</p>
 </div>
 </div>
 <div class="section level3">
