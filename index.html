@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9009</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,6 +79,9 @@
 <p>Then you can install the development version of <code>causalDisco</code> from GitHub using <code>pak</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"https://github.com/BjarkeHautop/causalDisco"</span><span class="op">)</span></span></code></pre></div>
+<p>or with all suggested packages (note that this requires a valid Java / JDK installation for rJava as described below):</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"https://github.com/BjarkeHautop/causalDisco"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="installing-rust">Installing Rust<a class="anchor" aria-label="anchor" href="#installing-rust"></a>
@@ -90,14 +93,14 @@
 </h3>
 <p><code>causalDisco</code> provides an interface to the Java library <a href="https://github.com/cmu-phil/tetrad" class="external-link"><code>Tetrad</code></a> for causal discovery algorithms. To use algorithms from <code>Tetrad</code> you need to install a Java Development Kit (JDK) &gt;= 21. We recommend Eclipse Temurin (OpenJDK), available at <a href="https://adoptium.net" class="external-link uri">https://adoptium.net</a> for all major operating systems.</p>
 <p>We provide a helper function to install Temurin JDK 25 on macOS and Windows:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">causalDisco</span><span class="fu">::</span><span class="fu"><a href="reference/install_java.html">install_java</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>You may also refer to <code>Tetrad</code>’s <a href="https://github.com/cmu-phil/tetrad/wiki/Setting-up-Java-for-Tetrad" class="external-link">Java setup guide</a>.</p>
 <p>The current supported version of <code>Tetrad</code> can then be installed by calling</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">causalDisco</span><span class="fu">::</span><span class="fu"><a href="reference/install_tetrad.html">install_tetrad</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>To verify everything is set up correctly you can run <code><a href="reference/check_tetrad_install.html">check_tetrad_install()</a></code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">causalDisco</span><span class="fu">::</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $installed</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
@@ -119,7 +122,7 @@
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>With <code>causalDisco</code> you can currently run causal discovery algorithms from the package <code>causalDisco</code> itself, the Java library <code>Tetrad</code>, the R package <code>bnlearn</code>, and the R package <code>pcalg</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>causalDisco.tetrad.version <span class="op">=</span> <span class="st">"7.6.9"</span><span class="op">)</span> <span class="co"># Memory issues are fixed on v7.6.9</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/annennenne/causalDisco" class="external-link">causalDisco</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; causalDisco startup:</span></span>
@@ -157,7 +160,7 @@
 <span><span class="va">cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tges.html">tges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, score <span class="op">=</span> <span class="st">"tbic"</span><span class="op">)</span></span>
 <span><span class="va">disco_cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">cd_tges</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
 <p>You can visualize the resulting causal graph using the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">disco_cd_tges</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot-1.png" alt="A causal graph with the known tiers indicated by vertical positioning of the nodes." width="100%"></p>
 </div>
@@ -181,13 +184,6 @@
 </ul>
 </div>
 <div class="section level3">
-<h3 id="dependencies">Dependencies<a class="anchor" aria-label="anchor" href="#dependencies"></a>
-</h3>
-<ul>
-<li>Currently you can’t install <code>causalDisco</code> without having Java/JDK installed. Move all <code>rJava</code> stuff to optional and start up only initialize <code>rJava</code> if installed?</li>
-</ul>
-</div>
-<div class="section level3">
 <h3 id="bugfixes">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes"></a>
 </h3>
 <div class="section level4">
@@ -197,7 +193,7 @@
 <li>
 <code>tpc</code> with engine <code>causalDisco</code> does not currently work correctly with tier knowledge</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
@@ -232,7 +228,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vertex_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pp.dat</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="va">vertex</span><span class="op">]</span></span>
 <span><span class="va">req_parents</span> <span class="op">&lt;-</span> <span class="va">kn</span><span class="op">$</span><span class="va">edges</span> <span class="op">|&gt;</span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">status</span> <span class="op">==</span> <span class="st">"required"</span>, <span class="va">to</span> <span class="op">==</span> <span class="va">vertex_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -253,8 +249,8 @@
 </ul>
 </li>
 </ul>
-<p>pcalg::ges() gives warning about required edges when we don’t specify any?</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<p><code><a href="reference/ges.html">ges()</a></code> with engine pcalg gives warning about required edges when we don’t specify any?</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
 <span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">tpcExample</span>,</span>
@@ -278,7 +274,7 @@
 <li>
 <code>Tetrad</code> does not use required correctly</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
 <span></span>
@@ -300,14 +296,14 @@
 <span><span class="co">#&gt; 4: oldage_x5    --&gt; oldage_x6</span></span>
 <span><span class="co">#&gt; 5:  youth_x3    o-&gt; oldage_x5</span></span>
 <span><span class="co">#&gt; 6:  youth_x4    --&gt; oldage_x6</span></span></code></pre></div>
-<p>and</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<p>The required edge is missing. Furthermore, in <code>pc</code> it gives undirected edges between the required edges.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>    <span class="va">tpcExample</span>,</span>
-<span>    <span class="fu">required</span><span class="op">(</span><span class="va">child_x1</span> <span class="op">~</span> <span class="va">youth_x3</span><span class="op">)</span></span>
+<span>    <span class="fu">required</span><span class="op">(</span><span class="va">child_x1</span> <span class="op">~</span> <span class="va">oldage_x5</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
@@ -318,16 +314,16 @@
 <span><span class="co">#&gt;         from   edge        to</span></span>
 <span><span class="co">#&gt;       &lt;char&gt; &lt;char&gt;    &lt;char&gt;</span></span>
 <span><span class="co">#&gt; 1:  child_x1    ---  child_x2</span></span>
-<span><span class="co">#&gt; 2:  child_x1    ---  youth_x3</span></span>
+<span><span class="co">#&gt; 2:  child_x1    --- oldage_x5</span></span>
 <span><span class="co">#&gt; 3:  child_x2    --- oldage_x5</span></span>
 <span><span class="co">#&gt; 4:  child_x2    ---  youth_x4</span></span>
 <span><span class="co">#&gt; 5: oldage_x5    --- oldage_x6</span></span>
 <span><span class="co">#&gt; 6: oldage_x5    ---  youth_x3</span></span>
 <span><span class="co">#&gt; 7: oldage_x6    ---  youth_x4</span></span></code></pre></div>
 <ul>
-<li>Was this fine? Undirected edges in tier knowledge?</li>
+<li>Also gives undirected edges in tier knowledge?</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
 <span></span>
@@ -353,6 +349,7 @@
 <span><span class="co">#&gt; 4: oldage_x5    --- oldage_x6</span></span>
 <span><span class="co">#&gt; 5: oldage_x5    ---  youth_x3</span></span>
 <span><span class="co">#&gt; 6: oldage_x6    ---  youth_x4</span></span></code></pre></div>
+<p>Added a bunch of <code><a href="https://rdrr.io/r/base/browser.html" class="external-link">browser()</a></code> statements in TetradSearch and the knowledge is correctly passed to Tetrad, so not sure what is going on here.</p>
 </div>
 </div>
 <div class="section level3">
@@ -363,7 +360,7 @@
 <li>
 <p>Structure the documentation better. See See how <code>mlr3</code> does it, and see their wiki on roxygen R6 guide <a href="https://github.com/mlr-org/mlr3/wiki/Roxygen-R6-Guide" class="external-link">here</a>.</p>
 <ul>
-<li>Make it clear somewhere what/how knowledge is supported in which algorithms. E.g. <code>pc</code> with engine <code>pcalg</code> only works with forbidden edges from knowledge objects and requires specifying both ways. It’s documented in <code>?as_pcalg_constaints</code> but should be more visible.</li>
+<li>Make it clear somewhere what/how knowledge is supported in which algorithms. E.g. <code>pc</code> with engine <code>pcalg</code> only works with forbidden edges from knowledge objects and requires specifying both ways. It’s documented in <code>?as_pcalg_constaints</code> but should be more visible. In <code><a href="reference/pcalgSearch.html">?pcalgSearch</a></code> probably?</li>
 </ul>
 </li>
 </ul>

@@ -29,6 +29,13 @@ GitHub using `pak`:
 pak::pkg_install("https://github.com/BjarkeHautop/causalDisco")
 ```
 
+or with all suggested packages (note that this requires a valid Java /
+JDK installation for rJava as described below):
+
+``` r
+pak::pkg_install("https://github.com/BjarkeHautop/causalDisco", dependencies = TRUE)
+```
+
 ### Installing Rust
 
 `causalDisco` depends on the package
@@ -164,12 +171,6 @@ Is it a work in progress? If so we need to document this in
 - Various helper functions: `as_pcalg_constraints`, …,
   `is_knowledgeable_caugi`, …, `tetrad_graph`
 
-### Dependencies
-
-- Currently you can’t install `causalDisco` without having Java/JDK
-  installed. Move all `rJava` stuff to optional and start up only
-  initialize `rJava` if installed?
-
 ### Bugfixes
 
 #### causalDisco issues
@@ -238,8 +239,9 @@ The algorithm needs to be modified when having required edges, I think.
 
   - Fixing requires refactoring the disco_method builder design I think.
 
-pcalg::ges() gives warning about required edges when we don’t specify
-any?
+[`ges()`](https://bjarkehautop.github.io/causalDisco/reference/ges.md)
+with engine pcalg gives warning about required edges when we don’t
+specify any?
 
 ``` r
 data("tpcExample")
@@ -288,7 +290,8 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
 #> 6:  youth_x4    --> oldage_x6
 ```
 
-and
+The required edge is missing. Furthermore, in `pc` it gives undirected
+edges between the required edges.
 
 ``` r
 if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
@@ -296,7 +299,7 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
 
   kn <- knowledge(
     tpcExample,
-    required(child_x1 ~ youth_x3)
+    required(child_x1 ~ oldage_x5)
   )
   
   tetrad_pc <- pc(engine = "tetrad", test = "conditional_gaussian", alpha = 0.05)
@@ -307,7 +310,7 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
 #>         from   edge        to
 #>       <char> <char>    <char>
 #> 1:  child_x1    ---  child_x2
-#> 2:  child_x1    ---  youth_x3
+#> 2:  child_x1    --- oldage_x5
 #> 3:  child_x2    --- oldage_x5
 #> 4:  child_x2    ---  youth_x4
 #> 5: oldage_x5    --- oldage_x6
@@ -315,7 +318,7 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
 #> 7: oldage_x6    ---  youth_x4
 ```
 
-- Was this fine? Undirected edges in tier knowledge?
+- Also gives undirected edges in tier knowledge?
 
 ``` r
 if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
@@ -345,6 +348,10 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
 #> 6: oldage_x6    ---  youth_x4
 ```
 
+Added a bunch of [`browser()`](https://rdrr.io/r/base/browser.html)
+statements in TetradSearch and the knowledge is correctly passed to
+Tetrad, so not sure what is going on here.
+
 ### Documentation
 
 - Make templates.
@@ -356,7 +363,9 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
   - Make it clear somewhere what/how knowledge is supported in which
     algorithms. E.g. `pc` with engine `pcalg` only works with forbidden
     edges from knowledge objects and requires specifying both ways. It’s
-    documented in `?as_pcalg_constaints` but should be more visible.
+    documented in `?as_pcalg_constaints` but should be more visible. In
+    [`?pcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/pcalgSearch.md)
+    probably?
 
 Maybe make it possible to check documentation of engine via `?pcalg` and
 similar for the rest?

@@ -40,12 +40,12 @@ check_tetrad_install()
 #> NULL
 #> 
 #> $java_ok
-#> [1] NA
+#> [1] FALSE
 #> 
 #> $java_version
-#> NULL
+#> [1] "17.0.17"
 #> 
 #> $message
-#> [1] "Tetrad directory not configured. Call install_tetrad() to install it."
+#> [1] "Java >= 21 is required but found version 17.0.17. Please update Java or run install_java()."
 #> 
 ```
