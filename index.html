@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9011</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -170,6 +170,9 @@
 <li>We say in <code><a href="reference/bnlearnSearch.html">?BnlearnSearch</a></code> (and implemented in <code>bnlearn_search</code>) various algorithms such as <code>gs</code>, <code>iamb</code>. However, we don’t have a <code>gs(), iamb()</code> function exported (similar to how we have a <code><a href="reference/pc.html">pc()</a></code> function). Should we add these functions?</li>
 </ul>
 <p>Is it a work in progress? If so we need to document this in <code><a href="reference/bnlearnSearch.html">?BnlearnSearch</a></code> (and similar for other functions)?.</p>
+<ul>
+<li>Making arguments and function naming consistent (snake_case). How much do we wanna match the corresponding e.g. pcalg naming? “fixedEdges” vs “fixed_edges”, “suffStat” vs “suff_stat”, “maj.rule” vs “maj_rule”, … Atm we have a mix of both styles, so hard for user to know which to use (especially if their starting point is our package).</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
@@ -377,6 +380,7 @@
 <li><p>Make it clear somewhere what/how knowledge is supported in which algorithms. E.g. <code>pc</code> with engine pcalg only works with forbidden edges from knowledge objects and requires specifying both ways. It’s documented in <code>?as_pcalg_constaints</code> but should be more visible. In <code><a href="reference/pcalgSearch.html">?PcalgSearch</a></code> probably?</p></li>
 <li><p>List in documentation of <code>tfci</code>, … what kind of graph it returns.</p></li>
 <li><p>Make vignettes</p></li>
+<li><p>Make all function args be snake_case. Note, that modifying these: <code>fixedGaps</code>, <code>fixedEdges</code>, <code>suffStat</code>, <code>methodOri</code> breaks tests since they are passed to pcalg. But, can you inside functions rename them to what pcalg expects.</p></li>
 </ul>
 </div>
 <div class="section level3">
