@@ -49,7 +49,7 @@ each engine, see:
 - [`TetradSearch`](https://bjarkehautop.github.io/causalDisco/reference/TetradSearch.md)
   for Tetrad,
 
-- [`pcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/pcalgSearch.md)
+- [`PcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/pcalgSearch.md)
   for pcalg.
 
 ## Examples
@@ -57,10 +57,10 @@ each engine, see:
 ``` r
 ### fci() example ###
 if (FALSE) { # \dontrun{
-data("tpcExample")
+data("tpc_example")
 
 kn <- knowledge(
-  tpcExample,
+  tpc_example,
   tier(
     child ~ tidyselect::starts_with("child"),
     youth ~ tidyselect::starts_with("youth"),
@@ -71,10 +71,10 @@ kn <- knowledge(
 # Recommended path using disco()
 my_fci <- fci(engine = "tetrad", test = "fisher_z", alpha = 0.05)
 
-disco(tpcExample, my_fci, knowledge = kn)
+disco(tpc_example, my_fci, knowledge = kn)
 
 # or using my_fci directly
 my_fci <- my_fci |> set_knowledge(kn)
-my_fci(tpcExample)
+my_fci(tpc_example)
 } # }
 ```

@@ -7,19 +7,19 @@ Generate Latex tikz code for plotting a temporal DAG, PDAG or PAG.
 ``` r
 maketikz(
   model,
-  xjit = 2,
-  yjit = 2,
-  markperiods = TRUE,
-  xpgap = 4,
-  annotateEdges = NULL,
-  addAxis = TRUE,
-  varLabels = NULL,
-  periodLabels = NULL,
-  annotationLabels = NULL,
+  x_jit = 2,
+  y_jit = 2,
+  mark_periods = TRUE,
+  period_gap = 4,
+  annotate_edges = NULL,
+  add_axis = TRUE,
+  var_labels = NULL,
+  period_labels = NULL,
+  annotation_labels = NULL,
   clipboard = TRUE,
-  rawout = FALSE,
-  colorAnnotate = NULL,
-  bendedges = FALSE
+  raw_out = FALSE,
+  color_annotate = NULL,
+  bend_edges = FALSE
 )
 ```
 
@@ -29,49 +29,49 @@ maketikz(
 
   `tpdag`, `tskeleton`, `tpag`, or `tamat` object to plot.
 
-- xjit:
+- x_jit:
 
   How much should nodes within a period be jittered horizontally.
 
-- yjit:
+- y_jit:
 
   Vertical distance between nodes within a period.
 
-- markperiods:
+- mark_periods:
 
   If `TRUE`, gray boxes are drawn behind each period.
 
-- xpgap:
+- period_gap:
 
   Horizontal gap between different periods.
 
-- annotateEdges:
+- annotate_edges:
 
-  If `TRUE`, add a text annotation to edges. If `annotationlabels` are
+  If `TRUE`, add a text annotation to edges. If `annotation_labels` are
   supplied, these labels will be used. Otherwise, the value in the
   inputted adjacency matrix corresponding to the edge will be used.
   Cannot be used for `tpag` input objects (or `ag` amat types).
 
-- addAxis:
+- add_axis:
 
   If `TRUE`, a horizontal axis with period labels are added.
 
-- varLabels:
+- var_labels:
 
   Optional labels for nodes (variables). Should be given as a named
   list, where the name is the variable name, and the entry is the label,
   e.g. `list(vname = "Label for vname")`.
 
-- periodLabels:
+- period_labels:
 
   Optional labels for periods. Should be given as a named list, where
   the name is the period name (as stored in the `tamat`), and the entry
   is the label, e.g. `list(periodname = "Label for period")`.
 
-- annotationLabels:
+- annotation_labels:
 
   Optional labels for edge annotations. Only used if
-  `annotateEdges = TRUE`. Should be given as a named list, where the
+  `annotate_edges = TRUE`. Should be given as a named list, where the
   name is the edge annotation (as stored in the `tamat`), and the entry
   is the label, e.g. `list(h = "High")`.
 
@@ -80,19 +80,19 @@ maketikz(
   If `TRUE`, the tikz code is not printed, but instead copied to the
   clipboard, so it can easily be pasted into a Latex document.
 
-- rawout:
+- raw_out:
 
   If `TRUE`, the tikz code is only returned as a character vector.
 
-- colorAnnotate:
+- color_annotate:
 
   Named list of colors to use to mark edge annotations instead of
-  labels. This overrules `annotateEdges` and both are not available at
+  labels. This overrules `annotate_edges` and both are not available at
   the same time. The list should be given with annotations as names and
   colors as entries, e.g. `list(h = "blue")`. Cannot be used for `tpag`
   input objects (or `ag` amat types).
 
-- bendedges:
+- bend_edges:
 
   If `TRUE`, all edges are bend 10 degrees to the right, thereby
   avoiding having edges exactly on top of each other.
@@ -117,9 +117,9 @@ parameter settings):
 
 ``` r
 # Make tikz figure code from tpdag, print code to screen
-data(tpcExample)
+data(tpc_example)
 kn <- knowledge(
-  tpcExample,
+  tpc_example,
   tier(
     child ~ tidyselect::starts_with("child"),
     youth ~ tidyselect::starts_with("youth"),
@@ -127,10 +127,10 @@ kn <- knowledge(
   )
 )
 
-tpdag1 <- tpc_run(tpcExample,
+tpdag1 <- tpc_run(tpc_example,
   kn,
   alpha = 0.01,
-  test = corTest,
+  test = cor_test,
   output = "tpdag"
 )
 maketikz(tpdag1, clipboard = FALSE)
@@ -162,7 +162,7 @@ maketikz(tpdag1, clipboard = FALSE)
 #> \end{tikzpicture}
 
 # Make tikz figure code from tamat, copy code to clipboard
-thisdag <- simDAG(5)
+thisdag <- sim_dag(5)
 rownames(thisdag) <- colnames(thisdag) <- c(
   "child_x", "child_y",
   "child_z", "adult_x",

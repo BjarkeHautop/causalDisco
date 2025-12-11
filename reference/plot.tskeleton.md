@@ -19,7 +19,7 @@ plot(x, ...)
 - ...:
 
   Further plotting arguments passed along to
-  [`plotTempoMech`](https://bjarkehautop.github.io/causalDisco/reference/plotTempoMech.md).
+  [`plot_tempo_mech`](https://bjarkehautop.github.io/causalDisco/reference/plot_tempo_mech.md).
 
 ## Value
 

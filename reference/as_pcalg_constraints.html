@@ -79,7 +79,7 @@ an undirected constraint.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A list with two elements, each an <code>n × n</code> logical matrix
-corresponding to <code>pcalg</code>'s <code>fixedGaps</code> and <code>fixedEdges</code> arguments.</p>
+corresponding to <span class="pkg">pcalg</span>'s <code>fixedGaps</code> and <code>fixedEdges</code> arguments.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -125,10 +125,10 @@ symmetrical counterpart. This can only hold for forbidden edges.</p></li>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">### as_pcalg_constraints() example ###</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># pcalg supports undirected constraints; build a tierless knowledge and convert</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tpcExample</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="knowledge.html">knowledge</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">tpcExample</span>,</span></span>
+<span class="r-in"><span>  <span class="va">tpc_example</span>,</span></span>
 <span class="r-in"><span>  <span class="fu">forbidden</span><span class="op">(</span><span class="va">child_x1</span> <span class="op">~</span> <span class="va">youth_x3</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  <span class="fu">forbidden</span><span class="op">(</span><span class="va">youth_x3</span> <span class="op">~</span> <span class="va">child_x1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
@@ -157,7 +157,7 @@ symmetrical counterpart. This can only hold for forbidden edges.</p></li>
 <span class="r-in"><span><span class="co"># error paths</span></span></span>
 <span class="r-in"><span><span class="co"># using tiers</span></span></span>
 <span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="knowledge.html">knowledge</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">tpcExample</span>,</span></span>
+<span class="r-in"><span>  <span class="va">tpc_example</span>,</span></span>
 <span class="r-in"><span>  <span class="fu">tier</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="va">child</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    <span class="va">youth</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span></span>
@@ -170,7 +170,7 @@ symmetrical counterpart. This can only hold for forbidden edges.</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># using directed knowledge</span></span></span>
 <span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="knowledge.html">knowledge</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">tpcExample</span>,</span></span>
+<span class="r-in"><span>  <span class="va">tpc_example</span>,</span></span>
 <span class="r-in"><span>  <span class="fu">forbidden</span><span class="op">(</span><span class="va">child_x1</span> <span class="op">~</span> <span class="va">youth_x3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>

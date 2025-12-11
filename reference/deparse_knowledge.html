@@ -93,10 +93,10 @@ that would rebuild that same object.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># turn a knowledge object back into DSL code</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tpcExample</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="knowledge.html">knowledge</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">tpcExample</span>,</span></span>
+<span class="r-in"><span>  <span class="va">tpc_example</span>,</span></span>
 <span class="r-in"><span>  <span class="fu">tier</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="va">child</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    <span class="va">youth</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span></span>
@@ -108,10 +108,10 @@ that would rebuild that same object.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="forbid_tier_violations.html">forbid_tier_violations</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="fu">deparse_knowledge</span><span class="op">(</span><span class="va">kn</span>, df_name <span class="op">=</span> <span class="st">"tpcExample"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="fu">deparse_knowledge</span><span class="op">(</span><span class="va">kn</span>, df_name <span class="op">=</span> <span class="st">"tpc_example"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> knowledge(tpcExample,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> knowledge(tpc_example,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   tier(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     child ~ child_x1 + child_x2,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     youth ~ youth_x3 + youth_x4,</span>
@@ -128,7 +128,7 @@ that would rebuild that same object.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> )</span>
 <span class="r-in"><span><span class="co"># printed output:</span></span></span>
-<span class="r-in"><span><span class="co"># knowledge(tpcExample,</span></span></span>
+<span class="r-in"><span><span class="co"># knowledge(tpc_example,</span></span></span>
 <span class="r-in"><span><span class="co">#   tier(</span></span></span>
 <span class="r-in"><span><span class="co">#     child ~ child_x1 + child_x2,</span></span></span>
 <span class="r-in"><span><span class="co">#     youth ~ youth_x3 + youth_x4,</span></span></span>

@@ -1,10 +1,9 @@
-# Causal Discovery Using the Temporal FCI (TFCI) Algorithm Use a modification of the FCI algorithm that makes use of background knowledge in the format of a partial ordering. This may, for instance, come about when variables can be assigned to distinct tiers or periods (i.e., a temporal ordering).
+# Causal Discovery Using the Temporal FCI (TFCI) Algorithm
 
-Causal Discovery Using the Temporal FCI (TFCI) Algorithm Use a
-modification of the FCI algorithm that makes use of background knowledge
-in the format of a partial ordering. This may, for instance, come about
-when variables can be assigned to distinct tiers or periods (i.e., a
-temporal ordering).
+Use a modification of the FCI algorithm that makes use of background
+knowledge in the format of a partial ordering. This may, for instance,
+come about when variables can be assigned to distinct tiers or periods
+(i.e., a temporal ordering).
 
 ## Usage
 
@@ -14,10 +13,10 @@ tfci_run(
   knowledge = NULL,
   order = NULL,
   alpha = 10^(-1),
-  test = regTest,
+  test = reg_test,
   suffStat = NULL,
   method = "stable.fast",
-  methodNA = "none",
+  na_method = "none",
   methodOri = "conservative",
   directed_as_undirected = FALSE,
   varnames = NULL,
@@ -55,9 +54,9 @@ tfci_run(
 
 - test:
 
-  A conditional independence test. The default `regTest` uses a
+  A conditional independence test. The default `reg_test` uses a
   regression-based information-loss test. Another available option is
-  `corTest` which tests for vanishing partial correlations.
+  `cor_test` which tests for vanishing partial correlations.
   User-supplied functions may also be used; see details for the required
   interface.
 
@@ -73,7 +72,7 @@ tfci_run(
   `"stable.fast"` (default). See
   [`skeleton`](https://rdrr.io/pkg/pcalg/man/skeleton.html) for details.
 
-- methodNA:
+- na_method:
 
   Handling of missing values, one of `"none"` (default; error on any
   `NA`), `"cc"` (complete-case analysis), or `"twd"` (test-wise
@@ -127,10 +126,10 @@ After this, the usual FCI orientation rules are applied; see
 ``` r
 ### tfci() example ###
 
-data("tpcExample")
+data("tpc_example")
 
 kn <- knowledge(
-  tpcExample,
+  tpc_example,
   tier(
     child ~ tidyselect::starts_with("child"),
     youth ~ tidyselect::starts_with("youth"),
@@ -141,7 +140,7 @@ kn <- knowledge(
 # Recommended path using disco()
 my_tfci <- tfci(engine = "causalDisco", test = "fisher_z", alpha = 0.05)
 
-disco(tpcExample, my_tfci, knowledge = kn)
+disco(tpc_example, my_tfci, knowledge = kn)
 #> 
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
@@ -166,7 +165,7 @@ disco(tpcExample, my_tfci, knowledge = kn)
 
 # or using my_tfci directly
 my_tfci <- my_tfci |> set_knowledge(kn)
-my_tfci(tpcExample)
+my_tfci(tpc_example)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 #> 
@@ -189,7 +188,7 @@ my_tfci(tpcExample)
 #> 
 
 # Also possible: using tfci_run()
-tfci_run(tpcExample, test = corTest, knowledge = kn)
+tfci_run(tpc_example, test = cor_test, knowledge = kn)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 #> 

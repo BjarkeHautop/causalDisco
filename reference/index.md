@@ -30,7 +30,7 @@ Core search algorithms implemented or wrapped by causalDisco.
 - [`tpc()`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md)
   : The Temporal Peter-Clark (PC) algorithm for causal discovery
 
-## Setup for Tetrad Engines
+## Setup for Tetrad Engine
 
 Functions for installing and verifying the Tetrad Java backend.
 
@@ -45,11 +45,11 @@ Functions for installing and verifying the Tetrad Java backend.
 
 - [`TetradSearch`](https://bjarkehautop.github.io/causalDisco/reference/TetradSearch.md)
   : R6 Interface to Tetrad Search Algorithms
-- [`bnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/bnlearnSearch.md)
+- [`BnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/bnlearnSearch.md)
   : R6 Interface to bnlearn Search Algorithms
-- [`causalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/causalDiscoSearch.md)
+- [`CausalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/causalDiscoSearch.md)
   : R6 Interface to causalDisco Search Algorithms
-- [`pcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/pcalgSearch.md)
+- [`PcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/pcalgSearch.md)
   : R6 Interface to pcalg Search Algorithms
 
 ## Algorithm Engines
@@ -57,43 +57,51 @@ Functions for installing and verifying the Tetrad Java backend.
 Low-level functions that execute search algorithms.
 
 - [`tfci_run()`](https://bjarkehautop.github.io/causalDisco/reference/tfci_run.md)
-  : Causal Discovery Using the Temporal FCI (TFCI) Algorithm Use a
-  modification of the FCI algorithm that makes use of background
-  knowledge in the format of a partial ordering. This may, for instance,
-  come about when variables can be assigned to distinct tiers or periods
-  (i.e., a temporal ordering).
+  : Causal Discovery Using the Temporal FCI (TFCI) Algorithm
 - [`tges_run()`](https://bjarkehautop.github.io/causalDisco/reference/tges_run.md)
   : Restricted Markov Equivalence Class Estimation Using Temporal Greedy
   Equivalence Search
 - [`tpc_run()`](https://bjarkehautop.github.io/causalDisco/reference/tpc_run.md)
   : Causal Discovery Using the Temporal PC Algorithm (TPC)
 
-## Score Functions
+## Classes used by algorithms with engine causalDisco
 
+- [`TEssGraph-class`](https://bjarkehautop.github.io/causalDisco/reference/TEssGraph-class.md)
+  [`TEssGraph`](https://bjarkehautop.github.io/causalDisco/reference/TEssGraph-class.md)
+  : Temporal EssGraph class with greedy steps
 - [`TemporalBIC-class`](https://bjarkehautop.github.io/causalDisco/reference/TemporalBIC-class.md)
   [`TemporalBIC`](https://bjarkehautop.github.io/causalDisco/reference/TemporalBIC-class.md)
   : Temporal Bayesian Information Criterion (Score criterion)
 - [`TemporalBDeu-class`](https://bjarkehautop.github.io/causalDisco/reference/TemporalBDeu-class.md)
   [`TemporalBDeu`](https://bjarkehautop.github.io/causalDisco/reference/TemporalBDeu-class.md)
   : Temporal Bayesian Dirichlet equivalent uniform (Score criterion)
-- [`gausCorScore()`](https://bjarkehautop.github.io/causalDisco/reference/gausCorScore.md)
+- [`gaus_cor_score()`](https://bjarkehautop.github.io/causalDisco/reference/gaus_cor_score.md)
   : Gaussian L0 score computed on correlation matrix
+
+## Test Functions
+
+- [`cor_test()`](https://bjarkehautop.github.io/causalDisco/reference/cor_test.md)
+  : Test for vanishing partial correlations
+- [`reg_test()`](https://bjarkehautop.github.io/causalDisco/reference/reg_test.md)
+  : Regression-based information loss test
 
 ## Graph Operations
 
-- [`graph2amat()`](https://bjarkehautop.github.io/causalDisco/reference/graph2amat.md)
-  : Convert graphNEL object to adjacency matrix
 - [`amat()`](https://bjarkehautop.github.io/causalDisco/reference/amat.md)
   : Extract adjacency matrix from tpdag, cpdag, tpag or pag object
-- [`essgraph2amat()`](https://bjarkehautop.github.io/causalDisco/reference/essgraph2amat.md)
+- [`graph_to_amat()`](https://bjarkehautop.github.io/causalDisco/reference/graph_to_amat.md)
+  : Convert graphNEL object to adjacency matrix
+- [`essgraph_to_amat()`](https://bjarkehautop.github.io/causalDisco/reference/essgraph_to_amat.md)
   : Convert essential graph to adjacency matrix
+- [`probmat_to_amat()`](https://bjarkehautop.github.io/causalDisco/reference/probmat_to_amat.md)
+  : Convert a matrix of probabilities into an adjacency matrix
 - [`tamat()`](https://bjarkehautop.github.io/causalDisco/reference/tamat.md)
   : Make a temporal adjacency matrix
 - [`edges()`](https://bjarkehautop.github.io/causalDisco/reference/edges.md)
   : List of edges in adjacency matrix
-- [`nedges()`](https://bjarkehautop.github.io/causalDisco/reference/nedges.md)
+- [`n_edges()`](https://bjarkehautop.github.io/causalDisco/reference/n_edges.md)
   : Number of edges in adjacency matrix
-- [`maxnedges()`](https://bjarkehautop.github.io/causalDisco/reference/maxnedges.md)
+- [`max_edges()`](https://bjarkehautop.github.io/causalDisco/reference/max_edges.md)
   : Compute maximal number of edges for graph
 - [`is_cpdag()`](https://bjarkehautop.github.io/causalDisco/reference/is_cpdag.md)
   : Check for CPDAG
@@ -101,14 +109,14 @@ Low-level functions that execute search algorithms.
   : Check for PDAG
 - [`shd()`](https://bjarkehautop.github.io/causalDisco/reference/shd.md)
   : Structural hamming distance between adjacency matrices
-- [`nDAGs()`](https://bjarkehautop.github.io/causalDisco/reference/nDAGs.md)
+- [`n_dags()`](https://bjarkehautop.github.io/causalDisco/reference/n_dags.md)
   : Number of different DAGs
 
 ## Simulation
 
-- [`simDAG()`](https://bjarkehautop.github.io/causalDisco/reference/simDAG.md)
+- [`sim_dag()`](https://bjarkehautop.github.io/causalDisco/reference/sim_dag.md)
   : Simulate a random DAG
-- [`simGausFromDAG()`](https://bjarkehautop.github.io/causalDisco/reference/simGausFromDAG.md)
+- [`sim_gaus_from_dag()`](https://bjarkehautop.github.io/causalDisco/reference/sim_gaus_from_dag.md)
   : Simulate Gaussian data according to DAG
 
 ## Plotting
@@ -136,7 +144,7 @@ Low-level functions that execute search algorithms.
 - [`plot(`*`<tskeleton>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/plot.tskeleton.md)
   : Plot temporal skeleton
 
-- [`plotTempoMech()`](https://bjarkehautop.github.io/causalDisco/reference/plotTempoMech.md)
+- [`plot_tempo_mech()`](https://bjarkehautop.github.io/causalDisco/reference/plot_tempo_mech.md)
   : Plot temporal data generating mechanism
 
 - [`tplot()`](https://bjarkehautop.github.io/causalDisco/reference/tplot.md)
@@ -253,13 +261,6 @@ Low-level functions that execute search algorithms.
   : Convert a Tetrad Java DataSet to an R data frame
 - [`as.graphNEL()`](https://bjarkehautop.github.io/causalDisco/reference/as.graphNEL.md)
   : Convert adjacency matrix to graphNEL object
-- [`probmat2amat()`](https://bjarkehautop.github.io/causalDisco/reference/probmat2amat.md)
-  : Convert a matrix of probabilities into an adjacency matrix
-- [`TEssGraph-class`](https://bjarkehautop.github.io/causalDisco/reference/TEssGraph-class.md)
-  [`TEssGraph`](https://bjarkehautop.github.io/causalDisco/reference/TEssGraph-class.md)
-  : Temporal EssGraph class with greedy steps
-- [`tplot()`](https://bjarkehautop.github.io/causalDisco/reference/tplot.md)
-  : Plot temporal graph via Latex
 
 ## Evaluation & Confusion Metrics
 
@@ -287,16 +288,18 @@ Low-level functions that execute search algorithms.
   : Recall
 - [`specificity()`](https://bjarkehautop.github.io/causalDisco/reference/specificity.md)
   : Specificity
-- [`F1()`](https://bjarkehautop.github.io/causalDisco/reference/F1.md) :
-  F1 score
-- [`G1()`](https://bjarkehautop.github.io/causalDisco/reference/G1.md) :
-  G1 score
-- [`FDR()`](https://bjarkehautop.github.io/causalDisco/reference/FDR.md)
+- [`f1_score()`](https://bjarkehautop.github.io/causalDisco/reference/f1_score.md)
+  : F1 score
+- [`g1_score()`](https://bjarkehautop.github.io/causalDisco/reference/g1_score.md)
+  : G1 score
+- [`fdr()`](https://bjarkehautop.github.io/causalDisco/reference/FDR.md)
   : False Discovery Rate
-- [`NPV()`](https://bjarkehautop.github.io/causalDisco/reference/NPV.md)
+- [`npv()`](https://bjarkehautop.github.io/causalDisco/reference/NPV.md)
   : Negative predictive value
-- [`FOR()`](https://bjarkehautop.github.io/causalDisco/reference/FOR.md)
+- [`false_omission_rate()`](https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.md)
   : False Omission Rate
+- [`average_degree()`](https://bjarkehautop.github.io/causalDisco/reference/average_degree.md)
+  : Compute average degree for adjacency matrix
 
 ## Miscellaneous
 
@@ -307,11 +310,5 @@ Low-level functions that execute search algorithms.
   : Supported engines for causalDisco
 - [`tetrad_graph()`](https://bjarkehautop.github.io/causalDisco/reference/tetrad_graph.md)
   : Build a lightweight S3 wrapper around a Tetrad PAG string
-- [`tpcExample`](https://bjarkehautop.github.io/causalDisco/reference/tpcExample.md)
+- [`tpc_example`](https://bjarkehautop.github.io/causalDisco/reference/tpc_example.md)
   : Simulated data example
-- [`corTest()`](https://bjarkehautop.github.io/causalDisco/reference/corTest.md)
-  : Test for vanishing partial correlations
-- [`regTest()`](https://bjarkehautop.github.io/causalDisco/reference/regTest.md)
-  : Regression-based information loss test
-- [`average_degree()`](https://bjarkehautop.github.io/causalDisco/reference/average_degree.md)
-  : Compute average degree for adjacency matrix

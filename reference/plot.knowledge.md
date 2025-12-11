@@ -26,10 +26,10 @@ A plot of the knowledge structure.
 ## Examples
 
 ``` r
-data("tpcExample")
+data("tpc_example")
 
 kn <- knowledge(
-  tpcExample,
+  tpc_example,
   tier(
     child ~ starts_with("child"),
     youth ~ starts_with("youth"),

@@ -8,7 +8,7 @@ negatives and FN are false negatives. If TP + FN = 0, 0 is returned.
 ## Usage
 
 ``` r
-NPV(confusion)
+npv(confusion)
 ```
 
 ## Arguments

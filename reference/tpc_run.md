@@ -14,10 +14,10 @@ tpc_run(
   knowledge = NULL,
   order = NULL,
   alpha = 10^(-1),
-  test = regTest,
+  test = reg_test,
   suffStat = NULL,
   method = "stable.fast",
-  methodNA = "none",
+  na_method = "none",
   methodOri = "conservative",
   output = "caugi",
   directed_as_undirected = FALSE,
@@ -57,9 +57,9 @@ tpc_run(
 
 - test:
 
-  A conditional independence test. The default `regTest` uses a
+  A conditional independence test. The default `reg_test` uses a
   regression-based information-loss test. Another available option is
-  `corTest` which tests for vanishing partial correlations.
+  `cor_test` which tests for vanishing partial correlations.
   User-supplied functions may also be used; see details for the required
   interface.
 
@@ -75,7 +75,7 @@ tpc_run(
   `"stable.fast"` (default). See
   [`skeleton`](https://rdrr.io/pkg/pcalg/man/skeleton.html) for details.
 
-- methodNA:
+- na_method:
 
   Handling of missing values, one of `"none"` (default; error on any
   `NA`), `"cc"` (complete-case analysis), or `"twd"` (test-wise
@@ -126,9 +126,9 @@ object. If `output = "caugi"`, a `caugi` and a `knowledge`
 ## Details
 
 Any independence test implemented in pcalg may be used; see
-[`pc`](https://rdrr.io/pkg/pcalg/man/pc.html). When `methodNA = "twd"`,
-test-wise deletion is performed: for `corTest`, each pairwise
-correlation uses complete cases; for `regTest`, each conditional test
+[`pc`](https://rdrr.io/pkg/pcalg/man/pc.html). When `na_method = "twd"`,
+test-wise deletion is performed: for `cor_test`, each pairwise
+correlation uses complete cases; for `reg_test`, each conditional test
 performs its own deletion. If you supply a user-defined `test`, you must
 also provide `suffStat`.
 
@@ -151,11 +151,11 @@ for each prefix.
 ### tpc() example ###
 
 # Load data
-data(tpcExample)
+data(tpc_example)
 
 # Build knowledge
 kn <- knowledge(
-  tpcExample,
+  tpc_example,
   tier(
     child ~ tidyselect::starts_with("child"),
     youth ~ tidyselect::starts_with("youth"),
@@ -166,7 +166,7 @@ kn <- knowledge(
 # Recommended route using disco
 my_tpc <- tpc(engine = "causalDisco", test = "fisher_z", alpha = 0.05)
 
-disco(tpcExample, my_tpc, knowledge = kn)
+disco(tpc_example, my_tpc, knowledge = kn)
 #> 
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
@@ -192,7 +192,7 @@ disco(tpcExample, my_tpc, knowledge = kn)
 # or using my_tpc directly
 
 my_tpc <- my_tpc |> set_knowledge(kn)
-my_tpc(tpcExample)
+my_tpc(tpc_example)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 #> 
@@ -216,7 +216,7 @@ my_tpc(tpcExample)
 
 # Using tpc_run() directly
 
-tpc_run(tpcExample, knowledge = kn, alpha = 0.01)
+tpc_run(tpc_example, knowledge = kn, alpha = 0.01)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 #> 
@@ -240,6 +240,6 @@ tpc_run(tpcExample, knowledge = kn, alpha = 0.01)
 
 # Deprecated: using order prefixes (will warn)
 testthat::expect_warning(
-  tpc_run(tpcExample, order = c("child", "youth", "oldage"), alpha = 0.01)
+  tpc_run(tpc_example, order = c("child", "youth", "oldage"), alpha = 0.01)
 )
 ```

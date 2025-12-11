@@ -40,19 +40,19 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">maketikz</span><span class="op">(</span></span>
 <span>  <span class="va">model</span>,</span>
-<span>  xjit <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>  yjit <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>  markperiods <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  xpgap <span class="op">=</span> <span class="fl">4</span>,</span>
-<span>  annotateEdges <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  addAxis <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  varLabels <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  periodLabels <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  annotationLabels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  x_jit <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  y_jit <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  mark_periods <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  period_gap <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  annotate_edges <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add_axis <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  var_labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  period_labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  annotation_labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  clipboard <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  rawout <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  colorAnnotate <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  bendedges <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  raw_out <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  color_annotate <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  bend_edges <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -64,46 +64,46 @@
 <dd><p><code>tpdag</code>, <code>tskeleton</code>, <code>tpag</code>, or <code>tamat</code> object to plot.</p></dd>
 
 
-<dt id="arg-xjit">xjit<a class="anchor" aria-label="anchor" href="#arg-xjit"></a></dt>
+<dt id="arg-x-jit">x_jit<a class="anchor" aria-label="anchor" href="#arg-x-jit"></a></dt>
 <dd><p>How much should nodes within a period be jittered horizontally.</p></dd>
 
 
-<dt id="arg-yjit">yjit<a class="anchor" aria-label="anchor" href="#arg-yjit"></a></dt>
+<dt id="arg-y-jit">y_jit<a class="anchor" aria-label="anchor" href="#arg-y-jit"></a></dt>
 <dd><p>Vertical distance between nodes within a period.</p></dd>
 
 
-<dt id="arg-markperiods">markperiods<a class="anchor" aria-label="anchor" href="#arg-markperiods"></a></dt>
+<dt id="arg-mark-periods">mark_periods<a class="anchor" aria-label="anchor" href="#arg-mark-periods"></a></dt>
 <dd><p>If <code>TRUE</code>, gray boxes are drawn behind each period.</p></dd>
 
 
-<dt id="arg-xpgap">xpgap<a class="anchor" aria-label="anchor" href="#arg-xpgap"></a></dt>
+<dt id="arg-period-gap">period_gap<a class="anchor" aria-label="anchor" href="#arg-period-gap"></a></dt>
 <dd><p>Horizontal gap between different periods.</p></dd>
 
 
-<dt id="arg-annotateedges">annotateEdges<a class="anchor" aria-label="anchor" href="#arg-annotateedges"></a></dt>
-<dd><p>If <code>TRUE</code>, add a text annotation to edges. If <code>annotationlabels</code>
+<dt id="arg-annotate-edges">annotate_edges<a class="anchor" aria-label="anchor" href="#arg-annotate-edges"></a></dt>
+<dd><p>If <code>TRUE</code>, add a text annotation to edges. If <code>annotation_labels</code>
 are supplied, these labels will be used. Otherwise, the value in the inputted adjacency matrix corresponding
 to the edge will be used. Cannot be used for <code>tpag</code>
 input objects (or <code>ag</code> amat types).</p></dd>
 
 
-<dt id="arg-addaxis">addAxis<a class="anchor" aria-label="anchor" href="#arg-addaxis"></a></dt>
+<dt id="arg-add-axis">add_axis<a class="anchor" aria-label="anchor" href="#arg-add-axis"></a></dt>
 <dd><p>If <code>TRUE</code>, a horizontal axis with period labels are added.</p></dd>
 
 
-<dt id="arg-varlabels">varLabels<a class="anchor" aria-label="anchor" href="#arg-varlabels"></a></dt>
+<dt id="arg-var-labels">var_labels<a class="anchor" aria-label="anchor" href="#arg-var-labels"></a></dt>
 <dd><p>Optional labels for nodes (variables). Should be given as a named list, where
 the name is the variable name, and the entry is the label, e.g. <code>list(vname = "Label for vname")</code>.</p></dd>
 
 
-<dt id="arg-periodlabels">periodLabels<a class="anchor" aria-label="anchor" href="#arg-periodlabels"></a></dt>
+<dt id="arg-period-labels">period_labels<a class="anchor" aria-label="anchor" href="#arg-period-labels"></a></dt>
 <dd><p>Optional labels for periods. Should be given as a named list, where
 the name is the period name (as stored in the <code>tamat</code>), and the entry is the label,
 e.g. <code>list(periodname = "Label for period")</code>.</p></dd>
 
 
-<dt id="arg-annotationlabels">annotationLabels<a class="anchor" aria-label="anchor" href="#arg-annotationlabels"></a></dt>
-<dd><p>Optional labels for edge annotations. Only used if <code>annotateEdges = TRUE</code>.
+<dt id="arg-annotation-labels">annotation_labels<a class="anchor" aria-label="anchor" href="#arg-annotation-labels"></a></dt>
+<dd><p>Optional labels for edge annotations. Only used if <code>annotate_edges = TRUE</code>.
 Should be given as a named list, where the name is the edge annotation (as stored in the <code>tamat</code>),
 and the entry is the label, e.g. <code>list(h = "High")</code>.</p></dd>
 
@@ -113,18 +113,18 @@ and the entry is the label, e.g. <code>list(h = "High")</code>.</p></dd>
 so it can easily be pasted into a Latex document.</p></dd>
 
 
-<dt id="arg-rawout">rawout<a class="anchor" aria-label="anchor" href="#arg-rawout"></a></dt>
+<dt id="arg-raw-out">raw_out<a class="anchor" aria-label="anchor" href="#arg-raw-out"></a></dt>
 <dd><p>If <code>TRUE</code>, the tikz code is only returned as a character vector.</p></dd>
 
 
-<dt id="arg-colorannotate">colorAnnotate<a class="anchor" aria-label="anchor" href="#arg-colorannotate"></a></dt>
+<dt id="arg-color-annotate">color_annotate<a class="anchor" aria-label="anchor" href="#arg-color-annotate"></a></dt>
 <dd><p>Named list of colors to use to mark edge annotations instead of labels. This
-overrules <code>annotateEdges</code> and both are not available at the same time. The list should be given with
+overrules <code>annotate_edges</code> and both are not available at the same time. The list should be given with
 annotations as names and colors as entries, e.g. <code>list(h = "blue")</code>. Cannot be used for <code>tpag</code>
 input objects (or <code>ag</code> amat types).</p></dd>
 
 
-<dt id="arg-bendedges">bendedges<a class="anchor" aria-label="anchor" href="#arg-bendedges"></a></dt>
+<dt id="arg-bend-edges">bend_edges<a class="anchor" aria-label="anchor" href="#arg-bend-edges"></a></dt>
 <dd><p>If <code>TRUE</code>, all edges are bend 10 degrees to the right, thereby avoiding having edges exactly on
 top of each other.</p></dd>
 
@@ -146,9 +146,9 @@ Latex preamble. The relevant lines of code are (depending a bit on parameter set
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Make tikz figure code from tpdag, print code to screen</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tpcExample</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="knowledge.html">knowledge</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">tpcExample</span>,</span></span>
+<span class="r-in"><span>  <span class="va">tpc_example</span>,</span></span>
 <span class="r-in"><span>  <span class="fu">tier</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="va">child</span> <span class="op">~</span> <span class="fu">tidyselect</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    <span class="va">youth</span> <span class="op">~</span> <span class="fu">tidyselect</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span></span>
@@ -156,10 +156,10 @@ Latex preamble. The relevant lines of code are (depending a bit on parameter set
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">tpdag1</span> <span class="op">&lt;-</span> <span class="fu"><a href="tpc_run.html">tpc_run</a></span><span class="op">(</span><span class="va">tpcExample</span>,</span></span>
+<span class="r-in"><span><span class="va">tpdag1</span> <span class="op">&lt;-</span> <span class="fu"><a href="tpc_run.html">tpc_run</a></span><span class="op">(</span><span class="va">tpc_example</span>,</span></span>
 <span class="r-in"><span>  <span class="va">kn</span>,</span></span>
 <span class="r-in"><span>  alpha <span class="op">=</span> <span class="fl">0.01</span>,</span></span>
-<span class="r-in"><span>  test <span class="op">=</span> <span class="va">corTest</span>,</span></span>
+<span class="r-in"><span>  test <span class="op">=</span> <span class="va">cor_test</span>,</span></span>
 <span class="r-in"><span>  output <span class="op">=</span> <span class="st">"tpdag"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">maketikz</span><span class="op">(</span><span class="va">tpdag1</span>, clipboard <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
@@ -191,7 +191,7 @@ Latex preamble. The relevant lines of code are (depending a bit on parameter set
 <span class="r-out co"><span class="r-pr">#&gt;</span> \end{tikzpicture}</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Make tikz figure code from tamat, copy code to clipboard</span></span></span>
-<span class="r-in"><span><span class="va">thisdag</span> <span class="op">&lt;-</span> <span class="fu"><a href="simDAG.html">simDAG</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">thisdag</span> <span class="op">&lt;-</span> <span class="fu"><a href="sim_dag.html">sim_dag</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">thisdag</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">thisdag</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"child_x"</span>, <span class="st">"child_y"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"child_z"</span>, <span class="st">"adult_x"</span>,</span></span>

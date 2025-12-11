@@ -33,10 +33,10 @@ algorithm.
   `$set_test()`. Recognized values are:
 
   - `fisher_z` - Fisher Z test for Gaussian data. See
-    [`corTest`](https://bjarkehautop.github.io/causalDisco/reference/corTest.md).
+    [`cor_test`](https://bjarkehautop.github.io/causalDisco/reference/cor_test.md).
 
   - `reg` - Regression test for discrete or binary data. See
-    [`regTest`](https://bjarkehautop.github.io/causalDisco/reference/regTest.md).
+    [`reg_test`](https://bjarkehautop.github.io/causalDisco/reference/reg_test.md).
 
 - `alg`:
 
@@ -58,7 +58,7 @@ algorithm.
   `$set_params()`. TODO: not secure yet in terms of distributing
   arguments. Use with caution.
 
-- `suff_stat`:
+- `suffStat`:
 
   Sufficient statistic. The format and contents of the sufficient
   statistic depends on which test is being used.
@@ -71,35 +71,35 @@ algorithm.
 
 ### Public methods
 
-- [`causalDiscoSearch$new()`](#method-causalDiscoSearch-new)
+- [`CausalDiscoSearch$new()`](#method-CausalDiscoSearch-new)
 
-- [`causalDiscoSearch$set_params()`](#method-causalDiscoSearch-set_params)
+- [`CausalDiscoSearch$set_params()`](#method-CausalDiscoSearch-set_params)
 
-- [`causalDiscoSearch$set_data()`](#method-causalDiscoSearch-set_data)
+- [`CausalDiscoSearch$set_data()`](#method-CausalDiscoSearch-set_data)
 
-- [`causalDiscoSearch$set_suff_stat()`](#method-causalDiscoSearch-set_suff_stat)
+- [`CausalDiscoSearch$set_suffStat()`](#method-CausalDiscoSearch-set_suffStat)
 
-- [`causalDiscoSearch$set_test()`](#method-causalDiscoSearch-set_test)
+- [`CausalDiscoSearch$set_test()`](#method-CausalDiscoSearch-set_test)
 
-- [`causalDiscoSearch$set_score()`](#method-causalDiscoSearch-set_score)
+- [`CausalDiscoSearch$set_score()`](#method-CausalDiscoSearch-set_score)
 
-- [`causalDiscoSearch$set_alg()`](#method-causalDiscoSearch-set_alg)
+- [`CausalDiscoSearch$set_alg()`](#method-CausalDiscoSearch-set_alg)
 
-- [`causalDiscoSearch$set_knowledge()`](#method-causalDiscoSearch-set_knowledge)
+- [`CausalDiscoSearch$set_knowledge()`](#method-CausalDiscoSearch-set_knowledge)
 
-- [`causalDiscoSearch$run_search()`](#method-causalDiscoSearch-run_search)
+- [`CausalDiscoSearch$run_search()`](#method-CausalDiscoSearch-run_search)
 
-- [`causalDiscoSearch$clone()`](#method-causalDiscoSearch-clone)
+- [`CausalDiscoSearch$clone()`](#method-CausalDiscoSearch-clone)
 
 ------------------------------------------------------------------------
 
 ### Method `new()`
 
-Constructor for the `causalDiscoSearch` class.
+Constructor for the `CausalDiscoSearch` class.
 
 #### Usage
 
-    causalDiscoSearch$new()
+    CausalDiscoSearch$new()
 
 ------------------------------------------------------------------------
 
@@ -109,7 +109,7 @@ Sets the parameters for the test and algorithm.
 
 #### Usage
 
-    causalDiscoSearch$set_params(params)
+    CausalDiscoSearch$set_params(params)
 
 #### Arguments
 
@@ -125,7 +125,7 @@ Sets the data for the search algorithm.
 
 #### Usage
 
-    causalDiscoSearch$set_data(data, set_suff_stat = TRUE)
+    CausalDiscoSearch$set_data(data, set_suffStat = TRUE)
 
 #### Arguments
 
@@ -133,19 +133,19 @@ Sets the data for the search algorithm.
 
   A `data.frame` or a `matrix` containing the data.
 
-- `set_suff_stat`:
+- `set_suffStat`:
 
   Logical; whether to set the sufficient statistic.
 
 ------------------------------------------------------------------------
 
-### Method `set_suff_stat()`
+### Method `set_suffStat()`
 
 Sets the sufficient statistic for the data.
 
 #### Usage
 
-    causalDiscoSearch$set_suff_stat()
+    CausalDiscoSearch$set_suffStat()
 
 ------------------------------------------------------------------------
 
@@ -155,7 +155,7 @@ Sets the test for the search algorithm.
 
 #### Usage
 
-    causalDiscoSearch$set_test(method, alpha = 0.05)
+    CausalDiscoSearch$set_test(method, alpha = 0.05)
 
 #### Arguments
 
@@ -175,7 +175,7 @@ Sets the score for the search algorithm.
 
 #### Usage
 
-    causalDiscoSearch$set_score(method, params = list())
+    CausalDiscoSearch$set_score(method, params = list())
 
 #### Arguments
 
@@ -195,7 +195,7 @@ Sets the algorithm for the search.
 
 #### Usage
 
-    causalDiscoSearch$set_alg(method)
+    CausalDiscoSearch$set_alg(method)
 
 #### Arguments
 
@@ -211,7 +211,7 @@ Sets the background knowledge for the search with a `knowledge` object.
 
 #### Usage
 
-    causalDiscoSearch$set_knowledge(kn, directed_as_undirected = FALSE)
+    CausalDiscoSearch$set_knowledge(kn, directed_as_undirected = FALSE)
 
 #### Arguments
 
@@ -222,8 +222,8 @@ Sets the background knowledge for the search with a `knowledge` object.
 - `directed_as_undirected`:
 
   Logical; whether to treat directed edges in the knowledge as
-  undirected. Default is `FALSE`. This is due to the nature of how
-  `pcalg` handles background knowledge when using
+  undirected. Default is `FALSE`. This is due to the nature of how pcalg
+  handles background knowledge when using
   [`skeleton`](https://rdrr.io/pkg/pcalg/man/skeleton.html) under the
   hood in
   [`tpc`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md)
@@ -238,7 +238,7 @@ Runs the search algorithm on the data.
 
 #### Usage
 
-    causalDiscoSearch$run_search(data = NULL, set_suff_stat = TRUE)
+    CausalDiscoSearch$run_search(data = NULL, set_suffStat = TRUE)
 
 #### Arguments
 
@@ -246,7 +246,7 @@ Runs the search algorithm on the data.
 
   A `data.frame` or a `matrix` containing the data.
 
-- `set_suff_stat`:
+- `set_suffStat`:
 
   Logical; whether to set the sufficient statistic
 
@@ -258,7 +258,7 @@ The objects of this class are cloneable with this method.
 
 #### Usage
 
-    causalDiscoSearch$clone(deep = FALSE)
+    CausalDiscoSearch$clone(deep = FALSE)
 
 #### Arguments
 
@@ -274,10 +274,10 @@ The objects of this class are cloneable with this method.
 # Generally, we do not recommend using the R6 classes directly, but rather
 # use the disco() or any method function, for example pc(), instead.
 
-data(tpcExample)
+data(tpc_example)
 
 # small toy dataset
-dat <- head(tpcExample, 50)
+dat <- head(tpc_example, 50)
 
 # background knowledge (tiers + one exogenous var)
 kn <- knowledge(
@@ -304,7 +304,7 @@ plot(result)
 # Using R6 class:
 
 # --- Constraint-based: TPC ----------------------------------------------------
-s_tpc <- causalDiscoSearch$new()
+s_tpc <- CausalDiscoSearch$new()
 s_tpc$set_params(list(verbose = FALSE))
 s_tpc$set_test("fisher_z", alpha = 0.2)
 s_tpc$set_alg("tpc")
@@ -334,7 +334,7 @@ print(res_tpc)
 #> 6 oldage_x6 old  
 #> 
 
-# Switch to TFCI on the same object (reuses suff_stat/test)
+# Switch to TFCI on the same object (reuses suffStat/test)
 s_tpc$set_alg("tfci")
 res_tfci <- s_tpc$run_search()
 print(res_tfci)
@@ -360,10 +360,10 @@ print(res_tfci)
 #> 
 
 # --- Score-based: TGES --------------------------------------------------------
-s_tges <- causalDiscoSearch$new()
+s_tges <- CausalDiscoSearch$new()
 s_tges$set_score("tbic") # Gaussian temporal score
 s_tges$set_alg("tges")
-s_tges$set_data(dat, set_suff_stat = FALSE) # suff stat not used for TGES
+s_tges$set_data(dat, set_suffStat = FALSE) # suff stat not used for TGES
 s_tges$set_knowledge(kn)
 res_tges <- s_tges$run_search()
 print(res_tges)
@@ -373,26 +373,26 @@ print(res_tges)
 # --- Intentional error demonstrations ----------------------------------------
 
 # run_search() without setting an algorithm
-try(causalDiscoSearch$new()$run_search(dat))
+try(CausalDiscoSearch$new()$run_search(dat))
 #> Error : Test must be set before sufficient statistic.
 
-# set_suff_stat() requires data and test first
-s_err <- causalDiscoSearch$new()
-try(s_err$set_suff_stat()) # no data & no test
+# set_suffStat() requires data and test first
+s_err <- CausalDiscoSearch$new()
+try(s_err$set_suffStat()) # no data & no test
 #> Error : Data must be set before sufficient statistic.
-s_err$set_data(dat, set_suff_stat = FALSE)
-try(s_err$set_suff_stat()) # no test
+s_err$set_data(dat, set_suffStat = FALSE)
+try(s_err$set_suffStat()) # no test
 #> Error : Test must be set before sufficient statistic.
 
 # unknown test / score / algorithm
-try(causalDiscoSearch$new()$set_test("not_a_test"))
+try(CausalDiscoSearch$new()$set_test("not_a_test"))
 #> Error : Unknown method: not_a_test
-try(causalDiscoSearch$new()$set_score("not_a_score"))
+try(CausalDiscoSearch$new()$set_score("not_a_score"))
 #> Error : Unknown score type using causalDisco engine: not_a_score
-try(causalDiscoSearch$new()$set_alg("not_an_alg"))
+try(CausalDiscoSearch$new()$set_alg("not_an_alg"))
 #> Error : Unknown method type using causalDisco engine: not_an_alg
 
 # set_knowledge() requires a `knowledge` object
-try(causalDiscoSearch$new()$set_knowledge(list(not = "knowledge")))
+try(CausalDiscoSearch$new()$set_knowledge(list(not = "knowledge")))
 #> Error : Input must be a knowledge instance.
 ```

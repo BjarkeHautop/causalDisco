@@ -59,10 +59,10 @@ Other knowledge functions:
 
 ``` r
 # turn a knowledge object back into DSL code
-data(tpcExample)
+data(tpc_example)
 
 kn <- knowledge(
-  tpcExample,
+  tpc_example,
   tier(
     child ~ starts_with("child"),
     youth ~ starts_with("youth"),
@@ -74,10 +74,10 @@ kn <- knowledge(
 
 kn <- forbid_tier_violations(kn)
 
-code <- deparse_knowledge(kn, df_name = "tpcExample")
+code <- deparse_knowledge(kn, df_name = "tpc_example")
 
 cat(code)
-#> knowledge(tpcExample,
+#> knowledge(tpc_example,
 #>   tier(
 #>     child ~ child_x1 + child_x2,
 #>     youth ~ youth_x3 + youth_x4,
@@ -94,7 +94,7 @@ cat(code)
 #>   )
 #> )
 # printed output:
-# knowledge(tpcExample,
+# knowledge(tpc_example,
 #   tier(
 #     child ~ child_x1 + child_x2,
 #     youth ~ youth_x3 + youth_x4,

@@ -64,19 +64,18 @@
 <div class="section level2">
 <h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
 </h2>
-<p>Causal discovery methods exist in many ecosystems, for example in <code>bnlearn</code>, <code>pcalg</code>, or <code>Tetrad</code>, but their APIs vary widely.</p>
-<p><code>causalDisco</code> unifies them under one clear grammar, making it easy to compare results, switch algorithms, and focus on scientific questions rather than package quirks.</p>
+<p>Causal discovery methods exist in many ecosystems, for example in bnlearn, pcalg, or Tetrad, but their APIs vary widely.</p>
+<p>causalDisco unifies them under one clear grammar, making it easy to compare results, switch algorithms, and focus on scientific questions rather than package quirks.</p>
 <p>Time to hit the disco 🪩</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <div class="section level3">
-<h3 id="install-causaldisco">Install <code>causalDisco</code>
-<a class="anchor" aria-label="anchor" href="#install-causaldisco"></a>
+<h3 id="install-causaldisco">Install causalDisco<a class="anchor" aria-label="anchor" href="#install-causaldisco"></a>
 </h3>
-<p>To install <code>causalDisco</code> ensure you first have installed Rust as described below.</p>
-<p>Then you can install the development version of <code>causalDisco</code> from GitHub using <code>pak</code>:</p>
+<p>To install causalDisco ensure you first have installed Rust as described below.</p>
+<p>Then you can install the development version of causalDisco from GitHub using pak:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"https://github.com/BjarkeHautop/causalDisco"</span><span class="op">)</span></span></code></pre></div>
 <p>or with all suggested packages (note that this requires a valid Java / JDK installation for rJava as described below):</p>
@@ -86,17 +85,17 @@
 <div class="section level3">
 <h3 id="installing-rust">Installing Rust<a class="anchor" aria-label="anchor" href="#installing-rust"></a>
 </h3>
-<p><code>causalDisco</code> depends on the package <a href="https://github.com/frederikfabriciusbjerre/caugi" class="external-link"><code>caugi</code></a>, which requires Rust to be installed on your system. See <a href="https://www.rust-lang.org/tools/install" class="external-link uri">https://www.rust-lang.org/tools/install</a> for instructions on how to install Rust.</p>
+<p>causalDisco depends on the package <a href="https://github.com/frederikfabriciusbjerre/caugi" class="external-link">caugi</a>, which requires Rust to be installed on your system. See <a href="https://www.rust-lang.org/tools/install" class="external-link uri">https://www.rust-lang.org/tools/install</a> for instructions on how to install Rust.</p>
 </div>
 <div class="section level3">
 <h3 id="installing-java--jdk">Installing Java / JDK<a class="anchor" aria-label="anchor" href="#installing-java--jdk"></a>
 </h3>
-<p><code>causalDisco</code> provides an interface to the Java library <a href="https://github.com/cmu-phil/tetrad" class="external-link"><code>Tetrad</code></a> for causal discovery algorithms. To use algorithms from <code>Tetrad</code> you need to install a Java Development Kit (JDK) &gt;= 21. We recommend Eclipse Temurin (OpenJDK), available at <a href="https://adoptium.net" class="external-link uri">https://adoptium.net</a> for all major operating systems.</p>
+<p><code>causalDisco</code> provides an interface to the Java library <a href="https://github.com/cmu-phil/tetrad" class="external-link">Tetrad</a> for causal discovery algorithms. To use algorithms from Tetrad you need to install a Java Development Kit (JDK) &gt;= 21. We recommend Eclipse Temurin (OpenJDK), available at <a href="https://adoptium.net" class="external-link uri">https://adoptium.net</a> for all major operating systems.</p>
 <p>We provide a helper function to install Temurin JDK 25 on macOS and Windows:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">causalDisco</span><span class="fu">::</span><span class="fu"><a href="reference/install_java.html">install_java</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>You may also refer to <code>Tetrad</code>’s <a href="https://github.com/cmu-phil/tetrad/wiki/Setting-up-Java-for-Tetrad" class="external-link">Java setup guide</a>.</p>
-<p>The current supported version of <code>Tetrad</code> can then be installed by calling</p>
+<p>You may also refer to Tetrad’s <a href="https://github.com/cmu-phil/tetrad/wiki/Setting-up-Java-for-Tetrad" class="external-link">Java setup guide</a>.</p>
+<p>The current supported version of Tetrad can then be installed by calling</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">causalDisco</span><span class="fu">::</span><span class="fu"><a href="reference/install_tetrad.html">install_tetrad</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>To verify everything is set up correctly you can run <code><a href="reference/check_tetrad_install.html">check_tetrad_install()</a></code>:</p>
@@ -121,7 +120,7 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>With <code>causalDisco</code> you can currently run causal discovery algorithms from the package <code>causalDisco</code> itself, the Java library <code>Tetrad</code>, the R package <code>bnlearn</code>, and the R package <code>pcalg</code>.</p>
+<p>With causalDisco you can currently run causal discovery algorithms from the package causalDisco itself, the Java library Tetrad, the R package bnlearn, and the R package pcalg.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>causalDisco.tetrad.version <span class="op">=</span> <span class="st">"7.6.9"</span><span class="op">)</span> <span class="co"># Memory issues are fixed on v7.6.9</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/annennenne/causalDisco" class="external-link">causalDisco</a></span><span class="op">)</span></span>
@@ -133,11 +132,11 @@
 <span><span class="co">#&gt;   Restart R to apply changes.</span></span>
 <span></span>
 <span><span class="co"># load data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># define background knowledge object</span></span>
 <span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>  <span class="va">tpcExample</span>,</span>
+<span>  <span class="va">tpc_example</span>,</span>
 <span>  <span class="fu">tier</span><span class="op">(</span></span>
 <span>    <span class="va">child</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>,</span>
 <span>    <span class="va">youth</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span>
@@ -149,16 +148,16 @@
 <span><span class="co"># Requires Tetrad to be installed</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
-<span>  <span class="va">disco_tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
+<span>  <span class="va">disco_tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co"># similarly, one could do</span></span>
 <span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="va">tetrad_pc</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/set_knowledge.html">set_knowledge</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span>
-<span>  <span class="va">disco_tetrad_pc_new</span> <span class="op">&lt;-</span> <span class="fu">tetrad_pc</span><span class="op">(</span><span class="va">tpcExample</span><span class="op">)</span></span>
+<span>  <span class="va">disco_tetrad_pc_new</span> <span class="op">&lt;-</span> <span class="fu">tetrad_pc</span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># use causalDisco's own tges algorithm with temporal BIC score</span></span>
 <span><span class="va">cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tges.html">tges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, score <span class="op">=</span> <span class="st">"tbic"</span><span class="op">)</span></span>
-<span><span class="va">disco_cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">cd_tges</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">disco_cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">cd_tges</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
 <p>You can visualize the resulting causal graph using the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">disco_cd_tges</span><span class="op">)</span></span></code></pre></div>
@@ -168,9 +167,9 @@
 <h2 id="questions">Questions<a class="anchor" aria-label="anchor" href="#questions"></a>
 </h2>
 <ul>
-<li>We say in <code><a href="reference/bnlearnSearch.html">?bnlearnSearch</a></code> (and implemented in <code>bnlearn_search</code>) various algorithms such as <code>gs</code>, <code>iamb</code>. However, we don’t have a <code>gs(), iamb()</code> function exported (similar to how we have a <code><a href="reference/pc.html">pc()</a></code> function). Should we add these functions?</li>
+<li>We say in <code><a href="reference/bnlearnSearch.html">?BnlearnSearch</a></code> (and implemented in <code>bnlearn_search</code>) various algorithms such as <code>gs</code>, <code>iamb</code>. However, we don’t have a <code>gs(), iamb()</code> function exported (similar to how we have a <code><a href="reference/pc.html">pc()</a></code> function). Should we add these functions?</li>
 </ul>
-<p>Is it a work in progress? If so we need to document this in <code><a href="reference/bnlearnSearch.html">?bnlearnSearch</a></code> (and similar for other functions)?.</p>
+<p>Is it a work in progress? If so we need to document this in <code><a href="reference/bnlearnSearch.html">?BnlearnSearch</a></code> (and similar for other functions)?.</p>
 </div>
 <div class="section level2">
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
@@ -191,13 +190,13 @@
 </h4>
 <ul>
 <li>
-<code>tpc</code> with engine <code>causalDisco</code> does not currently work correctly with tier knowledge</li>
+<code>tpc</code> with engine <code>"causalDisco"</code> does not currently work correctly with tier knowledge</li>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>  <span class="va">tpcExample</span>,</span>
+<span>  <span class="va">tpc_example</span>,</span>
 <span>  <span class="fu">tier</span><span class="op">(</span></span>
 <span>    <span class="va">child</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>,</span>
 <span>    <span class="va">youth</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span>
@@ -207,7 +206,7 @@
 <span></span>
 <span><span class="va">my_tpc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tpc.html">tpc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span><span class="va">tpcExample</span>, <span class="va">my_tpc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span><span class="va">tpc_example</span>, <span class="va">my_tpc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
 <span><span class="va">edges</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">caugi</span><span class="op">@</span><span class="va">edges</span></span>
 <span></span>
 <span><span class="va">violations</span> <span class="op">&lt;-</span> <span class="fu">causalDisco</span><span class="fu">:::</span><span class="fu">check_tier_violations</span><span class="op">(</span><span class="va">edges</span>, <span class="va">kn</span><span class="op">)</span></span>
@@ -241,9 +240,9 @@
 <span><span class="op">}</span></span></code></pre></div>
 <p>The algorithm needs to be modified when having required edges, I think.</p>
 <ul>
-<li><p>Look into how (if) possible to pass to <code>pcalg</code>.</p></li>
+<li><p>Look into how (if) possible to pass to pcalg.</p></li>
 <li>
-<p>Piping as done above for <code>Tetrad</code> in the example section loses <code>$knowledge$tiers</code> information due to how builders/closures capture knowledge.</p>
+<p>Piping as done above for Tetrad in the example section loses <code>$knowledge$tiers</code> information due to how builders/closures capture knowledge.</p>
 <ul>
 <li>Fixing requires refactoring the disco_method builder design I think.</li>
 </ul>
@@ -251,34 +250,34 @@
 </ul>
 <p><code><a href="reference/ges.html">ges()</a></code> with engine pcalg gives warning about required edges when we don’t specify any?</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>  <span class="va">tpcExample</span>,</span>
+<span>  <span class="va">tpc_example</span>,</span>
 <span>  <span class="fu">forbidden</span><span class="op">(</span><span class="va">child_x1</span> <span class="op">~</span> <span class="va">youth_x3</span><span class="op">)</span>,</span>
 <span>  <span class="fu">forbidden</span><span class="op">(</span><span class="va">youth_x3</span> <span class="op">~</span> <span class="va">child_x1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">pcalg_ges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ges.html">ges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"pcalg"</span>, score <span class="op">=</span> <span class="st">"sem_bic"</span><span class="op">)</span></span>
-<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">pcalg_ges</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">pcalg_ges</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="tetrad-issues">Tetrad issues<a class="anchor" aria-label="anchor" href="#tetrad-issues"></a>
 </h4>
 <ul>
-<li><p>v7.6.9 of <code>Tetrad</code> seems to fix the memory issues.</p></li>
-<li><p><code>Tetrad</code> does not use required correctly</p></li>
+<li><p>v7.6.9 of Tetrad seems to fix the memory issues.</p></li>
+<li><p>Tetrad does not use required correctly</p></li>
 </ul>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>    <span class="va">tpcExample</span>,</span>
+<span>    <span class="va">tpc_example</span>,</span>
 <span>    <span class="fu">required</span><span class="op">(</span><span class="va">child_x1</span> <span class="op">~</span> <span class="va">youth_x3</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="va">tetrad_fci</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fci.html">fci</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
-<span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">tetrad_fci</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
+<span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tetrad_fci</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
 <span>  <span class="va">edges</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">caugi</span><span class="op">@</span><span class="va">edges</span></span>
 <span>  <span class="va">edges</span></span>
 <span><span class="op">}</span></span>
@@ -293,15 +292,15 @@
 <p>The required edge is missing. Furthermore, in <code>pc</code> it gives undirected edges between the required edges.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>    <span class="va">tpcExample</span>,</span>
+<span>    <span class="va">tpc_example</span>,</span>
 <span>    <span class="fu">required</span><span class="op">(</span><span class="va">child_x1</span> <span class="op">~</span> <span class="va">oldage_x5</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
-<span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
+<span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
 <span>  <span class="va">edges</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">caugi</span><span class="op">@</span><span class="va">edges</span></span>
 <span>  <span class="va">edges</span></span>
 <span><span class="op">}</span></span>
@@ -319,10 +318,10 @@
 </ul>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>    <span class="va">tpcExample</span>,</span>
+<span>    <span class="va">tpc_example</span>,</span>
 <span>    <span class="fu">tier</span><span class="op">(</span></span>
 <span>      <span class="va">child</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>,</span>
 <span>      <span class="va">youth</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span>
@@ -331,7 +330,7 @@
 <span>  <span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
-<span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
+<span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
 <span>  <span class="va">edges</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">caugi</span><span class="op">@</span><span class="va">edges</span></span>
 <span>  <span class="va">edges</span></span>
 <span><span class="op">}</span></span>
@@ -347,15 +346,15 @@
 <p>Is this expected?</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>    <span class="va">tpcExample</span>,</span>
+<span>    <span class="va">tpc_example</span>,</span>
 <span>    <span class="fu">forbidden</span><span class="op">(</span><span class="va">child_x2</span> <span class="op">~</span> <span class="va">child_x1</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">tetrad_fci</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fci.html">fci</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
-<span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">tetrad_fci</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
+<span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tetrad_fci</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
 <span>  <span class="va">edges</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">caugi</span><span class="op">@</span><span class="va">edges</span></span>
 <span>  <span class="va">edges</span></span>
 <span><span class="op">}</span></span>
@@ -374,24 +373,10 @@
 <h3 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h3>
 <ul>
-<li><p>Make templates.</p></li>
-<li>
-<p>Structure the documentation better. See See how <code>mlr3</code> does it, and see their wiki on roxygen R6 guide <a href="https://github.com/mlr-org/mlr3/wiki/Roxygen-R6-Guide" class="external-link">here</a>.</p>
-<ul>
-<li>Make it clear somewhere what/how knowledge is supported in which algorithms. E.g. <code>pc</code> with engine <code>pcalg</code> only works with forbidden edges from knowledge objects and requires specifying both ways. It’s documented in <code>?as_pcalg_constaints</code> but should be more visible. In <code><a href="reference/pcalgSearch.html">?pcalgSearch</a></code> probably?</li>
-</ul>
-</li>
-</ul>
-<p>Maybe make it possible to check documentation of engine via <code>?pcalg</code> and similar for the rest?</p>
-<ul>
-<li>List in documentation of <code>tfci</code>, … what kind of graph it returns. <code>tfci</code> gives a PAG, right? Currently it returns <code>graph_class: UNKNOWN</code>
-<ul>
-<li>Either wait/help for <code>caugi</code> to implement different classes</li>
-<li>Or we implement a function that converts <code>caugi</code> output to specific graph classes based on algorithm/edges?</li>
-<li>Update plotting function to work correctly with different graph classes.</li>
-</ul>
-</li>
-<li>Make vignettes</li>
+<li><p>See how <code>mlr3</code> does it, and see their wiki on roxygen R6 guide <a href="https://github.com/mlr-org/mlr3/wiki/Roxygen-R6-Guide" class="external-link">here</a>.</p></li>
+<li><p>Make it clear somewhere what/how knowledge is supported in which algorithms. E.g. <code>pc</code> with engine pcalg only works with forbidden edges from knowledge objects and requires specifying both ways. It’s documented in <code>?as_pcalg_constaints</code> but should be more visible. In <code><a href="reference/pcalgSearch.html">?PcalgSearch</a></code> probably?</p></li>
+<li><p>List in documentation of <code>tfci</code>, … what kind of graph it returns.</p></li>
+<li><p>Make vignettes</p></li>
 </ul>
 </div>
 <div class="section level3">
@@ -414,12 +399,24 @@
 <h3 id="adopt-tetrad-v769">Adopt Tetrad v7.6.9<a class="anchor" aria-label="anchor" href="#adopt-tetrad-v769"></a>
 </h3>
 <ul>
-<li>Move to <code>Tetrad</code> v7.6.9. v7.6.9 removes the folder <a href="https://github.com/cmu-phil/tetrad/tree/v7.6.8/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/cluster" class="external-link">algcomparison/algorithm/cluster</a>
+<li>Move to Tetrad v7.6.9. v7.6.9 removes the folder <a href="https://github.com/cmu-phil/tetrad/tree/v7.6.8/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/cluster" class="external-link">algcomparison/algorithm/cluster</a>
 </li>
 </ul>
 <p>Was removed in this commit <a href="https://github.com/cmu-phil/tetrad/commit/295dceef6b83ac08ff0032fb194cf3ee5e429337#diff-adf829223cc59eac11682310f8a77c0ec3cf26a5b4310d75ec8edfaa86dd285b" class="external-link uri">https://github.com/cmu-phil/tetrad/commit/295dceef6b83ac08ff0032fb194cf3ee5e429337#diff-adf829223cc59eac11682310f8a77c0ec3cf26a5b4310d75ec8edfaa86dd285b</a></p>
 <p><a href="https://github.com/cmu-phil/tetrad/releases" class="external-link">Changelog</a> item 14 says “and a generalization of GFFC (Generalized Find Factor Clusters) of FOFC and FTFC, providing multiple strategies for discovering latent clusterings from measurement data.”</p>
 <p>so we need to implement this in <code>causalDisco</code> (help?)</p>
+<p>This also doesn’t work on 7.6.9</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">load_all</span>()</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>ℹ Loading causalDisco</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>causalDisco startup<span class="sc">:</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>  Java heap size requested<span class="sc">:</span> <span class="dv">2</span> GB</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>  Tetrad version<span class="sc">:</span> <span class="dv">7</span>.<span class="fl">6.9</span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>  Java successfully initialized with <span class="dv">2</span> GB.</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>  To change heap size, set <span class="fu">options</span>(<span class="at">java.heap.size =</span> <span class="st">'Ng'</span>) or <span class="fu">Sys.setenv</span>(<span class="at">JAVA_HEAP_SIZE =</span> <span class="st">'Ng'</span>) <span class="sc">*</span>before<span class="sc">*</span> loading.</span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>  Restart R to apply changes.</span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="sc">&gt;</span> tetrad_data <span class="ot">&lt;-</span> <span class="fu">rdata_to_tetrad</span>(df)</span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">rdata_to_tetrad</span>(df) <span class="sc">:</span> </span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>  java.lang.ClassNotFoundException<span class="sc">:</span> edu<span class="sc">/</span>cmu<span class="sc">/</span>tetrad<span class="sc">/</span>data<span class="sc">/</span>DiscreteVariable</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="cran-todo">CRAN TODO<a class="anchor" aria-label="anchor" href="#cran-todo"></a>

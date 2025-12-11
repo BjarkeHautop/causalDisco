@@ -189,33 +189,33 @@ An R6 object with the methods documented below.
 
 ### Public methods
 
-- [`bnlearnSearch$new()`](#method-bnlearnSearch-new)
+- [`BnlearnSearch$new()`](#method-BnlearnSearch-new)
 
-- [`bnlearnSearch$set_params()`](#method-bnlearnSearch-set_params)
+- [`BnlearnSearch$set_params()`](#method-BnlearnSearch-set_params)
 
-- [`bnlearnSearch$set_data()`](#method-bnlearnSearch-set_data)
+- [`BnlearnSearch$set_data()`](#method-BnlearnSearch-set_data)
 
-- [`bnlearnSearch$set_test()`](#method-bnlearnSearch-set_test)
+- [`BnlearnSearch$set_test()`](#method-BnlearnSearch-set_test)
 
-- [`bnlearnSearch$set_score()`](#method-bnlearnSearch-set_score)
+- [`BnlearnSearch$set_score()`](#method-BnlearnSearch-set_score)
 
-- [`bnlearnSearch$set_alg()`](#method-bnlearnSearch-set_alg)
+- [`BnlearnSearch$set_alg()`](#method-BnlearnSearch-set_alg)
 
-- [`bnlearnSearch$set_knowledge()`](#method-bnlearnSearch-set_knowledge)
+- [`BnlearnSearch$set_knowledge()`](#method-BnlearnSearch-set_knowledge)
 
-- [`bnlearnSearch$run_search()`](#method-bnlearnSearch-run_search)
+- [`BnlearnSearch$run_search()`](#method-BnlearnSearch-run_search)
 
-- [`bnlearnSearch$clone()`](#method-bnlearnSearch-clone)
+- [`BnlearnSearch$clone()`](#method-BnlearnSearch-clone)
 
 ------------------------------------------------------------------------
 
 ### Method `new()`
 
-Constructor for the `bnlearnSearch` class.
+Constructor for the `BnlearnSearch` class.
 
 #### Usage
 
-    bnlearnSearch$new()
+    BnlearnSearch$new()
 
 ------------------------------------------------------------------------
 
@@ -225,7 +225,7 @@ Set the parameters for the search algorithm.
 
 #### Usage
 
-    bnlearnSearch$set_params(params)
+    BnlearnSearch$set_params(params)
 
 #### Arguments
 
@@ -241,7 +241,7 @@ Set the data for the search algorithm.
 
 #### Usage
 
-    bnlearnSearch$set_data(data)
+    BnlearnSearch$set_data(data)
 
 #### Arguments
 
@@ -257,7 +257,7 @@ Set the conditional-independence test to use in the search algorithm.
 
 #### Usage
 
-    bnlearnSearch$set_test(method, alpha = 0.05)
+    BnlearnSearch$set_test(method, alpha = 0.05)
 
 #### Arguments
 
@@ -277,7 +277,7 @@ Set the score function for the search algorithm.
 
 #### Usage
 
-    bnlearnSearch$set_score(method)
+    BnlearnSearch$set_score(method)
 
 #### Arguments
 
@@ -293,7 +293,7 @@ Set the causal discovery algorithm to use.
 
 #### Usage
 
-    bnlearnSearch$set_alg(method, args = NULL)
+    BnlearnSearch$set_alg(method, args = NULL)
 
 #### Arguments
 
@@ -314,7 +314,7 @@ object.
 
 #### Usage
 
-    bnlearnSearch$set_knowledge(knowledge_obj)
+    BnlearnSearch$set_knowledge(knowledge_obj)
 
 #### Arguments
 
@@ -330,7 +330,7 @@ Run the search algorithm on the currently set data.
 
 #### Usage
 
-    bnlearnSearch$run_search(data = NULL)
+    BnlearnSearch$run_search(data = NULL)
 
 #### Arguments
 
@@ -347,7 +347,7 @@ The objects of this class are cloneable with this method.
 
 #### Usage
 
-    bnlearnSearch$clone(deep = FALSE)
+    BnlearnSearch$clone(deep = FALSE)
 
 #### Arguments
 
@@ -364,22 +364,22 @@ The objects of this class are cloneable with this method.
 # use the disco() or any method function, for example pc(), instead.
 
 # Load data
-data("tpcExample")
+data("tpc_example")
 
 # Recommended:
 my_pc <- pc(engine = "bnlearn", test = "fisher_z", alpha = 0.05)
-result <- my_pc(tpcExample)
+result <- my_pc(tpc_example)
 
 # or
-result <- disco(data = tpcExample, method = my_pc)
+result <- disco(data = tpc_example, method = my_pc)
 
 plot(result)
 
 
 # Using R6 class:
-s <- bnlearnSearch$new()
+s <- BnlearnSearch$new()
 
-s$set_data(tpcExample)
+s$set_data(tpc_example)
 s$set_test(method = "fisher_z", alpha = 0.05)
 s$set_alg("pc")
 

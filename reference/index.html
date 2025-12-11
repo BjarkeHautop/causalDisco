@@ -105,7 +105,7 @@
         </dt>
         <dd>The Temporal Peter-Clark (PC) algorithm for causal discovery</dd>
       </dl></div><div class="section level2">
-      <h2 id="setup-for-tetrad-engines">Setup for Tetrad Engines<a class="anchor" aria-label="anchor" href="#setup-for-tetrad-engines"></a></h2>
+      <h2 id="setup-for-tetrad-engine">Setup for Tetrad Engine<a class="anchor" aria-label="anchor" href="#setup-for-tetrad-engine"></a></h2>
 
       <div class="section-desc"><p>Functions for installing and verifying the Tetrad Java backend.</p></div>
 
@@ -153,21 +153,21 @@
 
         <dt>
 
-          <code><a href="bnlearnSearch.html">bnlearnSearch</a></code>
+          <code><a href="bnlearnSearch.html">BnlearnSearch</a></code>
 
         </dt>
         <dd>R6 Interface to bnlearn Search Algorithms</dd>
 
         <dt>
 
-          <code><a href="causalDiscoSearch.html">causalDiscoSearch</a></code>
+          <code><a href="causalDiscoSearch.html">CausalDiscoSearch</a></code>
 
         </dt>
         <dd>R6 Interface to causalDisco Search Algorithms</dd>
 
         <dt>
 
-          <code><a href="pcalgSearch.html">pcalgSearch</a></code>
+          <code><a href="pcalgSearch.html">PcalgSearch</a></code>
 
         </dt>
         <dd>R6 Interface to pcalg Search Algorithms</dd>
@@ -186,7 +186,7 @@
           <code><a href="tfci_run.html">tfci_run()</a></code>
 
         </dt>
-        <dd>Causal Discovery Using the Temporal FCI (TFCI) Algorithm Use a modification of the FCI algorithm that makes use of background knowledge in the format of a partial ordering. This may, for instance, come about when variables can be assigned to distinct tiers or periods (i.e., a temporal ordering).</dd>
+        <dd>Causal Discovery Using the Temporal FCI (TFCI) Algorithm</dd>
 
         <dt>
 
@@ -202,7 +202,7 @@
         </dt>
         <dd>Causal Discovery Using the Temporal PC Algorithm (TPC)</dd>
       </dl></div><div class="section level2">
-      <h2 id="score-functions">Score Functions<a class="anchor" aria-label="anchor" href="#score-functions"></a></h2>
+      <h2 id="classes-used-by-algorithms-with-engine-causaldisco">Classes used by algorithms with engine causalDisco<a class="anchor" aria-label="anchor" href="#classes-used-by-algorithms-with-engine-causaldisco"></a></h2>
 
 
 
@@ -212,6 +212,13 @@
 
 
       <dl><dt>
+
+          <code><a href="TEssGraph-class.html">TEssGraph-class</a></code> <code><a href="TEssGraph-class.html">TEssGraph</a></code>
+
+        </dt>
+        <dd>Temporal EssGraph class with greedy steps</dd>
+
+        <dt>
 
           <code><a href="TemporalBIC-class.html">TemporalBIC-class</a></code> <code><a href="TemporalBIC-class.html">TemporalBIC</a></code>
 
@@ -227,10 +234,33 @@
 
         <dt>
 
-          <code><a href="gausCorScore.html">gausCorScore()</a></code>
+          <code><a href="gaus_cor_score.html">gaus_cor_score()</a></code>
 
         </dt>
         <dd>Gaussian L0 score computed on correlation matrix</dd>
+      </dl></div><div class="section level2">
+      <h2 id="test-functions">Test Functions<a class="anchor" aria-label="anchor" href="#test-functions"></a></h2>
+
+
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="cor_test.html">cor_test()</a></code>
+
+        </dt>
+        <dd>Test for vanishing partial correlations</dd>
+
+        <dt>
+
+          <code><a href="reg_test.html">reg_test()</a></code>
+
+        </dt>
+        <dd>Regression-based information loss test</dd>
       </dl></div><div class="section level2">
       <h2 id="graph-operations">Graph Operations<a class="anchor" aria-label="anchor" href="#graph-operations"></a></h2>
 
@@ -243,13 +273,6 @@
 
       <dl><dt>
 
-          <code><a href="graph2amat.html">graph2amat()</a></code>
-
-        </dt>
-        <dd>Convert graphNEL object to adjacency matrix</dd>
-
-        <dt>
-
           <code><a href="amat.html">amat()</a></code>
 
         </dt>
@@ -257,10 +280,24 @@
 
         <dt>
 
-          <code><a href="essgraph2amat.html">essgraph2amat()</a></code>
+          <code><a href="graph_to_amat.html">graph_to_amat()</a></code>
+
+        </dt>
+        <dd>Convert graphNEL object to adjacency matrix</dd>
+
+        <dt>
+
+          <code><a href="essgraph_to_amat.html">essgraph_to_amat()</a></code>
 
         </dt>
         <dd>Convert essential graph to adjacency matrix</dd>
+
+        <dt>
+
+          <code><a href="probmat_to_amat.html">probmat_to_amat()</a></code>
+
+        </dt>
+        <dd>Convert a matrix of probabilities into an adjacency matrix</dd>
 
         <dt>
 
@@ -278,14 +315,14 @@
 
         <dt>
 
-          <code><a href="nedges.html">nedges()</a></code>
+          <code><a href="n_edges.html">n_edges()</a></code>
 
         </dt>
         <dd>Number of edges in adjacency matrix</dd>
 
         <dt>
 
-          <code><a href="maxnedges.html">maxnedges()</a></code>
+          <code><a href="max_edges.html">max_edges()</a></code>
 
         </dt>
         <dd>Compute maximal number of edges for graph</dd>
@@ -313,7 +350,7 @@
 
         <dt>
 
-          <code><a href="nDAGs.html">nDAGs()</a></code>
+          <code><a href="n_dags.html">n_dags()</a></code>
 
         </dt>
         <dd>Number of different DAGs</dd>
@@ -329,14 +366,14 @@
 
       <dl><dt>
 
-          <code><a href="simDAG.html">simDAG()</a></code>
+          <code><a href="sim_dag.html">sim_dag()</a></code>
 
         </dt>
         <dd>Simulate a random DAG</dd>
 
         <dt>
 
-          <code><a href="simGausFromDAG.html">simGausFromDAG()</a></code>
+          <code><a href="sim_gaus_from_dag.html">sim_gaus_from_dag()</a></code>
 
         </dt>
         <dd>Simulate Gaussian data according to DAG</dd>
@@ -401,7 +438,7 @@
 
         <dt>
 
-          <code><a href="plotTempoMech.html">plotTempoMech()</a></code>
+          <code><a href="plot_tempo_mech.html">plot_tempo_mech()</a></code>
 
         </dt>
         <dd>Plot temporal data generating mechanism</dd>
@@ -649,27 +686,6 @@
 
         </dt>
         <dd>Convert adjacency matrix to graphNEL object</dd>
-
-        <dt>
-
-          <code><a href="probmat2amat.html">probmat2amat()</a></code>
-
-        </dt>
-        <dd>Convert a matrix of probabilities into an adjacency matrix</dd>
-
-        <dt>
-
-          <code><a href="TEssGraph-class.html">TEssGraph-class</a></code> <code><a href="TEssGraph-class.html">TEssGraph</a></code>
-
-        </dt>
-        <dd>Temporal EssGraph class with greedy steps</dd>
-
-        <dt>
-
-          <code><a href="tplot.html">tplot()</a></code>
-
-        </dt>
-        <dd>Plot temporal graph via Latex</dd>
       </dl></div><div class="section level2">
       <h2 id="evaluation-confusion-metrics">Evaluation &amp; Confusion Metrics<a class="anchor" aria-label="anchor" href="#evaluation-confusion-metrics"></a></h2>
 
@@ -766,38 +782,45 @@
 
         <dt>
 
-          <code><a href="F1.html">F1()</a></code>
+          <code><a href="f1_score.html">f1_score()</a></code>
 
         </dt>
         <dd>F1 score</dd>
 
         <dt>
 
-          <code><a href="G1.html">G1()</a></code>
+          <code><a href="g1_score.html">g1_score()</a></code>
 
         </dt>
         <dd>G1 score</dd>
 
         <dt>
 
-          <code><a href="FDR.html">FDR()</a></code>
+          <code><a href="FDR.html">fdr()</a></code>
 
         </dt>
         <dd>False Discovery Rate</dd>
 
         <dt>
 
-          <code><a href="NPV.html">NPV()</a></code>
+          <code><a href="NPV.html">npv()</a></code>
 
         </dt>
         <dd>Negative predictive value</dd>
 
         <dt>
 
-          <code><a href="FOR.html">FOR()</a></code>
+          <code><a href="false_omission_rate.html">false_omission_rate()</a></code>
 
         </dt>
         <dd>False Omission Rate</dd>
+
+        <dt>
+
+          <code><a href="average_degree.html">average_degree()</a></code>
+
+        </dt>
+        <dd>Compute average degree for adjacency matrix</dd>
       </dl></div><div class="section level2">
       <h2 id="miscellaneous">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous"></a></h2>
 
@@ -831,31 +854,10 @@
 
         <dt>
 
-          <code><a href="tpcExample.html">tpcExample</a></code>
+          <code><a href="tpc_example.html">tpc_example</a></code>
 
         </dt>
         <dd>Simulated data example</dd>
-
-        <dt>
-
-          <code><a href="corTest.html">corTest()</a></code>
-
-        </dt>
-        <dd>Test for vanishing partial correlations</dd>
-
-        <dt>
-
-          <code><a href="regTest.html">regTest()</a></code>
-
-        </dt>
-        <dd>Regression-based information loss test</dd>
-
-        <dt>
-
-          <code><a href="average_degree.html">average_degree()</a></code>
-
-        </dt>
-        <dd>Compute average degree for adjacency matrix</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

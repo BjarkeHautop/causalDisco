@@ -7,9 +7,9 @@ common, consistent syntax.
 ## Motivation
 
 Causal discovery methods exist in many ecosystems, for example in
-`bnlearn`, `pcalg`, or `Tetrad`, but their APIs vary widely.
+bnlearn, pcalg, or Tetrad, but their APIs vary widely.
 
-`causalDisco` unifies them under one clear grammar, making it easy to
+causalDisco unifies them under one clear grammar, making it easy to
 compare results, switch algorithms, and focus on scientific questions
 rather than package quirks.
 
@@ -17,13 +17,13 @@ Time to hit the disco 🪩
 
 ## Installation
 
-### Install `causalDisco`
+### Install causalDisco
 
-To install `causalDisco` ensure you first have installed Rust as
-described below.
+To install causalDisco ensure you first have installed Rust as described
+below.
 
-Then you can install the development version of `causalDisco` from
-GitHub using `pak`:
+Then you can install the development version of causalDisco from GitHub
+using pak:
 
 ``` r
 pak::pkg_install("https://github.com/BjarkeHautop/causalDisco")
@@ -38,8 +38,8 @@ pak::pkg_install("https://github.com/BjarkeHautop/causalDisco", dependencies = T
 
 ### Installing Rust
 
-`causalDisco` depends on the package
-[`caugi`](https://github.com/frederikfabriciusbjerre/caugi), which
+causalDisco depends on the package
+[caugi](https://github.com/frederikfabriciusbjerre/caugi), which
 requires Rust to be installed on your system. See
 <https://www.rust-lang.org/tools/install> for instructions on how to
 install Rust.
@@ -47,8 +47,8 @@ install Rust.
 ### Installing Java / JDK
 
 `causalDisco` provides an interface to the Java library
-[`Tetrad`](https://github.com/cmu-phil/tetrad) for causal discovery
-algorithms. To use algorithms from `Tetrad` you need to install a Java
+[Tetrad](https://github.com/cmu-phil/tetrad) for causal discovery
+algorithms. To use algorithms from Tetrad you need to install a Java
 Development Kit (JDK) \>= 21. We recommend Eclipse Temurin (OpenJDK),
 available at <https://adoptium.net> for all major operating systems.
 
@@ -59,11 +59,10 @@ Windows:
 causalDisco::install_java()
 ```
 
-You may also refer to `Tetrad`’s [Java setup
+You may also refer to Tetrad’s [Java setup
 guide](https://github.com/cmu-phil/tetrad/wiki/Setting-up-Java-for-Tetrad).
 
-The current supported version of `Tetrad` can then be installed by
-calling
+The current supported version of Tetrad can then be installed by calling
 
 ``` r
 causalDisco::install_tetrad()
@@ -92,9 +91,9 @@ causalDisco::check_tetrad_install()
 
 ## Example
 
-With `causalDisco` you can currently run causal discovery algorithms
-from the package `causalDisco` itself, the Java library `Tetrad`, the R
-package `bnlearn`, and the R package `pcalg`.
+With causalDisco you can currently run causal discovery algorithms from
+the package causalDisco itself, the Java library Tetrad, the R package
+bnlearn, and the R package pcalg.
 
 ``` r
 options(causalDisco.tetrad.version = "7.6.9") # Memory issues are fixed on v7.6.9
@@ -107,11 +106,11 @@ library(causalDisco)
 #>   Restart R to apply changes.
 
 # load data
-data("tpcExample")
+data("tpc_example")
 
 # define background knowledge object
 kn <- knowledge(
-  tpcExample,
+  tpc_example,
   tier(
     child ~ starts_with("child"),
     youth ~ starts_with("youth"),
@@ -123,16 +122,16 @@ kn <- knowledge(
 # Requires Tetrad to be installed
 if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
   tetrad_pc <- pc(engine = "tetrad", test = "conditional_gaussian", alpha = 0.05)
-  disco_tetrad_pc <- disco(data = tpcExample, method = tetrad_pc, knowledge = kn)
+  disco_tetrad_pc <- disco(data = tpc_example, method = tetrad_pc, knowledge = kn)
 
   # similarly, one could do
   tetrad_pc <- tetrad_pc |> set_knowledge(kn)
-  disco_tetrad_pc_new <- tetrad_pc(tpcExample)
+  disco_tetrad_pc_new <- tetrad_pc(tpc_example)
 }
 
 # use causalDisco's own tges algorithm with temporal BIC score
 cd_tges <- tges(engine = "causalDisco", score = "tbic")
-disco_cd_tges <- disco(data = tpcExample, method = cd_tges, knowledge = kn)
+disco_cd_tges <- disco(data = tpc_example, method = cd_tges, knowledge = kn)
 ```
 
 You can visualize the resulting causal graph using the
@@ -148,7 +147,7 @@ of the nodes.](reference/figures/README-plot-1.png)
 ## Questions
 
 - We say in
-  [`?bnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/bnlearnSearch.md)
+  [`?BnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/bnlearnSearch.md)
   (and implemented in `bnlearn_search`) various algorithms such as `gs`,
   `iamb`. However, we don’t have a `gs(), iamb()` function exported
   (similar to how we have a
@@ -156,7 +155,7 @@ of the nodes.](reference/figures/README-plot-1.png)
   function). Should we add these functions?
 
 Is it a work in progress? If so we need to document this in
-[`?bnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/bnlearnSearch.md)
+[`?BnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/bnlearnSearch.md)
 (and similar for other functions)?.
 
 ## TODO
@@ -175,14 +174,14 @@ Is it a work in progress? If so we need to document this in
 
 #### causalDisco issues
 
-- `tpc` with engine `causalDisco` does not currently work correctly with
-  tier knowledge
+- `tpc` with engine `"causalDisco"` does not currently work correctly
+  with tier knowledge
 
 ``` r
-data("tpcExample")
+data("tpc_example")
 
 kn <- knowledge(
-  tpcExample,
+  tpc_example,
   tier(
     child ~ starts_with("child"),
     youth ~ starts_with("youth"),
@@ -192,7 +191,7 @@ kn <- knowledge(
 
 my_tpc <- tpc(engine = "causalDisco", test = "fisher_z")
 
-output <- disco(tpcExample, my_tpc, knowledge = kn)
+output <- disco(tpc_example, my_tpc, knowledge = kn)
 edges <- output$caugi@edges
 
 violations <- causalDisco:::check_tier_violations(edges, kn)
@@ -231,9 +230,9 @@ if (missing_required) {
 
 The algorithm needs to be modified when having required edges, I think.
 
-- Look into how (if) possible to pass to `pcalg`.
+- Look into how (if) possible to pass to pcalg.
 
-- Piping as done above for `Tetrad` in the example section loses
+- Piping as done above for Tetrad in the example section loses
   `$knowledge$tiers` information due to how builders/closures capture
   knowledge.
 
@@ -244,34 +243,34 @@ with engine pcalg gives warning about required edges when we don’t
 specify any?
 
 ``` r
-data("tpcExample")
+data("tpc_example")
 kn <- knowledge(
-  tpcExample,
+  tpc_example,
   forbidden(child_x1 ~ youth_x3),
   forbidden(youth_x3 ~ child_x1)
 )
 
 pcalg_ges <- ges(engine = "pcalg", score = "sem_bic")
-output <- disco(data = tpcExample, method = pcalg_ges, knowledge = kn)
+output <- disco(data = tpc_example, method = pcalg_ges, knowledge = kn)
 ```
 
 #### Tetrad issues
 
-- v7.6.9 of `Tetrad` seems to fix the memory issues.
+- v7.6.9 of Tetrad seems to fix the memory issues.
 
-- `Tetrad` does not use required correctly
+- Tetrad does not use required correctly
 
 ``` r
 if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
-  data("tpcExample")
+  data("tpc_example")
 
   kn <- knowledge(
-    tpcExample,
+    tpc_example,
     required(child_x1 ~ youth_x3)
   )
   
   tetrad_fci <- fci(engine = "tetrad", test = "conditional_gaussian", alpha = 0.05)
-  output <- disco(data = tpcExample, method = tetrad_fci, knowledge = kn)
+  output <- disco(data = tpc_example, method = tetrad_fci, knowledge = kn)
   edges <- output$caugi@edges
   edges
 }
@@ -290,15 +289,15 @@ edges between the required edges.
 
 ``` r
 if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
-  data("tpcExample")
+  data("tpc_example")
 
   kn <- knowledge(
-    tpcExample,
+    tpc_example,
     required(child_x1 ~ oldage_x5)
   )
   
   tetrad_pc <- pc(engine = "tetrad", test = "conditional_gaussian", alpha = 0.05)
-  output <- disco(data = tpcExample, method = tetrad_pc, knowledge = kn)
+  output <- disco(data = tpc_example, method = tetrad_pc, knowledge = kn)
   edges <- output$caugi@edges
   edges
 }
@@ -317,10 +316,10 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
 
 ``` r
 if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
-  data("tpcExample")
+  data("tpc_example")
 
   kn <- knowledge(
-    tpcExample,
+    tpc_example,
     tier(
       child ~ starts_with("child"),
       youth ~ starts_with("youth"),
@@ -329,7 +328,7 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
   )
 
   tetrad_pc <- pc(engine = "tetrad", test = "conditional_gaussian", alpha = 0.05)
-  output <- disco(data = tpcExample, method = tetrad_pc, knowledge = kn)
+  output <- disco(data = tpc_example, method = tetrad_pc, knowledge = kn)
   edges <- output$caugi@edges
   edges
 }
@@ -351,15 +350,15 @@ Is this expected?
 
 ``` r
 if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
-  data("tpcExample")
+  data("tpc_example")
 
   kn <- knowledge(
-    tpcExample,
+    tpc_example,
     forbidden(child_x2 ~ child_x1)
   )
 
   tetrad_fci <- fci(engine = "tetrad", test = "conditional_gaussian", alpha = 0.05)
-  output <- disco(data = tpcExample, method = tetrad_fci, knowledge = kn)
+  output <- disco(data = tpc_example, method = tetrad_fci, knowledge = kn)
   edges <- output$caugi@edges
   edges
 }
@@ -378,29 +377,18 @@ Or should the edge between `child_x2` and `child_x1` be `--o` instead of
 
 ### Documentation
 
-- Make templates.
-
-- Structure the documentation better. See See how `mlr3` does it, and
-  see their wiki on roxygen R6 guide
+- See how `mlr3` does it, and see their wiki on roxygen R6 guide
   [here](https://github.com/mlr-org/mlr3/wiki/Roxygen-R6-Guide).
 
-  - Make it clear somewhere what/how knowledge is supported in which
-    algorithms. E.g. `pc` with engine `pcalg` only works with forbidden
-    edges from knowledge objects and requires specifying both ways. It’s
-    documented in `?as_pcalg_constaints` but should be more visible. In
-    [`?pcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/pcalgSearch.md)
-    probably?
-
-Maybe make it possible to check documentation of engine via `?pcalg` and
-similar for the rest?
+- Make it clear somewhere what/how knowledge is supported in which
+  algorithms. E.g. `pc` with engine pcalg only works with forbidden
+  edges from knowledge objects and requires specifying both ways. It’s
+  documented in `?as_pcalg_constaints` but should be more visible. In
+  [`?PcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/pcalgSearch.md)
+  probably?
 
 - List in documentation of `tfci`, … what kind of graph it returns.
-  `tfci` gives a PAG, right? Currently it returns `graph_class: UNKNOWN`
-  - Either wait/help for `caugi` to implement different classes
-  - Or we implement a function that converts `caugi` output to specific
-    graph classes based on algorithm/edges?
-  - Update plotting function to work correctly with different graph
-    classes.
+
 - Make vignettes
 
 ### Standardization
@@ -414,7 +402,7 @@ similar for the rest?
 
 ### Adopt Tetrad v7.6.9
 
-- Move to `Tetrad` v7.6.9. v7.6.9 removes the folder
+- Move to Tetrad v7.6.9. v7.6.9 removes the folder
   [algcomparison/algorithm/cluster](https://github.com/cmu-phil/tetrad/tree/v7.6.8/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/cluster)
 
 Was removed in this commit
@@ -426,6 +414,22 @@ and FTFC, providing multiple strategies for discovering latent
 clusterings from measurement data.”
 
 so we need to implement this in `causalDisco` (help?)
+
+This also doesn’t work on 7.6.9
+
+``` r
+> load_all()
+ℹ Loading causalDisco
+causalDisco startup:
+  Java heap size requested: 2 GB
+  Tetrad version: 7.6.9
+  Java successfully initialized with 2 GB.
+  To change heap size, set options(java.heap.size = 'Ng') or Sys.setenv(JAVA_HEAP_SIZE = 'Ng') *before* loading.
+  Restart R to apply changes.
+> tetrad_data <- rdata_to_tetrad(df)
+Error in rdata_to_tetrad(df) : 
+  java.lang.ClassNotFoundException: edu/cmu/tetrad/data/DiscreteVariable
+```
 
 ### CRAN TODO
 

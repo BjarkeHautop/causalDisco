@@ -55,7 +55,7 @@ algorithm.
   `$set_params()`. The parameters are passed to the test and algorithm
   functions.
 
-- `suff_stat`:
+- `suffStat`:
 
   Sufficient statistic. The format and contents of the sufficient
   statistic depends on which test is being used.
@@ -84,35 +84,35 @@ algorithm.
 
 ### Public methods
 
-- [`pcalgSearch$new()`](#method-pcalgSearch-new)
+- [`PcalgSearch$new()`](#method-PcalgSearch-new)
 
-- [`pcalgSearch$set_params()`](#method-pcalgSearch-set_params)
+- [`PcalgSearch$set_params()`](#method-PcalgSearch-set_params)
 
-- [`pcalgSearch$set_data()`](#method-pcalgSearch-set_data)
+- [`PcalgSearch$set_data()`](#method-PcalgSearch-set_data)
 
-- [`pcalgSearch$set_suff_stat()`](#method-pcalgSearch-set_suff_stat)
+- [`PcalgSearch$set_suffStat()`](#method-PcalgSearch-set_suffStat)
 
-- [`pcalgSearch$set_test()`](#method-pcalgSearch-set_test)
+- [`PcalgSearch$set_test()`](#method-PcalgSearch-set_test)
 
-- [`pcalgSearch$set_score()`](#method-pcalgSearch-set_score)
+- [`PcalgSearch$set_score()`](#method-PcalgSearch-set_score)
 
-- [`pcalgSearch$set_alg()`](#method-pcalgSearch-set_alg)
+- [`PcalgSearch$set_alg()`](#method-PcalgSearch-set_alg)
 
-- [`pcalgSearch$set_knowledge()`](#method-pcalgSearch-set_knowledge)
+- [`PcalgSearch$set_knowledge()`](#method-PcalgSearch-set_knowledge)
 
-- [`pcalgSearch$run_search()`](#method-pcalgSearch-run_search)
+- [`PcalgSearch$run_search()`](#method-PcalgSearch-run_search)
 
-- [`pcalgSearch$clone()`](#method-pcalgSearch-clone)
+- [`PcalgSearch$clone()`](#method-PcalgSearch-clone)
 
 ------------------------------------------------------------------------
 
 ### Method `new()`
 
-Constructor for the `pcalgSearch` class.
+Constructor for the `PcalgSearch` class.
 
 #### Usage
 
-    pcalgSearch$new()
+    PcalgSearch$new()
 
 ------------------------------------------------------------------------
 
@@ -122,7 +122,7 @@ Sets the parameters for the test and algorithm.
 
 #### Usage
 
-    pcalgSearch$set_params(params)
+    PcalgSearch$set_params(params)
 
 #### Arguments
 
@@ -138,7 +138,7 @@ Sets the data for the search algorithm.
 
 #### Usage
 
-    pcalgSearch$set_data(data, set_suff_stat = TRUE)
+    PcalgSearch$set_data(data, set_suffStat = TRUE)
 
 #### Arguments
 
@@ -146,19 +146,19 @@ Sets the data for the search algorithm.
 
   A `data.frame` or a `matrix` containing the data.
 
-- `set_suff_stat`:
+- `set_suffStat`:
 
   Logical; whether to set the sufficient statistic. for the data.
 
 ------------------------------------------------------------------------
 
-### Method `set_suff_stat()`
+### Method `set_suffStat()`
 
 Sets the sufficient statistic for the data.
 
 #### Usage
 
-    pcalgSearch$set_suff_stat()
+    PcalgSearch$set_suffStat()
 
 ------------------------------------------------------------------------
 
@@ -168,7 +168,7 @@ Sets the test for the search algorithm.
 
 #### Usage
 
-    pcalgSearch$set_test(method, alpha = 0.05)
+    PcalgSearch$set_test(method, alpha = 0.05)
 
 #### Arguments
 
@@ -188,7 +188,7 @@ Sets the score for the search algorithm.
 
 #### Usage
 
-    pcalgSearch$set_score(method, params = list())
+    PcalgSearch$set_score(method, params = list())
 
 #### Arguments
 
@@ -208,7 +208,7 @@ Sets the algorithm for the search.
 
 #### Usage
 
-    pcalgSearch$set_alg(method)
+    PcalgSearch$set_alg(method)
 
 #### Arguments
 
@@ -227,7 +227,7 @@ done when data is provided.
 
 #### Usage
 
-    pcalgSearch$set_knowledge(knowledge_obj, directed_as_undirected = FALSE)
+    PcalgSearch$set_knowledge(knowledge_obj, directed_as_undirected = FALSE)
 
 #### Arguments
 
@@ -247,7 +247,7 @@ Runs the search algorithm on the data.
 
 #### Usage
 
-    pcalgSearch$run_search(data = NULL, set_suff_stat = TRUE)
+    PcalgSearch$run_search(data = NULL, set_suffStat = TRUE)
 
 #### Arguments
 
@@ -255,7 +255,7 @@ Runs the search algorithm on the data.
 
   A `data.frame` or a `matrix` containing the data.
 
-- `set_suff_stat`:
+- `set_suffStat`:
 
   Logical; whether to set the sufficient statistic
 
@@ -267,7 +267,7 @@ The objects of this class are cloneable with this method.
 
 #### Usage
 
-    pcalgSearch$clone(deep = FALSE)
+    PcalgSearch$clone(deep = FALSE)
 
 #### Arguments
 
@@ -284,32 +284,32 @@ The objects of this class are cloneable with this method.
 # use the disco() or any method function, for example pc(), instead.
 
 # Load data
-data("tpcExample")
+data("tpc_example")
 
 # Recommended:
-pc(engine = "pcalg", test = "fisher_z")(tpcExample)
+pc(engine = "pcalg", test = "fisher_z")(tpc_example)
 #> 
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 
 # or
 my_pc <- pc(engine = "pcalg", test = "fisher_z")
-my_pc(tpcExample)
+my_pc(tpc_example)
 #> 
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 
 # or
-disco(data = tpcExample, method = my_pc)
+disco(data = tpc_example, method = my_pc)
 #> 
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 
 # Using R6 class:
-s <- pcalgSearch$new()
+s <- PcalgSearch$new()
 
 s$set_test(method = "fisher_z", alpha = 0.05)
-s$set_data(tpcExample)
+s$set_data(tpc_example)
 s$set_alg("pc")
 
 g <- s$run_search()

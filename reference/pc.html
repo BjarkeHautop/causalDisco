@@ -79,18 +79,18 @@
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>For specific details on the supported scores, tests, and parameters for each engine, see:</p><ul><li><p><code><a href="TetradSearch.html">TetradSearch</a></code> for <span class="pkg">Tetrad</span>,</p></li>
-<li><p><code><a href="pcalgSearch.html">pcalgSearch</a></code> for <span class="pkg">pcalg</span>,</p></li>
-<li><p><code><a href="bnlearnSearch.html">bnlearnSearch</a></code> for <span class="pkg">bnlearn</span>.</p></li>
+<li><p><code><a href="pcalgSearch.html">PcalgSearch</a></code> for <span class="pkg">pcalg</span>,</p></li>
+<li><p><code><a href="bnlearnSearch.html">BnlearnSearch</a></code> for <span class="pkg">bnlearn</span>.</p></li>
 </ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">### pc() example ###</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="knowledge.html">knowledge</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">tpcExample</span>,</span></span>
+<span class="r-in"><span>  <span class="va">tpc_example</span>,</span></span>
 <span class="r-in"><span>  <span class="fu">tier</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="va">child</span> <span class="op">~</span> <span class="fu">tidyselect</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    <span class="va">youth</span> <span class="op">~</span> <span class="fu">tidyselect</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span></span>
@@ -101,11 +101,11 @@
 <span class="r-in"><span><span class="co"># Recommended path using disco()</span></span></span>
 <span class="r-in"><span><span class="va">my_pc</span> <span class="op">&lt;-</span> <span class="fu">pc</span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="disco.html">disco</a></span><span class="op">(</span><span class="va">tpcExample</span>, <span class="va">my_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="disco.html">disco</a></span><span class="op">(</span><span class="va">tpc_example</span>, <span class="va">my_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># or using my_pc directly</span></span></span>
 <span class="r-in"><span><span class="va">my_pc</span> <span class="op">&lt;-</span> <span class="va">my_pc</span> <span class="op">|&gt;</span> <span class="fu"><a href="set_knowledge.html">set_knowledge</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">my_pc</span><span class="op">(</span><span class="va">tpcExample</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">my_pc</span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

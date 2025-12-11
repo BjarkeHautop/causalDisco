@@ -1,9 +1,9 @@
 # Convert background knowledge to bnlearns white- and blacklists
 
 Converts a `knowledge` object to a list of two data frames, namely
-`whitelist` and `blacklist`, which can be used as arguments for
-`bnlearn` algorithms. The `whitelist` contains all required edges, and
-the `blacklist` contains all forbidden edges. Tiers will be made into
+`whitelist` and `blacklist`, which can be used as arguments for bnlearn
+algorithms. The `whitelist` contains all required edges, and the
+`blacklist` contains all forbidden edges. Tiers will be made into
 forbidden edges before running the conversion.
 
 ## Usage
@@ -53,10 +53,10 @@ Other knowledge functions:
 ### as_bnlearn_knowledge() example ###
 
 # produce whitelist/blacklist dataframe for bnlearn
-data(tpcExample)
+data(tpc_example)
 
 kn <- knowledge(
-  tpcExample,
+  tpc_example,
   tier(
     child ~ starts_with("child"),
     youth ~ starts_with("youth"),

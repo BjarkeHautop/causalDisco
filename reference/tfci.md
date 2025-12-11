@@ -42,7 +42,7 @@ object.
 For specific details on the supported scores, tests, and parameters for
 the engine, see:
 
-- [`causalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/causalDiscoSearch.md)
+- [`CausalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/causalDiscoSearch.md)
   for causalDisco.
 
 ## Examples
@@ -50,10 +50,10 @@ the engine, see:
 ``` r
 ### tfci() example ###
 
-data("tpcExample")
+data("tpc_example")
 
 kn <- knowledge(
-  tpcExample,
+  tpc_example,
   tier(
     child ~ tidyselect::starts_with("child"),
     youth ~ tidyselect::starts_with("youth"),
@@ -64,7 +64,7 @@ kn <- knowledge(
 # Recommended path using disco()
 my_tfci <- tfci(engine = "causalDisco", test = "fisher_z", alpha = 0.05)
 
-disco(tpcExample, my_tfci, knowledge = kn)
+disco(tpc_example, my_tfci, knowledge = kn)
 #> 
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
@@ -89,7 +89,7 @@ disco(tpcExample, my_tfci, knowledge = kn)
 
 # or using my_tfci directly
 my_tfci <- my_tfci |> set_knowledge(kn)
-my_tfci(tpcExample)
+my_tfci(tpc_example)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 #> 
@@ -112,7 +112,7 @@ my_tfci(tpcExample)
 #> 
 
 # Also possible: using tfci_run()
-tfci_run(tpcExample, test = corTest, knowledge = kn)
+tfci_run(tpc_example, test = cor_test, knowledge = kn)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 #> 

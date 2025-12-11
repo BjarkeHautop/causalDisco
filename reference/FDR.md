@@ -8,7 +8,7 @@ positives and TP are true positives. If FP + TP = 0, 0 is returned.
 ## Usage
 
 ``` r
-FDR(confusion)
+fdr(confusion)
 ```
 
 ## Arguments

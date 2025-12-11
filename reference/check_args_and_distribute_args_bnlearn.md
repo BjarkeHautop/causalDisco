@@ -1,6 +1,6 @@
-# Check arguments for bnlearnSearch class functions
+# Check arguments for BnlearnSearch class functions
 
-Check arguments for bnlearnSearch class functions
+Check arguments for BnlearnSearch class functions
 
 ## Usage
 

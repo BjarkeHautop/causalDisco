@@ -26,7 +26,7 @@ evaluate(est, true, metrics, ...)
 
 - ...:
 
-  Further arguments that depend on input type. Currently only `list.out`
+  Further arguments that depend on input type. Currently only `list_out`
   is allowed, and only if the first argument is a matrix (see details
   under Value).
 
@@ -35,7 +35,7 @@ evaluate(est, true, metrics, ...)
 A data.frame with one column for each computed metric and one row per
 evaluated matrix pair. Adjacency metrics are prefixed with "adj\_",
 orientation metrics are prefixed with "dir\_", other metrics do not get
-a prefix. If the first argument is a matrix, `list.out = TRUE` can be
+a prefix. If the first argument is a matrix, `list_out = TRUE` can be
 used to change the return object to a list instead. This list will
 contain three lists, where adjacency, orientation and other metrics are
 reported, respectively.
@@ -59,13 +59,14 @@ Available metrics to be used with confusion matrices are
 [precision](https://bjarkehautop.github.io/causalDisco/reference/precision.md),
 [recall](https://bjarkehautop.github.io/causalDisco/reference/recall.md),
 [specificity](https://bjarkehautop.github.io/causalDisco/reference/specificity.md),
-[FOR](https://bjarkehautop.github.io/causalDisco/reference/FOR.md),
-[FDR](https://bjarkehautop.github.io/causalDisco/reference/FDR.md),
-[NPV](https://bjarkehautop.github.io/causalDisco/reference/NPV.md),
-[F1](https://bjarkehautop.github.io/causalDisco/reference/F1.md) and
-[G1](https://bjarkehautop.github.io/causalDisco/reference/G1.md). The
-user can supply custom metrics as well: They need to have the confusion
-matrix as their first argument and should return a numeric.
+[false_omission_rate](https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.md),
+[fdr](https://bjarkehautop.github.io/causalDisco/reference/FDR.md),
+[npv](https://bjarkehautop.github.io/causalDisco/reference/NPV.md),
+[f1_score](https://bjarkehautop.github.io/causalDisco/reference/f1_score.md)
+and
+[g1_score](https://bjarkehautop.github.io/causalDisco/reference/g1_score.md).
+The user can supply custom metrics as well: They need to have the
+confusion matrix as their first argument and should return a numeric.
 
 Available metrics to be used as "other" is:
 [shd](https://bjarkehautop.github.io/causalDisco/reference/shd.md). The

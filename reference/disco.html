@@ -71,25 +71,25 @@ applied without additional knowledge.</p></dd>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>For specific details on the supported algorithms, scores, tests, and parameters for each engine, see:</p><ul><li><p><code><a href="TetradSearch.html">TetradSearch</a></code> for <span class="pkg">Tetrad</span>,</p></li>
-<li><p><code><a href="pcalgSearch.html">pcalgSearch</a></code> for <span class="pkg">pcalg</span>,</p></li>
-<li><p><code><a href="bnlearnSearch.html">bnlearnSearch</a></code> for <span class="pkg">bnlearn</span>,</p></li>
-<li><p><code><a href="causalDiscoSearch.html">causalDiscoSearch</a></code> for <span class="pkg">causalDisco</span>.</p></li>
+<li><p><code><a href="pcalgSearch.html">PcalgSearch</a></code> for <span class="pkg">pcalg</span>,</p></li>
+<li><p><code><a href="bnlearnSearch.html">BnlearnSearch</a></code> for <span class="pkg">bnlearn</span>,</p></li>
+<li><p><code><a href="causalDiscoSearch.html">CausalDiscoSearch</a></code> for <span class="pkg">causalDisco</span>.</p></li>
 </ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">### disco() example ###</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpcExample"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># use pc with engine bnlearn and test fisher_z</span></span></span>
 <span class="r-in"><span><span class="va">my_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"bnlearn"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">pc_bnlearn</span> <span class="op">&lt;-</span> <span class="fu">disco</span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">my_pc</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pc_bnlearn</span> <span class="op">&lt;-</span> <span class="fu">disco</span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">my_pc</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_bnlearn</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="disco-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># define tiered background knowledge</span></span></span>
 <span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="knowledge.html">knowledge</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">tpcExample</span>,</span></span>
+<span class="r-in"><span>  <span class="va">tpc_example</span>,</span></span>
 <span class="r-in"><span>  <span class="fu">tier</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="va">child</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    <span class="va">youth</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span></span>
@@ -99,7 +99,7 @@ applied without additional knowledge.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># use gs with engine bnlearn and test cor and tiered background knowledge</span></span></span>
 <span class="r-in"><span><span class="va">my_pc_tiered</span> <span class="op">&lt;-</span> <span class="fu"><a href="pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"bnlearn"</span>, test <span class="op">=</span> <span class="st">"cor"</span>, alpha <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">pc_tiered_bnlearn</span> <span class="op">&lt;-</span> <span class="fu">disco</span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpcExample</span>, method <span class="op">=</span> <span class="va">my_pc_tiered</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pc_tiered_bnlearn</span> <span class="op">&lt;-</span> <span class="fu">disco</span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">my_pc_tiered</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_tiered_bnlearn</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="disco-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>

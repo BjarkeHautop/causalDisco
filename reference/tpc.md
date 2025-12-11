@@ -43,11 +43,11 @@ object.
 ### tpc() example ###
 
 # Load data
-data(tpcExample)
+data(tpc_example)
 
 # Build knowledge
 kn <- knowledge(
-  tpcExample,
+  tpc_example,
   tier(
     child ~ tidyselect::starts_with("child"),
     youth ~ tidyselect::starts_with("youth"),
@@ -58,7 +58,7 @@ kn <- knowledge(
 # Recommended route using disco
 my_tpc <- tpc(engine = "causalDisco", test = "fisher_z", alpha = 0.05)
 
-disco(tpcExample, my_tpc, knowledge = kn)
+disco(tpc_example, my_tpc, knowledge = kn)
 #> 
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
@@ -84,7 +84,7 @@ disco(tpcExample, my_tpc, knowledge = kn)
 # or using my_tpc directly
 
 my_tpc <- my_tpc |> set_knowledge(kn)
-my_tpc(tpcExample)
+my_tpc(tpc_example)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 #> 
@@ -108,7 +108,7 @@ my_tpc(tpcExample)
 
 # Using tpc_run() directly
 
-tpc_run(tpcExample, knowledge = kn, alpha = 0.01)
+tpc_run(tpc_example, knowledge = kn, alpha = 0.01)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 #> 
@@ -132,6 +132,6 @@ tpc_run(tpcExample, knowledge = kn, alpha = 0.01)
 
 # Deprecated: using order prefixes (will warn)
 testthat::expect_warning(
-  tpc_run(tpcExample, order = c("child", "youth", "oldage"), alpha = 0.01)
+  tpc_run(tpc_example, order = c("child", "youth", "oldage"), alpha = 0.01)
 )
 ```

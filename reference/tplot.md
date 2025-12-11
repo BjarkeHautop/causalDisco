@@ -12,7 +12,7 @@ tplot(
   x,
   filename = "causaldisco_tplot_temp",
   keepfiles = FALSE,
-  bendedges = TRUE,
+  bend_edges = TRUE,
   ...
 )
 ```
@@ -41,7 +41,7 @@ tplot(
   deleted, otherwise they are kept and will be placed in the working
   directory.
 
-- bendedges:
+- bend_edges:
 
   If `TRUE` (default), all edges are bent 10 degrees to the right,
   thereby avoiding edges placed exactly on top of eachother.
