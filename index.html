@@ -251,17 +251,6 @@
 </ul>
 </li>
 </ul>
-<p><code><a href="reference/ges.html">ges()</a></code> with engine pcalg gives warning about required edges when we don’t specify any?</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
-<span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>  <span class="va">tpc_example</span>,</span>
-<span>  <span class="fu">forbidden</span><span class="op">(</span><span class="va">child_x1</span> <span class="op">~</span> <span class="va">youth_x3</span><span class="op">)</span>,</span>
-<span>  <span class="fu">forbidden</span><span class="op">(</span><span class="va">youth_x3</span> <span class="op">~</span> <span class="va">child_x1</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">pcalg_ges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ges.html">ges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"pcalg"</span>, score <span class="op">=</span> <span class="st">"sem_bic"</span><span class="op">)</span></span>
-<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">pcalg_ges</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="tetrad-issues">Tetrad issues<a class="anchor" aria-label="anchor" href="#tetrad-issues"></a>
@@ -270,7 +259,7 @@
 <li><p>v7.6.9 of Tetrad seems to fix the memory issues.</p></li>
 <li><p>Tetrad does not use required correctly</p></li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
@@ -293,7 +282,7 @@
 <span><span class="co">#&gt; 5:  youth_x3    o-&gt; oldage_x5</span></span>
 <span><span class="co">#&gt; 6:  youth_x4    --&gt; oldage_x6</span></span></code></pre></div>
 <p>The required edge is missing. Furthermore, in <code>pc</code> it gives undirected edges between the required edges.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
@@ -319,7 +308,7 @@
 <ul>
 <li>Also gives undirected edges in tier knowledge?</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
@@ -347,7 +336,7 @@
 <span><span class="co">#&gt; 6: oldage_x6    ---  youth_x4</span></span></code></pre></div>
 <p>Added a bunch of <code><a href="https://rdrr.io/r/base/browser.html" class="external-link">browser()</a></code> statements in TetradSearch and the knowledge is correctly passed to Tetrad, so not sure what is going on here.</p>
 <p>Is this expected?</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
@@ -410,17 +399,17 @@
 <p><a href="https://github.com/cmu-phil/tetrad/releases" class="external-link">Changelog</a> item 14 says “and a generalization of GFFC (Generalized Find Factor Clusters) of FOFC and FTFC, providing multiple strategies for discovering latent clusterings from measurement data.”</p>
 <p>so we need to implement this in <code>causalDisco</code> (help?)</p>
 <p>This also doesn’t work on 7.6.9</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">load_all</span>()</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>ℹ Loading causalDisco</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>causalDisco startup<span class="sc">:</span></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>  Java heap size requested<span class="sc">:</span> <span class="dv">2</span> GB</span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>  Tetrad version<span class="sc">:</span> <span class="dv">7</span>.<span class="fl">6.9</span></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>  Java successfully initialized with <span class="dv">2</span> GB.</span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>  To change heap size, set <span class="fu">options</span>(<span class="at">java.heap.size =</span> <span class="st">'Ng'</span>) or <span class="fu">Sys.setenv</span>(<span class="at">JAVA_HEAP_SIZE =</span> <span class="st">'Ng'</span>) <span class="sc">*</span>before<span class="sc">*</span> loading.</span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>  Restart R to apply changes.</span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="sc">&gt;</span> tetrad_data <span class="ot">&lt;-</span> <span class="fu">rdata_to_tetrad</span>(df)</span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">rdata_to_tetrad</span>(df) <span class="sc">:</span> </span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>  java.lang.ClassNotFoundException<span class="sc">:</span> edu<span class="sc">/</span>cmu<span class="sc">/</span>tetrad<span class="sc">/</span>data<span class="sc">/</span>DiscreteVariable</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">load_all</span>()</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>ℹ Loading causalDisco</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>causalDisco startup<span class="sc">:</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>  Java heap size requested<span class="sc">:</span> <span class="dv">2</span> GB</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>  Tetrad version<span class="sc">:</span> <span class="dv">7</span>.<span class="fl">6.9</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>  Java successfully initialized with <span class="dv">2</span> GB.</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>  To change heap size, set <span class="fu">options</span>(<span class="at">java.heap.size =</span> <span class="st">'Ng'</span>) or <span class="fu">Sys.setenv</span>(<span class="at">JAVA_HEAP_SIZE =</span> <span class="st">'Ng'</span>) <span class="sc">*</span>before<span class="sc">*</span> loading.</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>  Restart R to apply changes.</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="sc">&gt;</span> tetrad_data <span class="ot">&lt;-</span> <span class="fu">rdata_to_tetrad</span>(df)</span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">rdata_to_tetrad</span>(df) <span class="sc">:</span> </span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>  java.lang.ClassNotFoundException<span class="sc">:</span> edu<span class="sc">/</span>cmu<span class="sc">/</span>tetrad<span class="sc">/</span>data<span class="sc">/</span>DiscreteVariable</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="cran-todo">CRAN TODO<a class="anchor" aria-label="anchor" href="#cran-todo"></a>
