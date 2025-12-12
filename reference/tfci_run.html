@@ -11,7 +11,7 @@ variables can be assigned to distinct tiers or periods (i.e., a temporal orderin
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9011</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9012</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,6 +20,10 @@ variables can be assigned to distinct tiers or periods (i.e., a temporal orderin
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/knowledge.html">knowledge</a></li>
+  </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -53,7 +57,7 @@ variables can be assigned to distinct tiers or periods (i.e., a temporal orderin
 <span>  suffStat <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"stable.fast"</span>,</span>
 <span>  na_method <span class="op">=</span> <span class="st">"none"</span>,</span>
-<span>  methodOri <span class="op">=</span> <span class="st">"conservative"</span>,</span>
+<span>  orientation_method <span class="op">=</span> <span class="st">"conservative"</span>,</span>
 <span>  directed_as_undirected <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  varnames <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -115,7 +119,7 @@ error on any <code>NA</code>), <code>"cc"</code> (complete-case analysis), or
 <code>"twd"</code> (test-wise deletion).</p></dd>
 
 
-<dt id="arg-methodori">methodOri<a class="anchor" aria-label="anchor" href="#arg-methodori"></a></dt>
+<dt id="arg-orientation-method">orientation_method<a class="anchor" aria-label="anchor" href="#arg-orientation-method"></a></dt>
 <dd><p>Method for handling conflicting separating sets when orienting
 edges; must be one of <code>"standard"</code>, <code>"conservative"</code> (the default) or
 <code>"maj.rule"</code>. See <a href="https://rdrr.io/pkg/pcalg/man/pc.html" class="external-link">pc</a> for further details.</p></dd>

@@ -77,7 +77,7 @@ algorithm.
 
 - [`CausalDiscoSearch$set_data()`](#method-CausalDiscoSearch-set_data)
 
-- [`CausalDiscoSearch$set_suffStat()`](#method-CausalDiscoSearch-set_suffStat)
+- [`CausalDiscoSearch$set_suff_stat()`](#method-CausalDiscoSearch-set_suff_stat)
 
 - [`CausalDiscoSearch$set_test()`](#method-CausalDiscoSearch-set_test)
 
@@ -125,7 +125,7 @@ Sets the data for the search algorithm.
 
 #### Usage
 
-    CausalDiscoSearch$set_data(data, set_suffStat = TRUE)
+    CausalDiscoSearch$set_data(data, set_suff_stat = TRUE)
 
 #### Arguments
 
@@ -133,19 +133,19 @@ Sets the data for the search algorithm.
 
   A `data.frame` or a `matrix` containing the data.
 
-- `set_suffStat`:
+- `set_suff_stat`:
 
   Logical; whether to set the sufficient statistic.
 
 ------------------------------------------------------------------------
 
-### Method `set_suffStat()`
+### Method `set_suff_stat()`
 
 Sets the sufficient statistic for the data.
 
 #### Usage
 
-    CausalDiscoSearch$set_suffStat()
+    CausalDiscoSearch$set_suff_stat()
 
 ------------------------------------------------------------------------
 
@@ -238,7 +238,7 @@ Runs the search algorithm on the data.
 
 #### Usage
 
-    CausalDiscoSearch$run_search(data = NULL, set_suffStat = TRUE)
+    CausalDiscoSearch$run_search(data = NULL, set_suff_stat = TRUE)
 
 #### Arguments
 
@@ -246,7 +246,7 @@ Runs the search algorithm on the data.
 
   A `data.frame` or a `matrix` containing the data.
 
-- `set_suffStat`:
+- `set_suff_stat`:
 
   Logical; whether to set the sufficient statistic
 
@@ -363,7 +363,7 @@ print(res_tfci)
 s_tges <- CausalDiscoSearch$new()
 s_tges$set_score("tbic") # Gaussian temporal score
 s_tges$set_alg("tges")
-s_tges$set_data(dat, set_suffStat = FALSE) # suff stat not used for TGES
+s_tges$set_data(dat, set_suff_stat = FALSE) # suff stat not used for TGES
 s_tges$set_knowledge(kn)
 res_tges <- s_tges$run_search()
 print(res_tges)
@@ -376,12 +376,12 @@ print(res_tges)
 try(CausalDiscoSearch$new()$run_search(dat))
 #> Error : Test must be set before sufficient statistic.
 
-# set_suffStat() requires data and test first
+# set_suff_stat() requires data and test first
 s_err <- CausalDiscoSearch$new()
-try(s_err$set_suffStat()) # no data & no test
+try(s_err$set_suff_stat()) # no data & no test
 #> Error : Data must be set before sufficient statistic.
-s_err$set_data(dat, set_suffStat = FALSE)
-try(s_err$set_suffStat()) # no test
+s_err$set_data(dat, set_suff_stat = FALSE)
+try(s_err$set_suff_stat()) # no test
 #> Error : Test must be set before sufficient statistic.
 
 # unknown test / score / algorithm

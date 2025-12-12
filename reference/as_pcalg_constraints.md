@@ -2,9 +2,9 @@
 
 pcalg only supports *undirected* (symmetric) background constraints:
 
-- **fixedGaps** — forbidding edges (zeros enforced)
+- **fixed_gaps** — forbidding edges (zeros enforced)
 
-- **fixedEdges** — requiring edges (ones enforced)
+- **fixed_edges** — requiring edges (ones enforced)
 
 ## Usage
 
@@ -38,7 +38,7 @@ as_pcalg_constraints(
 ## Value
 
 A list with two elements, each an `n × n` logical matrix corresponding
-to pcalg's `fixedGaps` and `fixedEdges` arguments.
+to pcalg's `fixed_gaps` and `fixed_edges` arguments.
 
 ## Details
 
@@ -93,7 +93,7 @@ kn <- knowledge(
 
 pc_constraints <- as_pcalg_constraints(kn, directed_as_undirected = FALSE)
 print(pc_constraints)
-#> $fixedGaps
+#> $fixed_gaps
 #>           child_x2 child_x1 youth_x4 youth_x3 oldage_x6 oldage_x5
 #> child_x2     FALSE    FALSE    FALSE    FALSE     FALSE     FALSE
 #> child_x1     FALSE    FALSE    FALSE     TRUE     FALSE     FALSE
@@ -102,7 +102,7 @@ print(pc_constraints)
 #> oldage_x6    FALSE    FALSE    FALSE    FALSE     FALSE     FALSE
 #> oldage_x5    FALSE    FALSE    FALSE    FALSE     FALSE     FALSE
 #> 
-#> $fixedEdges
+#> $fixed_edges
 #>           child_x2 child_x1 youth_x4 youth_x3 oldage_x6 oldage_x5
 #> child_x2     FALSE    FALSE    FALSE    FALSE     FALSE     FALSE
 #> child_x1     FALSE    FALSE    FALSE    FALSE     FALSE     FALSE

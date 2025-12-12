@@ -90,7 +90,7 @@ algorithm.
 
 - [`PcalgSearch$set_data()`](#method-PcalgSearch-set_data)
 
-- [`PcalgSearch$set_suffStat()`](#method-PcalgSearch-set_suffStat)
+- [`PcalgSearch$set_suff_stat()`](#method-PcalgSearch-set_suff_stat)
 
 - [`PcalgSearch$set_test()`](#method-PcalgSearch-set_test)
 
@@ -138,7 +138,7 @@ Sets the data for the search algorithm.
 
 #### Usage
 
-    PcalgSearch$set_data(data, set_suffStat = TRUE)
+    PcalgSearch$set_data(data, set_suff_stat = TRUE)
 
 #### Arguments
 
@@ -146,19 +146,19 @@ Sets the data for the search algorithm.
 
   A `data.frame` or a `matrix` containing the data.
 
-- `set_suffStat`:
+- `set_suff_stat`:
 
   Logical; whether to set the sufficient statistic. for the data.
 
 ------------------------------------------------------------------------
 
-### Method `set_suffStat()`
+### Method `set_suff_stat()`
 
 Sets the sufficient statistic for the data.
 
 #### Usage
 
-    PcalgSearch$set_suffStat()
+    PcalgSearch$set_suff_stat()
 
 ------------------------------------------------------------------------
 
@@ -247,7 +247,7 @@ Runs the search algorithm on the data.
 
 #### Usage
 
-    PcalgSearch$run_search(data = NULL, set_suffStat = TRUE)
+    PcalgSearch$run_search(data = NULL, set_suff_stat = TRUE)
 
 #### Arguments
 
@@ -255,7 +255,7 @@ Runs the search algorithm on the data.
 
   A `data.frame` or a `matrix` containing the data.
 
-- `set_suffStat`:
+- `set_suff_stat`:
 
   Logical; whether to set the sufficient statistic
 

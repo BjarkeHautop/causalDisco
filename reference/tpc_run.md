@@ -18,7 +18,7 @@ tpc_run(
   suffStat = NULL,
   method = "stable.fast",
   na_method = "none",
-  methodOri = "conservative",
+  orientation_method = "conservative",
   output = "caugi",
   directed_as_undirected = FALSE,
   varnames = NULL,
@@ -81,7 +81,7 @@ tpc_run(
   `NA`), `"cc"` (complete-case analysis), or `"twd"` (test-wise
   deletion).
 
-- methodOri:
+- orientation_method:
 
   Conflict-handling method when orienting edges. Currently only the
   conservative method is available.

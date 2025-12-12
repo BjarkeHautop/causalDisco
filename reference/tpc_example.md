@@ -16,33 +16,33 @@ A data.frame with 200 rows and 6 variables.
 
 - child_x1:
 
-  Structural equation: \\X1 := \epsilon1\\ with \\\epsilon1 ~
-  Unif{0,1}\\
+  Structural equation: \\X_1 := \epsilon_1\\ with \\\epsilon_1 \sim
+  \mathrm{Unif}{0,1}\\
 
 - child_x2:
 
-  Structural equation: \\X2 := 2 \* X1 + \epsilon2\\ with \\\epsilon2 ~
-  N(0,1)\\
+  Structural equation: \\X_2 := 2 \* X_1 + \epsilon_2\\ with
+  \\\epsilon_2 \sim N(0,1)\\
 
 - youth_x3:
 
-  Structural equation: \\X3 := \epsilon3\\ with \\\epsilon3 ~ Unif{0,
-  1}\\
+  Structural equation: \\X_3 := \epsilon3\\ with \\\epsilon_3 \sim
+  \mathrm{Unif}{0, 1}\\
 
 - youth_x4:
 
-  Structural equation: \\X4 := X2 + \epsilon4\\ with \\\epsilon4 ~
-  N(0,1)\\
+  Structural equation: \\X_4 := X_2 + \epsilon_4\\ with \\\epsilon_4
+  \sim N(0,1)\\
 
 - oldage_x5:
 
-  Structural equation: \\X5 := X3^2 + X3 - 3 \* X2 + \epsilon5\\ with
-  \\\epsilon5 ~ N(0,1)\\
+  Structural equation: \\X_5 := X_3^2 + X_3 - 3 \* X_2 + \epsilon_5\\
+  with \\\epsilon_5 \sim N(0,1)\\
 
 - oldage_x6:
 
-  Structural equation: \\X6 := X4^3 + X4^2 + 2 \* X5 + \epsilon6\\ with
-  \\\epsilon6 ~ N(0,1)\\
+  Structural equation: \\X_6 := X_4^3 + X_4^2 + 2 \* X_5 + \epsilon_6\\
+  with \\\epsilon_6 \sim N(0,1)\\
 
 ## References
 

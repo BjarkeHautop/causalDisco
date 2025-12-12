@@ -17,7 +17,7 @@ tfci_run(
   suffStat = NULL,
   method = "stable.fast",
   na_method = "none",
-  methodOri = "conservative",
+  orientation_method = "conservative",
   directed_as_undirected = FALSE,
   varnames = NULL,
   ...
@@ -78,7 +78,7 @@ tfci_run(
   `NA`), `"cc"` (complete-case analysis), or `"twd"` (test-wise
   deletion).
 
-- methodOri:
+- orientation_method:
 
   Method for handling conflicting separating sets when orienting edges;
   must be one of `"standard"`, `"conservative"` (the default) or

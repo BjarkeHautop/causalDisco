@@ -9,7 +9,7 @@ prefixes defines with period they are related to ("child", "youth" or "oldage").
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9011</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9012</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,6 +18,10 @@ prefixes defines with period they are related to ("child", "youth" or "oldage").
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/knowledge.html">knowledge</a></li>
+  </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -47,22 +51,22 @@ prefixes defines with period they are related to ("child", "youth" or "oldage").
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
     <p>A data.frame with 200 rows and 6 variables.</p><dl><dt>child_x1</dt>
-<dd><p>Structural equation: \(X1 := \epsilon1\) with \(\epsilon1  ~ Unif{0,1}\)</p></dd>
+<dd><p>Structural equation: \(X_1 := \epsilon_1\) with \(\epsilon_1 \sim \mathrm{Unif}{0,1}\)</p></dd>
 
 <dt>child_x2</dt>
-<dd><p>Structural equation: \(X2 := 2 * X1 + \epsilon2\) with \(\epsilon2  ~  N(0,1)\)</p></dd>
+<dd><p>Structural equation: \(X_2 := 2 * X_1 + \epsilon_2\) with \(\epsilon_2 \sim N(0,1)\)</p></dd>
 
 <dt>youth_x3</dt>
-<dd><p>Structural equation: \(X3 := \epsilon3\) with \(\epsilon3  ~  Unif{0, 1}\)</p></dd>
+<dd><p>Structural equation: \(X_3 := \epsilon3\) with \(\epsilon_3 \sim \mathrm{Unif}{0, 1}\)</p></dd>
 
 <dt>youth_x4</dt>
-<dd><p>Structural equation: \(X4 := X2 + \epsilon4\) with \(\epsilon4  ~  N(0,1)\)</p></dd>
+<dd><p>Structural equation: \(X_4 := X_2 + \epsilon_4\) with \(\epsilon_4  \sim  N(0,1)\)</p></dd>
 
 <dt>oldage_x5</dt>
-<dd><p>Structural equation: \(X5 := X3^2 + X3 - 3 * X2 + \epsilon5\) with \(\epsilon5  ~  N(0,1)\)</p></dd>
+<dd><p>Structural equation: \(X_5 := X_3^2 + X_3 - 3 * X_2 + \epsilon_5\) with \(\epsilon_5 \sim N(0,1)\)</p></dd>
 
 <dt>oldage_x6</dt>
-<dd><p>Structural equation: \(X6 := X4^3 + X4^2 + 2 * X5 + \epsilon6\) with \(\epsilon6  ~  N(0,1)\)</p></dd>
+<dd><p>Structural equation: \(X_6 := X_4^3 + X_4^2 + 2 * X_5 + \epsilon_6\) with \(\epsilon_6 \sim N(0,1)\)</p></dd>
 
 
 </dl></div>
