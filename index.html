@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -177,13 +177,15 @@
 </ul>
 <p>Is it a work in progress? If so we need to document this in <code><a href="reference/bnlearnSearch.html">?BnlearnSearch</a></code> (and similar for other functions)?.</p>
 <ul>
-<li>Making arguments and function naming consistent (snake_case). How much do we wanna match the corresponding e.g. pcalg naming? “fixedEdges” vs “fixed_edges”, “suffStat” vs “suff_stat”, “maj.rule” vs “maj_rule”, … Atm we have a mix of both styles, so hard for user to know which to use (especially if their starting point is our package). We decided to use our own naming (snake_case).</li>
+<li><p>Making arguments and function naming consistent (snake_case). How much do we wanna match the corresponding e.g. pcalg naming? “fixedEdges” vs “fixed_edges”, “suffStat” vs “suff_stat”, “maj.rule” vs “maj_rule”, … Atm we have a mix of both styles, so hard for user to know which to use (especially if their starting point is our package). We decided to use our own naming (snake_case).</p></li>
+<li><p>Allow user to specify engines without being casesensitive? E.g. “TETRAD”, “tetrad”, “TeTrAd” should all work.</p></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
 </h2>
 <p>Rewrite knowledge required + forbidden to use caugi style with <code>%--&gt;%</code> instead of <code>~</code> (and also <code>%&lt;--%</code>).</p>
+<p>Automatically scale plot elements to fit the available plot size.</p>
 <div class="section level3">
 <h3 id="manging-exported-functions">Manging exported functions<a class="anchor" aria-label="anchor" href="#manging-exported-functions"></a>
 </h3>

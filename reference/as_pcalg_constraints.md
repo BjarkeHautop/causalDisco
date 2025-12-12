@@ -94,22 +94,22 @@ kn <- knowledge(
 pc_constraints <- as_pcalg_constraints(kn, directed_as_undirected = FALSE)
 print(pc_constraints)
 #> $fixed_gaps
-#>           child_x2 child_x1 youth_x4 youth_x3 oldage_x6 oldage_x5
-#> child_x2     FALSE    FALSE    FALSE    FALSE     FALSE     FALSE
-#> child_x1     FALSE    FALSE    FALSE     TRUE     FALSE     FALSE
-#> youth_x4     FALSE    FALSE    FALSE    FALSE     FALSE     FALSE
-#> youth_x3     FALSE     TRUE    FALSE    FALSE     FALSE     FALSE
-#> oldage_x6    FALSE    FALSE    FALSE    FALSE     FALSE     FALSE
-#> oldage_x5    FALSE    FALSE    FALSE    FALSE     FALSE     FALSE
+#>           child_x1 child_x2 oldage_x5 oldage_x6 youth_x3 youth_x4
+#> child_x1     FALSE    FALSE     FALSE     FALSE     TRUE    FALSE
+#> child_x2     FALSE    FALSE     FALSE     FALSE    FALSE    FALSE
+#> oldage_x5    FALSE    FALSE     FALSE     FALSE    FALSE    FALSE
+#> oldage_x6    FALSE    FALSE     FALSE     FALSE    FALSE    FALSE
+#> youth_x3      TRUE    FALSE     FALSE     FALSE    FALSE    FALSE
+#> youth_x4     FALSE    FALSE     FALSE     FALSE    FALSE    FALSE
 #> 
 #> $fixed_edges
-#>           child_x2 child_x1 youth_x4 youth_x3 oldage_x6 oldage_x5
-#> child_x2     FALSE    FALSE    FALSE    FALSE     FALSE     FALSE
-#> child_x1     FALSE    FALSE    FALSE    FALSE     FALSE     FALSE
-#> youth_x4     FALSE    FALSE    FALSE    FALSE     FALSE     FALSE
-#> youth_x3     FALSE    FALSE    FALSE    FALSE     FALSE     FALSE
-#> oldage_x6    FALSE    FALSE    FALSE    FALSE     FALSE     FALSE
-#> oldage_x5    FALSE    FALSE    FALSE    FALSE     FALSE     FALSE
+#>           child_x1 child_x2 oldage_x5 oldage_x6 youth_x3 youth_x4
+#> child_x1     FALSE    FALSE     FALSE     FALSE    FALSE    FALSE
+#> child_x2     FALSE    FALSE     FALSE     FALSE    FALSE    FALSE
+#> oldage_x5    FALSE    FALSE     FALSE     FALSE    FALSE    FALSE
+#> oldage_x6    FALSE    FALSE     FALSE     FALSE    FALSE    FALSE
+#> youth_x3     FALSE    FALSE     FALSE     FALSE    FALSE    FALSE
+#> youth_x4     FALSE    FALSE     FALSE     FALSE    FALSE    FALSE
 #> 
 
 # error paths

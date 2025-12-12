@@ -72,12 +72,12 @@ print(kn)
 #> ── Variables ──
 #> 
 #>   var       tier 
-#> 1 child_x2  NA   
-#> 2 child_x1  NA   
-#> 3 youth_x4  NA   
-#> 4 youth_x3  NA   
-#> 5 oldage_x6 NA   
-#> 6 oldage_x5 NA   
+#> 1 child_x1  NA   
+#> 2 child_x2  NA   
+#> 3 oldage_x5 NA   
+#> 4 oldage_x6 NA   
+#> 5 youth_x3  NA   
+#> 6 youth_x4  NA   
 #> 7 new_var   NA   
 #> 
 ```

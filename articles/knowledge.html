@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,13 +94,45 @@ variables. To do this, we use the <code>tier</code> function within
 <div class="section level3">
 <h3 id="creating-a-tierred-knowledge-object">Creating a tierred knowledge object<a class="anchor" aria-label="anchor" href="#creating-a-tierred-knowledge-object"></a>
 </h3>
-<p>Here is an example:</p>
+<p>A tier knowledge object can be created by specifying tiers and their
+associated variables. If using numeric tiers, lower numbers indicate
+earlier tiers, while otherwise it’s based on the order of appearance.
+Thus, the below specifies different ways to encode the same tier
+knowledge:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="fu">tier</span><span class="op">(</span></span>
 <span>    <span class="fl">1</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A2</span><span class="op">)</span>,</span>
 <span>    <span class="fl">2</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">B1</span>, <span class="va">B2</span><span class="op">)</span>,</span>
 <span>    <span class="fl">3</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">C1</span>, <span class="va">C2</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Same object, since it gets ordered numerically by tier number</span></span>
+<span><span class="va">kn_same</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>  <span class="fu">tier</span><span class="op">(</span></span>
+<span>    <span class="fl">1</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A2</span><span class="op">)</span>,</span>
+<span>    <span class="fl">3</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">C1</span>, <span class="va">C2</span><span class="op">)</span>,</span>
+<span>    <span class="fl">2</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">B1</span>, <span class="va">B2</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Not actually the same object (since kn_almost$vars lists the tiers, and thus says 10, 20, 30. But</span></span>
+<span><span class="co"># it functions the same as kn in causal discovery)</span></span>
+<span><span class="va">kn_almost</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>  <span class="fu">tier</span><span class="op">(</span></span>
+<span>    <span class="fl">10</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A2</span><span class="op">)</span>,</span>
+<span>    <span class="fl">30</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">C1</span>, <span class="va">C2</span><span class="op">)</span>,</span>
+<span>    <span class="fl">20</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">B1</span>, <span class="va">B2</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Again, not actually the same object, but functions the same.</span></span>
+<span><span class="va">kn_also_almost</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>  <span class="fu">tier</span><span class="op">(</span></span>
+<span>    <span class="va">A</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A2</span><span class="op">)</span>,</span>
+<span>    <span class="va">B</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">B1</span>, <span class="va">B2</span><span class="op">)</span>,</span>
+<span>    <span class="va">C</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">C1</span>, <span class="va">C2</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>We can visualize the tiers using:</p>

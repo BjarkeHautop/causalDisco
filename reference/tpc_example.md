@@ -17,17 +17,17 @@ A data.frame with 200 rows and 6 variables.
 - child_x1:
 
   Structural equation: \\X_1 := \epsilon_1\\ with \\\epsilon_1 \sim
-  \mathrm{Unif}{0,1}\\
+  \mathrm{Unif}(0,1)\\
 
 - child_x2:
 
-  Structural equation: \\X_2 := 2 \* X_1 + \epsilon_2\\ with
+  Structural equation: \\X_2 := 2 \cdot X_1 + \epsilon_2\\ with
   \\\epsilon_2 \sim N(0,1)\\
 
 - youth_x3:
 
-  Structural equation: \\X_3 := \epsilon3\\ with \\\epsilon_3 \sim
-  \mathrm{Unif}{0, 1}\\
+  Structural equation: \\X_3 := \epsilon_3\\ with \\\epsilon_3 \sim
+  \mathrm{Unif}(0, 1)\\
 
 - youth_x4:
 
@@ -36,13 +36,13 @@ A data.frame with 200 rows and 6 variables.
 
 - oldage_x5:
 
-  Structural equation: \\X_5 := X_3^2 + X_3 - 3 \* X_2 + \epsilon_5\\
+  Structural equation: \\X_5 := X_3^2 + X_3 - 3 \cdot X_2 + \epsilon_5\\
   with \\\epsilon_5 \sim N(0,1)\\
 
 - oldage_x6:
 
-  Structural equation: \\X_6 := X_4^3 + X_4^2 + 2 \* X_5 + \epsilon_6\\
-  with \\\epsilon_6 \sim N(0,1)\\
+  Structural equation: \\X_6 := X_4^3 + X_4^2 + 2 \cdot X_5 +
+  \epsilon_6\\ with \\\epsilon_6 \sim N(0,1)\\
 
 ## References
 
