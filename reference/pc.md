@@ -52,10 +52,10 @@ each engine, see:
 - [`TetradSearch`](https://bjarkehautop.github.io/causalDisco/reference/TetradSearch.md)
   for Tetrad,
 
-- [`PcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/pcalgSearch.md)
+- [`PcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/PcalgSearch.md)
   for pcalg,
 
-- [`BnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/bnlearnSearch.md)
+- [`BnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/BnlearnSearch.md)
   for bnlearn.
 
 ## Examples

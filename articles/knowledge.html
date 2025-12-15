@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9013</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9014</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +80,9 @@
 <span><span class="co">#&gt;   Restart R to apply changes.</span></span></code></pre></div>
 <p>This vignette demonstrates how to use the <code>knowledge</code>
 function to incorporate prior knowledge into causal discovery
-algorithms.</p>
+algorithms. The different supported knowledge types are explained below,
+along with examples of how to create knowledge objects and use them with
+causal discovery methods. They can of course be combined as needed.</p>
 <div class="section level2">
 <h2 id="tier-knowledge">Tier knowledge<a class="anchor" aria-label="anchor" href="#tier-knowledge"></a>
 </h2>
@@ -138,7 +140,9 @@ knowledge:</p>
 <p>We can visualize the tiers using:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
-<p><img src="knowledge_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" width="700"></p>
+<p><img src="knowledge_files/figure-html/plot%20tier%20knowledge-1.png" class="r-plt" width="700"></p>
+<p>The plot then shows the tiers as layers, with the earliest tiers to
+the left and latest to the right.</p>
 </div>
 <div class="section level3">
 <h3 id="using-tier-knowledge-with-a-dataset">Using tier knowledge with a dataset<a class="anchor" aria-label="anchor" href="#using-tier-knowledge-with-a-dataset"></a>
@@ -180,10 +184,13 @@ such as <code>starts_with</code>:</p>
 <span>    <span class="va">old</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"old"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<p>Note, that you don’t have to specify knowledge for all variables in
+the dataset. Variables not included in any tier are considered
+unrestricted and can have edges to/from any other variable.</p>
 <p>We can plot the knowledge to visualize the tiers:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
-<p><img src="knowledge_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" width="700"></p>
+<p><img src="knowledge_files/figure-html/plot%20tier%20knowledge%20with%20data-1.png" class="r-plt" width="700"></p>
 </div>
 </div>
 <div class="section level3">
@@ -200,13 +207,46 @@ temporal BIC (<code>tbic</code>):</p>
 we can plot the resulting causal graph.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">disco_cd_tges</span><span class="op">)</span></span></code></pre></div>
-<p><img src="knowledge_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" width="700"></p>
+<p><img src="knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-1.png" class="r-plt" width="700"></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="required-and-forbidden-knowledge">Required and forbidden knowledge<a class="anchor" aria-label="anchor" href="#required-and-forbidden-knowledge"></a>
 </h2>
-<p>WIP and syntax changes coming soon.</p>
+<p>You can specify required and forbidden edges using the
+<code>%--&gt;%</code> and <code>%--x%</code> operators, respectively.
+For example, to require an edge from <code>child_x1</code> to
+<code>youth_x3</code> and forbid an edge from <code>child_x2</code> to
+<code>oldage_x5</code>, you can do:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>  <span class="va">tpc_example</span>,</span>
+<span>  <span class="va">child_x1</span> <span class="op">%--&gt;%</span> <span class="va">youth_x3</span>,</span>
+<span>  <span class="va">child_x2</span> <span class="op">%--x%</span> <span class="va">oldage_x5</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>This knowledge object can also be visualized:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
+<p><img src="knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge-1.png" class="r-plt" width="700"></p>
+<p>The blue solid edges represents required edges, while the red dashed
+edges represent forbidden edges.</p>
+<p>Just like tier supported tidyselect helpers, you can also use them
+for specifying required and forbidden edges:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>  <span class="va">tpc_example</span>,</span>
+<span>  <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span> <span class="op">%--&gt;%</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span>
+<span>  <span class="fu">starts_with</span><span class="op">(</span><span class="st">"oldage"</span><span class="op">)</span> <span class="op">%--x%</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>This means, that all variables starting with “child” are required to
+have edges to all variables starting with “youth”, and no variables
+starting with “oldage” can have edges to any variables starting with
+“youth”. We can visualize this:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
+<p><img src="knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge%20with%20tidyselect-1.png" class="r-plt" width="700"></p>
+<p>You can then use this knowledge object with causal discovery
+algorithms similarly as before.</p>
 </div>
 <div class="section level2">
 <h2 id="engine-specific-information-about-knowledge">Engine specific information about knowledge<a class="anchor" aria-label="anchor" href="#engine-specific-information-about-knowledge"></a>
@@ -217,12 +257,12 @@ we can plot the resulting causal graph.</p>
 <p>Tier, required and forbidden knowledge are all supported with bnlearn
 engines. Note, that you can get a harmless(?) warning from bnlearn when
 using required knowledge.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">tpc_example</span>,</span>
-<span>  <span class="fu">required</span><span class="op">(</span><span class="va">child_x1</span> <span class="op">~</span> <span class="va">youth_x3</span><span class="op">)</span></span>
+<span>  <span class="va">child_x1</span> <span class="op">%--&gt;%</span> <span class="va">youth_x3</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">bnlearn_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"bnlearn"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
@@ -232,9 +272,9 @@ using required knowledge.</p>
 <span><span class="co">#&gt; both arcs are oriented in the opposite direction.</span></span></code></pre></div>
 <p>But the resulting causal graph respects the knowledge correctly
 nevertheless.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span></code></pre></div>
-<p><img src="knowledge_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" width="700"></p>
+<p><img src="knowledge_files/figure-html/plot%20bnlearn-1.png" class="r-plt" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="causaldisco">causalDisco<a class="anchor" aria-label="anchor" href="#causaldisco"></a>

@@ -5,8 +5,9 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/authors.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/index.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/news/index.html</loc></url>
-<url><loc>https://bjarkehautop.github.io/causalDisco/reference/FDR.html</loc></url>
-<url><loc>https://bjarkehautop.github.io/causalDisco/reference/NPV.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/reference/BnlearnSearch.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/reference/CausalDiscoSearch.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/reference/PcalgSearch.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/TEssGraph-class.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/TemporalBDeu-class.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/TemporalBIC-class.html</loc></url>
@@ -22,9 +23,7 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/as_pcalg_constraints.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/as_tetrad_knowledge.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/average_degree.html</loc></url>
-<url><loc>https://bjarkehautop.github.io/causalDisco/reference/bnlearnSearch.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/causalDisco-package.html</loc></url>
-<url><loc>https://bjarkehautop.github.io/causalDisco/reference/causalDiscoSearch.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/check_args_and_distribute_args_bnlearn.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/check_args_and_distribute_args_causalDisco.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/check_args_and_distribute_args_pcalg.html</loc></url>
@@ -49,6 +48,7 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/f1_score.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/fci.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/reference/fdr.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/forbid_edge.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/g1_score.html</loc></url>
@@ -70,8 +70,8 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/n_dags.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/n_edges.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/new_knowledgeable_caugi.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/reference/npv.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/pc.html</loc></url>
-<url><loc>https://bjarkehautop.github.io/causalDisco/reference/pcalgSearch.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/plot.knowledge.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/plot.knowledgeable_caugi.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/plot.pag.html</loc></url>

@@ -6,11 +6,8 @@ High-level interface for running causal discovery.
 
 - [`disco()`](https://bjarkehautop.github.io/causalDisco/reference/disco.md)
   : Disco!!
-
 - [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md)
-  :
-
-  Knowledge Mini-DSL constructor (`tier()`, `forbidden()`, `required()`)
+  : Knowledge Mini-DSL Constructor
 
 ## Causal Discovery Algorithms
 
@@ -43,14 +40,14 @@ Functions for installing and verifying the Tetrad Java backend.
 
 ## R6 Classes
 
+- [`BnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/BnlearnSearch.md)
+  : R6 Interface to bnlearn Search Algorithms
+- [`CausalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/CausalDiscoSearch.md)
+  : R6 Interface to causalDisco Search Algorithms
+- [`PcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/PcalgSearch.md)
+  : R6 Interface to pcalg Search Algorithms
 - [`TetradSearch`](https://bjarkehautop.github.io/causalDisco/reference/TetradSearch.md)
   : R6 Interface to Tetrad Search Algorithms
-- [`BnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/bnlearnSearch.md)
-  : R6 Interface to bnlearn Search Algorithms
-- [`CausalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/causalDiscoSearch.md)
-  : R6 Interface to causalDisco Search Algorithms
-- [`PcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/pcalgSearch.md)
-  : R6 Interface to pcalg Search Algorithms
 
 ## Algorithm Engines
 
@@ -292,9 +289,9 @@ Low-level functions that execute search algorithms.
   : F1 score
 - [`g1_score()`](https://bjarkehautop.github.io/causalDisco/reference/g1_score.md)
   : G1 score
-- [`fdr()`](https://bjarkehautop.github.io/causalDisco/reference/FDR.md)
+- [`fdr()`](https://bjarkehautop.github.io/causalDisco/reference/fdr.md)
   : False Discovery Rate
-- [`npv()`](https://bjarkehautop.github.io/causalDisco/reference/NPV.md)
+- [`npv()`](https://bjarkehautop.github.io/causalDisco/reference/npv.md)
   : Negative predictive value
 - [`false_omission_rate()`](https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.md)
   : False Omission Rate

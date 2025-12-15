@@ -61,8 +61,8 @@ Available metrics to be used with confusion matrices are
 [recall](https://bjarkehautop.github.io/causalDisco/reference/recall.md),
 [specificity](https://bjarkehautop.github.io/causalDisco/reference/specificity.md),
 [false_omission_rate](https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.md),
-[fdr](https://bjarkehautop.github.io/causalDisco/reference/FDR.md),
-[npv](https://bjarkehautop.github.io/causalDisco/reference/NPV.md),
+[fdr](https://bjarkehautop.github.io/causalDisco/reference/fdr.md),
+[npv](https://bjarkehautop.github.io/causalDisco/reference/npv.md),
 [f1_score](https://bjarkehautop.github.io/causalDisco/reference/f1_score.md)
 and
 [g1_score](https://bjarkehautop.github.io/causalDisco/reference/g1_score.md).

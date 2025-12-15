@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9013</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9014</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -173,13 +173,33 @@
 <h2 id="questions">Questions<a class="anchor" aria-label="anchor" href="#questions"></a>
 </h2>
 <ul>
-<li>We say in <code><a href="reference/bnlearnSearch.html">?BnlearnSearch</a></code> (and implemented in <code>bnlearn_search</code>) various algorithms such as <code>gs</code>, <code>iamb</code>. However, we don’t have a <code>gs(), iamb()</code> function exported (similar to how we have a <code><a href="reference/pc.html">pc()</a></code> function). Should we add these functions?</li>
+<li>Should we keep the current exogenous/root as it is?</li>
 </ul>
-<p>Is it a work in progress? If so we need to document this in <code><a href="reference/bnlearnSearch.html">?BnlearnSearch</a></code> (and similar for other functions)?.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fl">1</span>, B <span class="op">=</span> <span class="fl">2</span>, C <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  <span class="fu">exogenous</span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">kn</span><span class="op">$</span><span class="va">edges</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 5</span></span>
+<span><span class="co">#&gt;   status    from  to    tier_from tier_to</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt; 1 forbidden B     A     &lt;NA&gt;      &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt; 2 forbidden C     A     &lt;NA&gt;      &lt;NA&gt;</span></span></code></pre></div>
 <ul>
-<li><p>Making arguments and function naming consistent (snake_case). How much do we wanna match the corresponding e.g. pcalg naming? “fixedEdges” vs “fixed_edges”, “suffStat” vs “suff_stat”, “maj.rule” vs “maj_rule”, … Atm we have a mix of both styles, so hard for user to know which to use (especially if their starting point is our package). We decided to use our own naming (snake_case).</p></li>
-<li><p>Allow user to specify engines without being casesensitive? E.g. “TETRAD”, “tetrad”, “TeTrAd” should all work.</p></li>
+<li>What should plot knowledge do if only some variables have a tier? Currently just made it plot the missing tiers as it’s own tier to the right, but this is misleading?</li>
 </ul>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fl">1</span>, B <span class="op">=</span> <span class="fl">2</span>, C <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  <span class="fu">tier</span><span class="op">(</span></span>
+<span>    <span class="va">first</span> <span class="op">~</span> <span class="va">A</span>,</span>
+<span>    <span class="va">second</span> <span class="op">~</span> <span class="va">B</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-1-1.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
@@ -204,7 +224,7 @@
 <li>
 <code>tpc</code> with engine <code>"causalDisco"</code> does not currently work correctly with tier knowledge</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
@@ -239,7 +259,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vertex_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pp.dat</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="va">vertex</span><span class="op">]</span></span>
 <span><span class="va">req_parents</span> <span class="op">&lt;-</span> <span class="va">kn</span><span class="op">$</span><span class="va">edges</span> <span class="op">|&gt;</span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">status</span> <span class="op">==</span> <span class="st">"required"</span>, <span class="va">to</span> <span class="op">==</span> <span class="va">vertex_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -268,13 +288,13 @@
 <li><p>v7.6.9 of Tetrad seems to fix the memory issues.</p></li>
 <li><p>Tetrad does not use required correctly</p></li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>    <span class="va">tpc_example</span>,</span>
-<span>    <span class="fu">required</span><span class="op">(</span><span class="va">child_x1</span> <span class="op">~</span> <span class="va">youth_x3</span><span class="op">)</span></span>
+<span>    <span class="va">child_x1</span> <span class="op">%--&gt;%</span> <span class="va">youth_x3</span></span>
 <span>  <span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="va">tetrad_fci</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fci.html">fci</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
@@ -291,7 +311,7 @@
 <span><span class="co">#&gt; 5:  youth_x3    o-&gt; oldage_x5</span></span>
 <span><span class="co">#&gt; 6:  youth_x4    --&gt; oldage_x6</span></span></code></pre></div>
 <p>The required edge is missing. Furthermore, in <code>pc</code> it gives undirected edges between the required edges.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
@@ -305,6 +325,9 @@
 <span>  <span class="va">edges</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">caugi</span><span class="op">@</span><span class="va">edges</span></span>
 <span>  <span class="va">edges</span></span>
 <span><span class="op">}</span></span>
+<span><span class="co">#&gt; Warning: `required()` is deprecated and will be removed in a future version.</span></span>
+<span><span class="co">#&gt; Please use the infix operators `%--x%` (forbidden) and `%--&gt;%` (required)</span></span>
+<span><span class="co">#&gt; instead.</span></span>
 <span><span class="co">#&gt;         from   edge        to</span></span>
 <span><span class="co">#&gt;       &lt;char&gt; &lt;char&gt;    &lt;char&gt;</span></span>
 <span><span class="co">#&gt; 1:  child_x1    ---  child_x2</span></span>
@@ -317,7 +340,7 @@
 <ul>
 <li>Also gives undirected edges in tier knowledge?</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
@@ -345,13 +368,13 @@
 <span><span class="co">#&gt; 6: oldage_x6    ---  youth_x4</span></span></code></pre></div>
 <p>Added a bunch of <code><a href="https://rdrr.io/r/base/browser.html" class="external-link">browser()</a></code> statements in TetradSearch and the knowledge is correctly passed to Tetrad, so not sure what is going on here.</p>
 <p>V7.6.9 gives this:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>    <span class="va">tpc_example</span>,</span>
-<span>    <span class="fu">forbidden</span><span class="op">(</span><span class="va">child_x2</span> <span class="op">~</span> <span class="va">child_x1</span><span class="op">)</span></span>
+<span>    <span class="va">child_x2</span> <span class="op">%--x%</span> <span class="va">child_x1</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">tetrad_fci</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fci.html">fci</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
@@ -368,7 +391,7 @@
 <span><span class="co">#&gt; 5:  youth_x3    o-&gt; oldage_x5</span></span>
 <span><span class="co">#&gt; 6:  youth_x4    --&gt; oldage_x6</span></span></code></pre></div>
 <p>But v6.7.8 gives this (which is correct?):</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/detach.html" class="external-link">detach</a></span><span class="op">(</span><span class="st">"package:causalDisco"</span>, unload <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>causalDisco.tetrad.version <span class="op">=</span> <span class="st">"7.6.8"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/annennenne/causalDisco" class="external-link">causalDisco</a></span><span class="op">)</span></span>
@@ -384,7 +407,7 @@
 <span></span>
 <span>  <span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>    <span class="va">tpc_example</span>,</span>
-<span>    <span class="fu">forbidden</span><span class="op">(</span><span class="va">child_x2</span> <span class="op">~</span> <span class="va">child_x1</span><span class="op">)</span></span>
+<span>    <span class="va">child_x2</span> <span class="op">%--x%</span> <span class="va">child_x1</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">tetrad_fci</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fci.html">fci</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
@@ -406,8 +429,10 @@
 <h3 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h3>
 <ul>
+<li><p>Make it clear in <code><a href="reference/BnlearnSearch.html">?BnlearnSearch</a></code> (and similar for the others) that all algorithms aren’t currently fully supported.</p></li>
+<li><p>Use <code>snake_case</code> for all exported functions + arguments (even if the underlying engine uses e.g. camelCase).</p></li>
 <li><p>See how <code>mlr3</code> does it, and see their wiki on roxygen R6 guide <a href="https://github.com/mlr-org/mlr3/wiki/Roxygen-R6-Guide" class="external-link">here</a>.</p></li>
-<li><p>Make it clear somewhere what/how knowledge is supported in which algorithms. E.g. <code>pc</code> with engine pcalg only works with forbidden edges from knowledge objects and requires specifying both ways. It’s documented in <code>?as_pcalg_constaints</code> but should be more visible. In <code><a href="reference/pcalgSearch.html">?PcalgSearch</a></code> probably?</p></li>
+<li><p>Make it clear somewhere what/how knowledge is supported in which algorithms. E.g. <code>pc</code> with engine pcalg only works with forbidden edges from knowledge objects and requires specifying both ways. It’s documented in <code>?as_pcalg_constaints</code> but should be more visible. In <code><a href="reference/PcalgSearch.html">?PcalgSearch</a></code> probably?</p></li>
 <li><p>List in documentation of <code>tfci</code>, … what kind of graph it returns.</p></li>
 <li><p>Make vignettes</p></li>
 <li><p>Make all function args be snake_case. Note, that modifying these: <code>fixedGaps</code>, <code>fixedEdges</code>, <code>suffStat</code>, <code>methodOri</code> breaks tests since they are passed to pcalg. But, can you inside functions rename them to what pcalg expects.</p></li>
@@ -440,17 +465,17 @@
 <p><a href="https://github.com/cmu-phil/tetrad/releases" class="external-link">Changelog</a> item 14 says “and a generalization of GFFC (Generalized Find Factor Clusters) of FOFC and FTFC, providing multiple strategies for discovering latent clusterings from measurement data.”</p>
 <p>so we need to implement this in <code>causalDisco</code> (help?)</p>
 <p>This also doesn’t work on 7.6.9</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">load_all</span>()</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>ℹ Loading causalDisco</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>causalDisco startup<span class="sc">:</span></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>  Java heap size requested<span class="sc">:</span> <span class="dv">2</span> GB</span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>  Tetrad version<span class="sc">:</span> <span class="dv">7</span>.<span class="fl">6.9</span></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>  Java successfully initialized with <span class="dv">2</span> GB.</span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>  To change heap size, set <span class="fu">options</span>(<span class="at">java.heap.size =</span> <span class="st">'Ng'</span>) or <span class="fu">Sys.setenv</span>(<span class="at">JAVA_HEAP_SIZE =</span> <span class="st">'Ng'</span>) <span class="sc">*</span>before<span class="sc">*</span> loading.</span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>  Restart R to apply changes.</span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="sc">&gt;</span> tetrad_data <span class="ot">&lt;-</span> <span class="fu">rdata_to_tetrad</span>(df)</span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">rdata_to_tetrad</span>(df) <span class="sc">:</span> </span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>  java.lang.ClassNotFoundException<span class="sc">:</span> edu<span class="sc">/</span>cmu<span class="sc">/</span>tetrad<span class="sc">/</span>data<span class="sc">/</span>DiscreteVariable</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">load_all</span>()</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>ℹ Loading causalDisco</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>causalDisco startup<span class="sc">:</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>  Java heap size requested<span class="sc">:</span> <span class="dv">2</span> GB</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>  Tetrad version<span class="sc">:</span> <span class="dv">7</span>.<span class="fl">6.9</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>  Java successfully initialized with <span class="dv">2</span> GB.</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>  To change heap size, set <span class="fu">options</span>(<span class="at">java.heap.size =</span> <span class="st">'Ng'</span>) or <span class="fu">Sys.setenv</span>(<span class="at">JAVA_HEAP_SIZE =</span> <span class="st">'Ng'</span>) <span class="sc">*</span>before<span class="sc">*</span> loading.</span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>  Restart R to apply changes.</span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="sc">&gt;</span> tetrad_data <span class="ot">&lt;-</span> <span class="fu">rdata_to_tetrad</span>(df)</span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">rdata_to_tetrad</span>(df) <span class="sc">:</span> </span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>  java.lang.ClassNotFoundException<span class="sc">:</span> edu<span class="sc">/</span>cmu<span class="sc">/</span>tetrad<span class="sc">/</span>data<span class="sc">/</span>DiscreteVariable</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="cran-todo">CRAN TODO<a class="anchor" aria-label="anchor" href="#cran-todo"></a>

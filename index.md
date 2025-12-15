@@ -146,27 +146,38 @@ of the nodes.](reference/figures/README-plot-1.png)
 
 ## Questions
 
-- We say in
-  [`?BnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/bnlearnSearch.md)
-  (and implemented in `bnlearn_search`) various algorithms such as `gs`,
-  `iamb`. However, we don’t have a `gs(), iamb()` function exported
-  (similar to how we have a
-  [`pc()`](https://bjarkehautop.github.io/causalDisco/reference/pc.md)
-  function). Should we add these functions?
+- Should we keep the current exogenous/root as it is?
 
-Is it a work in progress? If so we need to document this in
-[`?BnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/bnlearnSearch.md)
-(and similar for other functions)?.
+``` r
+kn <- knowledge(
+  data.frame(A = 1, B = 2, C = 3),
+  exogenous(A)
+)
+kn$edges
+#> # A tibble: 2 × 5
+#>   status    from  to    tier_from tier_to
+#>   <chr>     <chr> <chr> <chr>     <chr>  
+#> 1 forbidden B     A     <NA>      <NA>   
+#> 2 forbidden C     A     <NA>      <NA>
+```
 
-- Making arguments and function naming consistent (snake_case). How much
-  do we wanna match the corresponding e.g. pcalg naming? “fixedEdges” vs
-  “fixed_edges”, “suffStat” vs “suff_stat”, “maj.rule” vs “maj_rule”, …
-  Atm we have a mix of both styles, so hard for user to know which to
-  use (especially if their starting point is our package). We decided to
-  use our own naming (snake_case).
+- What should plot knowledge do if only some variables have a tier?
+  Currently just made it plot the missing tiers as it’s own tier to the
+  right, but this is misleading?
 
-- Allow user to specify engines without being casesensitive? E.g.
-  “TETRAD”, “tetrad”, “TeTrAd” should all work.
+``` r
+kn <- knowledge(
+  data.frame(A = 1, B = 2, C = 3),
+  tier(
+    first ~ A,
+    second ~ B
+  )
+)
+
+plot(kn)
+```
+
+![](reference/figures/README-unnamed-chunk-1-1.png)
 
 ## TODO
 
@@ -265,7 +276,7 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
 
   kn <- knowledge(
     tpc_example,
-    required(child_x1 ~ youth_x3)
+    child_x1 %-->% youth_x3
   )
   
   tetrad_fci <- fci(engine = "tetrad", test = "conditional_gaussian", alpha = 0.05)
@@ -300,6 +311,9 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
   edges <- output$caugi@edges
   edges
 }
+#> Warning: `required()` is deprecated and will be removed in a future version.
+#> Please use the infix operators `%--x%` (forbidden) and `%-->%` (required)
+#> instead.
 #>         from   edge        to
 #>       <char> <char>    <char>
 #> 1:  child_x1    ---  child_x2
@@ -353,7 +367,7 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
 
   kn <- knowledge(
     tpc_example,
-    forbidden(child_x2 ~ child_x1)
+    child_x2 %--x% child_x1
   )
 
   tetrad_fci <- fci(engine = "tetrad", test = "conditional_gaussian", alpha = 0.05)
@@ -389,7 +403,7 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
 
   kn <- knowledge(
     tpc_example,
-    forbidden(child_x2 ~ child_x1)
+    child_x2 %--x% child_x1
   )
 
   tetrad_fci <- fci(engine = "tetrad", test = "conditional_gaussian", alpha = 0.05)
@@ -409,6 +423,14 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
 
 ### Documentation
 
+- Make it clear in
+  [`?BnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/BnlearnSearch.md)
+  (and similar for the others) that all algorithms aren’t currently
+  fully supported.
+
+- Use `snake_case` for all exported functions + arguments (even if the
+  underlying engine uses e.g. camelCase).
+
 - See how `mlr3` does it, and see their wiki on roxygen R6 guide
   [here](https://github.com/mlr-org/mlr3/wiki/Roxygen-R6-Guide).
 
@@ -416,7 +438,7 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
   algorithms. E.g. `pc` with engine pcalg only works with forbidden
   edges from knowledge objects and requires specifying both ways. It’s
   documented in `?as_pcalg_constaints` but should be more visible. In
-  [`?PcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/pcalgSearch.md)
+  [`?PcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/PcalgSearch.md)
   probably?
 
 - List in documentation of `tfci`, … what kind of graph it returns.

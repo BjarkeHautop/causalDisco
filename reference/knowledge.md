@@ -1,13 +1,15 @@
-# Knowledge Mini-DSL constructor (`tier()`, `forbidden()`, `required()`)
+# Knowledge Mini-DSL Constructor
 
-Accepts an optional data frame followed by calls built from
-**formulas**:
+Constructs a `knowledge` object optionally initialized with a data frame
+and extended with variable relationships expressed via formulas,
+selectors, or infix operators:
 
-- `tier( 1 ~ V1 + V2, exposure ~ E )`
-
-- `forbidden( V1 ~ V4, V2 ~ V4)`
-
-- `required ( V1 ~ V2 )`
+    tier(1 ~ V1 + V2, exposure ~ E)
+    forbidden(V1 ~ V4, V2 ~ V4)
+    required(V1 ~ V2)
+    V1 %-->% V3    # infix syntax for required edges
+    V2 %--x% V3    # infix syntax for forbidden edges
+    exogenous(V1, V2)
 
 ## Usage
 
@@ -19,21 +21,24 @@ knowledge(...)
 
 - ...:
 
-  - optionally, a single **data frame** (first argument) whose column
-    names initialise the variable set and freeze the knowledge object,
-    followed by
+  Arguments to define the knowledge object:
 
-  - zero or more calls to the mini‑DSL: `tier()`, `forbidden()`,
-    `required()`, or `exogenous()` (aliases: `exo()`, `root()`).
+  - Optionally, a single data frame (first argument) whose column names
+    initialize and freeze the variable set.
 
-  For `tier()` you may pass one or more two‑sided **formulas**
-  (`tier(1 ~ x + y)`, `tier("baseline" ~ starts_with("V"))`) or a single
-  numeric vector shortcut matching the number of variables to set tiers
-  by index. `forbidden()`/`required()` take one or more two‑sided
-  formulas (`from ~ to`), where each side can use tidyselect semantics
-  to select multiple variables. `exogenous()`/`exo()`/`root()` take
-  variable selectors (names or tidyselect), possibly multiple. Arguments
-  are evaluated in order; only these calls are allowed.
+  - Zero or more mini-DSL calls: `tier()`, `forbidden()`, `required()`,
+    `exogenous()`, `exo()`, `root()`, or infix operators `%-->%` and
+    `%--x%`.
+
+    - `tier()`: One or more two-sided formulas (`tier(1 ~ x + y)`), or a
+      numeric vector.
+
+    - `forbidden()` / `required()`: One or more two-sided formulas
+      (`from ~ to`).
+
+    - `exogenous()` / `exo()` / `root()`: Variable names or tidyselect
+      selectors. Arguments are evaluated in order; only these calls are
+      allowed.
 
 ## Value
 
@@ -41,34 +46,39 @@ A populated `knowledge` object.
 
 ## Details
 
+Create a `knowledge` object using a concise mini-DSL with `tier()`,
+`forbidden()`, `required()`, `exogenous()` and infix edge operators
+`%-->%` and `%--x%`.
+
 The first argument can be a data frame, which will be used to populate
 the `knowledge` object with variable names. If you later add variables
 with add\_\* verbs, this will throw a warning, since the knowledge
 object will be *frozen*. You can unfreeze a knowledge object by using
 the function `unfreeze(knowledge)`.
 
-If no data frame is provided, the `knowledge` object will be empty until
-variables are added with `tier()`, `forbidden()`, or `required()`. You
-can also populate the object with the
-[`add_vars()`](https://bjarkehautop.github.io/causalDisco/reference/add_vars.md)
-verb.
+If no data frame is provided, the object is initially empty. Variables
+can then be added via `tier()`, `forbidden()`, `required()`, infix
+operators, or
+[`add_vars()`](https://bjarkehautop.github.io/causalDisco/reference/add_vars.md).
 
-`tier()` assigns variables to tiers. Tiers are internally numbered,
-starting with 1. If you provide a numeric literal, it will be used as
-the tier index. If you provide a symbol or string, it will be used as a
-label. The order of the provided tiers will be used as the order of the
-tiers in the object, unless tiers are specified with numeric literals.
-This function takes formulas as input. The left-hand side of the formula
-is the *tier* and the right-hand side is the *variables*. You can also
-use tidyselect syntax to specify the variables. For example,
-`tier(1 ~ starts_with("V"))` will assign all variables starting with "V"
-to tier 1.
+- `tier()`: Assigns variables to tiers. Tiers may be numeric or string
+  labels. The left-hand side (LHS) of the formula is the tier; the
+  right-hand side (RHS) specifies variables. Variables can also be
+  selected using **tidyselect** syntax: `tier(1 ~ starts_with("V"))`.
 
-The `forbidden()` and `required()` functions add edges to the knowledge
-object. The edges are added as directed edges by default, currently
-there is no theoretical support for other edge types than these. These
-functions also take formulas as input. The left-hand side of the formula
-is the *from* variable, and the right-hand side is the *to* variable.
+- `forbidden()` / `required()`: Add directed edges between variables.
+  LHS is the source, RHS is the target. Both sides support tidyselect
+  syntax.
+
+- `%-->%` and `%--x%`: Infix alternatives for `required()` and
+  `forbidden()`. Example: `V1 %-->% V3` is equivalent to
+  `required(V1 ~ V3)`.
+
+- `exogenous()` / `exo()` / `root()`: Mark variables as exogenous (root
+  nodes).
+
+- Numeric vector shortcut for `tier()`: `tier(c(1, 2, 1))` assigns tiers
+  by index to all existing variables.
 
 ## See also
 
@@ -113,8 +123,8 @@ kn <- knowledge(
     1 ~ V1 + V2,
     2 ~ V3
   ),
-  required(V1 ~ V2),
-  forbidden(V3 ~ V1)
+  V1 %-->% V2,
+  V3 %--x% V1
 )
 
 # if a data frame is provided, variable names are checked against it
@@ -164,8 +174,8 @@ kn <- knowledge(
 # There is also required and forbidden edges, which are specified like so
 kn <- knowledge(
   df,
-  required(child_x1 ~ youth_x3),
-  forbidden(oldage_x6 ~ child_x1)
+  child_x1 %-->% youth_x3,
+  oldage_x6 %--x% child_x1
 )
 
 # You can also add exogenous variables
@@ -198,6 +208,7 @@ kn <-
   add_root(V1) |> # three ways to add roots
   add_exo(V2) |>
   add_exogenous(V3)
+#> Warning: `forbidden()` is deprecated and will be removed in a future version. Please use the infix operators `%--x%` (forbidden) and `%-->%` (required) instead.
 
 # Using seq_tiers for larger datasets
 df <- as.data.frame(
@@ -218,7 +229,7 @@ kn <- knowledge(
       ends_with("_{i}")
     )
   ),
-  required(X_1 ~ X_2)
+  X_1 %-->% X_2
 )
 
 df <- data.frame(

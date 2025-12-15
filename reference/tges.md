@@ -39,7 +39,7 @@ object.
 For specific details on the supported scores, tests, and parameters for
 the engine, see:
 
-- [`CausalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/causalDiscoSearch.md)
+- [`CausalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/CausalDiscoSearch.md)
   for causalDisco.
 
 ## Examples
