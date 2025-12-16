@@ -191,20 +191,20 @@
 </ul>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fl">1</span>, B <span class="op">=</span> <span class="fl">2</span>, C <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>A1 <span class="op">=</span> <span class="fl">1</span>, A2 <span class="op">=</span> <span class="fl">2</span>, B1 <span class="op">=</span> <span class="fl">3</span>, B2 <span class="op">=</span> <span class="fl">4</span>, C1 <span class="op">=</span> <span class="fl">5</span>, C2 <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>,</span>
 <span>  <span class="fu">tier</span><span class="op">(</span></span>
-<span>    <span class="va">first</span> <span class="op">~</span> <span class="va">A</span>,</span>
-<span>    <span class="va">second</span> <span class="op">~</span> <span class="va">B</span></span>
+<span>    <span class="va">first</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"A"</span><span class="op">)</span>,</span>
+<span>    <span class="va">second</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"B"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-1-1.png" width="100%"></p>
+<p><img src="reference/figures/README-knowledge%20plot%20question-1.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
 </h2>
-<p>Rewrite knowledge required + forbidden to use caugi style with <code>%--&gt;%</code> instead of <code>~</code> (and also <code>%&lt;--%</code>).</p>
+<p>Allow <code>%&lt;--%</code> and <code>%x--%</code> also?</p>
 <p>Automatically scale plot elements to fit the available plot size.</p>
 <div class="section level3">
 <h3 id="manging-exported-functions">Manging exported functions<a class="anchor" aria-label="anchor" href="#manging-exported-functions"></a>
@@ -435,7 +435,6 @@
 <li><p>Make it clear somewhere what/how knowledge is supported in which algorithms. E.g. <code>pc</code> with engine pcalg only works with forbidden edges from knowledge objects and requires specifying both ways. It’s documented in <code>?as_pcalg_constaints</code> but should be more visible. In <code><a href="reference/PcalgSearch.html">?PcalgSearch</a></code> probably?</p></li>
 <li><p>List in documentation of <code>tfci</code>, … what kind of graph it returns.</p></li>
 <li><p>Make vignettes</p></li>
-<li><p>Make all function args be snake_case. Note, that modifying these: <code>fixedGaps</code>, <code>fixedEdges</code>, <code>suffStat</code>, <code>methodOri</code> breaks tests since they are passed to pcalg. But, can you inside functions rename them to what pcalg expects.</p></li>
 </ul>
 </div>
 <div class="section level3">
@@ -464,7 +463,7 @@
 <p>Was removed in this commit <a href="https://github.com/cmu-phil/tetrad/commit/295dceef6b83ac08ff0032fb194cf3ee5e429337#diff-adf829223cc59eac11682310f8a77c0ec3cf26a5b4310d75ec8edfaa86dd285b" class="external-link uri">https://github.com/cmu-phil/tetrad/commit/295dceef6b83ac08ff0032fb194cf3ee5e429337#diff-adf829223cc59eac11682310f8a77c0ec3cf26a5b4310d75ec8edfaa86dd285b</a></p>
 <p><a href="https://github.com/cmu-phil/tetrad/releases" class="external-link">Changelog</a> item 14 says “and a generalization of GFFC (Generalized Find Factor Clusters) of FOFC and FTFC, providing multiple strategies for discovering latent clusterings from measurement data.”</p>
 <p>so we need to implement this in <code>causalDisco</code> (help?)</p>
-<p>This also doesn’t work on 7.6.9</p>
+<p>This also doesn’t work on 7.6.9:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">load_all</span>()</span>
 <span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>ℹ Loading causalDisco</span>
 <span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>causalDisco startup<span class="sc">:</span></span>
@@ -473,9 +472,13 @@
 <span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>  Java successfully initialized with <span class="dv">2</span> GB.</span>
 <span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>  To change heap size, set <span class="fu">options</span>(<span class="at">java.heap.size =</span> <span class="st">'Ng'</span>) or <span class="fu">Sys.setenv</span>(<span class="at">JAVA_HEAP_SIZE =</span> <span class="st">'Ng'</span>) <span class="sc">*</span>before<span class="sc">*</span> loading.</span>
 <span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>  Restart R to apply changes.</span>
-<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="sc">&gt;</span> tetrad_data <span class="ot">&lt;-</span> <span class="fu">rdata_to_tetrad</span>(df)</span>
-<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">rdata_to_tetrad</span>(df) <span class="sc">:</span> </span>
-<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>  java.lang.ClassNotFoundException<span class="sc">:</span> edu<span class="sc">/</span>cmu<span class="sc">/</span>tetrad<span class="sc">/</span>data<span class="sc">/</span>DiscreteVariable</span></code></pre></div>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>  </span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="sc">&gt;</span> var1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">2.3</span>, <span class="fl">3.1</span>, <span class="fl">4.5</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="sc">&gt;</span> var2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.1</span>, <span class="fl">6.2</span>, <span class="fl">7.3</span>, <span class="fl">8.4</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="sc">&gt;</span> df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(var1, var2)</span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a><span class="sc">&gt;</span> tetrad_data <span class="ot">&lt;-</span> <span class="fu">rdata_to_tetrad</span>(df)</span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">rdata_to_tetrad</span>(df) <span class="sc">:</span> </span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a>  java.lang.ClassNotFoundException<span class="sc">:</span> edu<span class="sc">/</span>cmu<span class="sc">/</span>tetrad<span class="sc">/</span>data<span class="sc">/</span>DiscreteVariable</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="cran-todo">CRAN TODO<a class="anchor" aria-label="anchor" href="#cran-todo"></a>
