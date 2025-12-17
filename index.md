@@ -146,51 +146,26 @@ of the nodes.](reference/figures/README-plot-1.png)
 
 ## Questions
 
-- Should we keep the current exogenous/root as it is?
+- `tpc` and `tfci` have default \alpha = 0.05, but the underlying
+  `tpc_run` and `tfci_run` have \alpha = 0.1.
 
-``` r
-kn <- knowledge(
-  data.frame(A = 1, B = 2, C = 3),
-  exogenous(A)
-)
-kn$edges
-#> # A tibble: 2 × 5
-#>   status    from  to    tier_from tier_to
-#>   <chr>     <chr> <chr> <chr>     <chr>  
-#> 1 forbidden B     A     <NA>      <NA>   
-#> 2 forbidden C     A     <NA>      <NA>
-```
-
-- What should plot knowledge do if only some variables have a tier?
-  Currently just made it plot the missing tiers as it’s own tier to the
-  right, but this is misleading?
-
-``` r
-kn <- knowledge(
-  data.frame(A1 = 1, A2 = 2, B1 = 3, B2 = 4, C1 = 5, C2 = 6),
-  tier(
-    first ~ starts_with("A"),
-    second ~ starts_with("B")
-  )
-)
-
-plot(kn)
-```
-
-![](reference/figures/README-knowledge%20plot%20question-1.png)
+- Shouldn’t we just list all possible arguments to `tpc`, `tfci`, and
+  `tges` instead of `...` and forcing the user to look at the underlying
+  `_run` functions? Then also make the `_run` functions not exported?
 
 ## TODO
 
-- Allow `%<--%` and `%x--%` also?
-
 - Automatically scale plot elements to fit the available plot size.
+
+- If only some variables have tier knowledge color the tiers and place
+  the rest somewhere else when plotting.
 
 - Refactor `_run` functions (a lot of copy-paste).
 
-- Currently impossible to set arguments to our `_run` functions through
-  the high-level interface `tpc`, … It’s handled by
-  `check_args_and_distribute_args` which calls
-  `check_args_and_distribute_args_causalDisco`. So fix this…
+- Make required work for our algorithms. It breaks when it internally
+  calls `tpdag`, so look into that…
+
+- Figure out when and why tier knowledge breaks for `tpc`.
 
 ### Manging exported functions
 

@@ -1,5 +1,13 @@
 # Package index
 
+## Overview
+
+Package overview
+
+- [`causalDisco`](https://bjarkehautop.github.io/causalDisco/reference/causalDisco-package.md)
+  [`causalDisco-package`](https://bjarkehautop.github.io/causalDisco/reference/causalDisco-package.md)
+  : Causal Disco package
+
 ## Main User Function
 
 High-level interface for running causal discovery.
@@ -300,9 +308,6 @@ Low-level functions that execute search algorithms.
 
 ## Miscellaneous
 
-- [`causalDisco`](https://bjarkehautop.github.io/causalDisco/reference/causalDisco-package.md)
-  [`causalDisco-package`](https://bjarkehautop.github.io/causalDisco/reference/causalDisco-package.md)
-  : Causal Disco package
 - [`engine_registry`](https://bjarkehautop.github.io/causalDisco/reference/engine_registry.md)
   : Supported engines for causalDisco
 - [`tetrad_graph()`](https://bjarkehautop.github.io/causalDisco/reference/tetrad_graph.md)

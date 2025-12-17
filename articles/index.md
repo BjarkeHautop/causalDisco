@@ -2,4 +2,4 @@
 
 ### All vignettes
 
-- [knowledge](https://bjarkehautop.github.io/causalDisco/articles/knowledge.md):
+- [Knowledge](https://bjarkehautop.github.io/causalDisco/articles/knowledge.md):

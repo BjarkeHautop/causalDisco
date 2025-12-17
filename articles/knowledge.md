@@ -1,4 +1,4 @@
-# knowledge
+# Knowledge
 
 ``` r
 library(causalDisco)
@@ -50,8 +50,7 @@ kn_same <- knowledge(
   )
 )
 
-# Not actually the same object (since kn_almost$vars lists the tiers, and thus says 10, 20, 30. But
-# it functions the same as kn in causal discovery)
+# Not actually the same object, but it is functionally equivalent.
 kn_almost <- knowledge(
   tier(
     10 ~ c(A1, A2),
@@ -161,6 +160,16 @@ plot(disco_cd_tges)
 ![](knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-1.png)
 
 ## Required and forbidden knowledge
+
+We discussed better syntax for `%--x%`. Which of these alternatives are
+best:
+
+- `child_x1 %--x% youth_x3` (current)
+- `!(child_x1 %-->% youth_x3)`
+- `child_x1 %!-->% youth_x3`
+
+Note, that `child_x1 !%-->% youth_x3` is not valid syntax for the R
+passer.
 
 You can specify required and forbidden edges using the `%-->%` and
 `%--x%` operators, respectively. For example, to require an edge from
