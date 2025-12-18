@@ -14,7 +14,7 @@ tfci_run(
   order = NULL,
   alpha = 10^(-1),
   test = reg_test,
-  suffStat = NULL,
+  suff_stat = NULL,
   method = "stable.fast",
   na_method = "none",
   orientation_method = "conservative",
@@ -60,7 +60,7 @@ tfci_run(
   User-supplied functions may also be used; see details for the required
   interface.
 
-- suffStat:
+- suff_stat:
 
   A sufficient statistic. If supplied, it is passed directly to the test
   and no statistics are computed from `data`. Its structure depends on
@@ -95,7 +95,7 @@ tfci_run(
 - varnames:
 
   Character vector of variable names. Only needed when `data` is not
-  supplied and all information is passed via `suffStat`.
+  supplied and all information is passed via `suff_stat`.
 
 - ...:
 

@@ -13,7 +13,7 @@ data; it is used in the causal discovery function tges."><meta property="og:imag
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9016</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9017</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,11 +91,13 @@ the edges does not contradict, the score is equal to that of the standard BDeu.<
 
 
 <div class="sourceCode"><pre><code>
-new("TemporalBdeu",
-  data = matrix(1, 1, 1),
-  order =  rep(1,ncol(data)),
-  iss = 1
-  ...)
+new(
+ "TemporalBdeu",
+ data = matrix(1, 1, 1),
+ order =  rep(1,ncol(data)),
+ iss = 1
+ ...
+)
 </code></pre></div>
 
     </div>

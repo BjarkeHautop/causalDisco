@@ -11,7 +11,7 @@ It allows to set the data, sufficient statistics, test, score, and algorithm."><
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9016</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9017</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,29 +61,29 @@ search object. Can be set with <code>set_data()</code>.</p></dd>
 <dt><code>score</code></dt>
 <dd><p>A function that will be used to build the score,
 when data is set. Can be set with <code>$set_score()</code>. Recognized values
-are:</p><ul><li><p><code>tbic</code> - Temporal BIC score for Gaussian data.
+are:</p><ul><li><p><code>"tbic"</code> - Temporal BIC score for Gaussian data.
 See <code><a href="TemporalBIC-class.html">TemporalBIC</a></code></p></li>
-<li><p><code>tbdeu</code> - Temporal BDeu score for discrete data.
+<li><p><code>"tbdeu"</code> - Temporal BDeu score for discrete data.
 See <code><a href="TemporalBDeu-class.html">TemporalBDeu</a></code>.</p></li>
 </ul></dd>
 
 
 <dt><code>test</code></dt>
 <dd><p>A function that will be used to test independence.
-Can be set with <code>$set_test()</code>. Recognized values are:</p><ul><li><p><code>fisher_z</code> - Fisher Z test for Gaussian data.
+Can be set with <code>$set_test()</code>. Recognized values are:</p><ul><li><p><code>"fisher_z"</code> - Fisher Z test for Gaussian data.
 See <code><a href="cor_test.html">cor_test</a></code>.</p></li>
-<li><p><code>reg</code> - Regression test for discrete or binary data.
+<li><p><code>"reg"</code> - Regression test for discrete or binary data.
 See <code><a href="reg_test.html">reg_test</a></code>.</p></li>
 </ul></dd>
 
 
 <dt><code>alg</code></dt>
 <dd><p>A function that will be used to run the search algorithm.
-Can be set with <code>$set_alg()</code>. Recognized values are:</p><ul><li><p><code>tpc</code>  - TPC algorithm.
+Can be set with <code>$set_alg()</code>. Recognized values are:</p><ul><li><p><code>"tpc"</code>  - TPC algorithm.
 See <code><a href="tpc.html">tpc</a></code>.</p></li>
-<li><p><code>tfci</code> - TFCI algorithm.
+<li><p><code>"tfci"</code> - TFCI algorithm.
 See <code><a href="tfci.html">tfci</a></code>.</p></li>
-<li><p><code>tges</code> - TGES algorithm.
+<li><p><code>"tges"</code> - TGES algorithm.
 See <code><a href="tges.html">tges</a></code>.</p></li>
 </ul></dd>
 
@@ -95,7 +95,7 @@ TODO: not secure yet in terms of distributing arguments.
 Use with caution.</p></dd>
 
 
-<dt><code>suffStat</code></dt>
+<dt><code>suff_stat</code></dt>
 <dd><p>Sufficient statistic. The format and contents of the
 sufficient statistic depends on which test is being used.</p></dd>
 

@@ -43,11 +43,13 @@ All reference classes extend and inherit methods from `envRefClass`.
 
 ## Constructor
 
-    new("TemporalBdeu",
-      data = matrix(1, 1, 1),
-      order =  rep(1,ncol(data)),
-      iss = 1
-      ...)
+    new(
+     "TemporalBdeu",
+     data = matrix(1, 1, 1),
+     order =  rep(1,ncol(data)),
+     iss = 1
+     ...
+    )
 
 ## See also
 

@@ -9,7 +9,7 @@ It allows to set the data, sufficient statistics, test, score, and algorithm."><
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9016</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9017</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,9 +54,9 @@ search object. Can be set with <code>set_data()</code>.</p></dd>
 <dt><code>score</code></dt>
 <dd><p>A function that will be used to build the score,
 when data is set. Can be set with <code>$set_score()</code>. Recognized values
-are:</p><ul><li><p><code>sem_bic</code> - BIC score for Gaussian observed data.
+are:</p><ul><li><p><code>"sem_bic"</code> - BIC score for Gaussian observed data.
 See <code><a href="https://rdrr.io/pkg/pcalg/man/GaussL0penObsScore-class.html" class="external-link">GaussL0penObsScore-class</a></code>.</p></li>
-<li><p><code>sem_bic_int</code> - BIC score for Gaussian data from jointly
+<li><p><code>"sem_bic_int"</code> - BIC score for Gaussian data from jointly
 interventional and observational Gaussian data.
 See <code><a href="https://rdrr.io/pkg/pcalg/man/GaussL0penIntScore-class.html" class="external-link">GaussL0penIntScore-class</a></code>.</p></li>
 </ul></dd>
@@ -64,9 +64,9 @@ See <code><a href="https://rdrr.io/pkg/pcalg/man/GaussL0penIntScore-class.html" 
 
 <dt><code>test</code></dt>
 <dd><p>A function that will be used to test independence.
-Can be set with <code>$set_test()</code>. Recognized values are:</p><ul><li><p><code>fisher_z</code> - Fisher Z test for Gaussian data.
+Can be set with <code>$set_test()</code>. Recognized values are:</p><ul><li><p><code>"fisher_z"</code> - Fisher Z test for Gaussian data.
 See <code><a href="https://rdrr.io/pkg/pcalg/man/condIndFisherZ.html" class="external-link">gaussCItest</a></code>.</p></li>
-<li><p><code>g_square</code> - G square test for discrete data.
+<li><p><code>"g_square"</code> - G square test for discrete data.
 See <code><a href="https://rdrr.io/pkg/pcalg/man/binCItest.html" class="external-link">binCItest</a></code> and
 <code><a href="https://rdrr.io/pkg/pcalg/man/disCItest.html" class="external-link">disCItest</a></code>.</p></li>
 </ul></dd>
@@ -74,9 +74,9 @@ See <code><a href="https://rdrr.io/pkg/pcalg/man/binCItest.html" class="external
 
 <dt><code>alg</code></dt>
 <dd><p>A function that will be used to run the search algorithm.
-Can be set with <code>$set_alg()</code>. Recognized values are:</p><ul><li><p><code>pc</code> - PC algorithm. See <code><a href="https://rdrr.io/pkg/pcalg/man/pc.html" class="external-link">pc</a></code>.</p></li>
-<li><p><code>fci</code> - FCI algorithm. See <code><a href="https://rdrr.io/pkg/pcalg/man/fci.html" class="external-link">fci</a></code>.</p></li>
-<li><p><code>ges</code> - GES algorithm. See <code><a href="https://rdrr.io/pkg/pcalg/man/ges.html" class="external-link">ges</a></code>.</p></li>
+Can be set with <code>$set_alg()</code>. Recognized values are:</p><ul><li><p><code>"pc"</code> - PC algorithm. See <code><a href="https://rdrr.io/pkg/pcalg/man/pc.html" class="external-link">pc</a></code>.</p></li>
+<li><p><code>"fci"</code> - FCI algorithm. See <code><a href="https://rdrr.io/pkg/pcalg/man/fci.html" class="external-link">fci</a></code>.</p></li>
+<li><p><code>"ges"</code> - GES algorithm. See <code><a href="https://rdrr.io/pkg/pcalg/man/ges.html" class="external-link">ges</a></code>.</p></li>
 </ul></dd>
 
 
@@ -86,7 +86,7 @@ Can be set with <code>$set_params()</code>.
 The parameters are passed to the test and algorithm functions.</p></dd>
 
 
-<dt><code>suffStat</code></dt>
+<dt><code>suff_stat</code></dt>
 <dd><p>Sufficient statistic. The format and contents of the
 sufficient statistic depends on which test is being used.</p></dd>
 
@@ -107,7 +107,7 @@ statistic is build for a mixed test.</p></dd>
 <dd><p>A list of fixed constraints for the search algorithm.</p></dd>
 
 
-<dt><code>adaptDF</code></dt>
+<dt><code>adapt_df</code></dt>
 <dd><p>Logical; whether to adapt the degrees of freedom
 for discrete tests.</p></dd>
 

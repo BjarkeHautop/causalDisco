@@ -15,7 +15,7 @@ future release."><meta property="og:image" content="https://bjarkehautop.github.
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9016</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9017</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,7 +60,7 @@ future release.</p>
 <span>  order <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span>
 <span>  test <span class="op">=</span> <span class="va">reg_test</span>,</span>
-<span>  suffStat <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  suff_stat <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"stable.fast"</span>,</span>
 <span>  na_method <span class="op">=</span> <span class="st">"none"</span>,</span>
 <span>  orientation_method <span class="op">=</span> <span class="st">"conservative"</span>,</span>
@@ -107,7 +107,7 @@ uses a regression-based information-loss test. Another available option is
 functions may also be used; see details for the required interface.</p></dd>
 
 
-<dt id="arg-suffstat">suffStat<a class="anchor" aria-label="anchor" href="#arg-suffstat"></a></dt>
+<dt id="arg-suff-stat">suff_stat<a class="anchor" aria-label="anchor" href="#arg-suff-stat"></a></dt>
 <dd><p>A sufficient statistic. If supplied, it is passed directly
 to the test and no statistics are computed from <code>data</code>. Its structure
 depends on the chosen <code>test</code>.</p></dd>
@@ -150,7 +150,7 @@ is due to the fact that <span class="pkg">pcalg</span> does not allow directed e
 <dt id="arg-varnames">varnames<a class="anchor" aria-label="anchor" href="#arg-varnames"></a></dt>
 <dd><p>Character vector of variable names. Only needed when
 <code>data</code> is not supplied and all information is passed via
-<code>suffStat</code>.</p></dd>
+<code>suff_stat</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -172,7 +172,7 @@ a <code>caugi</code> and a <code>knowledge</code> (<code>knowledgeable_caugi</co
 <code><a href="https://rdrr.io/pkg/pcalg/man/pc.html" class="external-link">pc</a></code>. When <code>na_method = "twd"</code>, test-wise deletion is
 performed: for <code>cor_test</code>, each pairwise correlation uses complete cases;
 for <code>reg_test</code>, each conditional test performs its own deletion. If you
-supply a user-defined <code>test</code>, you must also provide <code>suffStat</code>.</p>
+supply a user-defined <code>test</code>, you must also provide <code>suff_stat</code>.</p>
 <p>Temporal or tiered knowledge enters in two places:</p><ul><li><p>during skeleton estimation, candidate conditioning sets are pruned so
 they do not contain variables that are strictly after both endpoints;</p></li>
 <li><p>during orientation, any cross-tier edge is restricted to point

@@ -16,10 +16,10 @@ algorithm.
   A function that will be used to build the score, when data is set. Can
   be set with `$set_score()`. Recognized values are:
 
-  - `sem_bic` - BIC score for Gaussian observed data. See
+  - `"sem_bic"` - BIC score for Gaussian observed data. See
     [`GaussL0penObsScore-class`](https://rdrr.io/pkg/pcalg/man/GaussL0penObsScore-class.html).
 
-  - `sem_bic_int` - BIC score for Gaussian data from jointly
+  - `"sem_bic_int"` - BIC score for Gaussian data from jointly
     interventional and observational Gaussian data. See
     [`GaussL0penIntScore-class`](https://rdrr.io/pkg/pcalg/man/GaussL0penIntScore-class.html).
 
@@ -28,10 +28,10 @@ algorithm.
   A function that will be used to test independence. Can be set with
   `$set_test()`. Recognized values are:
 
-  - `fisher_z` - Fisher Z test for Gaussian data. See
+  - `"fisher_z"` - Fisher Z test for Gaussian data. See
     [`gaussCItest`](https://rdrr.io/pkg/pcalg/man/condIndFisherZ.html).
 
-  - `g_square` - G square test for discrete data. See
+  - `"g_square"` - G square test for discrete data. See
     [`binCItest`](https://rdrr.io/pkg/pcalg/man/binCItest.html) and
     [`disCItest`](https://rdrr.io/pkg/pcalg/man/disCItest.html).
 
@@ -40,13 +40,13 @@ algorithm.
   A function that will be used to run the search algorithm. Can be set
   with `$set_alg()`. Recognized values are:
 
-  - `pc` - PC algorithm. See
+  - `"pc"` - PC algorithm. See
     [`pc`](https://rdrr.io/pkg/pcalg/man/pc.html).
 
-  - `fci` - FCI algorithm. See
+  - `"fci"` - FCI algorithm. See
     [`fci`](https://rdrr.io/pkg/pcalg/man/fci.html).
 
-  - `ges` - GES algorithm. See
+  - `"ges"` - GES algorithm. See
     [`ges`](https://rdrr.io/pkg/pcalg/man/ges.html).
 
 - `params`:
@@ -55,7 +55,7 @@ algorithm.
   `$set_params()`. The parameters are passed to the test and algorithm
   functions.
 
-- `suffStat`:
+- `suff_stat`:
 
   Sufficient statistic. The format and contents of the sufficient
   statistic depends on which test is being used.
@@ -76,7 +76,7 @@ algorithm.
 
   A list of fixed constraints for the search algorithm.
 
-- `adaptDF`:
+- `adapt_df`:
 
   Logical; whether to adapt the degrees of freedom for discrete tests.
 

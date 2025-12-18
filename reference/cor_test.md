@@ -7,24 +7,24 @@ function from the `pcalg` package.
 ## Usage
 
 ``` r
-cor_test(x, y, S, suffStat)
+cor_test(x, y, conditioning_set, suff_stat)
 ```
 
 ## Arguments
 
 - x:
 
-  Index of x variable
+  Index of x variable.
 
 - y:
 
-  Index of y variable
+  Index of y variable.
 
-- S:
+- conditioning_set:
 
-  Index of S variable(s), possibly NULL
+  Index vector of conditioning variable(s), possibly `NULL`.
 
-- suffStat:
+- suff_stat:
 
   Sufficient statistic; list with data, binary variables and order.
 

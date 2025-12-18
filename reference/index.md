@@ -69,7 +69,7 @@ Low-level functions that execute search algorithms.
 - [`tpc_run()`](https://bjarkehautop.github.io/causalDisco/reference/tpc_run.md)
   : Causal Discovery Using the Temporal PC Algorithm (TPC)
 
-## Classes used by algorithms with engine causalDisco
+## Temporal Graph and Score Classes Extending pcalg
 
 - [`TEssGraph-class`](https://bjarkehautop.github.io/causalDisco/reference/TEssGraph-class.md)
   [`TEssGraph`](https://bjarkehautop.github.io/causalDisco/reference/TEssGraph-class.md)
@@ -80,8 +80,6 @@ Low-level functions that execute search algorithms.
 - [`TemporalBDeu-class`](https://bjarkehautop.github.io/causalDisco/reference/TemporalBDeu-class.md)
   [`TemporalBDeu`](https://bjarkehautop.github.io/causalDisco/reference/TemporalBDeu-class.md)
   : Temporal Bayesian Dirichlet equivalent uniform (Score criterion)
-- [`gaus_cor_score()`](https://bjarkehautop.github.io/causalDisco/reference/gaus_cor_score.md)
-  : Gaussian L0 score computed on correlation matrix
 
 ## Test Functions
 
@@ -314,3 +312,5 @@ Low-level functions that execute search algorithms.
   : Build a lightweight S3 wrapper around a Tetrad PAG string
 - [`tpc_example`](https://bjarkehautop.github.io/causalDisco/reference/tpc_example.md)
   : Simulated data example
+- [`gaus_cor_score()`](https://bjarkehautop.github.io/causalDisco/reference/gaus_cor_score.md)
+  : Gaussian L0 score computed on correlation matrix

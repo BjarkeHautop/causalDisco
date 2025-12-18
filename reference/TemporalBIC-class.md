@@ -49,12 +49,14 @@ All reference classes extend and inherit methods from `envRefClass`.
 
 ## Constructor
 
-    new("TemporalBIC",
-      data = matrix(1, 1, 1),
-      order =  rep(1,ncol(data)),
-      lambda = 0.5 * log(nrow(data)),
-      intercept = TRUE,
-      ...)
+    new(
+     "TemporalBIC",
+     data = matrix(1, 1, 1),
+     order =  rep(1,ncol(data)),
+     lambda = 0.5 * log(nrow(data)),
+     intercept = TRUE,
+     ...
+    )
 
 ## See also
 

@@ -21,10 +21,10 @@ algorithm.
   A function that will be used to build the score, when data is set. Can
   be set with `$set_score()`. Recognized values are:
 
-  - `tbic` - Temporal BIC score for Gaussian data. See
+  - `"tbic"` - Temporal BIC score for Gaussian data. See
     [`TemporalBIC`](https://bjarkehautop.github.io/causalDisco/reference/TemporalBIC-class.md)
 
-  - `tbdeu` - Temporal BDeu score for discrete data. See
+  - `"tbdeu"` - Temporal BDeu score for discrete data. See
     [`TemporalBDeu`](https://bjarkehautop.github.io/causalDisco/reference/TemporalBDeu-class.md).
 
 - `test`:
@@ -32,10 +32,10 @@ algorithm.
   A function that will be used to test independence. Can be set with
   `$set_test()`. Recognized values are:
 
-  - `fisher_z` - Fisher Z test for Gaussian data. See
+  - `"fisher_z"` - Fisher Z test for Gaussian data. See
     [`cor_test`](https://bjarkehautop.github.io/causalDisco/reference/cor_test.md).
 
-  - `reg` - Regression test for discrete or binary data. See
+  - `"reg"` - Regression test for discrete or binary data. See
     [`reg_test`](https://bjarkehautop.github.io/causalDisco/reference/reg_test.md).
 
 - `alg`:
@@ -43,13 +43,13 @@ algorithm.
   A function that will be used to run the search algorithm. Can be set
   with `$set_alg()`. Recognized values are:
 
-  - `tpc` - TPC algorithm. See
+  - `"tpc"` - TPC algorithm. See
     [`tpc`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md).
 
-  - `tfci` - TFCI algorithm. See
+  - `"tfci"` - TFCI algorithm. See
     [`tfci`](https://bjarkehautop.github.io/causalDisco/reference/tfci.md).
 
-  - `tges` - TGES algorithm. See
+  - `"tges"` - TGES algorithm. See
     [`tges`](https://bjarkehautop.github.io/causalDisco/reference/tges.md).
 
 - `params`:
@@ -58,7 +58,7 @@ algorithm.
   `$set_params()`. TODO: not secure yet in terms of distributing
   arguments. Use with caution.
 
-- `suffStat`:
+- `suff_stat`:
 
   Sufficient statistic. The format and contents of the sufficient
   statistic depends on which test is being used.
