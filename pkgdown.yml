@@ -3,7 +3,7 @@ pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   knowledge: knowledge.html
-last_built: 2025-12-18T12:15Z
+last_built: 2025-12-21T10:26Z
 urls:
   reference: https://bjarkehautop.github.io/causalDisco/reference
   article: https://bjarkehautop.github.io/causalDisco/articles

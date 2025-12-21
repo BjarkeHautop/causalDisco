@@ -157,7 +157,7 @@ can plot the resulting causal graph.
 plot(disco_cd_tges)
 ```
 
-![](knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-1.png)
+![](knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-1.png)![](knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-2.png)
 
 ## Required and forbidden knowledge
 
@@ -250,7 +250,7 @@ nevertheless.
 plot(output)
 ```
 
-![](knowledge_files/figure-html/plot%20bnlearn-1.png)
+![](knowledge_files/figure-html/plot%20bnlearn-1.png)![](knowledge_files/figure-html/plot%20bnlearn-2.png)
 
 ### causalDisco
 

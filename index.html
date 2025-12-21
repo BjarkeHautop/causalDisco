@@ -167,7 +167,7 @@
 <p>You can visualize the resulting causal graph using the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">disco_cd_tges</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-plot-1.png" alt="A causal graph with the known tiers indicated by vertical positioning of the nodes." width="100%"></p>
+<p><img src="reference/figures/README-plot-1.png" alt="A causal graph with the known tiers indicated by vertical positioning of the nodes." width="100%"><img src="reference/figures/README-plot-2.png" alt="A causal graph with the known tiers indicated by vertical positioning of the nodes." width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="questions">Questions<a class="anchor" aria-label="anchor" href="#questions"></a>
@@ -181,8 +181,12 @@
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
 </h2>
 <ul>
-<li><p>Automatically scale plot elements to fit the available plot size.</p></li>
-<li><p>If only some variables have tier knowledge color the tiers and place the rest somewhere else when plotting.</p></li>
+<li>
+<p>Improve plot</p>
+<ul>
+<li>Add some of the arguments from <code>plot_tempo_mech</code> (such as time_axis, …)</li>
+</ul>
+</li>
 <li><p>Make required work for our algorithms. It breaks when it internally calls <code>tpdag</code>, so look into that…</p></li>
 <li><p>Make score/test/alg names consistent. Currently a mix of snake_case, kebab-case, and period.case.</p></li>
 </ul>

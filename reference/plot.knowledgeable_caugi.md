@@ -22,7 +22,7 @@ plot(x, ...)
 
 - ...:
 
-  Additional arguments passed to igraph `plot`.
+  Additional arguments passed to igraph `plot` and `plot.knowledge`.
 
 ## Value
 
@@ -46,5 +46,6 @@ cd_tges <- tges(engine = "causalDisco", score = "tbic")
 disco_cd_tges <- disco(data = tpc_example, method = cd_tges, knowledge = kn)
 
 plot(disco_cd_tges)
+
 
 ```

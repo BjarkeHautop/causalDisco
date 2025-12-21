@@ -142,7 +142,9 @@ plot(disco_cd_tges)
 ```
 
 ![A causal graph with the known tiers indicated by vertical positioning
-of the nodes.](reference/figures/README-plot-1.png)
+of the nodes.](reference/figures/README-plot-1.png)![A causal graph with
+the known tiers indicated by vertical positioning of the
+nodes.](reference/figures/README-plot-2.png)
 
 ## Questions
 
@@ -155,10 +157,10 @@ of the nodes.](reference/figures/README-plot-1.png)
 
 ## TODO
 
-- Automatically scale plot elements to fit the available plot size.
+- Improve plot
 
-- If only some variables have tier knowledge color the tiers and place
-  the rest somewhere else when plotting.
+  - Add some of the arguments from `plot_tempo_mech` (such as time_axis,
+    …)
 
 - Make required work for our algorithms. It breaks when it internally
   calls `tpdag`, so look into that…
