@@ -87,11 +87,9 @@ data(tpc_example)
 
 kn <- knowledge(
   tpc_example,
-  forbidden(child_x1 ~ youth_x3),
-  forbidden(youth_x3 ~ child_x1)
+  child_x1 %--x% youth_x3,
+  youth_x3 %--x% child_x1
 )
-#> Warning: `forbidden()` is deprecated and will be removed in a future version. Please use the infix operators `%--x%` (forbidden) and `%-->%` (required) instead.
-#> Warning: `forbidden()` is deprecated and will be removed in a future version. Please use the infix operators `%--x%` (forbidden) and `%-->%` (required) instead.
 
 pc_constraints <- as_pcalg_constraints(kn, directed_as_undirected = FALSE)
 print(pc_constraints)
@@ -131,9 +129,8 @@ try(as_pcalg_constraints(kn), silent = TRUE) # fails due to tiers
 # using directed knowledge
 kn <- knowledge(
   tpc_example,
-  forbidden(child_x1 ~ youth_x3)
+  child_x1 %--x% youth_x3
 )
-#> Warning: `forbidden()` is deprecated and will be removed in a future version. Please use the infix operators `%--x%` (forbidden) and `%-->%` (required) instead.
 
 try(as_pcalg_constraints(kn), silent = TRUE) # fails due to directed knowledge
 ```

@@ -69,9 +69,8 @@ kn <- knowledge(
     old ~ starts_with("old")
   ),
   child_x1 %-->% youth_x3,
-  forbidden(oldage_x6 ~ child_x1)
+  oldage_x6 %--x% child_x1
 )
-#> Warning: `forbidden()` is deprecated and will be removed in a future version. Please use the infix operators `%--x%` (forbidden) and `%-->%` (required) instead.
 
 kn <- forbid_tier_violations(kn)
 

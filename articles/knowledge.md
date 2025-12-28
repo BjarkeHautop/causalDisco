@@ -14,76 +14,64 @@ This vignette demonstrates how to use the `knowledge` function to
 incorporate prior knowledge into causal discovery algorithms. The
 different supported knowledge types are explained below, along with
 examples of how to create knowledge objects and use them with causal
-discovery methods. They can of course be combined as needed.
+discovery methods. All knowledge types can be freely combined.
 
-## Tier knowledge
+At a conceptual level, all knowledge is ultimately represented as
+constraints on allowed edges. Some knowledge types provide higher-level
+abstractions for expressing common modeling assumptions more
+conveniently.
 
-We can define tier knowledge to specify temporal or logical ordering
-among variables. For example, consider a dataset with three groups of
-variables: `child`, `youth`, and `old`. We can specify that `child`
-variables precede `youth` variables, which in turn precede `old`
-variables. To do this, we use the `tier` function within `knowledge`.
+## Required and forbidden knowledge
 
-### Creating a tierred knowledge object
+At the most basic level, prior knowledge is expressed as required or
+forbidden edges between variables. These constraints apply to directed
+edges in the causal graph.
 
-A tier knowledge object can be created by specifying tiers and their
-associated variables. If using numeric tiers, lower numbers indicate
-earlier tiers, while otherwise it’s based on the order of appearance.
-Thus, the below specifies different ways to encode the same tier
-knowledge:
+- Required edges specify that a directed edge must exist between two
+  variables.
+- Forbidden edges specify that a directed edge is not allowed between
+  two variables.
+
+These constraints are specified using the %–\>% (required) and %–x%
+(forbidden) operators.
+
+We discussed better syntax for `%--x%`. Which of these alternatives are
+best:
+
+- `child_x1 %--x% youth_x3` (current)
+- `!(child_x1 %-->% youth_x3)`
+- `child_x1 %!-->% youth_x3`
+
+Note, that `child_x1 !%-->% youth_x3` is not valid syntax for the R
+passer.
+
+### Specifying required and forbidden edges
+
+Suppose we want to require an edge from A to B, and forbid an edge from
+B to C:
 
 ``` r
 kn <- knowledge(
-  tier(
-    1 ~ c(A1, A2),
-    2 ~ c(B1, B2),
-    3 ~ c(C1, C2)
-  )
-)
-
-# Same object, since it gets ordered numerically by tier number
-kn_same <- knowledge(
-  tier(
-    1 ~ c(A1, A2),
-    3 ~ c(C1, C2),
-    2 ~ c(B1, B2)
-  )
-)
-
-# Not actually the same object, but it is functionally equivalent.
-kn_almost <- knowledge(
-  tier(
-    10 ~ c(A1, A2),
-    30 ~ c(C1, C2),
-    20 ~ c(B1, B2)
-  )
-)
-
-# Again, not actually the same object, but functions the same.
-kn_also_almost <- knowledge(
-  tier(
-    A ~ c(A1, A2),
-    B ~ c(B1, B2),
-    C ~ c(C1, C2)
-  )
+  A %-->% B,
+  B %--x% C
 )
 ```
 
-We can visualize the tiers using:
+This knowledge object can be visualized:
 
 ``` r
 plot(kn)
 ```
 
-![](knowledge_files/figure-html/plot%20tier%20knowledge-1.png)
+![](knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge-1.png)
 
-The plot then shows the tiers as layers, with the earliest tiers to the
-left and latest to the right.
+The blue solid edge represents the required edge from A to B, while the
+red dashed edge represents the forbidden edge from B to C.
 
-### Using tier knowledge with a dataset
+### Specifying required and forbidden edges in a dataset
 
-Suppose we want to use the `tpc_example` dataset from the causalDisco
-package:
+We will use the `tpc_example` dataset from the causalDisco package for
+the following examples:
 
 ``` r
 data("tpc_example")
@@ -103,82 +91,6 @@ specified variables exist:
 ``` r
 kn <- knowledge(
   tpc_example,
-  tier(
-    child ~ c(child_x1, child_x2),
-    youth ~ c(youth_x3, youth_x4),
-    old ~ c(oldage_x5, oldage_x6)
-  )
-)
-```
-
-#### Simplifying variable selection
-
-To make specifying variables easier, you can use tidyselect helpers such
-as `starts_with`:
-
-``` r
-kn <- knowledge(
-  tpc_example,
-  tier(
-    child ~ starts_with("child"),
-    youth ~ starts_with("youth"),
-    old ~ starts_with("old")
-  )
-)
-```
-
-Note, that you don’t have to specify knowledge for all variables in the
-dataset. Variables not included in any tier are considered unrestricted
-and can have edges to/from any other variable.
-
-We can plot the knowledge to visualize the tiers:
-
-``` r
-plot(kn)
-```
-
-![](knowledge_files/figure-html/plot%20tier%20knowledge%20with%20data-1.png)
-
-### Using tier knowledge with causal discovery
-
-Now that we have defined our knowledge, we can use it with causal
-discovery algorithms such as the temporal GES algorithm `tges` with
-engine `causalDisco` and score temporal BIC (`tbic`):
-
-``` r
-cd_tges <- tges(engine = "causalDisco", score = "tbic")
-disco_cd_tges <- disco(data = tpc_example, method = cd_tges, knowledge = kn)
-```
-
-The causal discovery algorithms respects the provided knowledge, and we
-can plot the resulting causal graph.
-
-``` r
-plot(disco_cd_tges)
-```
-
-![](knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-1.png)![](knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-2.png)
-
-## Required and forbidden knowledge
-
-We discussed better syntax for `%--x%`. Which of these alternatives are
-best:
-
-- `child_x1 %--x% youth_x3` (current)
-- `!(child_x1 %-->% youth_x3)`
-- `child_x1 %!-->% youth_x3`
-
-Note, that `child_x1 !%-->% youth_x3` is not valid syntax for the R
-passer.
-
-You can specify required and forbidden edges using the `%-->%` and
-`%--x%` operators, respectively. For example, to require an edge from
-`child_x1` to `youth_x3` and forbid an edge from `child_x2` to
-`oldage_x5`, you can do:
-
-``` r
-kn <- knowledge(
-  tpc_example,
   child_x1 %-->% youth_x3,
   child_x2 %--x% oldage_x5
 )
@@ -190,13 +102,15 @@ This knowledge object can also be visualized:
 plot(kn)
 ```
 
-![](knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge-1.png)
+![](knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge%20with%20data-1.png)
 
-The blue solid edges represents required edges, while the red dashed
-edges represent forbidden edges.
+The plot then plots all variables in the dataset, with the required
+edges as blue solid edges and forbidden edges as red dashed edges.
 
-Just like tier supported tidyselect helpers, you can also use them for
-specifying required and forbidden edges:
+#### Using tidyselect helpers
+
+To make specifying variables easier, you can use tidyselect helpers such
+as `starts_with`:
 
 ``` r
 kn <- knowledge(
@@ -217,16 +131,156 @@ plot(kn)
 
 ![](knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge%20with%20tidyselect-1.png)
 
-You can then use this knowledge object with causal discovery algorithms
-similarly as before.
+For a list of all available tidyselect helpers we refer to the
+[tidyselect reference
+documentation](https://tidyselect.r-lib.org/reference/index.html).
+
+## Tier knowledge
+
+Tier knowledge provides a higher-level abstraction for expressing
+systematic ordering assumptions, such as temporal or logical precedence.
+Internally, tier knowledge is translated into a collection of forbidden
+edges, but it is exposed separately because it provides a concise and
+structured way to express common ordering assumptions.
+
+For example, consider a dataset with three groups of variables: child,
+youth, and old. We may wish to enforce that child variables precede
+youth variables, which in turn precede old variables. This can be
+expressed using tier knowledge.
+
+Tier knowledge enforces that edges may only point from earlier tiers to
+later tiers. Edges within the same tier are unrestricted unless
+additional knowledge is supplied.
+
+### Creating a tiered knowledge object
+
+A tier knowledge object is created by specifying tiers and their
+associated variables. If numeric tiers are used, lower numbers indicate
+earlier tiers; otherwise, tiers are ordered by their order of
+appearance.
+
+The following specifications encode the same tier structure:
+
+``` r
+kn <- knowledge(
+  tier(
+    1 ~ c(A1, A2),
+    2 ~ c(B1, B2),
+    3 ~ c(C1, C2)
+  )
+)
+
+# Same object, since tiers are ordered numerically
+kn_same <- knowledge(
+  tier(
+    1 ~ c(A1, A2),
+    3 ~ c(C1, C2),
+    2 ~ c(B1, B2)
+  )
+)
+
+# Functionally equivalent, though not identical
+kn_almost <- knowledge(
+  tier(
+    10 ~ c(A1, A2),
+    30 ~ c(C1, C2),
+    20 ~ c(B1, B2)
+  )
+)
+
+# Again functionally equivalent
+kn_also_almost <- knowledge(
+  tier(
+    A ~ c(A1, A2),
+    B ~ c(B1, B2),
+    C ~ c(C1, C2)
+  )
+)
+```
+
+We can visualize the tiers using:
+
+``` r
+plot(kn)
+```
+
+![](knowledge_files/figure-html/plot%20tier%20knowledge-1.png)
+
+The plot then shows the tiers as layers, with the earliest tiers to the
+left and latest to the right.
+
+Tidyselect helpers such as `starts_with` can also be used to define
+tiers in a concise way, just as with required and forbidden edges.
+
+## Exogenous knowledge
+
+Exogenous knowledge specifies that certain variables are exogenous,
+meaning they have no incoming edges in the causal graph. This is
+commonly assumed for variables that are known causes but not effects
+within the context of the analysis. Exogenous knowledge is specified
+using the `exogenous` function within `knowledge`.
+
+### Specifying exogenous variables
+
+The most natural usage is to supply the dataset so that the variables
+are checked for existence and selected correctly:
+
+``` r
+kn <- knowledge(
+  tpc_example,
+  exogenous("child_x1")
+)
+```
+
+Instead of `exogenous`, you can also use the shorthand functions `exo`
+or `root`.
+
+This knowledge object can be visualized:
+
+``` r
+plot(kn)
+```
+
+![](knowledge_files/figure-html/plot%20exogenous%20knowledge-1.png)
+
+## Using knowledge with causal discovery
+
+Once prior knowledge has been specified, it can be supplied to causal
+discovery algorithms. For example, we can use the temporal GES algorithm
+tges with engine “causalDisco” and temporal BIC (“tbic”):
+
+``` r
+kn <- knowledge(
+  tpc_example,
+  tier(
+    1 ~ starts_with("child"),
+    2 ~ starts_with("youth"),
+    3 ~ starts_with("oldage")
+  )
+)
+
+cd_tges <- tges(engine = "causalDisco", score = "tbic")
+disco_cd_tges <- disco(data = tpc_example, method = cd_tges, knowledge = kn)
+```
+
+The causal discovery algorithms respects the provided knowledge. We can
+plot the resulting causal graph:
+
+``` r
+plot(disco_cd_tges)
+```
+
+![](knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-1.png)![](knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-2.png)
+
+The black edges are those inferred from the data.
 
 ## Engine specific information about knowledge
 
 ### bnlearn
 
-Tier, required and forbidden knowledge are all supported with bnlearn
-engines. Note, that you can get a harmless(?) warning from bnlearn when
-using required knowledge.
+All knowledge types are supported with bnlearn engines. Note, that you
+can get a harmless(?) warning from bnlearn when using required
+knowledge.
 
 ``` r
 data("tpc_example")
@@ -259,9 +313,22 @@ knowledge.
 
 ### pcalg
 
-Note, that pcalg only supports forbidden edge knowledge. See
-[`?as_pcalg_constraints`](https://bjarkehautop.github.io/causalDisco/reference/as_pcalg_constraints.md)
-for details.
+Only forbidden knowledge symmetric knowledge is supported for pcalg.
+That is, edges that are forbidden in both directions. Thus, the only
+type of knowledge that can be used with pcalg is knowledge created using
+forbidden edges (`%--x%`) without any directed knowledge or tiers, such
+as this:
+
+``` r
+data("tpc_example")
+kn <- knowledge(
+  tpc_example,
+  child_x1 %--x% youth_x3,
+  youth_x3 %--x% child_x1
+)
+pc_pcalg <- pc(engine = "pcalg", test = "fisher_z", alpha = 0.05)
+output <- disco(data = tpc_example, method = pc_pcalg, knowledge = kn)
+```
 
 ### Tetrad
 

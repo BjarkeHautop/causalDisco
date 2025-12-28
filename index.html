@@ -38,6 +38,7 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="articles/causalDisco.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
@@ -202,6 +203,45 @@
 <h3 id="bugfixes">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes"></a>
 </h3>
 <ul>
+<li>bnlearn engine doesn’t learn undirected edges for pc algorithm?</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1405</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">v</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">*</span><span class="fl">0.5</span></span>
+<span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">*</span><span class="fl">0.5</span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="va">v</span> <span class="op">+</span> <span class="va">w</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">*</span><span class="fl">0.5</span></span>
+<span><span class="va">s</span> <span class="op">&lt;-</span> <span class="va">z</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">*</span><span class="fl">0.5</span></span>
+<span></span>
+<span><span class="va">data_simple</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, v <span class="op">=</span> <span class="va">v</span>, w <span class="op">=</span> <span class="va">w</span>, z <span class="op">=</span> <span class="va">z</span>, s <span class="op">=</span> <span class="va">s</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">data_simple</span><span class="op">)</span></span>
+<span><span class="co">#&gt;            x           v          w          z          s</span></span>
+<span><span class="co">#&gt; 1  0.2724785  0.07687489  1.2131219  1.4542158  0.2649549</span></span>
+<span><span class="co">#&gt; 2  0.3572619  0.81022383  0.4049109  1.5767672  1.5394264</span></span>
+<span><span class="co">#&gt; 3 -0.8616620 -0.68388923 -0.3195188 -1.1415913 -1.2647045</span></span>
+<span><span class="co">#&gt; 4  0.8083350  1.61458098  1.2132504  3.0666677  3.0334703</span></span>
+<span><span class="co">#&gt; 5  0.6127352  0.42484707  0.4253022  0.7889983  0.7937421</span></span>
+<span><span class="co">#&gt; 6 -0.6240686 -0.23225274 -0.7201852 -0.4876655 -0.7977492</span></span>
+<span></span>
+<span><span class="va">pc_method_pcalg</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"pcalg"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="va">pc_method_bnlearn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"bnlearn"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pc_result_pcalg</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span><span class="va">data_simple</span>, method <span class="op">=</span> <span class="va">pc_method_pcalg</span><span class="op">)</span></span>
+<span><span class="va">pc_result_bnlearn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span><span class="va">data_simple</span>, method <span class="op">=</span> <span class="va">pc_method_bnlearn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_pcalg</span><span class="op">$</span><span class="va">caugi</span>, main <span class="op">=</span> <span class="st">"PC (pcalg)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_bnlearn</span><span class="op">$</span><span class="va">caugi</span>, main <span class="op">=</span> <span class="st">"PC (bnlearn)"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-bnlearn%20pc%20undirected%20bug-1.png" alt="" width="100%"></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>It works if calling <code><a href="https://rdrr.io/pkg/bnlearn/man/constraint.html" class="external-link">bnlearn::pc.stable</a></code> directly:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pc_bn</span> <span class="op">&lt;-</span> <span class="fu">bnlearn</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bnlearn/man/constraint.html" class="external-link">pc.stable</a></span><span class="op">(</span><span class="va">data_simple</span>, test <span class="op">=</span> <span class="st">"zf"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_bn</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-bnlearn%20pc%20undirected%20fix-1.png" alt="" width="100%"></p>
+<ul>
 <li>
 <p>All of our algorithm does not work with required edges from knowledge objects (see e.g. <a href="https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tfci.R" class="external-link">unit tests for tfci</a>), <code>tpc</code>, <code>tges</code>, … Currently does nothing. Either make it work or throw error/warning if required edges are given.</p>
 <ul>
@@ -210,7 +250,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vertex_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pp.dat</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="va">vertex</span><span class="op">]</span></span>
 <span><span class="va">req_parents</span> <span class="op">&lt;-</span> <span class="va">kn</span><span class="op">$</span><span class="va">edges</span> <span class="op">|&gt;</span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">status</span> <span class="op">==</span> <span class="st">"required"</span>, <span class="va">to</span> <span class="op">==</span> <span class="va">vertex_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -237,9 +277,51 @@
 </h4>
 <ul>
 <li><p>v7.6.9 of Tetrad seems to fix the memory issues.</p></li>
-<li><p>Tetrad does not use required correctly</p></li>
+<li><p>Tetrad can’t correctly learn DAG using pc algorithm with a collider structure (A -&gt; B &lt;- C):</p></li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1405</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">C</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.8</span><span class="op">*</span><span class="va">A</span> <span class="op">+</span> <span class="fl">0.5</span><span class="op">*</span><span class="va">C</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">data_simple</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span>, <span class="va">C</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Should be easy to learn even for much smaller samples (pcalg and bnlearn get it right even for n = 100)</span></span>
+<span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span>  <span class="va">output_tetrad</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_simple</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span><span class="op">)</span></span>
+<span>  <span class="va">edges_tetrad</span> <span class="op">&lt;-</span> <span class="va">output_tetrad</span><span class="op">$</span><span class="va">caugi</span><span class="op">@</span><span class="va">edges</span></span>
+<span>  <span class="va">edges_tetrad</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt;      from   edge     to</span></span>
+<span><span class="co">#&gt;    &lt;char&gt; &lt;char&gt; &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:      A    ---      B</span></span>
+<span><span class="co">#&gt; 2:      B    ---      C</span></span>
+<span></span>
+<span><span class="co"># Both pcalg and bnlearn get it right:</span></span>
+<span><span class="va">pc_pcalg</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"pcalg"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="va">output_pcalg</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_simple</span>, method <span class="op">=</span> <span class="va">pc_pcalg</span><span class="op">)</span></span>
+<span><span class="va">edges_pcalg</span> <span class="op">&lt;-</span> <span class="va">output_pcalg</span><span class="op">$</span><span class="va">caugi</span><span class="op">@</span><span class="va">edges</span></span>
+<span><span class="va">edges_pcalg</span></span>
+<span><span class="co">#&gt;      from   edge     to</span></span>
+<span><span class="co">#&gt;    &lt;char&gt; &lt;char&gt; &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:      A    --&gt;      B</span></span>
+<span><span class="co">#&gt; 2:      C    --&gt;      B</span></span>
+<span></span>
+<span><span class="va">pc_bnlearn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"bnlearn"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="va">output_bnlearn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_simple</span>, method <span class="op">=</span> <span class="va">pc_bnlearn</span><span class="op">)</span></span>
+<span><span class="va">edges_bnlearn</span> <span class="op">&lt;-</span> <span class="va">output_bnlearn</span><span class="op">$</span><span class="va">caugi</span><span class="op">@</span><span class="va">edges</span></span>
+<span><span class="va">edges_bnlearn</span></span>
+<span><span class="co">#&gt;      from   edge     to</span></span>
+<span><span class="co">#&gt;    &lt;char&gt; &lt;char&gt; &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:      A    --&gt;      B</span></span>
+<span><span class="co">#&gt; 2:      C    --&gt;      B</span></span></code></pre></div>
+<ul>
+<li>Tetrad does not use required correctly</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
@@ -262,7 +344,7 @@
 <span><span class="co">#&gt; 5:  youth_x3    o-&gt; oldage_x5</span></span>
 <span><span class="co">#&gt; 6:  youth_x4    --&gt; oldage_x6</span></span></code></pre></div>
 <p>The required edge is missing. Furthermore, in <code>pc</code> it gives undirected edges between the required edges.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
@@ -288,7 +370,7 @@
 <ul>
 <li>Also gives undirected edges in tier knowledge?</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
@@ -316,7 +398,7 @@
 <span><span class="co">#&gt; 6: oldage_x6    ---  youth_x4</span></span></code></pre></div>
 <p>Added a bunch of <code><a href="https://rdrr.io/r/base/browser.html" class="external-link">browser()</a></code> statements in TetradSearch and the knowledge is correctly passed to Tetrad, so not sure what is going on here.</p>
 <p>Also this:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">||</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
@@ -379,21 +461,21 @@
 <p><a href="https://github.com/cmu-phil/tetrad/releases" class="external-link">Changelog</a> item 14 says “and a generalization of GFFC (Generalized Find Factor Clusters) of FOFC and FTFC, providing multiple strategies for discovering latent clusterings from measurement data.”</p>
 <p>so we need to implement this in <code>causalDisco</code> (help?)</p>
 <p>This also doesn’t work on 7.6.9:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">load_all</span>()</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>ℹ Loading causalDisco</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>causalDisco startup<span class="sc">:</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  Java heap size requested<span class="sc">:</span> <span class="dv">2</span> GB</span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  Tetrad version<span class="sc">:</span> <span class="dv">7</span>.<span class="fl">6.9</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  Java successfully initialized with <span class="dv">2</span> GB.</span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>  To change heap size, set <span class="fu">options</span>(<span class="at">java.heap.size =</span> <span class="st">'Ng'</span>) or <span class="fu">Sys.setenv</span>(<span class="at">JAVA_HEAP_SIZE =</span> <span class="st">'Ng'</span>) <span class="sc">*</span>before<span class="sc">*</span> loading.</span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>  Restart R to apply changes.</span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>  </span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="sc">&gt;</span> var1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">2.3</span>, <span class="fl">3.1</span>, <span class="fl">4.5</span>)</span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="sc">&gt;</span> var2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.1</span>, <span class="fl">6.2</span>, <span class="fl">7.3</span>, <span class="fl">8.4</span>)</span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="sc">&gt;</span> df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(var1, var2)</span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="sc">&gt;</span> tetrad_data <span class="ot">&lt;-</span> <span class="fu">rdata_to_tetrad</span>(df)</span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">rdata_to_tetrad</span>(df) <span class="sc">:</span> </span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>  java.lang.ClassNotFoundException<span class="sc">:</span> edu<span class="sc">/</span>cmu<span class="sc">/</span>tetrad<span class="sc">/</span>data<span class="sc">/</span>DiscreteVariable</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">load_all</span>()</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>ℹ Loading causalDisco</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>causalDisco startup<span class="sc">:</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>  Java heap size requested<span class="sc">:</span> <span class="dv">2</span> GB</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>  Tetrad version<span class="sc">:</span> <span class="dv">7</span>.<span class="fl">6.9</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>  Java successfully initialized with <span class="dv">2</span> GB.</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>  To change heap size, set <span class="fu">options</span>(<span class="at">java.heap.size =</span> <span class="st">'Ng'</span>) or <span class="fu">Sys.setenv</span>(<span class="at">JAVA_HEAP_SIZE =</span> <span class="st">'Ng'</span>) <span class="sc">*</span>before<span class="sc">*</span> loading.</span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>  Restart R to apply changes.</span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>  </span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="sc">&gt;</span> var1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">2.3</span>, <span class="fl">3.1</span>, <span class="fl">4.5</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="sc">&gt;</span> var2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.1</span>, <span class="fl">6.2</span>, <span class="fl">7.3</span>, <span class="fl">8.4</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="sc">&gt;</span> df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(var1, var2)</span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a><span class="sc">&gt;</span> tetrad_data <span class="ot">&lt;-</span> <span class="fu">rdata_to_tetrad</span>(df)</span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">rdata_to_tetrad</span>(df) <span class="sc">:</span> </span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a>  java.lang.ClassNotFoundException<span class="sc">:</span> edu<span class="sc">/</span>cmu<span class="sc">/</span>tetrad<span class="sc">/</span>data<span class="sc">/</span>DiscreteVariable</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="cran-todo">CRAN TODO<a class="anchor" aria-label="anchor" href="#cran-todo"></a>

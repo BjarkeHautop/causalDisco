@@ -35,6 +35,7 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="../articles/causalDisco.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
@@ -82,72 +83,58 @@
 function to incorporate prior knowledge into causal discovery
 algorithms. The different supported knowledge types are explained below,
 along with examples of how to create knowledge objects and use them with
-causal discovery methods. They can of course be combined as needed.</p>
+causal discovery methods. All knowledge types can be freely
+combined.</p>
+<p>At a conceptual level, all knowledge is ultimately represented as
+constraints on allowed edges. Some knowledge types provide higher-level
+abstractions for expressing common modeling assumptions more
+conveniently.</p>
 <div class="section level2">
-<h2 id="tier-knowledge">Tier knowledge<a class="anchor" aria-label="anchor" href="#tier-knowledge"></a>
+<h2 id="required-and-forbidden-knowledge">Required and forbidden knowledge<a class="anchor" aria-label="anchor" href="#required-and-forbidden-knowledge"></a>
 </h2>
-<p>We can define tier knowledge to specify temporal or logical ordering
-among variables. For example, consider a dataset with three groups of
-variables: <code>child</code>, <code>youth</code>, and <code>old</code>.
-We can specify that <code>child</code> variables precede
-<code>youth</code> variables, which in turn precede <code>old</code>
-variables. To do this, we use the <code>tier</code> function within
-<code>knowledge</code>.</p>
+<p>At the most basic level, prior knowledge is expressed as required or
+forbidden edges between variables. These constraints apply to directed
+edges in the causal graph.</p>
+<ul>
+<li>Required edges specify that a directed edge must exist between two
+variables.</li>
+<li>Forbidden edges specify that a directed edge is not allowed between
+two variables.</li>
+</ul>
+<p>These constraints are specified using the %–&gt;% (required) and %–x%
+(forbidden) operators.</p>
+<p>We discussed better syntax for <code>%--x%</code>. Which of these
+alternatives are best:</p>
+<ul>
+<li>
+<code>child_x1 %--x% youth_x3</code> (current)</li>
+<li><code>!(child_x1 %--&gt;% youth_x3)</code></li>
+<li><code>child_x1 %!--&gt;% youth_x3</code></li>
+</ul>
+<p>Note, that <code>child_x1 !%--&gt;% youth_x3</code> is not valid
+syntax for the R passer.</p>
 <div class="section level3">
-<h3 id="creating-a-tierred-knowledge-object">Creating a tierred knowledge object<a class="anchor" aria-label="anchor" href="#creating-a-tierred-knowledge-object"></a>
+<h3 id="specifying-required-and-forbidden-edges">Specifying required and forbidden edges<a class="anchor" aria-label="anchor" href="#specifying-required-and-forbidden-edges"></a>
 </h3>
-<p>A tier knowledge object can be created by specifying tiers and their
-associated variables. If using numeric tiers, lower numbers indicate
-earlier tiers, while otherwise it’s based on the order of appearance.
-Thus, the below specifies different ways to encode the same tier
-knowledge:</p>
+<p>Suppose we want to require an edge from A to B, and forbid an edge
+from B to C:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>  <span class="fu">tier</span><span class="op">(</span></span>
-<span>    <span class="fl">1</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A2</span><span class="op">)</span>,</span>
-<span>    <span class="fl">2</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">B1</span>, <span class="va">B2</span><span class="op">)</span>,</span>
-<span>    <span class="fl">3</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">C1</span>, <span class="va">C2</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Same object, since it gets ordered numerically by tier number</span></span>
-<span><span class="va">kn_same</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>  <span class="fu">tier</span><span class="op">(</span></span>
-<span>    <span class="fl">1</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A2</span><span class="op">)</span>,</span>
-<span>    <span class="fl">3</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">C1</span>, <span class="va">C2</span><span class="op">)</span>,</span>
-<span>    <span class="fl">2</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">B1</span>, <span class="va">B2</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Not actually the same object, but it is functionally equivalent.</span></span>
-<span><span class="va">kn_almost</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>  <span class="fu">tier</span><span class="op">(</span></span>
-<span>    <span class="fl">10</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A2</span><span class="op">)</span>,</span>
-<span>    <span class="fl">30</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">C1</span>, <span class="va">C2</span><span class="op">)</span>,</span>
-<span>    <span class="fl">20</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">B1</span>, <span class="va">B2</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Again, not actually the same object, but functions the same.</span></span>
-<span><span class="va">kn_also_almost</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>  <span class="fu">tier</span><span class="op">(</span></span>
-<span>    <span class="va">A</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A2</span><span class="op">)</span>,</span>
-<span>    <span class="va">B</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">B1</span>, <span class="va">B2</span><span class="op">)</span>,</span>
-<span>    <span class="va">C</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">C1</span>, <span class="va">C2</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
+<span>  <span class="va">A</span> <span class="op">%--&gt;%</span> <span class="va">B</span>,</span>
+<span>  <span class="va">B</span> <span class="op">%--x%</span> <span class="va">C</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>We can visualize the tiers using:</p>
+<p>This knowledge object can be visualized:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
-<p><img src="knowledge_files/figure-html/plot%20tier%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
-<p>The plot then shows the tiers as layers, with the earliest tiers to
-the left and latest to the right.</p>
+<p><img src="knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
+<p>The blue solid edge represents the required edge from A to B, while
+the red dashed edge represents the forbidden edge from B to C.</p>
 </div>
 <div class="section level3">
-<h3 id="using-tier-knowledge-with-a-dataset">Using tier knowledge with a dataset<a class="anchor" aria-label="anchor" href="#using-tier-knowledge-with-a-dataset"></a>
+<h3 id="specifying-required-and-forbidden-edges-in-a-dataset">Specifying required and forbidden edges in a dataset<a class="anchor" aria-label="anchor" href="#specifying-required-and-forbidden-edges-in-a-dataset"></a>
 </h3>
-<p>Suppose we want to use the <code>tpc_example</code> dataset from the
-causalDisco package:</p>
+<p>We will use the <code>tpc_example</code> dataset from the causalDisco
+package for the following examples:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span>
@@ -163,85 +150,21 @@ that the specified variables exist:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">tpc_example</span>,</span>
-<span>  <span class="fu">tier</span><span class="op">(</span></span>
-<span>    <span class="va">child</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">child_x1</span>, <span class="va">child_x2</span><span class="op">)</span>,</span>
-<span>    <span class="va">youth</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">youth_x3</span>, <span class="va">youth_x4</span><span class="op">)</span>,</span>
-<span>    <span class="va">old</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">oldage_x5</span>, <span class="va">oldage_x6</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<div class="section level4">
-<h4 id="simplifying-variable-selection">Simplifying variable selection<a class="anchor" aria-label="anchor" href="#simplifying-variable-selection"></a>
-</h4>
-<p>To make specifying variables easier, you can use tidyselect helpers
-such as <code>starts_with</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>  <span class="va">tpc_example</span>,</span>
-<span>  <span class="fu">tier</span><span class="op">(</span></span>
-<span>    <span class="va">child</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>,</span>
-<span>    <span class="va">youth</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span>
-<span>    <span class="va">old</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"old"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>Note, that you don’t have to specify knowledge for all variables in
-the dataset. Variables not included in any tier are considered
-unrestricted and can have edges to/from any other variable.</p>
-<p>We can plot the knowledge to visualize the tiers:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
-<p><img src="knowledge_files/figure-html/plot%20tier%20knowledge%20with%20data-1.png" class="r-plt" alt="" width="700"></p>
-</div>
-</div>
-<div class="section level3">
-<h3 id="using-tier-knowledge-with-causal-discovery">Using tier knowledge with causal discovery<a class="anchor" aria-label="anchor" href="#using-tier-knowledge-with-causal-discovery"></a>
-</h3>
-<p>Now that we have defined our knowledge, we can use it with causal
-discovery algorithms such as the temporal GES algorithm
-<code>tges</code> with engine <code>causalDisco</code> and score
-temporal BIC (<code>tbic</code>):</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tges.html">tges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, score <span class="op">=</span> <span class="st">"tbic"</span><span class="op">)</span></span>
-<span><span class="va">disco_cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">cd_tges</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
-<p>The causal discovery algorithms respects the provided knowledge, and
-we can plot the resulting causal graph.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">disco_cd_tges</span><span class="op">)</span></span></code></pre></div>
-<p><img src="knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-1.png" class="r-plt" alt="" width="700"><img src="knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-2.png" class="r-plt" alt="" width="700"></p>
-</div>
-</div>
-<div class="section level2">
-<h2 id="required-and-forbidden-knowledge">Required and forbidden knowledge<a class="anchor" aria-label="anchor" href="#required-and-forbidden-knowledge"></a>
-</h2>
-<p>We discussed better syntax for <code>%--x%</code>. Which of these
-alternatives are best:</p>
-<ul>
-<li>
-<code>child_x1 %--x% youth_x3</code> (current)</li>
-<li><code>!(child_x1 %--&gt;% youth_x3)</code></li>
-<li><code>child_x1 %!--&gt;% youth_x3</code></li>
-</ul>
-<p>Note, that <code>child_x1 !%--&gt;% youth_x3</code> is not valid
-syntax for the R passer.</p>
-<p>You can specify required and forbidden edges using the
-<code>%--&gt;%</code> and <code>%--x%</code> operators, respectively.
-For example, to require an edge from <code>child_x1</code> to
-<code>youth_x3</code> and forbid an edge from <code>child_x2</code> to
-<code>oldage_x5</code>, you can do:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>  <span class="va">tpc_example</span>,</span>
 <span>  <span class="va">child_x1</span> <span class="op">%--&gt;%</span> <span class="va">youth_x3</span>,</span>
 <span>  <span class="va">child_x2</span> <span class="op">%--x%</span> <span class="va">oldage_x5</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>This knowledge object can also be visualized:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
-<p><img src="knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
-<p>The blue solid edges represents required edges, while the red dashed
-edges represent forbidden edges.</p>
-<p>Just like tier supported tidyselect helpers, you can also use them
-for specifying required and forbidden edges:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<p><img src="knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge%20with%20data-1.png" class="r-plt" alt="" width="700"></p>
+<p>The plot then plots all variables in the dataset, with the required
+edges as blue solid edges and forbidden edges as red dashed edges.</p>
+<div class="section level4">
+<h4 id="using-tidyselect-helpers">Using tidyselect helpers<a class="anchor" aria-label="anchor" href="#using-tidyselect-helpers"></a>
+</h4>
+<p>To make specifying variables easier, you can use tidyselect helpers
+such as <code>starts_with</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">tpc_example</span>,</span>
 <span>  <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span> <span class="op">%--&gt;%</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span>
@@ -251,11 +174,134 @@ for specifying required and forbidden edges:</p>
 have edges to all variables starting with “youth”, and no variables
 starting with “oldage” can have edges to any variables starting with
 “youth”. We can visualize this:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
 <p><img src="knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge%20with%20tidyselect-1.png" class="r-plt" alt="" width="700"></p>
-<p>You can then use this knowledge object with causal discovery
-algorithms similarly as before.</p>
+<p>For a list of all available tidyselect helpers we refer to the <a href="https://tidyselect.r-lib.org/reference/index.html" class="external-link">tidyselect
+reference documentation</a>.</p>
+</div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="tier-knowledge">Tier knowledge<a class="anchor" aria-label="anchor" href="#tier-knowledge"></a>
+</h2>
+<p>Tier knowledge provides a higher-level abstraction for expressing
+systematic ordering assumptions, such as temporal or logical precedence.
+Internally, tier knowledge is translated into a collection of forbidden
+edges, but it is exposed separately because it provides a concise and
+structured way to express common ordering assumptions.</p>
+<p>For example, consider a dataset with three groups of variables:
+child, youth, and old. We may wish to enforce that child variables
+precede youth variables, which in turn precede old variables. This can
+be expressed using tier knowledge.</p>
+<p>Tier knowledge enforces that edges may only point from earlier tiers
+to later tiers. Edges within the same tier are unrestricted unless
+additional knowledge is supplied.</p>
+<div class="section level3">
+<h3 id="creating-a-tiered-knowledge-object">Creating a tiered knowledge object<a class="anchor" aria-label="anchor" href="#creating-a-tiered-knowledge-object"></a>
+</h3>
+<p>A tier knowledge object is created by specifying tiers and their
+associated variables. If numeric tiers are used, lower numbers indicate
+earlier tiers; otherwise, tiers are ordered by their order of
+appearance.</p>
+<p>The following specifications encode the same tier structure:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>  <span class="fu">tier</span><span class="op">(</span></span>
+<span>    <span class="fl">1</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A2</span><span class="op">)</span>,</span>
+<span>    <span class="fl">2</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">B1</span>, <span class="va">B2</span><span class="op">)</span>,</span>
+<span>    <span class="fl">3</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">C1</span>, <span class="va">C2</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Same object, since tiers are ordered numerically</span></span>
+<span><span class="va">kn_same</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>  <span class="fu">tier</span><span class="op">(</span></span>
+<span>    <span class="fl">1</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A2</span><span class="op">)</span>,</span>
+<span>    <span class="fl">3</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">C1</span>, <span class="va">C2</span><span class="op">)</span>,</span>
+<span>    <span class="fl">2</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">B1</span>, <span class="va">B2</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Functionally equivalent, though not identical</span></span>
+<span><span class="va">kn_almost</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>  <span class="fu">tier</span><span class="op">(</span></span>
+<span>    <span class="fl">10</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A2</span><span class="op">)</span>,</span>
+<span>    <span class="fl">30</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">C1</span>, <span class="va">C2</span><span class="op">)</span>,</span>
+<span>    <span class="fl">20</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">B1</span>, <span class="va">B2</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Again functionally equivalent</span></span>
+<span><span class="va">kn_also_almost</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>  <span class="fu">tier</span><span class="op">(</span></span>
+<span>    <span class="va">A</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A2</span><span class="op">)</span>,</span>
+<span>    <span class="va">B</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">B1</span>, <span class="va">B2</span><span class="op">)</span>,</span>
+<span>    <span class="va">C</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">C1</span>, <span class="va">C2</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>We can visualize the tiers using:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
+<p><img src="knowledge_files/figure-html/plot%20tier%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
+<p>The plot then shows the tiers as layers, with the earliest tiers to
+the left and latest to the right.</p>
+<p>Tidyselect helpers such as <code>starts_with</code> can also be used
+to define tiers in a concise way, just as with required and forbidden
+edges.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="exogenous-knowledge">Exogenous knowledge<a class="anchor" aria-label="anchor" href="#exogenous-knowledge"></a>
+</h2>
+<p>Exogenous knowledge specifies that certain variables are exogenous,
+meaning they have no incoming edges in the causal graph. This is
+commonly assumed for variables that are known causes but not effects
+within the context of the analysis. Exogenous knowledge is specified
+using the <code>exogenous</code> function within
+<code>knowledge</code>.</p>
+<div class="section level3">
+<h3 id="specifying-exogenous-variables">Specifying exogenous variables<a class="anchor" aria-label="anchor" href="#specifying-exogenous-variables"></a>
+</h3>
+<p>The most natural usage is to supply the dataset so that the variables
+are checked for existence and selected correctly:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>  <span class="va">tpc_example</span>,</span>
+<span>  <span class="fu">exogenous</span><span class="op">(</span><span class="st">"child_x1"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Instead of <code>exogenous</code>, you can also use the shorthand
+functions <code>exo</code> or <code>root</code>.</p>
+<p>This knowledge object can be visualized:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
+<p><img src="knowledge_files/figure-html/plot%20exogenous%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="using-knowledge-with-causal-discovery">Using knowledge with causal discovery<a class="anchor" aria-label="anchor" href="#using-knowledge-with-causal-discovery"></a>
+</h2>
+<p>Once prior knowledge has been specified, it can be supplied to causal
+discovery algorithms. For example, we can use the temporal GES algorithm
+tges with engine “causalDisco” and temporal BIC (“tbic”):</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>  <span class="va">tpc_example</span>,</span>
+<span>  <span class="fu">tier</span><span class="op">(</span></span>
+<span>    <span class="fl">1</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>,</span>
+<span>    <span class="fl">2</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span>
+<span>    <span class="fl">3</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"oldage"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tges.html">tges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, score <span class="op">=</span> <span class="st">"tbic"</span><span class="op">)</span></span>
+<span><span class="va">disco_cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">cd_tges</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
+<p>The causal discovery algorithms respects the provided knowledge. We
+can plot the resulting causal graph:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">disco_cd_tges</span><span class="op">)</span></span></code></pre></div>
+<p><img src="knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-1.png" class="r-plt" alt="" width="700"><img src="knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-2.png" class="r-plt" alt="" width="700"></p>
+<p>The black edges are those inferred from the data.</p>
 </div>
 <div class="section level2">
 <h2 id="engine-specific-information-about-knowledge">Engine specific information about knowledge<a class="anchor" aria-label="anchor" href="#engine-specific-information-about-knowledge"></a>
@@ -263,10 +309,10 @@ algorithms similarly as before.</p>
 <div class="section level3">
 <h3 id="bnlearn">bnlearn<a class="anchor" aria-label="anchor" href="#bnlearn"></a>
 </h3>
-<p>Tier, required and forbidden knowledge are all supported with bnlearn
-engines. Note, that you can get a harmless(?) warning from bnlearn when
-using required knowledge.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<p>All knowledge types are supported with bnlearn engines. Note, that
+you can get a harmless(?) warning from bnlearn when using required
+knowledge.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
@@ -281,7 +327,7 @@ using required knowledge.</p>
 <span><span class="co">#&gt; both arcs are oriented in the opposite direction.</span></span></code></pre></div>
 <p>But the resulting causal graph respects the knowledge correctly
 nevertheless.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span></code></pre></div>
 <p><img src="knowledge_files/figure-html/plot%20bnlearn-1.png" class="r-plt" alt="" width="700"><img src="knowledge_files/figure-html/plot%20bnlearn-2.png" class="r-plt" alt="" width="700"></p>
 </div>
@@ -294,8 +340,20 @@ required knowledge.</p>
 <div class="section level3">
 <h3 id="pcalg">pcalg<a class="anchor" aria-label="anchor" href="#pcalg"></a>
 </h3>
-<p>Note, that pcalg only supports forbidden edge knowledge. See
-<code><a href="../reference/as_pcalg_constraints.html">?as_pcalg_constraints</a></code> for details.</p>
+<p>Only forbidden knowledge symmetric knowledge is supported for pcalg.
+That is, edges that are forbidden in both directions. Thus, the only
+type of knowledge that can be used with pcalg is knowledge created using
+forbidden edges (<code>%--x%</code>) without any directed knowledge or
+tiers, such as this:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
+<span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>  <span class="va">tpc_example</span>,</span>
+<span>  <span class="va">child_x1</span> <span class="op">%--x%</span> <span class="va">youth_x3</span>,</span>
+<span>  <span class="va">youth_x3</span> <span class="op">%--x%</span> <span class="va">child_x1</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">pc_pcalg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"pcalg"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">pc_pcalg</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="tetrad">Tetrad<a class="anchor" aria-label="anchor" href="#tetrad"></a>
