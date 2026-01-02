@@ -41,8 +41,8 @@ w <- x + rnorm(n)*0.5
 z <- v + w + rnorm(n)*0.5
 s <- z + rnorm(n)*0.5
 
-data_simple <- data.frame(x = x, v = v, w = w, z = z, s = s)
-head(data_simple)
+data_linear <- data.frame(x = x, v = v, w = w, z = z, s = s)
+head(data_linear)
 #>            x           v          w          z          s
 #> 1  0.2724785  0.07687489  1.2131219  1.4542158  0.2649549
 #> 2  0.3572619  0.81022383  0.4049109  1.5767672  1.5394264
@@ -61,8 +61,8 @@ PC method with Fisher’s Z test and a significance level of 0.05 and
 pc_pcalg <- pc(engine = "pcalg", test = "fisher_z", alpha = 0.05)
 pc_bnlearn <- pc(engine = "bnlearn", test = "fisher_z", alpha = 0.05)
 
-pc_result_pcalg <- disco(data_simple, method = pc_pcalg)
-pc_result_bnlearn <- disco(data_simple, method = pc_bnlearn)
+pc_result_pcalg <- disco(data_linear, method = pc_pcalg)
+pc_result_bnlearn <- disco(data_linear, method = pc_bnlearn)
 ```
 
 We can visualize the results from each engine:
@@ -95,15 +95,15 @@ above and applying the PC algorithm to the new data set:
 set.seed(1405)
 n <- 1000
 v <- rnorm(n)
-x <- x + rnorm(n)*0.5
-w <- x + rnorm(n)*0.5
-z <- v + w + rnorm(n)*0.5
-s <- z + rnorm(n)*0.5
+x <- v + rnorm(n) * 0.5
+w <- x + rnorm(n) * 0.5
+z <- v + w + rnorm(n) * 0.5
+s <- z + rnorm(n) * 0.5
 
-data_simple <- data.frame(x = x, v = v, w = w, z = z, s = s)
+data_linear <- data.frame(x = x, v = v, w = w, z = z, s = s)
 
 pc_pcalg_reversed <- pc(engine = "pcalg", test = "fisher_z", alpha = 0.05)
-pc_result_reversed <- disco(data_simple, method = pc_pcalg_reversed)
+pc_result_reversed <- disco(data_linear, method = pc_pcalg_reversed)
 plot(pc_result_reversed, main = "PC (pcalg) reversed")
 ```
 
@@ -113,6 +113,56 @@ We learn the same causal structure as before, demonstrating that the
 direction of influence between `x` and `w` cannot be determined from the
 data alone.
 
+### Non-linear example
+
+Here, we simulate data the same DAG structure as above, but with
+non-linear relationships between the variables.
+
+``` r
+set.seed(1405)
+n <- 1000
+x <- runif(n, min = 0, max = 2*pi)
+v <- sin(x) + rnorm(n) * 0.25
+w <- cos(x) + rnorm(n) * 0.25
+z <- 3 * v^2 - w + rnorm(n) * 0.25 
+s <- z^2 + rnorm(n) * 0.25
+
+data_nonlinear <- data.frame(x = x, v = v, w = w, z = z, s = s)
+```
+
+Here we try to use the PC algorithm with Fisher’s Z test again, but this
+time it will not perform well due to the non-linear relationships in the
+data.
+
+``` r
+pc_pcalg_nonlinear <- pc(engine = "pcalg", test = "fisher_z", alpha = 0.05)
+pc_result_nonlinear <- disco(data_nonlinear, method = pc_pcalg_nonlinear)
+plot(pc_result_nonlinear, main = "PC (pcalg) non-linear")
+```
+
+![](causalDisco_files/figure-html/pc%20algorithm%20non-linear-1.png)
+
+As expected, the PC algorithm with Fisher’s Z test does not recover the
+correct causal structure in this non-linear setting. To handle
+non-linear relationships, we can for instance use the Kernel Conditional
+Independence Test (KCI) in Tetrad.
+
+``` r
+if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
+  pc_bnlearn_nonlinear <- pc(engine = "tetrad", test = "kci")
+  pc_result_nonlinear_mi <- disco(data_nonlinear, method = pc_bnlearn_nonlinear)
+  plot(pc_result_nonlinear_mi, main = "PC (Tetrad KCI) non-linear")
+}
+```
+
+The result of the PC algorithm using the KCI test again look like what
+we’d expect to see. Note, that this test is much more demanding than
+using Fisher’s Z test.
+
 ## Incorporating prior knowledge
+
+As the dimensional grows the problem of finding the corresponding graph
+given observational data becomes exponentially harder. Thus, if there is
+any prior information available, this can help make the problem easier.
 
 To be continued…

@@ -180,59 +180,7 @@ nodes.](reference/figures/README-plot-2.png)
 
 ### Bugfixes
 
-- bnlearn engine doesn’t learn undirected edges for pc algorithm?
-
-``` r
-set.seed(1405)
-n <- 1000
-x <- rnorm(n)
-v <- x + rnorm(n)*0.5
-w <- x + rnorm(n)*0.5
-z <- v + w + rnorm(n)*0.5
-s <- z + rnorm(n)*0.5
-
-data_simple <- data.frame(x = x, v = v, w = w, z = z, s = s)
-head(data_simple)
-#>            x           v          w          z          s
-#> 1  0.2724785  0.07687489  1.2131219  1.4542158  0.2649549
-#> 2  0.3572619  0.81022383  0.4049109  1.5767672  1.5394264
-#> 3 -0.8616620 -0.68388923 -0.3195188 -1.1415913 -1.2647045
-#> 4  0.8083350  1.61458098  1.2132504  3.0666677  3.0334703
-#> 5  0.6127352  0.42484707  0.4253022  0.7889983  0.7937421
-#> 6 -0.6240686 -0.23225274 -0.7201852 -0.4876655 -0.7977492
-
-pc_method_pcalg <- pc(engine = "pcalg", test = "fisher_z", alpha = 0.05)
-pc_method_bnlearn <- pc(engine = "bnlearn", test = "fisher_z", alpha = 0.05)
-
-pc_result_pcalg <- disco(data_simple, method = pc_method_pcalg)
-pc_result_bnlearn <- disco(data_simple, method = pc_method_bnlearn)
-
-par(mfrow = c(1, 2))
-plot(pc_result_pcalg$caugi, main = "PC (pcalg)")
-plot(pc_result_bnlearn$caugi, main = "PC (bnlearn)")
-```
-
-![](reference/figures/README-bnlearn%20pc%20undirected%20bug-1.png)
-
-``` r
-par(mfrow = c(1, 1))
-```
-
-It works if calling
-[`bnlearn::pc.stable`](https://rdrr.io/pkg/bnlearn/man/constraint.html)
-directly:
-
-``` r
-pc_bn <- bnlearn::pc.stable(data_simple, test = "zf", alpha = 0.05)
-plot(pc_bn)
-```
-
-![](reference/figures/README-bnlearn%20pc%20undirected%20fix-1.png)
-
-Problem is
-[`knowledgeable_caugi()`](https://bjarkehautop.github.io/causalDisco/reference/knowledgeable_caugi.md)
-incorrectly converts the `bnlearn` object to `caugi` object, losing the
-undirected edges. Fixed in PR \#149 in caugi.
+- bnlearn has bug for old version of caugi. Fixed in PR \#149 in caugi.
 
 - All of our algorithm does not work with required edges from knowledge
   objects (see e.g. [unit tests for
@@ -330,6 +278,45 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
 #> 6:  youth_x4    --> oldage_x6
 ```
 
+- Non-working Tetrad test/score arguments `"cci"`, `"probalistic"`, and
+  `"mixed_variable_polynomial"`:
+
+``` r
+if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
+  data("tpc_example")
+
+  tetrad_pc <- pc(engine = "tetrad", test = "cci", alpha = 0.05)
+  output <- disco(data = tpc_example, method = tetrad_pc)
+  
+  tetrad_pc <- pc(engine = "tetrad", test = "probabilistic")
+  output <- disco(data = tpc_example, method = tetrad_pc)
+}
+#> Error in `.jcall()`:
+#> ! java.lang.RuntimeException: Unrecognized basis type: 4
+```
+
+``` r
+if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
+  data("tpc_example")
+  
+  tetrad_pc <- pc(engine = "tetrad", test = "probabilistic")
+  output <- disco(data = tpc_example, method = tetrad_pc)
+}
+#> Error in `private$use_probabilistic_test()`:
+#> ! unused argument (alpha = 0.05)
+```
+
+``` r
+if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
+  data("tpc_example")
+  
+  tetrad_ges <- ges(engine = "tetrad", score = "mixed_variable_polynomial")
+  output <- disco(data = tpc_example, method = tetrad_pc)
+}
+#> Error in `private$use_probabilistic_test()`:
+#> ! unused argument (alpha = 0.05)
+```
+
 ### Documentation
 
 - Make it clear in
@@ -397,6 +384,10 @@ causalDisco startup:
 Error in rdata_to_tetrad(df) : 
   java.lang.ClassNotFoundException: edu/cmu/tetrad/data/DiscreteVariable
 ```
+
+KCI test from Tetrad in pc algorithm gives wrong graph in getting
+started vignette (non-linear data) when version is 7.6.9? Works
+correctly in 7.6.8.
 
 ### CRAN TODO
 
