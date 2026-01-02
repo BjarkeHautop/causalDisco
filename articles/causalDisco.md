@@ -77,7 +77,9 @@ plot(pc_result_bnlearn, main = "PC (bnlearn)")
 par(mfrow = c(1, 1))
 ```
 
-(Ignore that PC bnlearn doesn’t work correctly for now)
+(Note, that it doesn’t work correctly for bnlearn, since `as_caugi` in
+caugi had a bug. I fixed it in PR \#149, so it will work in the next
+release of caugi.)
 
 The first notable feature of this plot is that some edges have arrows,
 while others do not. For instance, the edge from `v` to `z` is directed,
@@ -146,7 +148,7 @@ non-linear relationships, we can for instance use the Kernel Conditional
 Independence Test (KCI) in Tetrad.
 
 ``` r
-if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
+if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
   pc_bnlearn_nonlinear <- pc(engine = "tetrad", test = "kci")
   pc_result_nonlinear_mi <- disco(data_nonlinear, method = pc_bnlearn_nonlinear)
   plot(pc_result_nonlinear_mi, main = "PC (Tetrad KCI) non-linear")

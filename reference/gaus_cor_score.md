@@ -102,22 +102,22 @@ pcalg::ges(gaus_cor_score(cmat, n = 100))
 #> $local.score
 #> function (vertex, parents) 
 #> local.score(vertex, parents)
-#> <environment: 0x5618be9d5cc8>
+#> <environment: 0x556dacf86448>
 #> 
 #> $global.score
 #> function (edges) 
 #> global.score(vertex, parents)
-#> <environment: 0x5618be9d5cc8>
+#> <environment: 0x556dacf86448>
 #> 
 #> $local.fit
 #> function (vertex, parents) 
 #> local.fit(vertex, parents)
-#> <environment: 0x5618be9d5cc8>
+#> <environment: 0x556dacf86448>
 #> 
 #> $global.fit
 #> function (edges) 
 #> global.fit(vertex, parents)
-#> <environment: 0x5618be9d5cc8>
+#> <environment: 0x556dacf86448>
 #> 
 #> $lambda
 #> [1] 2.302585
