@@ -52,10 +52,6 @@ placement of a tail (0).
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-#############################################################################
-# Compare two adjacency matrices ############################################
-#############################################################################
 x1 <- matrix(c(
   0, 0, 0, 0,
   1, 0, 1, 0,
@@ -68,11 +64,37 @@ x2 <- matrix(c(
   0, 0, 0, 0,
   1, 0, 1, 0
 ), 4, 4, byrow = TRUE)
+nodes <- c("A", "B", "C", "D")
+rownames(x1) <- colnames(x1) <- nodes
+rownames(x2) <- colnames(x2) <- nodes
 
 # confusion matrix for adjacencies
 confusion(x2, x1)
+#> $tp
+#> [1] 3
+#> 
+#> $tn
+#> [1] 1
+#> 
+#> $fp
+#> [1] 1
+#> 
+#> $fn
+#> [1] 1
+#> 
 
 # confusion matrix for conditional orientations
 confusion(x2, x1, type = "dir")
-} # }
+#> $tp
+#> [1] 2
+#> 
+#> $tn
+#> [1] 2
+#> 
+#> $fp
+#> [1] 1
+#> 
+#> $fn
+#> [1] 1
+#> 
 ```

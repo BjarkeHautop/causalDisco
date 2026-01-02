@@ -44,9 +44,9 @@ An adjacency matrix.
 # Simulate a DAG adjacency matrix with 5 nodes and sparsity 0.5
 sim_dag(5, sparsity = 0.5)
 #>    x1 x2 x3 x4 x5
-#> x1  0  1  1  0  0
-#> x2  0  0  0  0  0
+#> x1  0  0  0  0  0
+#> x2  0  0  1  1  0
 #> x3  0  0  0  0  0
-#> x4  0  1  1  0  0
-#> x5  0  0  0  1  0
+#> x4  1  0  1  0  0
+#> x5  0  0  1  0  0
 ```

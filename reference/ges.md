@@ -51,26 +51,40 @@ each engine, see:
 ## Examples
 
 ``` r
-### ges() example ###
-if (FALSE) { # \dontrun{
 data("tpc_example")
 
-kn <- knowledge(
-  tpc_example,
-  tier(
-    child ~ tidyselect::starts_with("child"),
-    youth ~ tidyselect::starts_with("youth"),
-    oldage ~ tidyselect::starts_with("oldage")
-  )
-)
-
+#### Using pcalg engine ####
 # Recommended path using disco()
-my_ges <- ges(engine = "tetrad", score = "sem_bic")
+ges_pcalg <- ges(engine = "pcalg", score = "sem_bic")
+disco(tpc_example, ges_pcalg)
+#> 
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
 
-disco(tpc_example, my_ges, knowledge = kn)
+# or using ges_pcalg directly
+ges_pcalg(tpc_example)
+#> 
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
 
-# or using my_ges directly
-my_ges <- my_ges |> set_knowledge(kn)
-my_ges(tpc_example)
-} # }
+#### Using tetrad engine with tier knowledge ####
+# Requires Tetrad to be installed
+if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
+  kn <- knowledge(
+    tpc_example,
+    tier(
+      child ~ tidyselect::starts_with("child"),
+      youth ~ tidyselect::starts_with("youth"),
+      oldage ~ tidyselect::starts_with("oldage")
+    )
+  )
+
+  # Recommended path using disco()
+  ges_tetrad <- ges(engine = "tetrad", score = "sem_bic")
+  disco(tpc_example, ges_tetrad, knowledge = kn)
+
+  # or using ges_tetrad directly
+  ges_tetrad <- ges_tetrad |> set_knowledge(kn)
+  ges_tetrad(tpc_example)
+}
 ```

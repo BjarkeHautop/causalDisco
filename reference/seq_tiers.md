@@ -68,7 +68,7 @@ data(tpc_example)
 formulas <- seq_tiers(1:2, matches("^child_x{i}$"))
 
 # you can pass this bundle directly to tier() inside knowledge()
-kn <- knowledge(head(tpc_example), tier(formulas))
+kn <- knowledge(tpc_example, tier(formulas))
 #> Error in eval(expr, envir = environment()): object 'formulas' not found
 print(kn)
 #> Error: object 'kn' not found

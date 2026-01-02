@@ -153,7 +153,7 @@ Low-level functions that execute search algorithms.
 - [`tplot()`](https://bjarkehautop.github.io/causalDisco/reference/tplot.md)
   : Plot temporal graph via Latex
 
-- [`maketikz()`](https://bjarkehautop.github.io/causalDisco/reference/maketikz.md)
+- [`make_tikz()`](https://bjarkehautop.github.io/causalDisco/reference/make_tikz.md)
   : Generate Latex tikz code for plotting a temporal DAG, PDAG or PAG.
 
 ## Printing

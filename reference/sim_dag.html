@@ -11,7 +11,7 @@ that are absent, relative to a fully connected DAG."><meta property="og:image" c
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9019</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9020</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,11 +88,11 @@ in which case the node order is permuted randomly.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Simulate a DAG adjacency matrix with 5 nodes and sparsity 0.5</span></span></span>
 <span class="r-in"><span><span class="fu">sim_dag</span><span class="op">(</span><span class="fl">5</span>, sparsity <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    x1 x2 x3 x4 x5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x1  0  1  1  0  0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x2  0  0  0  0  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x1  0  0  0  0  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x2  0  0  1  1  0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> x3  0  0  0  0  0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x4  0  1  1  0  0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x5  0  0  0  1  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x4  1  0  1  0  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x5  0  0  1  0  0</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

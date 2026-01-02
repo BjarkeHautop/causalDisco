@@ -25,9 +25,7 @@ CausalDiscovery.jl](https://mschauer.github.io/CausalInference.jl/latest/example
 We will consider data from the following DAG, which is also discussed in
 chapter 2 of Judea Pearl’s book.
 
-![DAG example](dag.png)
-
-DAG example
+![](dag.png)
 
 We create data from a linear Gaussian model corresponding to the above
 DAG:
@@ -36,10 +34,10 @@ DAG:
 set.seed(1405)
 n <- 1000
 x <- rnorm(n)
-v <- x + rnorm(n)*0.5
-w <- x + rnorm(n)*0.5
-z <- v + w + rnorm(n)*0.5
-s <- z + rnorm(n)*0.5
+v <- x + rnorm(n) * 0.5
+w <- x + rnorm(n) * 0.5
+z <- v + w + rnorm(n) * 0.5
+s <- z + rnorm(n) * 0.5
 
 data_linear <- data.frame(x = x, v = v, w = w, z = z, s = s)
 head(data_linear)
@@ -121,10 +119,10 @@ non-linear relationships between the variables.
 ``` r
 set.seed(1405)
 n <- 1000
-x <- runif(n, min = 0, max = 2*pi)
+x <- runif(n, min = 0, max = 2 * pi)
 v <- sin(x) + rnorm(n) * 0.25
 w <- cos(x) + rnorm(n) * 0.25
-z <- 3 * v^2 - w + rnorm(n) * 0.25 
+z <- 3 * v^2 - w + rnorm(n) * 0.25
 s <- z^2 + rnorm(n) * 0.25
 
 data_nonlinear <- data.frame(x = x, v = v, w = w, z = z, s = s)
@@ -155,9 +153,7 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
 }
 ```
 
-![Graph output](nonlinear-tetrad-kci.png)
-
-Graph output
+![](nonlinear-tetrad-kci.png)
 
 The result of the PC algorithm using the KCI test look like what we’d
 expect to see. Note, that this test is much more demanding than using

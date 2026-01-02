@@ -28,6 +28,7 @@
   - `simDAG` to `sim_dag`
   - `gausCorScore` to `gaus_cor_score`
   - `plotTempoMech` to `plot_tempo_mech`
+  - `maketikz` to `make_tikz`
 
 - All R6 classes have been renamed to **CamelCase**:
 

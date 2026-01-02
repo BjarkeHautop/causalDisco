@@ -49,7 +49,7 @@ tplot(
 - ...:
 
   Additional argument passed to
-  [`maketikz`](https://bjarkehautop.github.io/causalDisco/reference/maketikz.md).
+  [`make_tikz`](https://bjarkehautop.github.io/causalDisco/reference/make_tikz.md).
 
 ## Details
 
