@@ -155,9 +155,13 @@ if (check_tetrad_install()$installed || check_tetrad_install()$java_ok) {
 }
 ```
 
-The result of the PC algorithm using the KCI test again look like what
-we’d expect to see. Note, that this test is much more demanding than
-using Fisher’s Z test.
+![Graph output](nonlinear-tetrad-kci.png)
+
+Graph output
+
+The result of the PC algorithm using the KCI test look like what we’d
+expect to see. Note, that this test is much more demanding than using
+Fisher’s Z test.
 
 ## Incorporating prior knowledge
 
