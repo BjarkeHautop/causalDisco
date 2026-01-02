@@ -176,6 +176,7 @@
 <ul>
 <li><p><code>tpc</code> and <code>tfci</code> have default <span class="math inline">\alpha = 0.05</span>, but the underlying <code>tpc_run</code> and <code>tfci_run</code> have <span class="math inline">\alpha = 0.1</span>.</p></li>
 <li><p>Shouldn’t we just list all possible arguments to <code>tpc</code>, <code>tfci</code>, and <code>tges</code> instead of <code>...</code> and forcing the user to look at the underlying <code>_run</code> functions? Then also make the <code>_run</code> functions not exported?</p></li>
+<li><p>What I wrote in Tetrad FCI required under Tetrad issues - discuss?</p></li>
 </ul>
 </div>
 <div class="section level2">
@@ -263,7 +264,8 @@
 <span><span class="co">#&gt; 4: oldage_x5    --&gt; oldage_x6</span></span>
 <span><span class="co">#&gt; 5:  youth_x3    o-&gt; oldage_x5</span></span>
 <span><span class="co">#&gt; 6:  youth_x4    --&gt; oldage_x6</span></span></code></pre></div>
-<p>The required edge is missing.</p>
+<p>The required edge is missing. This is maybe not a bug? Tetrad behaves the same way. Found this paper: <a href="https://proceedings.mlr.press/v108/andrews20a/andrews20a.pdf" class="external-link">On the Completeness of Causal Discovery in the Presence of Latent Confounding with Tiered Background Knowledge</a> where it says “In fact, it is straightforward to show that FCI is not complete with background knowledge that specifies one variable as the cause of another.” and continues with an example illustrating why.</p>
+<p>Should we add some warning about this in the documentation and if user tries to do it?</p>
 <ul>
 <li>Non-working Tetrad test/score arguments <code>"cci"</code> and <code>"mixed_variable_polynomial"</code>:</li>
 </ul>
