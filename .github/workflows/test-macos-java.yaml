@@ -24,6 +24,6 @@ jobs:
           cat("\nJAVA_HOME =", Sys.getenv("JAVA_HOME"), "\n")
           system2("java", "-version", stdout=TRUE, stderr=TRUE)
           source("R/install_tetrad.R")
-          install_tetrad()
-          check_tetrad_install()
+          install_tetrad(version = "7.6.8")
+          check_tetrad_install(version = "7.6.8")
           '
