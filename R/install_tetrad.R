@@ -178,7 +178,7 @@ check_tetrad_install <- function(
 #' }
 #' @export
 install_tetrad <- function(
-  version = getOption("causalDisco.tetrad.version"),
+  version = "7.6.8",
   dir = NULL,
   set_renviron = TRUE,
   force = FALSE
