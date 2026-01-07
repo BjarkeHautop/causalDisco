@@ -150,9 +150,9 @@ Conditional Independence Test (KCI) in Tetrad.
 
 ``` r
 if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
-  pc_bnlearn_nonlinear <- pc(engine = "tetrad", test = "kci")
-  pc_result_nonlinear_mi <- disco(data_nonlinear, method = pc_bnlearn_nonlinear)
-  plot(pc_result_nonlinear_mi, main = "PC (Tetrad KCI) non-linear")
+  pc_tetrad_nonlinear <- pc(engine = "tetrad", test = "kci")
+  pc_result_nonlinear_kci <- disco(data_nonlinear, method = pc_tetrad_nonlinear)
+  plot(pc_result_nonlinear_kci, main = "PC (Tetrad KCI) non-linear")
 }
 ```
 
@@ -192,8 +192,8 @@ plot(pc_result_with_knowledge$caugi)
 
 ![](causalDisco_files/figure-html/pc%20algorithm%20with%20knowledge-1.png)
 
-It now correctly recovers the true DAG structure, since it couldn’t
-decide from the data alone whether `x` causes `w` and `v` or vice versa.
+It now correctly recovers the true DAG structure with this extra
+knowledge.
 
 For more information about how to incorporate knowledge, see the
 [knowledge

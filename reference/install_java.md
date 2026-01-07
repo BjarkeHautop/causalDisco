@@ -32,7 +32,7 @@ install_java(force = FALSE)
 - force:
 
   Logical; if `TRUE`, forces reinstallation even if the JDK is already
-  present.
+  present. Default is `FALSE`.
 
 ## Examples
 
