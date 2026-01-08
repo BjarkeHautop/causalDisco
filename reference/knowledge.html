@@ -23,7 +23,7 @@ exogenous(V1, V2)
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9021</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9022</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@ extended with variable relationships expressed via formulas, selectors, or infix
 <span><span class="fu">required</span><span class="op">(</span><span class="va">V1</span> <span class="op">~</span> <span class="va">V2</span><span class="op">)</span></span>
 <span><span class="va">V1</span> <span class="op">%--&gt;%</span> <span class="va">V3</span>    <span class="co"># infix syntax for required edges</span></span>
 <span><span class="va">V2</span> <span class="op">%--x%</span> <span class="va">V3</span>    <span class="co"># infix syntax for forbidden edges</span></span>
-<span><span class="fu">exogenous</span><span class="op">(</span><span class="va">V1</span>, <span class="va">V2</span><span class="op">)</span></span></code></pre><p></p></div>
+<span><span class="fu"><a href="https://caugi.org/reference/exogenous.html" class="external-link">exogenous</a></span><span class="op">(</span><span class="va">V1</span>, <span class="va">V2</span><span class="op">)</span></span></code></pre><p></p></div>
     </div>
 
     <div class="section level2">
@@ -77,10 +77,10 @@ extended with variable relationships expressed via formulas, selectors, or infix
 <dd><p>Arguments to define the knowledge object:</p><ul><li><p>Optionally, a single data frame (first argument) whose column names
 initialize and freeze the variable set.</p></li>
 <li><p>Zero or more mini-DSL calls:
-<code>tier()</code>, <code>forbidden()</code>, <code>required()</code>, <code>exogenous()</code>, <code>exo()</code>, <code>root()</code>,
+<code>tier()</code>, <code>forbidden()</code>, <code>required()</code>, <code><a href="https://caugi.org/reference/exogenous.html" class="external-link">exogenous()</a></code>, <code>exo()</code>, <code>root()</code>,
 or infix operators <code>%--&gt;%</code> and <code>%--x%</code>.</p><ul><li><p><code>tier()</code>: One or more two-sided formulas (<code>tier(1 ~ x + y)</code>), or a numeric vector.</p></li>
 <li><p><code>forbidden()</code> / <code>required()</code>: One or more two-sided formulas (<code>from ~ to</code>).</p></li>
-<li><p><code>exogenous()</code> / <code>exo()</code> / <code>root()</code>: Variable names or tidyselect selectors.
+<li><p><code><a href="https://caugi.org/reference/exogenous.html" class="external-link">exogenous()</a></code> / <code>exo()</code> / <code>root()</code>: Variable names or tidyselect selectors.
 Arguments are evaluated in order; only these calls are allowed.</p></li>
 </ul></li>
 </ul></dd>
@@ -93,7 +93,7 @@ Arguments are evaluated in order; only these calls are allowed.</p></li>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Create a <code>knowledge</code> object using a concise mini-DSL with <code>tier()</code>, <code>forbidden()</code>,
-<code>required()</code>, <code>exogenous()</code> and infix edge operators <code>%--&gt;%</code> and <code>%--x%</code>.</p>
+<code>required()</code>, <code><a href="https://caugi.org/reference/exogenous.html" class="external-link">exogenous()</a></code> and infix edge operators <code>%--&gt;%</code> and <code>%--x%</code>.</p>
 <p>The first argument can be a data frame, which will be used to populate the
 <code>knowledge</code> object with variable names. If you later add variables with
 add_* verbs, this will throw a warning, since the knowledge object will
@@ -108,7 +108,7 @@ specifies variables. Variables can also be selected using <strong>tidyselect</st
 LHS is the source, RHS is the target. Both sides support tidyselect syntax.</p></li>
 <li><p><code>%--&gt;%</code> and <code>%--x%</code>: Infix alternatives for <code>required()</code> and <code>forbidden()</code>.
 Example: <code>V1 %--&gt;% V3</code> is equivalent to <code>required(V1 ~ V3)</code>.</p></li>
-<li><p><code>exogenous()</code> / <code>exo()</code> / <code>root()</code>: Mark variables as exogenous (root nodes).</p></li>
+<li><p><code><a href="https://caugi.org/reference/exogenous.html" class="external-link">exogenous()</a></code> / <code>exo()</code> / <code>root()</code>: Mark variables as exogenous (root nodes).</p></li>
 <li><p>Numeric vector shortcut for <code>tier()</code>:
 <code>tier(c(1, 2, 1))</code> assigns tiers by index to all existing variables.</p></li>
 </ul></div>
@@ -213,7 +213,7 @@ Example: <code>V1 %--&gt;% V3</code> is equivalent to <code>required(V1 ~ V3)</c
 <span class="r-in"><span><span class="co"># You can also add exogenous variables</span></span></span>
 <span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu">knowledge</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">df</span>,</span></span>
-<span class="r-in"><span>  <span class="fu">exogenous</span><span class="op">(</span><span class="va">child_x1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://caugi.org/reference/exogenous.html" class="external-link">exogenous</a></span><span class="op">(</span><span class="va">child_x1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  <span class="fu">exo</span><span class="op">(</span><span class="va">child_x2</span><span class="op">)</span>, <span class="co"># shorthand</span></span></span>
 <span class="r-in"><span>  <span class="fu">root</span><span class="op">(</span><span class="va">youth_x3</span><span class="op">)</span> <span class="co"># another shorthand</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>

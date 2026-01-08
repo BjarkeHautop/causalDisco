@@ -51,7 +51,7 @@ Suppose we want to require an edge from A to B, and forbid an edge from
 B to C:
 
 ``` r
-kn <- knowledge(
+kn_1 <- knowledge(
   A %-->% B,
   B %--x% C
 )
@@ -60,13 +60,26 @@ kn <- knowledge(
 This knowledge object can be visualized:
 
 ``` r
-plot(kn)
+plot(kn_1)
 ```
 
 ![](knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge-1.png)
 
 The blue solid edge represents the required edge from A to B, while the
 red dashed edge represents the forbidden edge from B to C.
+
+If one wishes to remove some edges (either required or forbidden)
+knowledge from an existing knowledge object, the `remove_edges` function
+can be used. For example, to remove the required edge from A to B:
+
+``` r
+kn_1_removed <- remove_edges(kn_1, A ~ B)
+plot(kn_1_removed)
+```
+
+![](knowledge_files/figure-html/remove%20required%20edge-1.png)
+
+Modify syntax of `remove_edges`?
 
 ### Specifying required and forbidden edges in a dataset
 
@@ -89,7 +102,7 @@ We can pass the dataset to `knowledge`, which also checks that the
 specified variables exist:
 
 ``` r
-kn <- knowledge(
+kn_2 <- knowledge(
   tpc_example,
   child_x1 %-->% youth_x3,
   child_x2 %--x% oldage_x5
@@ -99,7 +112,7 @@ kn <- knowledge(
 This knowledge object can also be visualized:
 
 ``` r
-plot(kn)
+plot(kn_2)
 ```
 
 ![](knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge%20with%20data-1.png)
@@ -113,7 +126,7 @@ To make specifying variables easier, you can use tidyselect helpers such
 as `starts_with`:
 
 ``` r
-kn <- knowledge(
+kn_3 <- knowledge(
   tpc_example,
   starts_with("child") %-->% starts_with("youth"),
   starts_with("oldage") %--x% starts_with("youth")
@@ -126,7 +139,7 @@ starting with “oldage” can have edges to any variables starting with
 “youth”. We can visualize this:
 
 ``` r
-plot(kn)
+plot(kn_3)
 ```
 
 ![](knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge%20with%20tidyselect-1.png)
@@ -135,29 +148,31 @@ For a list of all available tidyselect helpers we refer to the
 [tidyselect reference
 documentation](https://tidyselect.r-lib.org/reference/index.html).
 
-## Tier knowledge
+## Tiered knowledge
 
-Tier knowledge provides a higher-level abstraction for expressing
+Tiered knowledge provides a higher-level abstraction for expressing
 systematic ordering assumptions, such as temporal or logical precedence.
-Internally, tier knowledge is translated into a collection of forbidden
-edges, but it is exposed separately because it provides a concise and
-structured way to express common ordering assumptions.
+Internally, tiered knowledge is translated into a collection of
+forbidden edges, but it is exposed separately because it provides a
+concise and structured way to express common ordering assumptions.
 
 For example, consider a dataset with three groups of variables: child,
 youth, and old. We may wish to enforce that child variables precede
 youth variables, which in turn precede old variables. This can be
-expressed using tier knowledge.
+expressed using tiered knowledge.
 
-Tier knowledge enforces that edges may only point from earlier tiers to
-later tiers. Edges within the same tier are unrestricted unless
+Tiered knowledge enforces that edges may only point from earlier tiers
+to later tiers. Edges within the same tier are unrestricted unless
 additional knowledge is supplied.
 
 ### Creating a tiered knowledge object
 
-A tier knowledge object is created by specifying tiers and their
+Suppose we observe variables over time: first the A’s, then the B’s, and
+finally the C’s. This ordering implies that causal influences cannot go
+backward in time (e.g., B’s cannot cause A’s). A tiered knowledge object
+captures this temporal structure by specifying tiers and their
 associated variables. If numeric tiers are used, lower numbers indicate
-earlier tiers; otherwise, tiers are ordered by their order of
-appearance.
+earlier tiers; otherwise, tiers are ordered by their appearance.
 
 The following specifications encode the same tier structure:
 
@@ -196,6 +211,15 @@ kn_also_almost <- knowledge(
     C ~ c(C1, C2)
   )
 )
+
+# Has a letter, so tiers are ordered by appearance, thus functionally equivalent
+kn_mixed <- knowledge(
+  tier(
+    3   ~ c(A1, A2),
+    B   ~ c(B1, B2),
+    1   ~ c(C1, C2)
+  )
+)
 ```
 
 We can visualize the tiers using:
@@ -212,13 +236,12 @@ left and latest to the right.
 Tidyselect helpers such as `starts_with` can also be used to define
 tiers in a concise way, just as with required and forbidden edges.
 
-## Exogenous knowledge
+## Exogenous variables knowledge
 
-Exogenous knowledge specifies that certain variables are exogenous,
-meaning they have no incoming edges in the causal graph. This is
-commonly assumed for variables that are known causes but not effects
-within the context of the analysis. Exogenous knowledge is specified
-using the `exogenous` function within `knowledge`.
+Exogenous variables are those that have no incoming edges in the causal
+graph. That is, variables which are known causes but are not affected by
+other variables. Exogenous variables can be specified using the
+`exogenous` function within `knowledge`.
 
 ### Specifying exogenous variables
 
@@ -226,22 +249,57 @@ The most natural usage is to supply the dataset so that the variables
 are checked for existence and selected correctly:
 
 ``` r
-kn <- knowledge(
+kn_exo_1 <- knowledge(
   tpc_example,
   exogenous("child_x1")
 )
 ```
 
-Instead of `exogenous`, you can also use the shorthand functions `exo`
-or `root`.
+Instead of `exogenous`, you can also use the shorthand functions `exo`.
 
 This knowledge object can be visualized:
 
 ``` r
-plot(kn)
+plot(kn_exo_1)
 ```
 
 ![](knowledge_files/figure-html/plot%20exogenous%20knowledge-1.png)
+
+Below we add both child_x1 and child_x2 as exogenous variables using
+tidyselect helpers:
+
+``` r
+kn_exo_2 <- knowledge(
+  tpc_example,
+  exogenous(starts_with("child"))
+)
+plot(kn_exo_2)
+```
+
+![](knowledge_files/figure-html/exogenous%20knowledge%20with%20tidyselect-1.png)
+
+## Combining different knowledge types
+
+Different knowledge types can be freely combined in a single knowledge
+object. For example, we can combine tiered knowledge with required and
+forbidden edges:
+
+``` r
+kn_combined <- knowledge(
+  tpc_example,
+  tier(
+    1 ~ starts_with("child"),
+    2 ~ starts_with("youth"),
+    3 ~ starts_with("oldage")
+  ),
+  child_x1 %-->% youth_x3,
+  child_x1 %--x% child_x2
+)
+
+plot(kn_combined)
+```
+
+![](knowledge_files/figure-html/combined%20knowledge-1.png)
 
 ## Using knowledge with causal discovery
 
@@ -308,7 +366,7 @@ plot(output)
 
 ### causalDisco
 
-WIP. Currently causalDisco only works correctly with tier and required
+WIP. Currently causalDisco only works correctly with tiered and required
 knowledge.
 
 ### pcalg

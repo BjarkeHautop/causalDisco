@@ -27,8 +27,8 @@ knowledge(...)
     initialize and freeze the variable set.
 
   - Zero or more mini-DSL calls: `tier()`, `forbidden()`, `required()`,
-    `exogenous()`, `exo()`, `root()`, or infix operators `%-->%` and
-    `%--x%`.
+    [`exogenous()`](https://caugi.org/reference/exogenous.html),
+    `exo()`, `root()`, or infix operators `%-->%` and `%--x%`.
 
     - `tier()`: One or more two-sided formulas (`tier(1 ~ x + y)`), or a
       numeric vector.
@@ -36,9 +36,9 @@ knowledge(...)
     - `forbidden()` / `required()`: One or more two-sided formulas
       (`from ~ to`).
 
-    - `exogenous()` / `exo()` / `root()`: Variable names or tidyselect
-      selectors. Arguments are evaluated in order; only these calls are
-      allowed.
+    - [`exogenous()`](https://caugi.org/reference/exogenous.html) /
+      `exo()` / `root()`: Variable names or tidyselect selectors.
+      Arguments are evaluated in order; only these calls are allowed.
 
 ## Value
 
@@ -47,8 +47,9 @@ A populated `knowledge` object.
 ## Details
 
 Create a `knowledge` object using a concise mini-DSL with `tier()`,
-`forbidden()`, `required()`, `exogenous()` and infix edge operators
-`%-->%` and `%--x%`.
+`forbidden()`, `required()`,
+[`exogenous()`](https://caugi.org/reference/exogenous.html) and infix
+edge operators `%-->%` and `%--x%`.
 
 The first argument can be a data frame, which will be used to populate
 the `knowledge` object with variable names. If you later add variables
@@ -74,8 +75,8 @@ operators, or
   `forbidden()`. Example: `V1 %-->% V3` is equivalent to
   `required(V1 ~ V3)`.
 
-- `exogenous()` / `exo()` / `root()`: Mark variables as exogenous (root
-  nodes).
+- [`exogenous()`](https://caugi.org/reference/exogenous.html) / `exo()`
+  / `root()`: Mark variables as exogenous (root nodes).
 
 - Numeric vector shortcut for `tier()`: `tier(c(1, 2, 1))` assigns tiers
   by index to all existing variables.
