@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9023</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,10 +85,10 @@ algorithms. The different supported knowledge types are explained below,
 along with examples of how to create knowledge objects and use them with
 causal discovery methods. All knowledge types can be freely
 combined.</p>
-<p>At a conceptual level, all knowledge is ultimately represented as
-constraints on allowed edges. Some knowledge types provide higher-level
-abstractions for expressing common modeling assumptions more
-conveniently.</p>
+<p>At a conceptual level, all knowledge is represented as constraints on
+edges, specifying which edges are allowed, disallowed, or required. Some
+knowledge types provide higher-level abstractions for expressing common
+modeling assumptions more conveniently.</p>
 <div class="section level2">
 <h2 id="required-and-forbidden-knowledge">Required and forbidden knowledge<a class="anchor" aria-label="anchor" href="#required-and-forbidden-knowledge"></a>
 </h2>
@@ -101,18 +101,9 @@ variables.</li>
 <li>Forbidden edges specify that a directed edge is not allowed between
 two variables.</li>
 </ul>
-<p>These constraints are specified using the %–&gt;% (required) and %–x%
-(forbidden) operators.</p>
-<p>We discussed better syntax for <code>%--x%</code>. Which of these
-alternatives are best:</p>
-<ul>
-<li>
-<code>child_x1 %--x% youth_x3</code> (current)</li>
-<li><code>!(child_x1 %--&gt;% youth_x3)</code></li>
-<li><code>child_x1 %!--&gt;% youth_x3</code></li>
-</ul>
-<p>Note, that <code>child_x1 !%--&gt;% youth_x3</code> is not valid
-syntax for the R passer.</p>
+<p>These constraints are specified using the %–&gt;% (required) and
+%!–&gt;% (forbidden) operators, with the exclamation mark (!) indicating
+negation of the edge.</p>
 <div class="section level3">
 <h3 id="specifying-required-and-forbidden-edges">Specifying required and forbidden edges<a class="anchor" aria-label="anchor" href="#specifying-required-and-forbidden-edges"></a>
 </h3>
@@ -121,7 +112,7 @@ from B to C:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kn_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">A</span> <span class="op">%--&gt;%</span> <span class="va">B</span>,</span>
-<span>  <span class="va">B</span> <span class="op">%--x%</span> <span class="va">C</span></span>
+<span>  <span class="va">B</span> <span class="op">%!--&gt;%</span> <span class="va">C</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>This knowledge object can be visualized:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -131,13 +122,12 @@ from B to C:</p>
 the red dashed edge represents the forbidden edge from B to C.</p>
 <p>If one wishes to remove some edges (either required or forbidden)
 knowledge from an existing knowledge object, the
-<code>remove_edges</code> function can be used. For example, to remove
+<code>remove_edge</code> function can be used. For example, to remove
 the required edge from A to B:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">kn_1_removed</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/remove_edges.html">remove_edges</a></span><span class="op">(</span><span class="va">kn_1</span>, <span class="va">A</span> <span class="op">~</span> <span class="va">B</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">kn_1_removed</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/remove_edge.html">remove_edge</a></span><span class="op">(</span><span class="va">kn_1</span>, from <span class="op">=</span> <span class="va">A</span>, to <span class="op">=</span> <span class="va">B</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn_1_removed</span><span class="op">)</span></span></code></pre></div>
 <p><img src="knowledge_files/figure-html/remove%20required%20edge-1.png" class="r-plt" alt="" width="700"></p>
-<p>Modify syntax of <code>remove_edges</code>?</p>
 </div>
 <div class="section level3">
 <h3 id="specifying-required-and-forbidden-edges-in-a-dataset">Specifying required and forbidden edges in a dataset<a class="anchor" aria-label="anchor" href="#specifying-required-and-forbidden-edges-in-a-dataset"></a>
@@ -160,7 +150,7 @@ that the specified variables exist:</p>
 <code class="sourceCode R"><span><span class="va">kn_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">tpc_example</span>,</span>
 <span>  <span class="va">child_x1</span> <span class="op">%--&gt;%</span> <span class="va">youth_x3</span>,</span>
-<span>  <span class="va">child_x2</span> <span class="op">%--x%</span> <span class="va">oldage_x5</span></span>
+<span>  <span class="va">child_x2</span> <span class="op">%!--&gt;%</span> <span class="va">oldage_x5</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>This knowledge object can also be visualized:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -177,7 +167,7 @@ such as <code>starts_with</code>:</p>
 <code class="sourceCode R"><span><span class="va">kn_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">tpc_example</span>,</span>
 <span>  <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span> <span class="op">%--&gt;%</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span>
-<span>  <span class="fu">starts_with</span><span class="op">(</span><span class="st">"oldage"</span><span class="op">)</span> <span class="op">%--x%</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span></span>
+<span>  <span class="fu">starts_with</span><span class="op">(</span><span class="st">"oldage"</span><span class="op">)</span> <span class="op">%!--&gt;%</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>This means, that all variables starting with “child” are required to
 have edges to all variables starting with “youth”, and no variables
@@ -320,7 +310,7 @@ required and forbidden edges:</p>
 <span>    <span class="fl">3</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"oldage"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span>,</span>
 <span>  <span class="va">child_x1</span> <span class="op">%--&gt;%</span> <span class="va">youth_x3</span>,</span>
-<span>  <span class="va">child_x1</span> <span class="op">%--x%</span> <span class="va">child_x2</span></span>
+<span>  <span class="va">child_x1</span> <span class="op">%!--&gt;%</span> <span class="va">child_x2</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn_combined</span><span class="op">)</span></span></code></pre></div>
@@ -391,14 +381,14 @@ required knowledge.</p>
 <p>Only forbidden knowledge symmetric knowledge is supported for pcalg.
 That is, edges that are forbidden in both directions. Thus, the only
 type of knowledge that can be used with pcalg is knowledge created using
-forbidden edges (<code>%--x%</code>) without any directed knowledge or
-tiers, such as this:</p>
+forbidden edges (<code>%!--&gt;%</code>) without any directed knowledge
+or tiers, such as this:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">tpc_example</span>,</span>
-<span>  <span class="va">child_x1</span> <span class="op">%--x%</span> <span class="va">youth_x3</span>,</span>
-<span>  <span class="va">youth_x3</span> <span class="op">%--x%</span> <span class="va">child_x1</span></span>
+<span>  <span class="va">child_x1</span> <span class="op">%!--&gt;%</span> <span class="va">youth_x3</span>,</span>
+<span>  <span class="va">youth_x3</span> <span class="op">%!--&gt;%</span> <span class="va">child_x1</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">pc_pcalg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"pcalg"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">pc_pcalg</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>

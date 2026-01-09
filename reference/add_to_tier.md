@@ -5,12 +5,12 @@ Add variables to an existing tier
 ## Usage
 
 ``` r
-add_to_tier(.kn, ...)
+add_to_tier(kn, ...)
 ```
 
 ## Arguments
 
-- .kn:
+- kn:
 
   A `knowledge` object.
 
@@ -37,7 +37,7 @@ Other knowledge functions:
 [`forbid_tier_violations()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.md),
 [`get_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/get_tiers.md),
 [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md),
-[`remove_edges()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edges.md),
+[`remove_edge()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edge.md),
 [`remove_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/remove_tiers.md),
 [`remove_vars()`](https://bjarkehautop.github.io/causalDisco/reference/remove_vars.md),
 [`reorder_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/reorder_tiers.md),
@@ -49,8 +49,6 @@ Other knowledge functions:
 ## Examples
 
 ``` r
-### knowledge verbs example ###
-
 data(tpc_example)
 
 # create knowledge object using verbs
@@ -64,7 +62,7 @@ kn1 <- knowledge() |>
   add_to_tier(old ~ starts_with("oldage")) |>
   require_edge(child_x1 ~ youth_x3) |>
   forbid_edge(child_x2 ~ youth_x4) |>
-  add_exogenous(child_x1) # synonyms: add_exo(), add_root()
+  add_exogenous(child_x1) # synonym: add_exo()
 
 # set kn1 to frozen
 # (meaning you cannot add variables to the knowledge object anymore)
@@ -80,8 +78,8 @@ kn2 <- knowledge(
     old ~ starts_with("oldage")
   ),
   child_x1 %-->% youth_x3,
-  child_x2 %--x% youth_x4,
-  exo(child_x1) # synonyms: exogenous(), root()
+  child_x2 %!-->% youth_x4,
+  exo(child_x1) # synonym: exogenous()
 )
 
 print(identical(kn1, kn2))

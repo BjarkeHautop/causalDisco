@@ -36,17 +36,14 @@ object.
 
 ## Details
 
-For specific details on the supported scores, tests, and parameters for
-the engine, see:
-
-- [`CausalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/CausalDiscoSearch.md)
-  for causalDisco.
+For specific details on the supported scores, see
+[`CausalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/CausalDiscoSearch.md).
+For additional parameters passed via `...`, see
+[`tges_run()`](https://bjarkehautop.github.io/causalDisco/reference/tges_run.md).
 
 ## Examples
 
 ``` r
-### tges_run() example ###
-
 # Recommended route using disco:
 kn <- knowledge(
   tpc_example,

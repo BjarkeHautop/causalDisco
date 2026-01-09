@@ -29,11 +29,12 @@ algorithm.
   `$set_test()`. Recognized values are:
 
   - `"fisher_z"` - Fisher Z test for Gaussian data. See
-    [`gaussCItest`](https://rdrr.io/pkg/pcalg/man/condIndFisherZ.html).
+    [`pcalg::gaussCItest()`](https://rdrr.io/pkg/pcalg/man/condIndFisherZ.html).
 
   - `"g_square"` - G square test for discrete data. See
-    [`binCItest`](https://rdrr.io/pkg/pcalg/man/binCItest.html) and
-    [`disCItest`](https://rdrr.io/pkg/pcalg/man/disCItest.html).
+    [`pcalg::binCItest()`](https://rdrr.io/pkg/pcalg/man/binCItest.html)
+    and
+    [`pcalg::disCItest()`](https://rdrr.io/pkg/pcalg/man/disCItest.html).
 
 - `alg`:
 
@@ -41,13 +42,13 @@ algorithm.
   with `$set_alg()`. Recognized values are:
 
   - `"pc"` - PC algorithm. See
-    [`pc`](https://rdrr.io/pkg/pcalg/man/pc.html).
+    [`pcalg::pc()`](https://rdrr.io/pkg/pcalg/man/pc.html).
 
   - `"fci"` - FCI algorithm. See
-    [`fci`](https://rdrr.io/pkg/pcalg/man/fci.html).
+    [`pcalg::fci()`](https://rdrr.io/pkg/pcalg/man/fci.html).
 
   - `"ges"` - GES algorithm. See
-    [`ges`](https://rdrr.io/pkg/pcalg/man/ges.html).
+    [`pcalg::ges()`](https://rdrr.io/pkg/pcalg/man/ges.html).
 
 - `params`:
 

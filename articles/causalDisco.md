@@ -18,8 +18,9 @@ algorithms, knowledge incorporation, and result visualization.
 ## Simple example of causal discovery
 
 The example discussed in this section is inspired by the Julia package
-CausalDiscovery.jl with their PC algorithm example, which can be found
-here [PC algorithm example in
+[CausalDiscovery.jl](https://mschauer.github.io/CausalInference.jl/latest/)
+with their PC algorithm example, which can be found here [PC algorithm
+example in
 CausalDiscovery.jl](https://mschauer.github.io/CausalInference.jl/latest/examples/pc_basic_examples/).
 
 We will consider data from the following DAG, which is also discussed in
@@ -77,19 +78,20 @@ plot(pc_result_bnlearn, main = "PC (bnlearn)")
 par(mfrow = c(1, 1))
 ```
 
-(Note, that it doesn’t work correctly for bnlearn, since `as_caugi` in
-caugi had a bug. I fixed it in PR \#149, so it will work in the next
-release of caugi.)
+(Note, that it doesn’t work correctly for bnlearn, since
+[`as_caugi()`](https://caugi.org/reference/as_caugi.html) in caugi had a
+bug. I fixed it in PR \#149, so it will work in the next release of
+caugi.)
 
 The first notable feature of this plot is that some edges have arrows,
 while others do not. For instance, the edge from `v` to `z` is directed,
 indicating that `v` influences `z`, but not vice versa. In contrast, the
-edge between `x` and `w` has no arrows at either end (and with dashed
-lines), showing that the direction of causal influence cannot be
-determined from the data alone. Both directions; `x` to `w` and `w` to
-`x`, are consistent with the observed data. We can demonstrate this by
-reversing the direction of influence in the data-generating process
-above and applying the PC algorithm to the new data set:
+edge between `x` and `w` has no arrows at either end, showing that the
+direction of causal influence cannot be determined from the data alone.
+Both directions; `x` to `w` and `w` to `x`, are consistent with the
+observed data. We can demonstrate this by reversing the direction of
+influence in the data-generating process above and applying the PC
+algorithm to the new data set:
 
 ``` r
 set.seed(1405)
@@ -159,8 +161,8 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 ![](nonlinear-tetrad-kci.png)
 
 The result of the PC algorithm using the KCI test look like what we’d
-expect to see. Note, that this test is much more demanding than using
-Fisher’s Z test.
+expect to see. Note, that this test is much more computationally
+demanding than using Fisher’s Z test.
 
 ## Incorporating prior knowledge
 
@@ -174,8 +176,8 @@ and `w` do not cause `x`. This can be specified as follows:
 ``` r
 kn <- knowledge(
   data_linear,
-  v %--x% x,  # v does not cause x
-  w %--x% x   # w does not cause x
+  v %!-->% x,  # v does not cause x
+  w %!-->% x   # w does not cause x
 )
 plot(kn)
 ```

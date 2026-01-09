@@ -15,7 +15,7 @@ future release."><meta property="og:image" content="https://bjarkehautop.github.
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9023</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +59,7 @@ future release.</p>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  knowledge <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  order <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  alpha <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  test <span class="op">=</span> <span class="va">reg_test</span>,</span>
 <span>  suff_stat <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"stable.fast"</span>,</span>
@@ -117,7 +117,7 @@ depends on the chosen <code>test</code>.</p></dd>
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>Skeleton construction method, one of <code>"stable"</code>,
 <code>"original"</code>, or <code>"stable.fast"</code> (default). See
-<code><a href="https://rdrr.io/pkg/pcalg/man/skeleton.html" class="external-link">skeleton</a></code> for details.</p></dd>
+<code><a href="https://rdrr.io/pkg/pcalg/man/skeleton.html" class="external-link">pcalg::skeleton()</a></code> for details.</p></dd>
 
 
 <dt id="arg-na-method">na_method<a class="anchor" aria-label="anchor" href="#arg-na-method"></a></dt>
@@ -156,7 +156,7 @@ is due to the fact that <span class="pkg">pcalg</span> does not allow directed e
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Additional arguments passed to
-<code><a href="https://rdrr.io/pkg/pcalg/man/skeleton.html" class="external-link">skeleton</a></code> during skeleton construction.</p></dd>
+<code><a href="https://rdrr.io/pkg/pcalg/man/skeleton.html" class="external-link">pcalg::skeleton()</a></code> during skeleton construction.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -170,7 +170,7 @@ a <code>caugi</code> and a <code>knowledge</code> (<code>knowledgeable_caugi</co
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Any independence test implemented in <span class="pkg">pcalg</span> may be used; see
-<code><a href="https://rdrr.io/pkg/pcalg/man/pc.html" class="external-link">pc</a></code>. When <code>na_method = "twd"</code>, test-wise deletion is
+<code><a href="https://rdrr.io/pkg/pcalg/man/pc.html" class="external-link">pcalg::pc()</a></code>. When <code>na_method = "twd"</code>, test-wise deletion is
 performed: for <code>cor_test</code>, each pairwise correlation uses complete cases;
 for <code>reg_test</code>, each conditional test performs its own deletion. If you
 supply a user-defined <code>test</code>, you must also provide <code>suff_stat</code>.</p>
@@ -185,9 +185,7 @@ forward in time.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">### tpc() example ###</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Load data</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Load data</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Build knowledge</span></span></span>
@@ -274,11 +272,6 @@ forward in time.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> oldage_x5 old  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> oldage_x6 old  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Deprecated: using order prefixes (will warn)</span></span></span>
-<span class="r-in"><span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/expect_error.html" class="external-link">expect_warning</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="fu">tpc_run</span><span class="op">(</span><span class="va">tpc_example</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"child"</span>, <span class="st">"youth"</span>, <span class="st">"oldage"</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

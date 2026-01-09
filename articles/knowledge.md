@@ -16,10 +16,10 @@ different supported knowledge types are explained below, along with
 examples of how to create knowledge objects and use them with causal
 discovery methods. All knowledge types can be freely combined.
 
-At a conceptual level, all knowledge is ultimately represented as
-constraints on allowed edges. Some knowledge types provide higher-level
-abstractions for expressing common modeling assumptions more
-conveniently.
+At a conceptual level, all knowledge is represented as constraints on
+edges, specifying which edges are allowed, disallowed, or required. Some
+knowledge types provide higher-level abstractions for expressing common
+modeling assumptions more conveniently.
 
 ## Required and forbidden knowledge
 
@@ -32,18 +32,9 @@ edges in the causal graph.
 - Forbidden edges specify that a directed edge is not allowed between
   two variables.
 
-These constraints are specified using the %–\>% (required) and %–x%
-(forbidden) operators.
-
-We discussed better syntax for `%--x%`. Which of these alternatives are
-best:
-
-- `child_x1 %--x% youth_x3` (current)
-- `!(child_x1 %-->% youth_x3)`
-- `child_x1 %!-->% youth_x3`
-
-Note, that `child_x1 !%-->% youth_x3` is not valid syntax for the R
-passer.
+These constraints are specified using the %–\>% (required) and %!–\>%
+(forbidden) operators, with the exclamation mark (!) indicating negation
+of the edge.
 
 ### Specifying required and forbidden edges
 
@@ -53,7 +44,7 @@ B to C:
 ``` r
 kn_1 <- knowledge(
   A %-->% B,
-  B %--x% C
+  B %!-->% C
 )
 ```
 
@@ -69,17 +60,15 @@ The blue solid edge represents the required edge from A to B, while the
 red dashed edge represents the forbidden edge from B to C.
 
 If one wishes to remove some edges (either required or forbidden)
-knowledge from an existing knowledge object, the `remove_edges` function
+knowledge from an existing knowledge object, the `remove_edge` function
 can be used. For example, to remove the required edge from A to B:
 
 ``` r
-kn_1_removed <- remove_edges(kn_1, A ~ B)
+kn_1_removed <- remove_edge(kn_1, from = A, to = B)
 plot(kn_1_removed)
 ```
 
 ![](knowledge_files/figure-html/remove%20required%20edge-1.png)
-
-Modify syntax of `remove_edges`?
 
 ### Specifying required and forbidden edges in a dataset
 
@@ -105,7 +94,7 @@ specified variables exist:
 kn_2 <- knowledge(
   tpc_example,
   child_x1 %-->% youth_x3,
-  child_x2 %--x% oldage_x5
+  child_x2 %!-->% oldage_x5
 )
 ```
 
@@ -129,7 +118,7 @@ as `starts_with`:
 kn_3 <- knowledge(
   tpc_example,
   starts_with("child") %-->% starts_with("youth"),
-  starts_with("oldage") %--x% starts_with("youth")
+  starts_with("oldage") %!-->% starts_with("youth")
 )
 ```
 
@@ -293,7 +282,7 @@ kn_combined <- knowledge(
     3 ~ starts_with("oldage")
   ),
   child_x1 %-->% youth_x3,
-  child_x1 %--x% child_x2
+  child_x1 %!-->% child_x2
 )
 
 plot(kn_combined)
@@ -374,15 +363,15 @@ knowledge.
 Only forbidden knowledge symmetric knowledge is supported for pcalg.
 That is, edges that are forbidden in both directions. Thus, the only
 type of knowledge that can be used with pcalg is knowledge created using
-forbidden edges (`%--x%`) without any directed knowledge or tiers, such
+forbidden edges (`%!-->%`) without any directed knowledge or tiers, such
 as this:
 
 ``` r
 data("tpc_example")
 kn <- knowledge(
   tpc_example,
-  child_x1 %--x% youth_x3,
-  youth_x3 %--x% child_x1
+  child_x1 %!-->% youth_x3,
+  youth_x3 %!-->% child_x1
 )
 pc_pcalg <- pc(engine = "pcalg", test = "fisher_z", alpha = 0.05)
 output <- disco(data = tpc_example, method = pc_pcalg, knowledge = kn)

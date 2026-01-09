@@ -102,22 +102,22 @@ pcalg::ges(gaus_cor_score(cmat, n = 100))
 #> $local.score
 #> function (vertex, parents) 
 #> local.score(vertex, parents)
-#> <environment: 0x557c723b81d0>
+#> <environment: 0x561d0d78b980>
 #> 
 #> $global.score
 #> function (edges) 
 #> global.score(vertex, parents)
-#> <environment: 0x557c723b81d0>
+#> <environment: 0x561d0d78b980>
 #> 
 #> $local.fit
 #> function (vertex, parents) 
 #> local.fit(vertex, parents)
-#> <environment: 0x557c723b81d0>
+#> <environment: 0x561d0d78b980>
 #> 
 #> $global.fit
 #> function (edges) 
 #> global.fit(vertex, parents)
-#> <environment: 0x557c723b81d0>
+#> <environment: 0x561d0d78b980>
 #> 
 #> $lambda
 #> [1] 2.302585
@@ -131,9 +131,9 @@ pcalg::ges(gaus_cor_score(cmat, n = 100))
 #> $scatter
 #> $scatter[[1]]
 #>          x1       x2       x3   
-#> x1 99.00000 16.85679 70.30417  0
-#> x2 16.85679 99.00000 58.98489  0
-#> x3 70.30417 58.98489 99.00000  0
+#> x1 99.00000 15.77272 57.71738  0
+#> x2 15.77272 99.00000 65.40854  0
+#> x3 57.71738 65.40854 99.00000  0
 #>     0.00000  0.00000  0.00000 99
 #> 
 #> 
@@ -164,7 +164,7 @@ pcalg::ges(gaus_cor_score(cmat, n = 100))
 #> [1] 0.99 0.00
 #> 
 #> [[3]]
-#> [1] 0.2608077 0.0000000 0.6268690 0.4890696
+#> [1] 0.3260109 0.0000000 0.4901844 0.5825959
 #> 
 #> 
 ```

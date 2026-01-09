@@ -21,8 +21,6 @@ An object of class \<tetrad_graph\>
 ## Examples
 
 ``` r
-### tetrad_graph() example ###
-
 # A tiny 3-node PAG in Tetrad’s CSV-like string form:
 # rows/cols are A,B,C; entries use pcalg’s PAG codes (0,1,2,3)
 pag_txt <- "A,B,C

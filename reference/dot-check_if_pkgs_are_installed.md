@@ -31,7 +31,6 @@ warns.
 ## Examples
 
 ``` r
-### .check_if_pkgs_are_installed() example ###
 # Succeeds silently (base packages are always available)
 causalDisco:::.check_if_pkgs_are_installed(
   pkgs = c("stats"),

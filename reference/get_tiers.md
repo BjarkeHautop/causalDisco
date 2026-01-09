@@ -33,7 +33,7 @@ Other knowledge functions:
 [`forbid_edge()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_edge.md),
 [`forbid_tier_violations()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.md),
 [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md),
-[`remove_edges()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edges.md),
+[`remove_edge()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edge.md),
 [`remove_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/remove_tiers.md),
 [`remove_vars()`](https://bjarkehautop.github.io/causalDisco/reference/remove_vars.md),
 [`reorder_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/reorder_tiers.md),
@@ -45,8 +45,6 @@ Other knowledge functions:
 ## Examples
 
 ``` r
-### get_tiers() example ###
-
 kn <- knowledge(
   tier(
     1 ~ V1 + V2,

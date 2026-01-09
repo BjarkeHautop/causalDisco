@@ -7,7 +7,7 @@ algorithm.
 
 ## See also
 
-[`knowledge`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md).
+[`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md).
 
 ## Public fields
 
@@ -33,10 +33,10 @@ algorithm.
   `$set_test()`. Recognized values are:
 
   - `"fisher_z"` - Fisher Z test for Gaussian data. See
-    [`cor_test`](https://bjarkehautop.github.io/causalDisco/reference/cor_test.md).
+    [`cor_test()`](https://bjarkehautop.github.io/causalDisco/reference/cor_test.md).
 
   - `"reg"` - Regression test for discrete or binary data. See
-    [`reg_test`](https://bjarkehautop.github.io/causalDisco/reference/reg_test.md).
+    [`reg_test()`](https://bjarkehautop.github.io/causalDisco/reference/reg_test.md).
 
 - `alg`:
 
@@ -44,13 +44,13 @@ algorithm.
   with `$set_alg()`. Recognized values are:
 
   - `"tpc"` - TPC algorithm. See
-    [`tpc`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md).
+    [`tpc()`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md).
 
   - `"tfci"` - TFCI algorithm. See
-    [`tfci`](https://bjarkehautop.github.io/causalDisco/reference/tfci.md).
+    [`tfci()`](https://bjarkehautop.github.io/causalDisco/reference/tfci.md).
 
   - `"tges"` - TGES algorithm. See
-    [`tges`](https://bjarkehautop.github.io/causalDisco/reference/tges.md).
+    [`tges()`](https://bjarkehautop.github.io/causalDisco/reference/tges.md).
 
 - `params`:
 
@@ -224,11 +224,11 @@ Sets the background knowledge for the search with a `knowledge` object.
   Logical; whether to treat directed edges in the knowledge as
   undirected. Default is `FALSE`. This is due to the nature of how pcalg
   handles background knowledge when using
-  [`skeleton`](https://rdrr.io/pkg/pcalg/man/skeleton.html) under the
-  hood in
-  [`tpc`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md)
+  [`pcalg::skeleton()`](https://rdrr.io/pkg/pcalg/man/skeleton.html)
+  under the hood in
+  [`tpc()`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md)
   and
-  [`tfci`](https://bjarkehautop.github.io/causalDisco/reference/tfci.md).
+  [`tfci()`](https://bjarkehautop.github.io/causalDisco/reference/tfci.md).
 
 ------------------------------------------------------------------------
 
@@ -269,8 +269,6 @@ The objects of this class are cloneable with this method.
 ## Examples
 
 ``` r
-### causalDisco_search R6 class example ###
-
 # Generally, we do not recommend using the R6 classes directly, but rather
 # use the disco() or any method function, for example pc(), instead.
 

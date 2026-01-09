@@ -1,13 +1,12 @@
-# Forbid all tier violations
+# Remove an edge from a knowledge object
 
-Given a `knowledge` object with variables already assigned to tiers,
-forbids every directed edge that runs from a higher-numbered tier down
-into a lower-numbered tier.
+Drop a single directed edge specified by `from` and `to`. Errors if the
+edge does not exist.
 
 ## Usage
 
 ``` r
-forbid_tier_violations(kn)
+remove_edge(kn, from, to)
 ```
 
 ## Arguments
@@ -16,9 +15,17 @@ forbid_tier_violations(kn)
 
   A `knowledge` object.
 
+- from:
+
+  The source node (unquoted or character).
+
+- to:
+
+  The target node (unquoted or character).
+
 ## Value
 
-The same `knowledge` object with new forbidden edges added.
+The updated `knowledge` object.
 
 ## See also
 
@@ -33,9 +40,9 @@ Other knowledge functions:
 [`as_tetrad_knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/as_tetrad_knowledge.md),
 [`deparse_knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/deparse_knowledge.md),
 [`forbid_edge()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_edge.md),
+[`forbid_tier_violations()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.md),
 [`get_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/get_tiers.md),
 [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md),
-[`remove_edge()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edge.md),
 [`remove_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/remove_tiers.md),
 [`remove_vars()`](https://bjarkehautop.github.io/causalDisco/reference/remove_vars.md),
 [`reorder_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/reorder_tiers.md),
@@ -47,7 +54,7 @@ Other knowledge functions:
 ## Examples
 
 ``` r
-# automatically forbid edges that go from later tiers to earlier tiers
+# remove variables and their incident edges
 data(tpc_example)
 
 kn <- knowledge(
@@ -55,13 +62,10 @@ kn <- knowledge(
   tier(
     child ~ starts_with("child"),
     youth ~ starts_with("youth"),
-    old ~ starts_with("old")
-  )
+    oldage ~ starts_with("old")
+  ),
+  child_x1 %-->% youth_x3
 )
-
-# turn all tier violations to forbidden edges
-kn2 <- forbid_tier_violations(kn)
-
 print(kn)
 #> 
 #> ── Knowledge object ────────────────────────────────────────────────────────────
@@ -69,55 +73,87 @@ print(kn)
 #> 
 #> ── Tiers ──
 #> 
-#>   label
-#> 1 child
-#> 2 youth
-#> 3 old  
+#>   label 
+#> 1 child 
+#> 2 youth 
+#> 3 oldage
 #> 
 #> ── Variables ──
 #> 
-#>   var       tier 
-#> 1 child_x1  child
-#> 2 child_x2  child
-#> 3 youth_x3  youth
-#> 4 youth_x4  youth
-#> 5 oldage_x5 old  
-#> 6 oldage_x6 old  
+#>   var       tier  
+#> 1 child_x1  child 
+#> 2 child_x2  child 
+#> 3 youth_x3  youth 
+#> 4 youth_x4  youth 
+#> 5 oldage_x5 oldage
+#> 6 oldage_x6 oldage
 #> 
-print(kn2)
+#> ── Edges ──
+#> 
+#>  ✔  child_x1 → youth_x3
+#> 
+
+kn <- remove_edge(kn, child_x1, youth_x3)
+print(kn)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 #> 
 #> ── Tiers ──
 #> 
-#>   label
-#> 1 child
-#> 2 youth
-#> 3 old  
+#>   label 
+#> 1 child 
+#> 2 youth 
+#> 3 oldage
 #> 
 #> ── Variables ──
 #> 
-#>   var       tier 
-#> 1 child_x1  child
-#> 2 child_x2  child
-#> 3 youth_x3  youth
-#> 4 youth_x4  youth
-#> 5 oldage_x5 old  
-#> 6 oldage_x6 old  
+#>   var       tier  
+#> 1 child_x1  child 
+#> 2 child_x2  child 
+#> 3 youth_x3  youth 
+#> 4 youth_x4  youth 
+#> 5 oldage_x5 oldage
+#> 6 oldage_x6 oldage
 #> 
-#> ── Edges ──
+
+kn <- remove_vars(kn, starts_with("child_"))
+print(kn)
+#> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
-#>  ✖  oldage_x5 → child_x1
-#>  ✖  oldage_x5 → child_x2
-#>  ✖  oldage_x5 → youth_x3
-#>  ✖  oldage_x5 → youth_x4
-#>  ✖  oldage_x6 → child_x1
-#>  ✖  oldage_x6 → child_x2
-#>  ✖  oldage_x6 → youth_x3
-#>  ✖  oldage_x6 → youth_x4
-#>  ✖  youth_x3 → child_x1
-#>  ✖  youth_x3 → child_x2
-#>  ✖  youth_x4 → child_x1
-#>  ✖  youth_x4 → child_x2
+#> 
+#> ── Tiers ──
+#> 
+#>   label 
+#> 1 child 
+#> 2 youth 
+#> 3 oldage
+#> 
+#> ── Variables ──
+#> 
+#>   var       tier  
+#> 1 youth_x3  youth 
+#> 2 youth_x4  youth 
+#> 3 oldage_x5 oldage
+#> 4 oldage_x6 oldage
+#> 
+
+kn <- remove_tiers(kn, "child")
+print(kn)
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
+#> 
+#> ── Tiers ──
+#> 
+#>   label 
+#> 1 youth 
+#> 2 oldage
+#> 
+#> ── Variables ──
+#> 
+#>   var       tier  
+#> 1 youth_x3  youth 
+#> 2 youth_x4  youth 
+#> 3 oldage_x5 oldage
+#> 4 oldage_x6 oldage
 #> 
 ```

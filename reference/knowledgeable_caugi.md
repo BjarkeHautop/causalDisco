@@ -34,4 +34,4 @@ The conversion from any graph type to a `caugi` is handled by the
 
 ## See also
 
-[`caugi`](https://caugi.org/reference/caugi.html)
+[`caugi::caugi()`](https://caugi.org/reference/caugi.html)

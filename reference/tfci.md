@@ -39,17 +39,14 @@ object.
 
 ## Details
 
-For specific details on the supported scores, tests, and parameters for
-the engine, see:
-
-- [`CausalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/CausalDiscoSearch.md)
-  for causalDisco.
+For specific details on the supported tests, see
+[`CausalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/CausalDiscoSearch.md).
+For additional parameters passed via `...`, see
+[`tfci_run()`](https://bjarkehautop.github.io/causalDisco/reference/tfci_run.md).
 
 ## Examples
 
 ``` r
-### tfci() example ###
-
 data("tpc_example")
 
 kn <- knowledge(

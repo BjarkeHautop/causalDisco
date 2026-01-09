@@ -37,11 +37,16 @@ A function of class `"tpc"` that takes a single argument `data` (a data
 frame) and returns a `caugi` and a `knowledge` (`knowledgeable_caugi`)
 object.
 
+## Details
+
+For specific details on the supported tests, see
+[`CausalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/CausalDiscoSearch.md).
+For additional parameters passed via `...`, see
+[`tpc_run()`](https://bjarkehautop.github.io/causalDisco/reference/tpc_run.md).
+
 ## Examples
 
 ``` r
-### tpc() example ###
-
 # Load data
 data(tpc_example)
 
@@ -129,9 +134,4 @@ tpc_run(tpc_example, knowledge = kn, alpha = 0.01)
 #> 5 oldage_x5 old  
 #> 6 oldage_x6 old  
 #> 
-
-# Deprecated: using order prefixes (will warn)
-testthat::expect_warning(
-  tpc_run(tpc_example, order = c("child", "youth", "oldage"), alpha = 0.01)
-)
 ```

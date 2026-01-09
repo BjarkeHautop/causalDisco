@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9023</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,11 +56,11 @@
 
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>A <code>disco_method</code> object representing a causal discovery
-algorithm. Available methods are</p><ul><li><p><code><a href="pc.html">pc</a></code> - PC algorithm,</p></li>
-<li><p><code><a href="fci.html">fci</a></code> - FCI algorithm,</p></li>
-<li><p><code><a href="ges.html">ges</a></code> - GES algorithm,</p></li>
-<li><p><code><a href="tges.html">tges</a></code> - TGES algorithm,</p></li>
-<li><p><code><a href="tpc.html">tpc</a></code> - TPC algorithm.</p></li>
+algorithm. Available methods are</p><ul><li><p><code><a href="pc.html">pc()</a></code> - PC algorithm,</p></li>
+<li><p><code><a href="fci.html">fci()</a></code> - FCI algorithm,</p></li>
+<li><p><code><a href="ges.html">ges()</a></code> - GES algorithm,</p></li>
+<li><p><code><a href="tges.html">tges()</a></code> - TGES algorithm,</p></li>
+<li><p><code><a href="tpc.html">tpc()</a></code> - TPC algorithm.</p></li>
 </ul></dd>
 
 
@@ -83,8 +83,7 @@ applied without additional knowledge.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">### disco() example ###</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># use pc with engine bnlearn and test fisher_z</span></span></span>
 <span class="r-in"><span><span class="va">my_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"bnlearn"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></span>

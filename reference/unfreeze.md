@@ -8,12 +8,12 @@ constructor
 ## Usage
 
 ``` r
-unfreeze(.kn)
+unfreeze(kn)
 ```
 
 ## Arguments
 
-- .kn:
+- kn:
 
   A `knowledge` object.
 
@@ -37,7 +37,7 @@ Other knowledge functions:
 [`forbid_tier_violations()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.md),
 [`get_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/get_tiers.md),
 [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md),
-[`remove_edges()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edges.md),
+[`remove_edge()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edge.md),
 [`remove_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/remove_tiers.md),
 [`remove_vars()`](https://bjarkehautop.github.io/causalDisco/reference/remove_vars.md),
 [`reorder_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/reorder_tiers.md),
@@ -48,8 +48,6 @@ Other knowledge functions:
 ## Examples
 
 ``` r
-### unfreeze() example ###
-
 # unfreeze allows adding variables beyond the original data frame columns
 data(tpc_example)
 

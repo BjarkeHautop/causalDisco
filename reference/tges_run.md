@@ -36,8 +36,6 @@ Tobias Ellegaard Larsen
 ## Examples
 
 ``` r
-### tges_run() example ###
-
 # Recommended route using disco:
 kn <- knowledge(
   tpc_example,

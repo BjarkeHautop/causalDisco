@@ -5,12 +5,12 @@ Reorder all tiers at once
 ## Usage
 
 ``` r
-reorder_tiers(.kn, order, by_index = FALSE)
+reorder_tiers(kn, order, by_index = FALSE)
 ```
 
 ## Arguments
 
-- .kn:
+- kn:
 
   A `knowledge` object.
 
@@ -45,7 +45,7 @@ Other knowledge functions:
 [`forbid_tier_violations()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.md),
 [`get_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/get_tiers.md),
 [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md),
-[`remove_edges()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edges.md),
+[`remove_edge()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edge.md),
 [`remove_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/remove_tiers.md),
 [`remove_vars()`](https://bjarkehautop.github.io/causalDisco/reference/remove_vars.md),
 [`reposition_tier()`](https://bjarkehautop.github.io/causalDisco/reference/reposition_tier.md),

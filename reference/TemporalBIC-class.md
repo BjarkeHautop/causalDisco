@@ -4,7 +4,7 @@ A Reference Class for Gaussian Observational Data Scoring with Tiered
 Background Knowledge. This class represents a score for causal discovery
 using tiered background knowledge from observational Gaussian data; it
 is used in the causal discovery function
-[`tges`](https://bjarkehautop.github.io/causalDisco/reference/tges.md).
+[`tges()`](https://bjarkehautop.github.io/causalDisco/reference/tges.md).
 
 ## Arguments
 
@@ -60,7 +60,7 @@ All reference classes extend and inherit methods from `envRefClass`.
 
 ## See also
 
-[`tges`](https://bjarkehautop.github.io/causalDisco/reference/tges.md)
+[`tges()`](https://bjarkehautop.github.io/causalDisco/reference/tges.md)
 
 ## Author
 
@@ -70,7 +70,7 @@ Tobias Ellegaard Larsen
 
 ``` r
 # Simulate Gaussian data
-set.seed(123)
+set.seed(1405)
 n <- 500
 child_x <- rnorm(n)
 child_y <- 0.5 * child_x + rnorm(n)

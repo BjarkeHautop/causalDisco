@@ -6,16 +6,16 @@ Merge two `knowledge` objects
 
 ``` r
 # S3 method for class 'knowledge'
-.kn1 + .kn2
+kn1 + kn2
 ```
 
 ## Arguments
 
-- .kn1:
+- kn1:
 
   A `knowledge` object.
 
-- .kn2:
+- kn2:
 
   Another `knowledge` object.
 
@@ -34,7 +34,7 @@ Other knowledge functions:
 [`forbid_tier_violations()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.md),
 [`get_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/get_tiers.md),
 [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md),
-[`remove_edges()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edges.md),
+[`remove_edge()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edge.md),
 [`remove_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/remove_tiers.md),
 [`remove_vars()`](https://bjarkehautop.github.io/causalDisco/reference/remove_vars.md),
 [`reorder_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/reorder_tiers.md),
@@ -46,8 +46,6 @@ Other knowledge functions:
 ## Examples
 
 ``` r
-### +.knowledge example ###
-
 # Create two knowledge objects
 kn1 <- knowledge(
   tier(
@@ -59,7 +57,7 @@ kn1 <- knowledge(
 
 kn2 <- knowledge(
   tier(3 ~ V3),
-  V2 %--x% V3
+  V2 %!-->% V3
 )
 
 kn_merged <- kn1 + kn2
@@ -93,7 +91,7 @@ try(kn1 + kn2)
 # Requried / forbidden violations
 
 kn1 <- knowledge(
-  V1 %--x% V2
+  V1 %!-->% V2
 )
 
 kn2 <- knowledge(

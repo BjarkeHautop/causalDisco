@@ -19,19 +19,19 @@ disco(data, method, knowledge = NULL)
   A `disco_method` object representing a causal discovery algorithm.
   Available methods are
 
-  - [`pc`](https://bjarkehautop.github.io/causalDisco/reference/pc.md) -
+  - [`pc()`](https://bjarkehautop.github.io/causalDisco/reference/pc.md) -
     PC algorithm,
 
-  - [`fci`](https://bjarkehautop.github.io/causalDisco/reference/fci.md) -
+  - [`fci()`](https://bjarkehautop.github.io/causalDisco/reference/fci.md) -
     FCI algorithm,
 
-  - [`ges`](https://bjarkehautop.github.io/causalDisco/reference/ges.md) -
+  - [`ges()`](https://bjarkehautop.github.io/causalDisco/reference/ges.md) -
     GES algorithm,
 
-  - [`tges`](https://bjarkehautop.github.io/causalDisco/reference/tges.md) -
+  - [`tges()`](https://bjarkehautop.github.io/causalDisco/reference/tges.md) -
     TGES algorithm,
 
-  - [`tpc`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md) -
+  - [`tpc()`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md) -
     TPC algorithm.
 
 - knowledge:
@@ -63,7 +63,6 @@ parameters for each engine, see:
 ## Examples
 
 ``` r
-### disco() example ###
 data("tpc_example")
 
 # use pc with engine bnlearn and test fisher_z

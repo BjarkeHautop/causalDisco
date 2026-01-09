@@ -5,10 +5,8 @@ and extended with variable relationships expressed via formulas,
 selectors, or infix operators:
 
     tier(1 ~ V1 + V2, exposure ~ E)
-    forbidden(V1 ~ V4, V2 ~ V4)
-    required(V1 ~ V2)
-    V1 %-->% V3    # infix syntax for required edges
-    V2 %--x% V3    # infix syntax for forbidden edges
+    V1 %-->% V3    # infix syntax for required edge from V1 to V3
+    V2 %!-->% V3    # infix syntax for an edge from V2 to V3 that is forbidden
     exogenous(V1, V2)
 
 ## Usage
@@ -26,19 +24,16 @@ knowledge(...)
   - Optionally, a single data frame (first argument) whose column names
     initialize and freeze the variable set.
 
-  - Zero or more mini-DSL calls: `tier()`, `forbidden()`, `required()`,
+  - Zero or more mini-DSL calls: `tier()`,
     [`exogenous()`](https://caugi.org/reference/exogenous.html),
-    `exo()`, `root()`, or infix operators `%-->%` and `%--x%`.
+    `exo()`, or infix operators `%-->%`, `%!-->%`.
 
     - `tier()`: One or more two-sided formulas (`tier(1 ~ x + y)`), or a
       numeric vector.
 
-    - `forbidden()` / `required()`: One or more two-sided formulas
-      (`from ~ to`).
-
     - [`exogenous()`](https://caugi.org/reference/exogenous.html) /
-      `exo()` / `root()`: Variable names or tidyselect selectors.
-      Arguments are evaluated in order; only these calls are allowed.
+      `exo()`: Variable names or tidyselect selectors. Arguments are
+      evaluated in order; only these calls are allowed.
 
 ## Value
 
@@ -47,9 +42,8 @@ A populated `knowledge` object.
 ## Details
 
 Create a `knowledge` object using a concise mini-DSL with `tier()`,
-`forbidden()`, `required()`,
 [`exogenous()`](https://caugi.org/reference/exogenous.html) and infix
-edge operators `%-->%` and `%--x%`.
+edge operators `%-->%` and `%!-->%`.
 
 The first argument can be a data frame, which will be used to populate
 the `knowledge` object with variable names. If you later add variables
@@ -65,18 +59,14 @@ operators, or
 - `tier()`: Assigns variables to tiers. Tiers may be numeric or string
   labels. The left-hand side (LHS) of the formula is the tier; the
   right-hand side (RHS) specifies variables. Variables can also be
-  selected using **tidyselect** syntax: `tier(1 ~ starts_with("V"))`.
+  selected using tidyselect syntax: `tier(1 ~ starts_with("V"))`.
 
-- `forbidden()` / `required()`: Add directed edges between variables.
-  LHS is the source, RHS is the target. Both sides support tidyselect
-  syntax.
+- `%-->%` and `%!-->%`: Infix operators to define required and forbidden
+  edges, respectively. Both sides of the operator can use tidyselect
+  syntax to select multiple variables.
 
-- `%-->%` and `%--x%`: Infix alternatives for `required()` and
-  `forbidden()`. Example: `V1 %-->% V3` is equivalent to
-  `required(V1 ~ V3)`.
-
-- [`exogenous()`](https://caugi.org/reference/exogenous.html) / `exo()`
-  / `root()`: Mark variables as exogenous (root nodes).
+- [`exogenous()`](https://caugi.org/reference/exogenous.html) / `exo()`:
+  Mark variables as exogenous.
 
 - Numeric vector shortcut for `tier()`: `tier(c(1, 2, 1))` assigns tiers
   by index to all existing variables.
@@ -96,7 +86,7 @@ Other knowledge functions:
 [`forbid_edge()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_edge.md),
 [`forbid_tier_violations()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.md),
 [`get_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/get_tiers.md),
-[`remove_edges()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edges.md),
+[`remove_edge()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edge.md),
 [`remove_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/remove_tiers.md),
 [`remove_vars()`](https://bjarkehautop.github.io/causalDisco/reference/remove_vars.md),
 [`reorder_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/reorder_tiers.md),
@@ -108,11 +98,7 @@ Other knowledge functions:
 ## Examples
 
 ``` r
-### knowledge() example ###
-
-# build knowledge from a data frame and a few DSL calls
 data(tpc_example)
-df <- head(tpc_example)
 
 # knowledge objects are made with the knowledge() function
 kn <- knowledge()
@@ -125,12 +111,12 @@ kn <- knowledge(
     2 ~ V3
   ),
   V1 %-->% V2,
-  V3 %--x% V1
+  V3 %!-->% V1
 )
 
 # if a data frame is provided, variable names are checked against it
 kn <- knowledge(
-  df,
+  tpc_example,
   tier(
     1 ~ child_x1 + child_x2,
     2 ~ youth_x3 + youth_x4,
@@ -141,7 +127,7 @@ kn <- knowledge(
 # throws error
 try(
   knowledge(
-    df,
+    tpc_example,
     tier(
       1 ~ child_x1 + child_x2,
       2 ~ youth_x3 + youth_x4,
@@ -154,7 +140,7 @@ try(
 
 # using tidyselect helpers
 kn <- knowledge(
-  df,
+  tpc_example,
   tier(
     1 ~ starts_with("child"), # can use tidyselect helpers
     2 ~ youth_x3 + youth_x4, # do not need quotes for tiers or variables
@@ -164,7 +150,7 @@ kn <- knowledge(
 
 # custom tier naming
 kn <- knowledge(
-  df,
+  tpc_example,
   tier(
     "child" ~ starts_with("child"), # can use tidyselect helpers
     youth ~ starts_with("youth"), # do not need quotes for tiers
@@ -174,17 +160,16 @@ kn <- knowledge(
 
 # There is also required and forbidden edges, which are specified like so
 kn <- knowledge(
-  df,
+  tpc_example,
   child_x1 %-->% youth_x3,
-  oldage_x6 %--x% child_x1
+  oldage_x6 %!-->% child_x1
 )
 
 # You can also add exogenous variables
 kn <- knowledge(
-  df,
+  tpc_example,
   exogenous(child_x1),
-  exo(child_x2), # shorthand
-  root(youth_x3) # another shorthand
+  exo(child_x2) # shorthand
 )
 
 # You can also build knowledge with a verb pipeline
@@ -205,14 +190,13 @@ kn <-
     forbidden(V5 ~ V6)
   ) |>
   add_tier(3, after = "2") |>
-  add_to_tier(3 ~ V7) |> # add third tier later
-  add_root(V1) |> # three ways to add roots
+  add_to_tier(3 ~ V7) |>
   add_exo(V2) |>
   add_exogenous(V3)
-#> Warning: `forbidden()` is deprecated and will be removed in a future version. Please use the infix operators `%--x%` (forbidden) and `%-->%` (required) instead.
+#> Warning: `forbidden()` is deprecated and will be removed in a future version. Please use the infix operators `%!-->%` (forbidden) and `%-->%` (required) instead.
 
 # Using seq_tiers for larger datasets
-df <- as.data.frame(
+tpc_example <- as.data.frame(
   matrix(
     runif(100), # 100 random numbers in (0,1)
     nrow = 1,
@@ -221,10 +205,10 @@ df <- as.data.frame(
   )
 )
 
-names(df) <- paste0("X_", 1:100) # label the columns X_1,..., X_100
+names(tpc_example) <- paste0("X_", 1:100) # label the columns X_1,..., X_100
 
 kn <- knowledge(
-  df,
+  tpc_example,
   tier(
     seq_tiers(
       1:100,
@@ -234,7 +218,7 @@ kn <- knowledge(
   X_1 %-->% X_2
 )
 
-df <- data.frame(
+tpc_example <- data.frame(
   X_1 = 1,
   X_2 = 2,
   tier3_A = 3,
@@ -243,7 +227,7 @@ df <- data.frame(
 )
 
 kn_seq_tiers2 <- knowledge(
-  df,
+  tpc_example,
   tier(
     seq_tiers(1:2, ends_with("_{i}")), # X_1, X_2
     seq_tiers(3, starts_with("tier{i}")), # tier3_

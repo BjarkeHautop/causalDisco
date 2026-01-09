@@ -9,29 +9,25 @@ pcalg only supports *undirected* (symmetric) background constraints:
 ## Usage
 
 ``` r
-as_pcalg_constraints(
-  .kn,
-  labels = .kn$vars$var,
-  directed_as_undirected = FALSE
-)
+as_pcalg_constraints(kn, labels = kn$vars$var, directed_as_undirected = FALSE)
 ```
 
 ## Arguments
 
-- .kn:
+- kn:
 
   A `knowledge` object. Must have no tier information.
 
 - labels:
 
   Character vector of all variable names, in the exact order of your
-  data columns. Every variable referenced by an edge in `.kn` must
-  appear here.
+  data columns. Every variable referenced by an edge in `kn` must appear
+  here.
 
 - directed_as_undirected:
 
   Logical (default `FALSE`). If `FALSE`, we require that every edge in
-  `.kn` has its mirror-image present as well, and will error if any are
+  `kn` has its mirror-image present as well, and will error if any are
   missing. If `TRUE`, we automatically mirror every directed edge into
   an undirected constraint.
 
@@ -68,7 +64,7 @@ Other knowledge functions:
 [`forbid_tier_violations()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.md),
 [`get_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/get_tiers.md),
 [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md),
-[`remove_edges()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edges.md),
+[`remove_edge()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edge.md),
 [`remove_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/remove_tiers.md),
 [`remove_vars()`](https://bjarkehautop.github.io/causalDisco/reference/remove_vars.md),
 [`reorder_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/reorder_tiers.md),
@@ -80,15 +76,13 @@ Other knowledge functions:
 ## Examples
 
 ``` r
-### as_pcalg_constraints() example ###
-
 # pcalg supports undirected constraints; build a tierless knowledge and convert
 data(tpc_example)
 
 kn <- knowledge(
   tpc_example,
-  child_x1 %--x% youth_x3,
-  youth_x3 %--x% child_x1
+  child_x1 %!-->% youth_x3,
+  youth_x3 %!-->% child_x1
 )
 
 pc_constraints <- as_pcalg_constraints(kn, directed_as_undirected = FALSE)
@@ -129,7 +123,7 @@ try(as_pcalg_constraints(kn), silent = TRUE) # fails due to tiers
 # using directed knowledge
 kn <- knowledge(
   tpc_example,
-  child_x1 %--x% youth_x3
+  child_x1 %!-->% youth_x3
 )
 
 try(as_pcalg_constraints(kn), silent = TRUE) # fails due to directed knowledge

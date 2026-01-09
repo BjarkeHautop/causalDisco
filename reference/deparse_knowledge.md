@@ -3,18 +3,17 @@
 Given a `knowledge` object, return a single string containing the R code
 (using
 [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md),
-`tier()`, `forbidden()`, `required()`) that would rebuild that same
-object.
+`tier()`, `%-->%`, and `%!-->%`. that would rebuild that same object.
 
 ## Usage
 
 ``` r
-deparse_knowledge(.kn, df_name = NULL)
+deparse_knowledge(kn, df_name = NULL)
 ```
 
 ## Arguments
 
-- .kn:
+- kn:
 
   A `knowledge` object.
 
@@ -46,7 +45,7 @@ Other knowledge functions:
 [`forbid_tier_violations()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.md),
 [`get_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/get_tiers.md),
 [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md),
-[`remove_edges()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edges.md),
+[`remove_edge()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edge.md),
 [`remove_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/remove_tiers.md),
 [`remove_vars()`](https://bjarkehautop.github.io/causalDisco/reference/remove_vars.md),
 [`reorder_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/reorder_tiers.md),
@@ -69,13 +68,10 @@ kn <- knowledge(
     old ~ starts_with("old")
   ),
   child_x1 %-->% youth_x3,
-  oldage_x6 %--x% child_x1
+  oldage_x6 %!-->% child_x1
 )
 
-kn <- forbid_tier_violations(kn)
-
 code <- deparse_knowledge(kn, df_name = "tpc_example")
-
 cat(code)
 #> knowledge(tpc_example,
 #>   tier(
@@ -83,31 +79,24 @@ cat(code)
 #>     youth ~ youth_x3 + youth_x4,
 #>     old ~ oldage_x5 + oldage_x6
 #>   ),
-#>   forbidden(
-#>     oldage_x5 ~ child_x1 + child_x2 + youth_x3 + youth_x4,
-#>     oldage_x6 ~ child_x1 + child_x2 + youth_x3 + youth_x4,
-#>     youth_x3 ~ child_x1 + child_x2,
-#>     youth_x4 ~ child_x1 + child_x2
-#>   ),
-#>   required(
-#>     child_x1 ~ youth_x3
-#>   )
+#>   child_x1 %-->% youth_x3,
+#>   oldage_x6 %!-->% child_x1
 #> )
-# printed output:
-# knowledge(tpc_example,
-#   tier(
-#     child ~ child_x1 + child_x2,
-#     youth ~ youth_x3 + youth_x4,
-#     old ~ oldage_x5 + oldage_x6
-#   ),
-#   forbidden(
-#     oldage_x5 ~ child_x1 + child_x2 + youth_x3 + youth_x4,
-#     oldage_x6 ~ child_x1 + child_x2 + youth_x3 + youth_x4,
-#     youth_x3 ~ child_x1 + child_x2,
-#     youth_x4 ~ child_x1 + child_x2
-#   ),
-#   required(
-#     child_x1 ~ youth_x3
-#   )
-# )
+
+# Explicitly add all forbidden edges implied by tiers
+kn <- forbid_tier_violations(kn)
+code <- deparse_knowledge(kn, df_name = "tpc_example")
+cat(code)
+#> knowledge(tpc_example,
+#>   tier(
+#>     child ~ child_x1 + child_x2,
+#>     youth ~ youth_x3 + youth_x4,
+#>     old ~ oldage_x5 + oldage_x6
+#>   ),
+#>   child_x1 %-->% youth_x3,
+#>   oldage_x5 %!-->% c(child_x1, child_x2, youth_x3, youth_x4),
+#>   oldage_x6 %!-->% c(child_x1, child_x2, youth_x3, youth_x4),
+#>   youth_x3 %!-->% c(child_x1, child_x2),
+#>   youth_x4 %!-->% c(child_x1, child_x2)
+#> )
 ```

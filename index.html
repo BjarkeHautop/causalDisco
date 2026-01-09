@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9023</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,7 +101,6 @@
 <p>We provide a helper function to install Temurin JDK 25 on macOS and Windows:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">causalDisco</span><span class="fu">::</span><span class="fu"><a href="reference/install_java.html">install_java</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>You may also refer to Tetrad’s <a href="https://github.com/cmu-phil/tetrad/wiki/Setting-up-Java-for-Tetrad" class="external-link">Java setup guide</a>.</p>
 <p>The current supported version of Tetrad can then be installed by calling</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">causalDisco</span><span class="fu">::</span><span class="fu"><a href="reference/install_tetrad.html">install_tetrad</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -171,14 +170,6 @@
 <p><img src="reference/figures/README-plot-1.png" alt="A causal graph with the known tiers indicated by vertical positioning of the nodes." width="100%"><img src="reference/figures/README-plot-2.png" alt="A causal graph with the known tiers indicated by vertical positioning of the nodes." width="100%"></p>
 </div>
 <div class="section level2">
-<h2 id="questions">Questions<a class="anchor" aria-label="anchor" href="#questions"></a>
-</h2>
-<ul>
-<li><p><code>tpc</code> and <code>tfci</code> have default <span class="math inline">\alpha = 0.05</span>, but the underlying <code>tpc_run</code> and <code>tfci_run</code> have <span class="math inline">\alpha = 0.1</span>.</p></li>
-<li><p>Shouldn’t we just list all possible arguments to <code>tpc</code>, <code>tfci</code>, and <code>tges</code> instead of <code>...</code> and forcing the user to look at the underlying <code>_run</code> functions? Then also make the <code>_run</code> functions not exported?</p></li>
-</ul>
-</div>
-<div class="section level2">
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
 </h2>
 <ul>
@@ -206,7 +197,7 @@
 <p>If we want any changes we can modify the tikz code after generation.</p>
 </li>
 <li><p>Make required work for our algorithms. It breaks when it internally calls <code>tpdag</code>, so look into that…</p></li>
-<li><p>Make score/test/alg names consistent. Currently a mix of snake_case, kebab-case, and period.case.</p></li>
+<li><p>Make score/test/alg names consistent. Currently a mix of snake_case, kebab-case, and period.case. - done?</p></li>
 <li><p>In documentation of defaults for tests maybe add the underlying engine defaults if they differ?</p></li>
 </ul>
 <div class="section level3">
@@ -220,8 +211,8 @@
 <h3 id="manging-exported-functions">Manging exported functions<a class="anchor" aria-label="anchor" href="#manging-exported-functions"></a>
 </h3>
 <ul>
-<li><p>Do we need to export the run functions (<code>tpc_run</code>, …) if we recommend user to use <code><a href="reference/disco.html">disco()</a></code> with the method functions (<code>tpc</code>, …)?</p></li>
-<li><p>Various helper functions: <code>as_pcalg_constraints</code>, …, <code>is_knowledgeable_caugi</code>, …, <code>tetrad_graph</code></p></li>
+<li>Various helper functions: <code>as_pcalg_constraints</code>, …, <code>is_knowledgeable_caugi</code>, …, <code>tetrad_graph</code>
+</li>
 </ul>
 </div>
 <div class="section level3">
@@ -300,7 +291,7 @@
 <span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co">#&gt; Error in `.jcall()`:</span></span>
-<span><span class="co">#&gt; ! java.lang.RuntimeException: Unrecognized basis type: 4</span></span></code></pre></div>
+<span><span class="co">#&gt; ! java.lang.RuntimeException: java.lang.IllegalArgumentException: Unrecognized basis type: 4</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>

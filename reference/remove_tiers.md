@@ -5,12 +5,12 @@ Drops tier definitions (and un‐tiers any vars assigned to them).
 ## Usage
 
 ``` r
-remove_tiers(.kn, ...)
+remove_tiers(kn, ...)
 ```
 
 ## Arguments
 
-- .kn:
+- kn:
 
   A `knowledge` object.
 
@@ -38,7 +38,7 @@ Other knowledge functions:
 [`forbid_tier_violations()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.md),
 [`get_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/get_tiers.md),
 [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md),
-[`remove_edges()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edges.md),
+[`remove_edge()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edge.md),
 [`remove_vars()`](https://bjarkehautop.github.io/causalDisco/reference/remove_vars.md),
 [`reorder_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/reorder_tiers.md),
 [`reposition_tier()`](https://bjarkehautop.github.io/causalDisco/reference/reposition_tier.md),
@@ -49,8 +49,6 @@ Other knowledge functions:
 ## Examples
 
 ``` r
-### remove_vars() example ###
-
 # remove variables and their incident edges
 data(tpc_example)
 
@@ -90,7 +88,7 @@ print(kn)
 #>  ✔  child_x1 → youth_x3
 #> 
 
-kn <- remove_edges(kn, child_x1 ~ youth_x3)
+kn <- remove_edge(kn, child_x1, youth_x3)
 print(kn)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 

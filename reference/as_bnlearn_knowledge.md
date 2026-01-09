@@ -9,12 +9,12 @@ forbidden edges before running the conversion.
 ## Usage
 
 ``` r
-as_bnlearn_knowledge(.kn)
+as_bnlearn_knowledge(kn)
 ```
 
 ## Arguments
 
-- .kn:
+- kn:
 
   A `knowledge` object. Must have no tier information.
 
@@ -38,7 +38,7 @@ Other knowledge functions:
 [`forbid_tier_violations()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.md),
 [`get_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/get_tiers.md),
 [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md),
-[`remove_edges()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edges.md),
+[`remove_edge()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edge.md),
 [`remove_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/remove_tiers.md),
 [`remove_vars()`](https://bjarkehautop.github.io/causalDisco/reference/remove_vars.md),
 [`reorder_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/reorder_tiers.md),
@@ -50,8 +50,6 @@ Other knowledge functions:
 ## Examples
 
 ``` r
-### as_bnlearn_knowledge() example ###
-
 # produce whitelist/blacklist dataframe for bnlearn
 data(tpc_example)
 

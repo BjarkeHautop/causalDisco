@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9023</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,8 +88,8 @@ visualization.</p>
 <h2 id="simple-example-of-causal-discovery">Simple example of causal discovery<a class="anchor" aria-label="anchor" href="#simple-example-of-causal-discovery"></a>
 </h2>
 <p>The example discussed in this section is inspired by the Julia
-package CausalDiscovery.jl with their PC algorithm example, which can be
-found here <a href="https://mschauer.github.io/CausalInference.jl/latest/examples/pc_basic_examples/" class="external-link">PC
+package <a href="https://mschauer.github.io/CausalInference.jl/latest/" class="external-link">CausalDiscovery.jl</a>
+with their PC algorithm example, which can be found here <a href="https://mschauer.github.io/CausalInference.jl/latest/examples/pc_basic_examples/" class="external-link">PC
 algorithm example in CausalDiscovery.jl</a>.</p>
 <p>We will consider data from the following DAG, which is also discussed
 in chapter 2 of Judea Pearl’s book.</p>
@@ -133,19 +133,19 @@ PC method with Fisher’s Z test and a significance level of 0.05 and
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>(Note, that it doesn’t work correctly for bnlearn, since
-<code>as_caugi</code> in caugi had a bug. I fixed it in PR #149, so it
+<code><a href="https://caugi.org/reference/as_caugi.html" class="external-link">as_caugi()</a></code> in caugi had a bug. I fixed it in PR #149, so it
 will work in the next release of caugi.)</p>
 <p>The first notable feature of this plot is that some edges have
 arrows, while others do not. For instance, the edge from <code>v</code>
 to <code>z</code> is directed, indicating that <code>v</code> influences
 <code>z</code>, but not vice versa. In contrast, the edge between
-<code>x</code> and <code>w</code> has no arrows at either end (and with
-dashed lines), showing that the direction of causal influence cannot be
-determined from the data alone. Both directions; <code>x</code> to
-<code>w</code> and <code>w</code> to <code>x</code>, are consistent with
-the observed data. We can demonstrate this by reversing the direction of
-influence in the data-generating process above and applying the PC
-algorithm to the new data set:</p>
+<code>x</code> and <code>w</code> has no arrows at either end, showing
+that the direction of causal influence cannot be determined from the
+data alone. Both directions; <code>x</code> to <code>w</code> and
+<code>w</code> to <code>x</code>, are consistent with the observed data.
+We can demonstrate this by reversing the direction of influence in the
+data-generating process above and applying the PC algorithm to the new
+data set:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1405</span><span class="op">)</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
@@ -199,8 +199,8 @@ Kernel Conditional Independence Test (KCI) in Tetrad.</p>
 <span><span class="op">}</span></span></code></pre></div>
 <p><img src="nonlinear-tetrad-kci.png"></p>
 <p>The result of the PC algorithm using the KCI test look like what we’d
-expect to see. Note, that this test is much more demanding than using
-Fisher’s Z test.</p>
+expect to see. Note, that this test is much more computationally
+demanding than using Fisher’s Z test.</p>
 </div>
 </div>
 <div class="section level2">
@@ -216,8 +216,8 @@ can be specified as follows:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">data_linear</span>,</span>
-<span>  <span class="va">v</span> <span class="op">%--x%</span> <span class="va">x</span>,  <span class="co"># v does not cause x</span></span>
-<span>  <span class="va">w</span> <span class="op">%--x%</span> <span class="va">x</span>   <span class="co"># w does not cause x</span></span>
+<span>  <span class="va">v</span> <span class="op">%!--&gt;%</span> <span class="va">x</span>,  <span class="co"># v does not cause x</span></span>
+<span>  <span class="va">w</span> <span class="op">%!--&gt;%</span> <span class="va">x</span>   <span class="co"># w does not cause x</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causalDisco_files/figure-html/prior%20knowledge-1.png" class="r-plt" alt="" width="700"></p>

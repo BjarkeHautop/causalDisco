@@ -1,8 +1,8 @@
 # Test for vanishing partial correlations
 
 This function simply calls the
-[`gaussCItest`](https://rdrr.io/pkg/pcalg/man/condIndFisherZ.html)
-function from the `pcalg` package.
+[`pcalg::gaussCItest()`](https://rdrr.io/pkg/pcalg/man/condIndFisherZ.html)
+function from the pcalg package.
 
 ## Usage
 

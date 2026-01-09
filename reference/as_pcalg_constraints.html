@@ -15,7 +15,7 @@ fixed_edges — requiring edges (ones enforced)
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9023</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,30 +52,26 @@ fixed_edges — requiring edges (ones enforced)
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">as_pcalg_constraints</span><span class="op">(</span></span>
-<span>  <span class="va">.kn</span>,</span>
-<span>  labels <span class="op">=</span> <span class="va">.kn</span><span class="op">$</span><span class="va">vars</span><span class="op">$</span><span class="va">var</span>,</span>
-<span>  directed_as_undirected <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">as_pcalg_constraints</span><span class="op">(</span><span class="va">kn</span>, labels <span class="op">=</span> <span class="va">kn</span><span class="op">$</span><span class="va">vars</span><span class="op">$</span><span class="va">var</span>, directed_as_undirected <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg--kn">.kn<a class="anchor" aria-label="anchor" href="#arg--kn"></a></dt>
+<dl><dt id="arg-kn">kn<a class="anchor" aria-label="anchor" href="#arg-kn"></a></dt>
 <dd><p>A <code>knowledge</code> object.  Must have no tier information.</p></dd>
 
 
 <dt id="arg-labels">labels<a class="anchor" aria-label="anchor" href="#arg-labels"></a></dt>
 <dd><p>Character vector of all variable names, in the exact order
-of your data columns.  Every variable referenced by an edge in <code>.kn</code>
+of your data columns.  Every variable referenced by an edge in <code>kn</code>
 must appear here.</p></dd>
 
 
 <dt id="arg-directed-as-undirected">directed_as_undirected<a class="anchor" aria-label="anchor" href="#arg-directed-as-undirected"></a></dt>
 <dd><p>Logical (default <code>FALSE</code>).  If
-<code>FALSE</code>, we require that every edge in <code>.kn</code> has its
+<code>FALSE</code>, we require that every edge in <code>kn</code> has its
 mirror-image present as well, and will error if any are missing.  If
 <code>TRUE</code>, we automatically mirror every directed edge into
 an undirected constraint.</p></dd>
@@ -115,7 +111,7 @@ symmetrical counterpart. This can only hold for forbidden edges.</p></li>
 <code><a href="forbid_tier_violations.html">forbid_tier_violations()</a></code>,
 <code><a href="get_tiers.html">get_tiers()</a></code>,
 <code><a href="knowledge.html">knowledge()</a></code>,
-<code><a href="remove_edges.html">remove_edges()</a></code>,
+<code><a href="remove_edge.html">remove_edge()</a></code>,
 <code><a href="remove_tiers.html">remove_tiers()</a></code>,
 <code><a href="remove_vars.html">remove_vars()</a></code>,
 <code><a href="reorder_tiers.html">reorder_tiers()</a></code>,
@@ -127,15 +123,13 @@ symmetrical counterpart. This can only hold for forbidden edges.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">### as_pcalg_constraints() example ###</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># pcalg supports undirected constraints; build a tierless knowledge and convert</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># pcalg supports undirected constraints; build a tierless knowledge and convert</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="knowledge.html">knowledge</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">tpc_example</span>,</span></span>
-<span class="r-in"><span>  <span class="va">child_x1</span> <span class="op">%--x%</span> <span class="va">youth_x3</span>,</span></span>
-<span class="r-in"><span>  <span class="va">youth_x3</span> <span class="op">%--x%</span> <span class="va">child_x1</span></span></span>
+<span class="r-in"><span>  <span class="va">child_x1</span> <span class="op">%!--&gt;%</span> <span class="va">youth_x3</span>,</span></span>
+<span class="r-in"><span>  <span class="va">youth_x3</span> <span class="op">%!--&gt;%</span> <span class="va">child_x1</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">pc_constraints</span> <span class="op">&lt;-</span> <span class="fu">as_pcalg_constraints</span><span class="op">(</span><span class="va">kn</span>, directed_as_undirected <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
@@ -176,7 +170,7 @@ symmetrical counterpart. This can only hold for forbidden edges.</p></li>
 <span class="r-in"><span><span class="co"># using directed knowledge</span></span></span>
 <span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="knowledge.html">knowledge</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">tpc_example</span>,</span></span>
-<span class="r-in"><span>  <span class="va">child_x1</span> <span class="op">%--x%</span> <span class="va">youth_x3</span></span></span>
+<span class="r-in"><span>  <span class="va">child_x1</span> <span class="op">%!--&gt;%</span> <span class="va">youth_x3</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">as_pcalg_constraints</span><span class="op">(</span><span class="va">kn</span><span class="op">)</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># fails due to directed knowledge</span></span></span>

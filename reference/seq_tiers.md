@@ -49,7 +49,7 @@ Other knowledge functions:
 [`forbid_tier_violations()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.md),
 [`get_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/get_tiers.md),
 [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md),
-[`remove_edges()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edges.md),
+[`remove_edge()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edge.md),
 [`remove_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/remove_tiers.md),
 [`remove_vars()`](https://bjarkehautop.github.io/causalDisco/reference/remove_vars.md),
 [`reorder_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/reorder_tiers.md),
@@ -60,16 +60,33 @@ Other knowledge functions:
 ## Examples
 
 ``` r
-### seq_tiers() example ###
-
 # generate a bundle of tier formulas using a pattern with {i}
 # here we create: 1 ~ matches("^child_x1$"), 2 ~ matches("^child_x2$")
 data(tpc_example)
-formulas <- seq_tiers(1:2, matches("^child_x{i}$"))
 
-# you can pass this bundle directly to tier() inside knowledge()
-kn <- knowledge(tpc_example, tier(formulas))
-#> Error in eval(expr, envir = environment()): object 'formulas' not found
+kn <- knowledge(
+  tpc_example,
+  tier(seq_tiers(1:2, matches("^child_x{i}$")))
+)
 print(kn)
-#> Error: object 'kn' not found
+#> 
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
+#> 
+#> ── Tiers ──
+#> 
+#>   label
+#> 1 1    
+#> 2 2    
+#> 
+#> ── Variables ──
+#> 
+#>   var       tier 
+#> 1 child_x1  1    
+#> 2 child_x2  2    
+#> 3 oldage_x5 NA   
+#> 4 oldage_x6 NA   
+#> 5 youth_x3  NA   
+#> 6 youth_x4  NA   
+#> 
 ```

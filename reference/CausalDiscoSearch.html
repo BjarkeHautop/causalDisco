@@ -11,7 +11,7 @@ It allows to set the data, sufficient statistics, test, score, and algorithm."><
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9023</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +50,7 @@ It allows to set the data, sufficient statistics, test, score, and algorithm.</p
 
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="knowledge.html">knowledge</a></code>.</p></div>
+    <div class="dont-index"><p><code><a href="knowledge.html">knowledge()</a></code>.</p></div>
     </div>
     <div class="section level2">
     <h2 id="public-fields">Public fields<a class="anchor" aria-label="anchor" href="#public-fields"></a></h2>
@@ -72,20 +72,20 @@ See <code><a href="TemporalBDeu-class.html">TemporalBDeu</a></code>.</p></li>
 <dt><code>test</code></dt>
 <dd><p>A function that will be used to test independence.
 Can be set with <code>$set_test()</code>. Recognized values are:</p><ul><li><p><code>"fisher_z"</code> - Fisher Z test for Gaussian data.
-See <code><a href="cor_test.html">cor_test</a></code>.</p></li>
+See <code><a href="cor_test.html">cor_test()</a></code>.</p></li>
 <li><p><code>"reg"</code> - Regression test for discrete or binary data.
-See <code><a href="reg_test.html">reg_test</a></code>.</p></li>
+See <code><a href="reg_test.html">reg_test()</a></code>.</p></li>
 </ul></dd>
 
 
 <dt><code>alg</code></dt>
 <dd><p>A function that will be used to run the search algorithm.
 Can be set with <code>$set_alg()</code>. Recognized values are:</p><ul><li><p><code>"tpc"</code>  - TPC algorithm.
-See <code><a href="tpc.html">tpc</a></code>.</p></li>
+See <code><a href="tpc.html">tpc()</a></code>.</p></li>
 <li><p><code>"tfci"</code> - TFCI algorithm.
-See <code><a href="tfci.html">tfci</a></code>.</p></li>
+See <code><a href="tfci.html">tfci()</a></code>.</p></li>
 <li><p><code>"tges"</code> - TGES algorithm.
-See <code><a href="tges.html">tges</a></code>.</p></li>
+See <code><a href="tges.html">tges()</a></code>.</p></li>
 </ul></dd>
 
 
@@ -248,9 +248,9 @@ sufficient statistic depends on which test is being used.</p></dd>
 <dd><p>Logical; whether to treat directed edges in
 the knowledge as undirected. Default is <code>FALSE</code>. This is due to the
 nature of how <span class="pkg">pcalg</span> handles background knowledge when using
-<code><a href="https://rdrr.io/pkg/pcalg/man/skeleton.html" class="external-link">skeleton</a></code> under the hood in
-<code><a href="tpc.html">tpc</a></code> and
-<code><a href="tfci.html">tfci</a></code>.</p></dd>
+<code><a href="https://rdrr.io/pkg/pcalg/man/skeleton.html" class="external-link">pcalg::skeleton()</a></code> under the hood in
+<code><a href="tpc.html">tpc()</a></code> and
+<code><a href="tfci.html">tfci()</a></code>.</p></dd>
 
 
 </dl><p></p></div>
@@ -298,9 +298,7 @@ nature of how <span class="pkg">pcalg</span> handles background knowledge when u
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">### causalDisco_search R6 class example ###</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Generally, we do not recommend using the R6 classes directly, but rather</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Generally, we do not recommend using the R6 classes directly, but rather</span></span></span>
 <span class="r-in"><span><span class="co"># use the disco() or any method function, for example pc(), instead.</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span></span>

@@ -13,7 +13,7 @@ tpc_run(
   data = NULL,
   knowledge = NULL,
   order = NULL,
-  alpha = 10^(-1),
+  alpha = 0.05,
   test = reg_test,
   suff_stat = NULL,
   method = "stable.fast",
@@ -73,7 +73,8 @@ tpc_run(
 
   Skeleton construction method, one of `"stable"`, `"original"`, or
   `"stable.fast"` (default). See
-  [`skeleton`](https://rdrr.io/pkg/pcalg/man/skeleton.html) for details.
+  [`pcalg::skeleton()`](https://rdrr.io/pkg/pcalg/man/skeleton.html) for
+  details.
 
 - na_method:
 
@@ -111,8 +112,8 @@ tpc_run(
 - ...:
 
   Additional arguments passed to
-  [`skeleton`](https://rdrr.io/pkg/pcalg/man/skeleton.html) during
-  skeleton construction.
+  [`pcalg::skeleton()`](https://rdrr.io/pkg/pcalg/man/skeleton.html)
+  during skeleton construction.
 
 ## Value
 
@@ -126,11 +127,11 @@ object. If `output = "caugi"`, a `caugi` and a `knowledge`
 ## Details
 
 Any independence test implemented in pcalg may be used; see
-[`pc`](https://rdrr.io/pkg/pcalg/man/pc.html). When `na_method = "twd"`,
-test-wise deletion is performed: for `cor_test`, each pairwise
-correlation uses complete cases; for `reg_test`, each conditional test
-performs its own deletion. If you supply a user-defined `test`, you must
-also provide `suff_stat`.
+[`pcalg::pc()`](https://rdrr.io/pkg/pcalg/man/pc.html). When
+`na_method = "twd"`, test-wise deletion is performed: for `cor_test`,
+each pairwise correlation uses complete cases; for `reg_test`, each
+conditional test performs its own deletion. If you supply a user-defined
+`test`, you must also provide `suff_stat`.
 
 Temporal or tiered knowledge enters in two places:
 
@@ -148,8 +149,6 @@ for each prefix.
 ## Examples
 
 ``` r
-### tpc() example ###
-
 # Load data
 data(tpc_example)
 
@@ -237,9 +236,4 @@ tpc_run(tpc_example, knowledge = kn, alpha = 0.01)
 #> 5 oldage_x5 old  
 #> 6 oldage_x6 old  
 #> 
-
-# Deprecated: using order prefixes (will warn)
-testthat::expect_warning(
-  tpc_run(tpc_example, order = c("child", "youth", "oldage"), alpha = 0.01)
-)
 ```

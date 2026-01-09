@@ -12,7 +12,7 @@ tfci_run(
   data = NULL,
   knowledge = NULL,
   order = NULL,
-  alpha = 10^(-1),
+  alpha = 0.05,
   test = reg_test,
   suff_stat = NULL,
   method = "stable.fast",
@@ -70,7 +70,8 @@ tfci_run(
 
   Skeleton construction method, one of `"stable"`, `"original"`, or
   `"stable.fast"` (default). See
-  [`skeleton`](https://rdrr.io/pkg/pcalg/man/skeleton.html) for details.
+  [`pcalg::skeleton()`](https://rdrr.io/pkg/pcalg/man/skeleton.html) for
+  details.
 
 - na_method:
 
@@ -100,8 +101,8 @@ tfci_run(
 - ...:
 
   Additional arguments passed to
-  [`skeleton`](https://rdrr.io/pkg/pcalg/man/skeleton.html) during
-  skeleton construction.
+  [`pcalg::skeleton()`](https://rdrr.io/pkg/pcalg/man/skeleton.html)
+  during skeleton construction.
 
 ## Value
 
@@ -124,8 +125,6 @@ After this, the usual FCI orientation rules are applied; see
 ## Examples
 
 ``` r
-### tfci() example ###
-
 data("tpc_example")
 
 kn <- knowledge(

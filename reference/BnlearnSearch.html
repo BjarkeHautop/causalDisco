@@ -9,7 +9,7 @@ algorithms within the causalDisco framework."><meta property="og:image" content=
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9023</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,13 +58,14 @@ search object. Can be set with <code>set_data()</code>.</p></dd>
 
 <dt><code>score</code></dt>
 <dd><p>Character scalar naming the score function used in
-bnlearn. Can be set with <code>$set_score()</code>.
+bnlearn. Can be set with <code>$set_score()</code>. Kebab-case score names (as used in <span class="pkg">bnlearn</span>, e.g.
+<code>"pred-loglik"</code>) are also accepted and automatically translated to snake_case.
 Recognised values are:</p>
 <p><strong>Discrete – categorical</strong></p><ul><li><p><code>"loglik"</code> — log-likelihood</p></li>
 <li><p><code>"aic"</code> — Akaike Information Criterion</p></li>
 <li><p><code>"bic"</code> — Bayesian Information Criterion</p></li>
 <li><p><code>"ebic"</code> — Extended BIC</p></li>
-<li><p><code>"pred-loglik"</code> — predictive log-likelihood</p></li>
+<li><p><code>"pred_loglik"</code> — predictive log-likelihood</p></li>
 <li><p><code>"bde"</code> — Bayesian Dirichlet equivalent (uniform)</p></li>
 <li><p><code>"bds"</code> — Bayesian Dirichlet score</p></li>
 <li><p><code>"mbde"</code> — modified BDE</p></li>
@@ -74,46 +75,47 @@ Recognised values are:</p>
 <li><p><code>"qnml"</code> — quotient NML</p></li>
 <li><p><code>"nal"</code> — node-average log-likelihood</p></li>
 <li><p><code>"pnal"</code> — penalised node-average log-likelihood</p></li>
-</ul><p><strong>Gaussian</strong></p><ul><li><p><code>"loglik-g"</code>, <code>"aic-g"</code>, <code>"bic-g"</code>,
-<code>"ebic-g"</code>, <code>"pred-loglik-g"</code></p></li>
+</ul><p><strong>Gaussian</strong></p><ul><li><p><code>"loglik_g"</code>, <code>"aic_g"</code>, <code>"bic_g"</code>,
+<code>"ebic_g"</code>, <code>"pred_loglik_g"</code></p></li>
 <li><p><code>"bge"</code> — Gaussian posterior density</p></li>
-<li><p><code>"nal-g"</code> — node-average log-likelihood</p></li>
-<li><p><code>"pnal-g"</code> — penalised node-average log-likelihood</p></li>
-</ul><p><strong>Conditional Gaussian</strong></p><ul><li><p><code>"loglik-cg"</code>, <code>"aic-cg"</code>, <code>"bic-cg"</code>,
-<code>"ebic-cg"</code>, <code>"pred-loglik-cg"</code>,
-<code>"nal-cg"</code>, <code>"pnal-cg"</code></p></li>
+<li><p><code>"nal_g"</code> — node-average log-likelihood</p></li>
+<li><p><code>"pnal_g"</code> — penalised node-average log-likelihood</p></li>
+</ul><p><strong>Conditional Gaussian</strong></p><ul><li><p><code>"loglik_cg"</code>, <code>"aic_cg"</code>, <code>"bic_cg"</code>,
+<code>"ebic_cg"</code>, <code>"pred_loglik_cg"</code>,
+<code>"nal_cg"</code>, <code>"pnal_cg"</code></p></li>
 </ul></dd>
 
 
 <dt><code>test</code></dt>
 <dd><p>Character scalar naming the conditional-independence test
-passed to bnlearn. Can be set with <code>$set_score()</code>.
+passed to bnlearn. Can be set with <code>$set_score()</code>. Kebab-case test names
+(as used in <span class="pkg">bnlearn</span>, e.g. "mi-adf") are also accepted and automatically translated to snake_case.
 Recognised values are:</p>
 <p><strong>Discrete – categorical</strong></p><ul><li><p><code>"mi"</code> – mutual information</p></li>
-<li><p><code>"mi-adf"</code> – mutual information with adjusted d.f.</p></li>
-<li><p><code>"mc-mi"</code> – Monte Carlo mutual information</p></li>
-<li><p><code>"smc-mi"</code> – sequential Monte Carlo mutual information</p></li>
-<li><p><code>"sp-mi"</code> – semi-parametric mutual information</p></li>
-<li><p><code>"mi-sh"</code> – mutual information (shrinkage)</p></li>
+<li><p><code>"mi_adf"</code> – mutual information with adjusted d.f.</p></li>
+<li><p><code>"mc_mi"</code> – Monte Carlo mutual information</p></li>
+<li><p><code>"smc_mi"</code> – sequential Monte Carlo mutual information</p></li>
+<li><p><code>"sp_mi"</code> – semi-parametric mutual information</p></li>
+<li><p><code>"mi_sh"</code> – mutual information (shrinkage)</p></li>
 <li><p><code>"x2"</code> – chi-squared</p></li>
-<li><p><code>"x2-adf"</code> – chi-squared with adjusted d.f.</p></li>
-<li><p><code>"mc-x2"</code> – Monte Carlo chi-squared</p></li>
-<li><p><code>"smc-x2"</code> – sequential Monte Carlo chi-squared</p></li>
-<li><p><code>"sp-x2"</code> – semi-parametric chi-squared</p></li>
+<li><p><code>"x2_adf"</code> – chi-squared with adjusted d.f.</p></li>
+<li><p><code>"mc_x2"</code> – Monte Carlo chi-squared</p></li>
+<li><p><code>"smc_x2"</code> – sequential Monte Carlo chi-squared</p></li>
+<li><p><code>"sp_x2"</code> – semi-parametric chi-squared</p></li>
 </ul><p><strong>Discrete – ordered factors</strong></p><ul><li><p><code>"jt"</code> – Jonckheere–Terpstra</p></li>
-<li><p><code>"mc-jt"</code> – Monte Carlo Jonckheere–Terpstra</p></li>
-<li><p><code>"smc-jt"</code> – sequential Monte Carlo Jonckheere–Terpstra</p></li>
+<li><p><code>"mc_jt"</code> – Monte Carlo Jonckheere–Terpstra</p></li>
+<li><p><code>"smc_jt"</code> – sequential Monte Carlo Jonckheere–Terpstra</p></li>
 </ul><p><strong>Gaussian</strong></p><ul><li><p><code>"cor"</code> – Pearson correlation</p></li>
-<li><p><code>"mc-cor"</code> – Monte Carlo Pearson correlation</p></li>
-<li><p><code>"smc-cor"</code> – sequential Monte Carlo Pearson correlation</p></li>
+<li><p><code>"mc_cor"</code> – Monte Carlo Pearson correlation</p></li>
+<li><p><code>"smc_cor"</code> – sequential Monte Carlo Pearson correlation</p></li>
 <li><p><code>"zf"</code> / <code>"fisher_z"</code> – Fisher Z test</p></li>
-<li><p><code>"mc-zf"</code> – Monte Carlo Fisher Z</p></li>
-<li><p><code>"smc-zf"</code> – sequential Monte Carlo Fisher Z</p></li>
-<li><p><code>"mi-g"</code> – mutual information (Gaussian)</p></li>
-<li><p><code>"mc-mi-g"</code> – Monte Carlo mutual information (Gaussian)</p></li>
-<li><p><code>"smc-mi-g"</code> – sequential Monte Carlo mutual information (Gaussian)</p></li>
-<li><p><code>"mi-g-sh"</code> – mutual information (Gaussian, shrinkage)</p></li>
-</ul><p><strong>Conditional Gaussian</strong></p><ul><li><p><code>"mi-cg"</code> – mutual information (conditional Gaussian)</p></li>
+<li><p><code>"mc_zf"</code> – Monte Carlo Fisher Z</p></li>
+<li><p><code>"smc_zf"</code> – sequential Monte Carlo Fisher Z</p></li>
+<li><p><code>"mi_g"</code> – mutual information (Gaussian)</p></li>
+<li><p><code>"mc_mi_g"</code> – Monte Carlo mutual information (Gaussian)</p></li>
+<li><p><code>"smc_mi_g"</code> – sequential Monte Carlo mutual information (Gaussian)</p></li>
+<li><p><code>"mi_g_sh"</code> – mutual information (Gaussian, shrinkage)</p></li>
+</ul><p><strong>Conditional Gaussian</strong></p><ul><li><p><code>"mi_cg"</code> – mutual information (conditional Gaussian)</p></li>
 </ul></dd>
 
 

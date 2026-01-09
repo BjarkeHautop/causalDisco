@@ -167,7 +167,6 @@ Low-level functions that execute search algorithms.
 
 - [`add_exogenous()`](https://bjarkehautop.github.io/causalDisco/reference/add_exogenous.md)
   [`add_exo()`](https://bjarkehautop.github.io/causalDisco/reference/add_exogenous.md)
-  [`add_root()`](https://bjarkehautop.github.io/causalDisco/reference/add_exogenous.md)
   : Add exogenous variables
 
 - [`add_tier()`](https://bjarkehautop.github.io/causalDisco/reference/add_tier.md)
@@ -181,8 +180,8 @@ Low-level functions that execute search algorithms.
 
   Add variables to `knowledge` object
 
-- [`remove_edges()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edges.md)
-  : Remove edges from a knowledge object
+- [`remove_edge()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edge.md)
+  : Remove an edge from a knowledge object
 
 - [`remove_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/remove_tiers.md)
   : Remove entire tiers from a knowledge object

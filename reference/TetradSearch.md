@@ -719,10 +719,10 @@ Sets the causal discovery algorithm to use in Tetrad.
     - `conflict_rule = 1` - The value of `conflict_rule` determines how
       collider conflicts are handled. `1` corresponds to the "overwrite"
       rule as introduced in the pcalg package, see
-      [`pc`](https://rdrr.io/pkg/pcalg/man/pc.html). `2` means that all
-      collider conflicts using bidirected edges should be prioritized,
-      while `3` means that existing colliders should be prioritized,
-      ignoring subsequent conflicting information.
+      [`pcalg::pc()`](https://rdrr.io/pkg/pcalg/man/pc.html). `2` means
+      that all collider conflicts using bidirected edges should be
+      prioritized, while `3` means that existing colliders should be
+      prioritized, ignoring subsequent conflicting information.
 
     - `depth = -1` - Maximum size of conditioning set,
 
@@ -1015,10 +1015,10 @@ Sets the causal discovery algorithm to use in Tetrad.
     - `conflict_rule = 1` - The value of `conflict_rule` determines how
       collider conflicts are handled. `1` corresponds to the "overwrite"
       rule as introduced in the pcalg package, see
-      [`pc`](https://rdrr.io/pkg/pcalg/man/pc.html). `2` means that all
-      collider conflicts using bidirected edges should be prioritized,
-      while `3` means that existing colliders should be prioritized,
-      ignoring subsequent conflicting information.
+      [`pcalg::pc()`](https://rdrr.io/pkg/pcalg/man/pc.html). `2` means
+      that all collider conflicts using bidirected edges should be
+      prioritized, while `3` means that existing colliders should be
+      prioritized, ignoring subsequent conflicting information.
 
     - `depth = -1` - Maximum size of conditioning set,
 
@@ -1034,10 +1034,10 @@ Sets the causal discovery algorithm to use in Tetrad.
     - `conflict_rule = 1` - The value of `conflict_rule` determines how
       collider conflicts are handled. `1` corresponds to the "overwrite"
       rule as introduced in the pcalg package, see
-      [`pc`](https://rdrr.io/pkg/pcalg/man/pc.html). `2` means that all
-      collider conflicts using bidirected edges should be prioritized,
-      while `3` means that existing colliders should be prioritized,
-      ignoring subsequent conflicting information.
+      [`pcalg::pc()`](https://rdrr.io/pkg/pcalg/man/pc.html). `2` means
+      that all collider conflicts using bidirected edges should be
+      prioritized, while `3` means that existing colliders should be
+      prioritized, ignoring subsequent conflicting information.
 
     - `depth = -1` - Maximum size of conditioning set,
 

@@ -17,7 +17,9 @@ An R6 object with the methods documented below.
 - `score`:
 
   Character scalar naming the score function used in bnlearn. Can be set
-  with `$set_score()`. Recognised values are:
+  with `$set_score()`. Kebab-case score names (as used in bnlearn, e.g.
+  `"pred-loglik"`) are also accepted and automatically translated to
+  snake_case. Recognised values are:
 
   **Discrete – categorical**
 
@@ -29,7 +31,7 @@ An R6 object with the methods documented below.
 
   - `"ebic"` — Extended BIC
 
-  - `"pred-loglik"` — predictive log-likelihood
+  - `"pred_loglik"` — predictive log-likelihood
 
   - `"bde"` — Bayesian Dirichlet equivalent (uniform)
 
@@ -51,81 +53,83 @@ An R6 object with the methods documented below.
 
   **Gaussian**
 
-  - `"loglik-g"`, `"aic-g"`, `"bic-g"`, `"ebic-g"`, `"pred-loglik-g"`
+  - `"loglik_g"`, `"aic_g"`, `"bic_g"`, `"ebic_g"`, `"pred_loglik_g"`
 
   - `"bge"` — Gaussian posterior density
 
-  - `"nal-g"` — node-average log-likelihood
+  - `"nal_g"` — node-average log-likelihood
 
-  - `"pnal-g"` — penalised node-average log-likelihood
+  - `"pnal_g"` — penalised node-average log-likelihood
 
   **Conditional Gaussian**
 
-  - `"loglik-cg"`, `"aic-cg"`, `"bic-cg"`, `"ebic-cg"`,
-    `"pred-loglik-cg"`, `"nal-cg"`, `"pnal-cg"`
+  - `"loglik_cg"`, `"aic_cg"`, `"bic_cg"`, `"ebic_cg"`,
+    `"pred_loglik_cg"`, `"nal_cg"`, `"pnal_cg"`
 
 - `test`:
 
   Character scalar naming the conditional-independence test passed to
-  bnlearn. Can be set with `$set_score()`. Recognised values are:
+  bnlearn. Can be set with `$set_score()`. Kebab-case test names (as
+  used in bnlearn, e.g. "mi-adf") are also accepted and automatically
+  translated to snake_case. Recognised values are:
 
   **Discrete – categorical**
 
   - `"mi"` – mutual information
 
-  - `"mi-adf"` – mutual information with adjusted d.f.
+  - `"mi_adf"` – mutual information with adjusted d.f.
 
-  - `"mc-mi"` – Monte Carlo mutual information
+  - `"mc_mi"` – Monte Carlo mutual information
 
-  - `"smc-mi"` – sequential Monte Carlo mutual information
+  - `"smc_mi"` – sequential Monte Carlo mutual information
 
-  - `"sp-mi"` – semi-parametric mutual information
+  - `"sp_mi"` – semi-parametric mutual information
 
-  - `"mi-sh"` – mutual information (shrinkage)
+  - `"mi_sh"` – mutual information (shrinkage)
 
   - `"x2"` – chi-squared
 
-  - `"x2-adf"` – chi-squared with adjusted d.f.
+  - `"x2_adf"` – chi-squared with adjusted d.f.
 
-  - `"mc-x2"` – Monte Carlo chi-squared
+  - `"mc_x2"` – Monte Carlo chi-squared
 
-  - `"smc-x2"` – sequential Monte Carlo chi-squared
+  - `"smc_x2"` – sequential Monte Carlo chi-squared
 
-  - `"sp-x2"` – semi-parametric chi-squared
+  - `"sp_x2"` – semi-parametric chi-squared
 
   **Discrete – ordered factors**
 
   - `"jt"` – Jonckheere–Terpstra
 
-  - `"mc-jt"` – Monte Carlo Jonckheere–Terpstra
+  - `"mc_jt"` – Monte Carlo Jonckheere–Terpstra
 
-  - `"smc-jt"` – sequential Monte Carlo Jonckheere–Terpstra
+  - `"smc_jt"` – sequential Monte Carlo Jonckheere–Terpstra
 
   **Gaussian**
 
   - `"cor"` – Pearson correlation
 
-  - `"mc-cor"` – Monte Carlo Pearson correlation
+  - `"mc_cor"` – Monte Carlo Pearson correlation
 
-  - `"smc-cor"` – sequential Monte Carlo Pearson correlation
+  - `"smc_cor"` – sequential Monte Carlo Pearson correlation
 
   - `"zf"` / `"fisher_z"` – Fisher Z test
 
-  - `"mc-zf"` – Monte Carlo Fisher Z
+  - `"mc_zf"` – Monte Carlo Fisher Z
 
-  - `"smc-zf"` – sequential Monte Carlo Fisher Z
+  - `"smc_zf"` – sequential Monte Carlo Fisher Z
 
-  - `"mi-g"` – mutual information (Gaussian)
+  - `"mi_g"` – mutual information (Gaussian)
 
-  - `"mc-mi-g"` – Monte Carlo mutual information (Gaussian)
+  - `"mc_mi_g"` – Monte Carlo mutual information (Gaussian)
 
-  - `"smc-mi-g"` – sequential Monte Carlo mutual information (Gaussian)
+  - `"smc_mi_g"` – sequential Monte Carlo mutual information (Gaussian)
 
-  - `"mi-g-sh"` – mutual information (Gaussian, shrinkage)
+  - `"mi_g_sh"` – mutual information (Gaussian, shrinkage)
 
   **Conditional Gaussian**
 
-  - `"mi-cg"` – mutual information (conditional Gaussian)
+  - `"mi_cg"` – mutual information (conditional Gaussian)
 
 - `alg`:
 

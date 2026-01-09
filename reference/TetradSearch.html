@@ -13,7 +13,7 @@ resulting graph or statistics."><meta property="og:image" content="https://bjark
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9023</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -578,7 +578,7 @@ J. Zhang, should be used guaranteeing additional tail completeness.</p></li>
 <li><p><code>"cpc"</code> - Conservative PC algorithm.</p><ul><li><p><code>conflict_rule = 1</code> -
 The value of <code>conflict_rule</code> determines how collider conflicts are handled. <code>1</code>
 corresponds to the "overwrite" rule as introduced in the <span class="pkg">pcalg</span> package, see
-<code><a href="https://rdrr.io/pkg/pcalg/man/pc.html" class="external-link">pc</a></code>. <code>2</code> means that all collider conflicts using bidirected edges
+<code><a href="https://rdrr.io/pkg/pcalg/man/pc.html" class="external-link">pcalg::pc()</a></code>. <code>2</code> means that all collider conflicts using bidirected edges
 should be prioritized, while <code>3</code> means that existing colliders should be prioritized,
 ignoring subsequent conflicting information.</p></li>
 <li><p><code>depth = -1</code> - Maximum size of conditioning set,</p></li>
@@ -792,7 +792,7 @@ setting small entries less than this threshold to zero.</p></li>
 <li><p><code>"pc"</code> - Peter-Clark (PC) algorithm</p><ul><li><p><code>conflict_rule = 1</code> -
 The value of <code>conflict_rule</code> determines how collider conflicts are handled. <code>1</code>
 corresponds to the "overwrite" rule as introduced in the <span class="pkg">pcalg</span> package, see
-<code><a href="https://rdrr.io/pkg/pcalg/man/pc.html" class="external-link">pc</a></code>. <code>2</code> means that all collider conflicts using bidirected edges
+<code><a href="https://rdrr.io/pkg/pcalg/man/pc.html" class="external-link">pcalg::pc()</a></code>. <code>2</code> means that all collider conflicts using bidirected edges
 should be prioritized, while <code>3</code> means that existing colliders should be prioritized,
 ignoring subsequent conflicting information.</p></li>
 <li><p><code>depth = -1</code> - Maximum size of conditioning set,</p></li>
@@ -805,7 +805,7 @@ a legal CPDAG.</p></li>
 <li><p><code>"pc_max"</code> - PCMax algorithm</p><ul><li><p><code>conflict_rule = 1</code> -
 The value of <code>conflict_rule</code> determines how collider conflicts are handled. <code>1</code>
 corresponds to the "overwrite" rule as introduced in the <span class="pkg">pcalg</span> package, see
-<code><a href="https://rdrr.io/pkg/pcalg/man/pc.html" class="external-link">pc</a></code>. <code>2</code> means that all collider conflicts using bidirected edges
+<code><a href="https://rdrr.io/pkg/pcalg/man/pc.html" class="external-link">pcalg::pc()</a></code>. <code>2</code> means that all collider conflicts using bidirected edges
 should be prioritized, while <code>3</code> means that existing colliders should be prioritized,
 ignoring subsequent conflicting information.</p></li>
 <li><p><code>depth = -1</code> - Maximum size of conditioning set,</p></li>

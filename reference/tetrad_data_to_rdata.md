@@ -32,11 +32,9 @@ path.
 ## Examples
 
 ``` r
-### rdata_to_tetrad() / tetrad_data_to_rdata() example ###
-
 # Requires tetrad to be installed
 if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
-  set.seed(42)
+  set.seed(1405)
   df <- data.frame(
     cont = rnorm(6),
     disc = as.integer(sample(0:2, 6, replace = TRUE))

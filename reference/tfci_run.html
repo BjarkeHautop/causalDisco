@@ -11,7 +11,7 @@ variables can be assigned to distinct tiers or periods (i.e., a temporal orderin
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9023</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,7 @@ variables can be assigned to distinct tiers or periods (i.e., a temporal orderin
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  knowledge <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  order <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  alpha <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  test <span class="op">=</span> <span class="va">reg_test</span>,</span>
 <span>  suff_stat <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"stable.fast"</span>,</span>
@@ -111,7 +111,7 @@ depends on the chosen <code>test</code>.</p></dd>
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>Skeleton construction method, one of <code>"stable"</code>,
 <code>"original"</code>, or <code>"stable.fast"</code> (default). See
-<code><a href="https://rdrr.io/pkg/pcalg/man/skeleton.html" class="external-link">skeleton</a></code> for details.</p></dd>
+<code><a href="https://rdrr.io/pkg/pcalg/man/skeleton.html" class="external-link">pcalg::skeleton()</a></code> for details.</p></dd>
 
 
 <dt id="arg-na-method">na_method<a class="anchor" aria-label="anchor" href="#arg-na-method"></a></dt>
@@ -141,7 +141,7 @@ is due to the fact that <span class="pkg">pcalg</span> does not allow directed e
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Additional arguments passed to
-<code><a href="https://rdrr.io/pkg/pcalg/man/skeleton.html" class="external-link">skeleton</a></code> during skeleton construction.</p></dd>
+<code><a href="https://rdrr.io/pkg/pcalg/man/skeleton.html" class="external-link">pcalg::skeleton()</a></code> during skeleton construction.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -164,9 +164,7 @@ for details.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">### tfci() example ###</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="knowledge.html">knowledge</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">tpc_example</span>,</span></span>
