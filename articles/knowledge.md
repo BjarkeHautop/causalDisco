@@ -32,9 +32,11 @@ edges in the causal graph.
 - Forbidden edges specify that a directed edge is not allowed between
   two variables.
 
-These constraints are specified using the %–\>% (required) and %!–\>%
-(forbidden) operators, with the exclamation mark (!) indicating negation
-of the edge.
+These constraints are specified using the `%-->%` (required) and
+`%!-->%` (forbidden) operators, with the exclamation mark (`!`)
+indicating negation of the edge, i.e. the absence of the edge.
+Conceptually, this could be written as `%!(-->)%`, but we find this
+syntax too verbose.
 
 ### Specifying required and forbidden edges
 
@@ -224,6 +226,19 @@ left and latest to the right.
 
 Tidyselect helpers such as `starts_with` can also be used to define
 tiers in a concise way, just as with required and forbidden edges.
+Different tidyselect helpers can be freely combined within a tier
+definition using `+`. For example, the following tiered knowledge object
+defines two tiers, “young” and “old”, by combining tidyselect helpers:
+
+``` r
+kn_tier_tidyselect <- knowledge(
+  tpc_example,
+  tier(
+    young ~ starts_with("child") + ends_with(c("3", "4")),
+    old   ~ starts_with("old")
+  )
+)
+```
 
 ## Exogenous variables knowledge
 
@@ -325,7 +340,7 @@ The black edges are those inferred from the data.
 
 ### bnlearn
 
-All knowledge types are supported with bnlearn engines. Note, that you
+All knowledge types are supported with bnlearn engine. Note, that you
 can get a harmless(?) warning from bnlearn when using required
 knowledge.
 
@@ -355,8 +370,8 @@ plot(output)
 
 ### causalDisco
 
-WIP. Currently causalDisco only works correctly with tiered and required
-knowledge.
+WIP. Currently causalDisco only works correctly with tiered and
+forbidden knowledge.
 
 ### pcalg
 
@@ -379,4 +394,4 @@ output <- disco(data = tpc_example, method = pc_pcalg, knowledge = kn)
 
 ### Tetrad
 
-WIP. Currently only implemented correctly for forbidden knowledge.
+WIP. All knowledge types are supported with Tetrad engine.

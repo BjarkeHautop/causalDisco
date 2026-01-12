@@ -135,8 +135,27 @@ try(
     ) # wrong name
   )
 )
-#> Error : Unknown variable(s): [woops]
-#> They are not present in the data frame provided to this knowledge object.
+#> 
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
+#> 
+#> ── Tiers ──
+#> 
+#>   label
+#> 1 1    
+#> 2 2    
+#> 3 3    
+#> 
+#> ── Variables ──
+#> 
+#>   var       tier 
+#> 1 child_x1  1    
+#> 2 child_x2  1    
+#> 3 youth_x3  2    
+#> 4 youth_x4  2    
+#> 5 oldage_x5 3    
+#> 6 oldage_x6 NA   
+#> 
 
 # using tidyselect helpers
 kn <- knowledge(
