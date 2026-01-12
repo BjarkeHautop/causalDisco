@@ -9,7 +9,7 @@ It allows to set the data, sufficient statistics, test, score, and algorithm."><
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9024</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9025</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,7 +104,9 @@ statistic is build for a mixed test.</p></dd>
 
 
 <dt><code>knowledge</code></dt>
-<dd><p>A list of fixed constraints for the search algorithm.</p></dd>
+<dd><p>A list of fixed constraints for the search algorithm. Note, that
+pcalg only works with symmetric knowledge. Thus, the only allowed types of knowledge
+is forbidden edges in both directions.</p></dd>
 
 
 <dt><code>adapt_df</code></dt>

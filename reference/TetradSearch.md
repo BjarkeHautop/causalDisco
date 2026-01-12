@@ -551,8 +551,8 @@ Sets the scoring function to use in Tetrad.
       sparser graphs,
 
     - `sem_gic_rule = "bic"` - The following rules are available:
-      `"bic"` — \\\ln n\\, `"gic2"` — \\p n^{1/3}\\, `"ric"` — \\2 \ln(p
-      n)\\, `"ricc"` — \\2(\ln(p n) + \ln\ln(p n))\\, `"gic6"` — \\\ln n
+      `"bic"` - \\\ln n\\, `"gic2"` - \\p n^{1/3}\\, `"ric"` - \\2 \ln(p
+      n)\\, `"ricc"` - \\2(\ln(p n) + \ln\ln(p n))\\, `"gic6"` - \\\ln n
       \ln(p n)\\.
 
     - `precompute_covariances = TRUE` - For more than 5000 variables or

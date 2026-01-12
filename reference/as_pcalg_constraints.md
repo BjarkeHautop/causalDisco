@@ -2,9 +2,9 @@
 
 pcalg only supports *undirected* (symmetric) background constraints:
 
-- **fixed_gaps** — forbidding edges (zeros enforced)
+- **fixed_gaps** - forbidding edges (zeros enforced)
 
-- **fixed_edges** — requiring edges (ones enforced)
+- **fixed_edges** - requiring edges (ones enforced)
 
 ## Usage
 

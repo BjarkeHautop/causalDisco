@@ -75,7 +75,7 @@ rownames(x1) <- colnames(x1) <- nodes
 rownames(x2) <- colnames(x2) <- nodes
 
 # confusion matrix for adjacencies
-confusion(x2, x1)
+causalDisco:::confusion(x2, x1)
 #> $tp
 #> [1] 3
 #> 
@@ -90,7 +90,7 @@ confusion(x2, x1)
 #> 
 
 # confusion matrix for conditional orientations
-confusion(x2, x1, type = "dir")
+causalDisco:::confusion(x2, x1, type = "dir")
 #> $tp
 #> [1] 2
 #> 

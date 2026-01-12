@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9024</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9025</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -126,6 +126,29 @@
         </dt>
         <dd>The Temporal Peter-Clark (PC) algorithm for causal discovery</dd>
       </dl></div><div class="section level2">
+      <h2 id="tests-for-tpc">Tests for TPC<a class="anchor" aria-label="anchor" href="#tests-for-tpc"></a></h2>
+
+      <div class="section-desc"><p>Test functions implemented for use in the TPC algorithm.</p></div>
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="cor_test.html">cor_test()</a></code>
+
+        </dt>
+        <dd>Test for vanishing partial correlations</dd>
+
+        <dt>
+
+          <code><a href="reg_test.html">reg_test()</a></code>
+
+        </dt>
+        <dd>Regression-based information loss test</dd>
+      </dl></div><div class="section level2">
       <h2 id="setup-for-tetrad-engine">Setup for Tetrad Engine<a class="anchor" aria-label="anchor" href="#setup-for-tetrad-engine"></a></h2>
 
       <div class="section-desc"><p>Functions for installing and verifying the Tetrad Java backend.</p></div>
@@ -223,152 +246,6 @@
         </dt>
         <dd>Causal Discovery Using the Temporal PC Algorithm (TPC)</dd>
       </dl></div><div class="section level2">
-      <h2 id="temporal-graph-and-score-classes-extending-pcalg">Temporal Graph and Score Classes Extending pcalg<a class="anchor" aria-label="anchor" href="#temporal-graph-and-score-classes-extending-pcalg"></a></h2>
-
-
-
-      <dl></dl></div><div class="section level2">
-
-
-
-
-      <dl><dt>
-
-          <code><a href="TEssGraph-class.html">TEssGraph-class</a></code> <code><a href="TEssGraph-class.html">TEssGraph</a></code>
-
-        </dt>
-        <dd>Temporal EssGraph class with greedy steps</dd>
-
-        <dt>
-
-          <code><a href="TemporalBIC-class.html">TemporalBIC-class</a></code> <code><a href="TemporalBIC-class.html">TemporalBIC</a></code>
-
-        </dt>
-        <dd>Temporal Bayesian Information Criterion (Score criterion)</dd>
-
-        <dt>
-
-          <code><a href="TemporalBDeu-class.html">TemporalBDeu-class</a></code> <code><a href="TemporalBDeu-class.html">TemporalBDeu</a></code>
-
-        </dt>
-        <dd>Temporal Bayesian Dirichlet equivalent uniform (Score criterion)</dd>
-      </dl></div><div class="section level2">
-      <h2 id="test-functions">Test Functions<a class="anchor" aria-label="anchor" href="#test-functions"></a></h2>
-
-
-
-      <dl></dl></div><div class="section level2">
-
-
-
-
-      <dl><dt>
-
-          <code><a href="cor_test.html">cor_test()</a></code>
-
-        </dt>
-        <dd>Test for vanishing partial correlations</dd>
-
-        <dt>
-
-          <code><a href="reg_test.html">reg_test()</a></code>
-
-        </dt>
-        <dd>Regression-based information loss test</dd>
-      </dl></div><div class="section level2">
-      <h2 id="graph-operations">Graph Operations<a class="anchor" aria-label="anchor" href="#graph-operations"></a></h2>
-
-
-
-      <dl></dl></div><div class="section level2">
-
-
-
-
-      <dl><dt>
-
-          <code><a href="amat.html">amat()</a></code>
-
-        </dt>
-        <dd>Extract adjacency matrix from tpdag, cpdag, tpag or pag object</dd>
-
-        <dt>
-
-          <code><a href="graph_to_amat.html">graph_to_amat()</a></code>
-
-        </dt>
-        <dd>Convert graphNEL object to adjacency matrix</dd>
-
-        <dt>
-
-          <code><a href="essgraph_to_amat.html">essgraph_to_amat()</a></code>
-
-        </dt>
-        <dd>Convert essential graph to adjacency matrix</dd>
-
-        <dt>
-
-          <code><a href="probmat_to_amat.html">probmat_to_amat()</a></code>
-
-        </dt>
-        <dd>Convert a matrix of probabilities into an adjacency matrix</dd>
-
-        <dt>
-
-          <code><a href="tamat.html">tamat()</a></code>
-
-        </dt>
-        <dd>Make a temporal adjacency matrix</dd>
-
-        <dt>
-
-          <code><a href="edges.html">edges()</a></code>
-
-        </dt>
-        <dd>List of edges in adjacency matrix</dd>
-
-        <dt>
-
-          <code><a href="n_edges.html">n_edges()</a></code>
-
-        </dt>
-        <dd>Number of edges in adjacency matrix</dd>
-
-        <dt>
-
-          <code><a href="max_edges.html">max_edges()</a></code>
-
-        </dt>
-        <dd>Compute maximal number of edges for graph</dd>
-
-        <dt>
-
-          <code><a href="is_cpdag.html">is_cpdag()</a></code>
-
-        </dt>
-        <dd>Check for CPDAG</dd>
-
-        <dt>
-
-          <code><a href="is_pdag.html">is_pdag()</a></code>
-
-        </dt>
-        <dd>Check for PDAG</dd>
-
-        <dt>
-
-          <code><a href="shd.html">shd()</a></code>
-
-        </dt>
-        <dd>Structural hamming distance between adjacency matrices</dd>
-
-        <dt>
-
-          <code><a href="n_dags.html">n_dags()</a></code>
-
-        </dt>
-        <dd>Number of different DAGs</dd>
-      </dl></div><div class="section level2">
       <h2 id="simulation">Simulation<a class="anchor" aria-label="anchor" href="#simulation"></a></h2>
 
 
@@ -392,7 +269,7 @@
         </dt>
         <dd>Simulate Gaussian data according to DAG</dd>
       </dl></div><div class="section level2">
-      <h2 id="plotting">Plotting<a class="anchor" aria-label="anchor" href="#plotting"></a></h2>
+      <h2 id="plotting-and-printing">Plotting and Printing<a class="anchor" aria-label="anchor" href="#plotting-and-printing"></a></h2>
 
 
 
@@ -417,52 +294,10 @@
 
         <dt>
 
-          <code><a href="plot.pag.html">plot(<i>&lt;pag&gt;</i>)</a></code>
+          <code><a href="print.knowledge.html">print(<i>&lt;knowledge&gt;</i>)</a></code>
 
         </dt>
-        <dd>Plot partial ancestral graph (PAG)</dd>
-
-        <dt>
-
-          <code><a href="plot.tamat.html">plot(<i>&lt;tamat&gt;</i>)</a></code>
-
-        </dt>
-        <dd>Plot adjacency matrix with order information</dd>
-
-        <dt>
-
-          <code><a href="plot.tpag.html">plot(<i>&lt;tpag&gt;</i>)</a></code>
-
-        </dt>
-        <dd>Plot temporal partial ancestral graph (TPAG)</dd>
-
-        <dt>
-
-          <code><a href="plot.tpdag.html">plot(<i>&lt;tpdag&gt;</i>)</a></code>
-
-        </dt>
-        <dd>Plot temporal partially directed acyclic graph (TPDAG)</dd>
-
-        <dt>
-
-          <code><a href="plot.tskeleton.html">plot(<i>&lt;tskeleton&gt;</i>)</a></code>
-
-        </dt>
-        <dd>Plot temporal skeleton</dd>
-
-        <dt>
-
-          <code><a href="plot_tempo_mech.html">plot_tempo_mech()</a></code>
-
-        </dt>
-        <dd>Plot temporal data generating mechanism</dd>
-
-        <dt>
-
-          <code><a href="tplot.html">tplot()</a></code>
-
-        </dt>
-        <dd>Plot temporal graph via Latex</dd>
+        <dd>Print a <code>knowledge</code> object</dd>
 
         <dt>
 
@@ -471,23 +306,7 @@
         </dt>
         <dd>Generate Latex tikz code for plotting a temporal DAG, PDAG or PAG.</dd>
       </dl></div><div class="section level2">
-      <h2 id="printing">Printing<a class="anchor" aria-label="anchor" href="#printing"></a></h2>
-
-
-
-      <dl></dl></div><div class="section level2">
-
-
-
-
-      <dl><dt>
-
-          <code><a href="print.knowledge.html">print(<i>&lt;knowledge&gt;</i>)</a></code>
-
-        </dt>
-        <dd>Print a <code>knowledge</code> object</dd>
-      </dl></div><div class="section level2">
-      <h2 id="tiers-knowledge-helpers">Tiers / Knowledge helpers<a class="anchor" aria-label="anchor" href="#tiers-knowledge-helpers"></a></h2>
+      <h2 id="knowledge-helpers">Knowledge helpers<a class="anchor" aria-label="anchor" href="#knowledge-helpers"></a></h2>
 
 
 
@@ -638,13 +457,6 @@
 
         <dt>
 
-          <code><a href="is_knowledgeable_caugi.html">is_knowledgeable_caugi()</a></code>
-
-        </dt>
-        <dd>Is it a <code>knowledgeable_caugi</code>?</dd>
-
-        <dt>
-
           <code><a href="knowledge.knowledgeable_caugi.html">knowledge.knowledgeable_caugi()</a></code>
 
         </dt>
@@ -711,69 +523,6 @@
 
 
       <dl><dt>
-
-          <code><a href="evaluate.html">evaluate()</a></code>
-
-        </dt>
-        <dd>Evaluate adjacency matrix estimation</dd>
-
-        <dt>
-
-          <code><a href="evaluate.array.html">evaluate(<i>&lt;array&gt;</i>)</a></code>
-
-        </dt>
-        <dd>Evaluate adjacency matrix estimation</dd>
-
-        <dt>
-
-          <code><a href="evaluate.matrix.html">evaluate(<i>&lt;matrix&gt;</i>)</a></code>
-
-        </dt>
-        <dd>Evaluate adjacency matrix estimation</dd>
-
-        <dt>
-
-          <code><a href="evaluate.tamat.html">evaluate(<i>&lt;tamat&gt;</i>)</a></code>
-
-        </dt>
-        <dd>Evaluate adjacency matrix estimation</dd>
-
-        <dt>
-
-          <code><a href="confusion.html">confusion()</a></code>
-
-        </dt>
-        <dd>Compute confusion matrix for comparing two adjacency matrices</dd>
-
-        <dt>
-
-          <code><a href="dir_confusion.html">dir_confusion()</a></code>
-
-        </dt>
-        <dd>Compute confusion matrix for comparing two adjacency matrices</dd>
-
-        <dt>
-
-          <code><a href="dir_confusion_original.html">dir_confusion_original()</a></code>
-
-        </dt>
-        <dd>Compute confusion matrix for comparing two adjacency matrices</dd>
-
-        <dt>
-
-          <code><a href="adj_confusion.html">adj_confusion()</a></code>
-
-        </dt>
-        <dd>Compute confusion matrix for comparing two adjacency matrices</dd>
-
-        <dt>
-
-          <code><a href="compare.html">compare()</a></code>
-
-        </dt>
-        <dd>Compare two tpdag or tskeleton objects</dd>
-
-        <dt>
 
           <code><a href="precision.html">precision()</a></code>
 
@@ -854,24 +603,10 @@
 
         <dt>
 
-          <code><a href="tetrad_graph.html">tetrad_graph()</a></code>
-
-        </dt>
-        <dd>Build a lightweight S3 wrapper around a Tetrad PAG string</dd>
-
-        <dt>
-
           <code><a href="tpc_example.html">tpc_example</a></code>
 
         </dt>
         <dd>Simulated data example</dd>
-
-        <dt>
-
-          <code><a href="gaus_cor_score.html">gaus_cor_score()</a></code>
-
-        </dt>
-        <dd>Gaussian L0 score computed on correlation matrix</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

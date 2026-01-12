@@ -35,6 +35,15 @@ Core search algorithms implemented or wrapped by causalDisco.
 - [`tpc()`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md)
   : The Temporal Peter-Clark (PC) algorithm for causal discovery
 
+## Tests for TPC
+
+Test functions implemented for use in the TPC algorithm.
+
+- [`cor_test()`](https://bjarkehautop.github.io/causalDisco/reference/cor_test.md)
+  : Test for vanishing partial correlations
+- [`reg_test()`](https://bjarkehautop.github.io/causalDisco/reference/reg_test.md)
+  : Regression-based information loss test
+
 ## Setup for Tetrad Engine
 
 Functions for installing and verifying the Tetrad Java backend.
@@ -69,52 +78,6 @@ Low-level functions that execute search algorithms.
 - [`tpc_run()`](https://bjarkehautop.github.io/causalDisco/reference/tpc_run.md)
   : Causal Discovery Using the Temporal PC Algorithm (TPC)
 
-## Temporal Graph and Score Classes Extending pcalg
-
-- [`TEssGraph-class`](https://bjarkehautop.github.io/causalDisco/reference/TEssGraph-class.md)
-  [`TEssGraph`](https://bjarkehautop.github.io/causalDisco/reference/TEssGraph-class.md)
-  : Temporal EssGraph class with greedy steps
-- [`TemporalBIC-class`](https://bjarkehautop.github.io/causalDisco/reference/TemporalBIC-class.md)
-  [`TemporalBIC`](https://bjarkehautop.github.io/causalDisco/reference/TemporalBIC-class.md)
-  : Temporal Bayesian Information Criterion (Score criterion)
-- [`TemporalBDeu-class`](https://bjarkehautop.github.io/causalDisco/reference/TemporalBDeu-class.md)
-  [`TemporalBDeu`](https://bjarkehautop.github.io/causalDisco/reference/TemporalBDeu-class.md)
-  : Temporal Bayesian Dirichlet equivalent uniform (Score criterion)
-
-## Test Functions
-
-- [`cor_test()`](https://bjarkehautop.github.io/causalDisco/reference/cor_test.md)
-  : Test for vanishing partial correlations
-- [`reg_test()`](https://bjarkehautop.github.io/causalDisco/reference/reg_test.md)
-  : Regression-based information loss test
-
-## Graph Operations
-
-- [`amat()`](https://bjarkehautop.github.io/causalDisco/reference/amat.md)
-  : Extract adjacency matrix from tpdag, cpdag, tpag or pag object
-- [`graph_to_amat()`](https://bjarkehautop.github.io/causalDisco/reference/graph_to_amat.md)
-  : Convert graphNEL object to adjacency matrix
-- [`essgraph_to_amat()`](https://bjarkehautop.github.io/causalDisco/reference/essgraph_to_amat.md)
-  : Convert essential graph to adjacency matrix
-- [`probmat_to_amat()`](https://bjarkehautop.github.io/causalDisco/reference/probmat_to_amat.md)
-  : Convert a matrix of probabilities into an adjacency matrix
-- [`tamat()`](https://bjarkehautop.github.io/causalDisco/reference/tamat.md)
-  : Make a temporal adjacency matrix
-- [`edges()`](https://bjarkehautop.github.io/causalDisco/reference/edges.md)
-  : List of edges in adjacency matrix
-- [`n_edges()`](https://bjarkehautop.github.io/causalDisco/reference/n_edges.md)
-  : Number of edges in adjacency matrix
-- [`max_edges()`](https://bjarkehautop.github.io/causalDisco/reference/max_edges.md)
-  : Compute maximal number of edges for graph
-- [`is_cpdag()`](https://bjarkehautop.github.io/causalDisco/reference/is_cpdag.md)
-  : Check for CPDAG
-- [`is_pdag()`](https://bjarkehautop.github.io/causalDisco/reference/is_pdag.md)
-  : Check for PDAG
-- [`shd()`](https://bjarkehautop.github.io/causalDisco/reference/shd.md)
-  : Structural hamming distance between adjacency matrices
-- [`n_dags()`](https://bjarkehautop.github.io/causalDisco/reference/n_dags.md)
-  : Number of different DAGs
-
 ## Simulation
 
 - [`sim_dag()`](https://bjarkehautop.github.io/causalDisco/reference/sim_dag.md)
@@ -122,7 +85,7 @@ Low-level functions that execute search algorithms.
 - [`sim_gaus_from_dag()`](https://bjarkehautop.github.io/causalDisco/reference/sim_gaus_from_dag.md)
   : Simulate Gaussian data according to DAG
 
-## Plotting
+## Plotting and Printing
 
 - [`plot(`*`<knowledge>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/plot.knowledge.md)
   : Plot a Knowledge Object
@@ -132,38 +95,15 @@ Low-level functions that execute search algorithms.
 
   Plot a Causal Graph from a `knowledgeable_caugi` Object
 
-- [`plot(`*`<pag>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/plot.pag.md)
-  : Plot partial ancestral graph (PAG)
-
-- [`plot(`*`<tamat>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/plot.tamat.md)
-  : Plot adjacency matrix with order information
-
-- [`plot(`*`<tpag>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/plot.tpag.md)
-  : Plot temporal partial ancestral graph (TPAG)
-
-- [`plot(`*`<tpdag>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/plot.tpdag.md)
-  : Plot temporal partially directed acyclic graph (TPDAG)
-
-- [`plot(`*`<tskeleton>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/plot.tskeleton.md)
-  : Plot temporal skeleton
-
-- [`plot_tempo_mech()`](https://bjarkehautop.github.io/causalDisco/reference/plot_tempo_mech.md)
-  : Plot temporal data generating mechanism
-
-- [`tplot()`](https://bjarkehautop.github.io/causalDisco/reference/tplot.md)
-  : Plot temporal graph via Latex
-
-- [`make_tikz()`](https://bjarkehautop.github.io/causalDisco/reference/make_tikz.md)
-  : Generate Latex tikz code for plotting a temporal DAG, PDAG or PAG.
-
-## Printing
-
 - [`print(`*`<knowledge>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/print.knowledge.md)
   :
 
   Print a `knowledge` object
 
-## Tiers / Knowledge helpers
+- [`make_tikz()`](https://bjarkehautop.github.io/causalDisco/reference/make_tikz.md)
+  : Generate Latex tikz code for plotting a temporal DAG, PDAG or PAG.
+
+## Knowledge helpers
 
 - [`add_exogenous()`](https://bjarkehautop.github.io/causalDisco/reference/add_exogenous.md)
   [`add_exo()`](https://bjarkehautop.github.io/causalDisco/reference/add_exogenous.md)
@@ -234,11 +174,6 @@ Low-level functions that execute search algorithms.
 
   Create a new `knowledgeable_caugi` object
 
-- [`is_knowledgeable_caugi()`](https://bjarkehautop.github.io/causalDisco/reference/is_knowledgeable_caugi.md)
-  :
-
-  Is it a `knowledgeable_caugi`?
-
 - [`knowledge.knowledgeable_caugi()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.knowledgeable_caugi.md)
   : Extract the knowledge from a knowledgeable_caugi
 
@@ -266,24 +201,6 @@ Low-level functions that execute search algorithms.
 
 ## Evaluation & Confusion Metrics
 
-- [`evaluate()`](https://bjarkehautop.github.io/causalDisco/reference/evaluate.md)
-  : Evaluate adjacency matrix estimation
-- [`evaluate(`*`<array>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/evaluate.array.md)
-  : Evaluate adjacency matrix estimation
-- [`evaluate(`*`<matrix>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/evaluate.matrix.md)
-  : Evaluate adjacency matrix estimation
-- [`evaluate(`*`<tamat>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/evaluate.tamat.md)
-  : Evaluate adjacency matrix estimation
-- [`confusion()`](https://bjarkehautop.github.io/causalDisco/reference/confusion.md)
-  : Compute confusion matrix for comparing two adjacency matrices
-- [`dir_confusion()`](https://bjarkehautop.github.io/causalDisco/reference/dir_confusion.md)
-  : Compute confusion matrix for comparing two adjacency matrices
-- [`dir_confusion_original()`](https://bjarkehautop.github.io/causalDisco/reference/dir_confusion_original.md)
-  : Compute confusion matrix for comparing two adjacency matrices
-- [`adj_confusion()`](https://bjarkehautop.github.io/causalDisco/reference/adj_confusion.md)
-  : Compute confusion matrix for comparing two adjacency matrices
-- [`compare()`](https://bjarkehautop.github.io/causalDisco/reference/compare.md)
-  : Compare two tpdag or tskeleton objects
 - [`precision()`](https://bjarkehautop.github.io/causalDisco/reference/precision.md)
   : Precision
 - [`recall()`](https://bjarkehautop.github.io/causalDisco/reference/recall.md)
@@ -307,9 +224,5 @@ Low-level functions that execute search algorithms.
 
 - [`engine_registry`](https://bjarkehautop.github.io/causalDisco/reference/engine_registry.md)
   : Supported engines for causalDisco
-- [`tetrad_graph()`](https://bjarkehautop.github.io/causalDisco/reference/tetrad_graph.md)
-  : Build a lightweight S3 wrapper around a Tetrad PAG string
 - [`tpc_example`](https://bjarkehautop.github.io/causalDisco/reference/tpc_example.md)
   : Simulated data example
-- [`gaus_cor_score()`](https://bjarkehautop.github.io/causalDisco/reference/gaus_cor_score.md)
-  : Gaussian L0 score computed on correlation matrix

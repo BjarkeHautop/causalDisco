@@ -19,7 +19,7 @@ exogenous(V1, V2)
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9024</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9025</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -237,13 +237,12 @@ Both sides of the operator can use tidyselect syntax to select multiple variable
 <span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">knowledge</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fu">tier</span><span class="op">(</span><span class="fl">1</span> <span class="op">~</span> <span class="va">V5</span>, <span class="fl">2</span> <span class="op">~</span> <span class="va">V6</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    <span class="fu">forbidden</span><span class="op">(</span><span class="va">V5</span> <span class="op">~</span> <span class="va">V6</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">V5</span> <span class="op">%!--&gt;%</span> <span class="va">V6</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="add_tier.html">add_tier</a></span><span class="op">(</span><span class="fl">3</span>, after <span class="op">=</span> <span class="st">"2"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="add_to_tier.html">add_to_tier</a></span><span class="op">(</span><span class="fl">3</span> <span class="op">~</span> <span class="va">V7</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="add_exogenous.html">add_exo</a></span><span class="op">(</span><span class="va">V2</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="add_exogenous.html">add_exogenous</a></span><span class="op">(</span><span class="va">V3</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`forbidden()` is deprecated and will be removed in a future version. Please use the infix operators `%!--&gt;%` (forbidden) and `%--&gt;%` (required) instead.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Using seq_tiers for larger datasets</span></span></span>
 <span class="r-in"><span><span class="va">tpc_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span></span></span>

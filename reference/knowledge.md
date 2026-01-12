@@ -206,13 +206,12 @@ kn <-
 kn <-
   knowledge(
     tier(1 ~ V5, 2 ~ V6),
-    forbidden(V5 ~ V6)
+    V5 %!-->% V6
   ) |>
   add_tier(3, after = "2") |>
   add_to_tier(3 ~ V7) |>
   add_exo(V2) |>
   add_exogenous(V3)
-#> Warning: `forbidden()` is deprecated and will be removed in a future version. Please use the infix operators `%!-->%` (forbidden) and `%-->%` (required) instead.
 
 # Using seq_tiers for larger datasets
 tpc_example <- as.data.frame(

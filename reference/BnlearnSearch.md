@@ -23,43 +23,43 @@ An R6 object with the methods documented below.
 
   **Discrete – categorical**
 
-  - `"loglik"` — log-likelihood
+  - `"loglik"` - log-likelihood
 
-  - `"aic"` — Akaike Information Criterion
+  - `"aic"` - Akaike Information Criterion
 
-  - `"bic"` — Bayesian Information Criterion
+  - `"bic"` - Bayesian Information Criterion
 
-  - `"ebic"` — Extended BIC
+  - `"ebic"` - Extended BIC
 
-  - `"pred_loglik"` — predictive log-likelihood
+  - `"pred_loglik"` - predictive log-likelihood
 
-  - `"bde"` — Bayesian Dirichlet equivalent (uniform)
+  - `"bde"` - Bayesian Dirichlet equivalent (uniform)
 
-  - `"bds"` — Bayesian Dirichlet score
+  - `"bds"` - Bayesian Dirichlet score
 
-  - `"mbde"` — modified BDE
+  - `"mbde"` - modified BDE
 
-  - `"bdla"` — locally averaged BDE
+  - `"bdla"` - locally averaged BDE
 
-  - `"k2"` — K2 score
+  - `"k2"` - K2 score
 
-  - `"fnml"` — factorised NML
+  - `"fnml"` - factorised NML
 
-  - `"qnml"` — quotient NML
+  - `"qnml"` - quotient NML
 
-  - `"nal"` — node-average log-likelihood
+  - `"nal"` - node-average log-likelihood
 
-  - `"pnal"` — penalised node-average log-likelihood
+  - `"pnal"` - penalised node-average log-likelihood
 
   **Gaussian**
 
   - `"loglik_g"`, `"aic_g"`, `"bic_g"`, `"ebic_g"`, `"pred_loglik_g"`
 
-  - `"bge"` — Gaussian posterior density
+  - `"bge"` - Gaussian posterior density
 
-  - `"nal_g"` — node-average log-likelihood
+  - `"nal_g"` - node-average log-likelihood
 
-  - `"pnal_g"` — penalised node-average log-likelihood
+  - `"pnal_g"` - penalised node-average log-likelihood
 
   **Conditional Gaussian**
 
