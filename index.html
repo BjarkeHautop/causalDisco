@@ -97,7 +97,7 @@
 <div class="section level3">
 <h3 id="installing-java--jdk">Installing Java / JDK<a class="anchor" aria-label="anchor" href="#installing-java--jdk"></a>
 </h3>
-<p><code>causalDisco</code> provides an interface to the Java library <a href="https://github.com/cmu-phil/tetrad" class="external-link">Tetrad</a> for causal discovery algorithms. To use algorithms from Tetrad you need to install a Java Development Kit (JDK) &gt;= 21. We recommend Eclipse Temurin (OpenJDK), available at <a href="https://adoptium.net" class="external-link uri">https://adoptium.net</a> for all major operating systems.</p>
+<p>causalDisco provides an interface to the Java library <a href="https://github.com/cmu-phil/tetrad" class="external-link">Tetrad</a> for causal discovery algorithms. To use algorithms from Tetrad you need to install a Java Development Kit (JDK) &gt;= 21. We recommend Eclipse Temurin (OpenJDK), available at <a href="https://adoptium.net" class="external-link uri">https://adoptium.net</a> for all major operating systems.</p>
 <p>We provide a helper function to install Temurin JDK 25 on macOS and Windows:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">causalDisco</span><span class="fu">::</span><span class="fu"><a href="reference/install_java.html">install_java</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -176,26 +176,65 @@
 <li>
 <p>Improve plot (use caugi)</p>
 <ul>
-<li><p>For new features that are hard to do in grid (which caugi uses), maybe just insert the image in ggplot? See this stackexchange <a href="https://stackoverflow.com/questions/9917049/inserting-an-image-to-ggplot2" class="external-link uri">https://stackoverflow.com/questions/9917049/inserting-an-image-to-ggplot2</a> Then we modify the image on top (i.e. the image we insert is the background). It should be possible to read coordinates of groups and add time-axis that way for example.</p></li>
-<li><p>Implement a working <code>make_tikz</code> for these plots. See tikzDevice package, which can do it automatically from R plots:</p></li>
+<li>For new features that are hard to do in grid (which caugi uses), maybe just insert the image in ggplot?</li>
 </ul>
+</li>
+</ul>
+<p>A rough WIP is here, which colors a rectangle around A and B:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Make sure causalDisco is not loaded to avoid namespace conflicts with caugi</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="st">"package:causalDisco"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/search.html" class="external-link">search</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/detach.html" class="external-link">detach</a></span><span class="op">(</span><span class="st">"package:causalDisco"</span>, unload <span class="op">=</span> <span class="cn">TRUE</span>, character.only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://frederikfabriciusbjerre.github.io/caugi/" class="external-link">caugi</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/GuangchuangYu/ggplotify" class="external-link">ggplotify</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://caugi.org/reference/caugi.html" class="external-link">caugi</a></span><span class="op">(</span><span class="va">A</span> <span class="op">%--&gt;%</span> <span class="va">B</span>, <span class="va">C</span>, <span class="va">D</span><span class="op">)</span></span>
+<span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="fu">caugi_layout</span><span class="op">(</span><span class="va">cg</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://caugi.org/reference/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">layout</span><span class="op">)</span></span>
+<span><span class="va">layout</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">layout</span><span class="op">$</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://caugi.org/reference/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">layout</span><span class="op">)</span></span>
+<span><span class="va">plot_cg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cg</span>, layout <span class="op">=</span> <span class="va">layout</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Wrap the grid plot as ggplot</span></span>
+<span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu">as.ggplot</span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">plot_cg</span><span class="op">@</span><span class="va">grob</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Add rectangle</span></span>
+<span><span class="va">gg</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span></span>
+<span>    <span class="st">"rect"</span>,</span>
+<span>    xmin <span class="op">=</span> <span class="va">layout</span><span class="op">$</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="fl">0.05</span>,</span>
+<span>    xmax <span class="op">=</span> <span class="va">layout</span><span class="op">$</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="fl">0.05</span>,</span>
+<span>    ymin <span class="op">=</span> <span class="va">layout</span><span class="op">$</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>    ymax <span class="op">=</span> <span class="va">layout</span><span class="op">$</span><span class="va">y</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
+<span>    fill <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">0.3</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/caugi-modified-plot.png"></p>
+<ul>
+<li>Implement a working <code>make_tikz</code> for these plots. See tikzDevice package, which can do it automatically from R plots:</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://frederikfabriciusbjerre.github.io/caugi/" class="external-link">caugi</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/daqana/tikzDevice" class="external-link">tikzDevice</a></span><span class="op">)</span></span>
 <span><span class="va">cg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://caugi.org/reference/caugi.html" class="external-link">caugi</a></span><span class="op">(</span><span class="va">A</span> <span class="op">%--&gt;%</span> <span class="va">B</span> <span class="op">+</span> <span class="va">C</span><span class="op">)</span></span>
 <span><span class="fu">tikz</span><span class="op">(</span><span class="st">"cg_plot.tex"</span>, width <span class="op">=</span> <span class="fl">6</span>, height <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
-<span>    <span class="va">cg</span>,</span>
-<span>    node_style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>        by_node <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>            A <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"lightblue"</span>, col <span class="op">=</span> <span class="st">"darkblue"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
-<span>            B <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
-<span>        <span class="op">)</span></span>
+<span>  <span class="va">cg</span>,</span>
+<span>  node_style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    by_node <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      A <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"lightblue"</span>, col <span class="op">=</span> <span class="st">"darkblue"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>      B <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>If we want any changes we can modify the tikz code after generation.</p>
-</li>
+<ul>
 <li><p>Make required work for our algorithms. It breaks when it internally calls <code>tpdag</code>, so look into that…</p></li>
 <li><p>Make score/test/alg names consistent. Currently a mix of snake_case, kebab-case, and period.case. - done?</p></li>
 <li><p>In documentation of defaults for tests maybe add the underlying engine defaults if they differ?</p></li>
@@ -228,7 +267,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vertex_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pp.dat</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="va">vertex</span><span class="op">]</span></span>
 <span><span class="va">req_parents</span> <span class="op">&lt;-</span> <span class="va">kn</span><span class="op">$</span><span class="va">edges</span> <span class="op">|&gt;</span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">status</span> <span class="op">==</span> <span class="st">"required"</span>, <span class="va">to</span> <span class="op">==</span> <span class="va">vertex_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -257,7 +296,7 @@
 <li><p>v7.6.9 of Tetrad seems to fix the memory issues.</p></li>
 <li><p>Tetrad does not use required correctly in <code>fci</code> algorithm</p></li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
@@ -283,7 +322,7 @@
 <ul>
 <li>Non-working Tetrad test/score arguments <code>"cci"</code> and <code>"mixed_variable_polynomial"</code>:</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
@@ -291,8 +330,8 @@
 <span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co">#&gt; Error in `.jcall()`:</span></span>
-<span><span class="co">#&gt; ! java.lang.RuntimeException: java.lang.IllegalArgumentException: Unrecognized basis type: 4</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<span><span class="co">#&gt; ! java.lang.RuntimeException: Unrecognized basis type: 4</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span>  </span>
@@ -342,21 +381,21 @@
 <p><a href="https://github.com/cmu-phil/tetrad/releases" class="external-link">Changelog</a> item 14 says “and a generalization of GFFC (Generalized Find Factor Clusters) of FOFC and FTFC, providing multiple strategies for discovering latent clusterings from measurement data.”</p>
 <p>so we need to implement this in <code>causalDisco</code> (help?)</p>
 <p>This also doesn’t work on 7.6.9:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">load_all</span>()</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>ℹ Loading causalDisco</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>causalDisco startup<span class="sc">:</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  Java heap size requested<span class="sc">:</span> <span class="dv">2</span> GB</span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  Tetrad version<span class="sc">:</span> <span class="dv">7</span>.<span class="fl">6.9</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  Java successfully initialized with <span class="dv">2</span> GB.</span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>  To change heap size, set <span class="fu">options</span>(<span class="at">java.heap.size =</span> <span class="st">'Ng'</span>) or <span class="fu">Sys.setenv</span>(<span class="at">JAVA_HEAP_SIZE =</span> <span class="st">'Ng'</span>) <span class="sc">*</span>before<span class="sc">*</span> loading.</span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>  Restart R to apply changes.</span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>  </span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="sc">&gt;</span> var1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">2.3</span>, <span class="fl">3.1</span>, <span class="fl">4.5</span>)</span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="sc">&gt;</span> var2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.1</span>, <span class="fl">6.2</span>, <span class="fl">7.3</span>, <span class="fl">8.4</span>)</span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="sc">&gt;</span> df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(var1, var2)</span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="sc">&gt;</span> tetrad_data <span class="ot">&lt;-</span> <span class="fu">rdata_to_tetrad</span>(df)</span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">rdata_to_tetrad</span>(df) <span class="sc">:</span> </span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>  java.lang.ClassNotFoundException<span class="sc">:</span> edu<span class="sc">/</span>cmu<span class="sc">/</span>tetrad<span class="sc">/</span>data<span class="sc">/</span>DiscreteVariable</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">load_all</span>()</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>ℹ Loading causalDisco</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>causalDisco startup<span class="sc">:</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>  Java heap size requested<span class="sc">:</span> <span class="dv">2</span> GB</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>  Tetrad version<span class="sc">:</span> <span class="dv">7</span>.<span class="fl">6.9</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>  Java successfully initialized with <span class="dv">2</span> GB.</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>  To change heap size, set <span class="fu">options</span>(<span class="at">java.heap.size =</span> <span class="st">'Ng'</span>) or <span class="fu">Sys.setenv</span>(<span class="at">JAVA_HEAP_SIZE =</span> <span class="st">'Ng'</span>) <span class="sc">*</span>before<span class="sc">*</span> loading.</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>  Restart R to apply changes.</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>  </span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="sc">&gt;</span> var1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">2.3</span>, <span class="fl">3.1</span>, <span class="fl">4.5</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="sc">&gt;</span> var2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.1</span>, <span class="fl">6.2</span>, <span class="fl">7.3</span>, <span class="fl">8.4</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="sc">&gt;</span> df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(var1, var2)</span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="sc">&gt;</span> tetrad_data <span class="ot">&lt;-</span> <span class="fu">rdata_to_tetrad</span>(df)</span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">rdata_to_tetrad</span>(df) <span class="sc">:</span> </span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>  java.lang.ClassNotFoundException<span class="sc">:</span> edu<span class="sc">/</span>cmu<span class="sc">/</span>tetrad<span class="sc">/</span>data<span class="sc">/</span>DiscreteVariable</span></code></pre></div>
 <p>KCI test from Tetrad in pc algorithm gives wrong graph in getting started vignette (non-linear data) when version is 7.6.9? Works correctly in 7.6.8. Fixed in unreleased version of Tetrad (see #1946 in Tetrad issues).</p>
 </div>
 <div class="section level3">
