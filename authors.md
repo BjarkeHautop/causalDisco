@@ -2,7 +2,7 @@
 
 ## Authors
 
-- **Anne Helby Petersen**. Author, maintainer.
+- **Anne Helby Petersen**. Author.
 
 - **Tobias Ellegaard Larsen**. Contributor.
 
@@ -10,7 +10,7 @@
 
 - **Frederik Fabricius-Bjerre**. Author.
 
-- **Bjarke Hautop Kristensen**. Author.
+- **Bjarke Hautop Kristensen**. Author, maintainer.
 
 ## Citation
 

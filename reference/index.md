@@ -192,10 +192,6 @@ Low-level functions that execute search algorithms.
 
 ## Conversions
 
-- [`rdata_to_tetrad()`](https://bjarkehautop.github.io/causalDisco/reference/rdata_to_tetrad.md)
-  : Tetrad R Data Utilities
-- [`tetrad_data_to_rdata()`](https://bjarkehautop.github.io/causalDisco/reference/tetrad_data_to_rdata.md)
-  : Convert a Tetrad Java DataSet to an R data frame
 - [`as.graphNEL()`](https://bjarkehautop.github.io/causalDisco/reference/as.graphNEL.md)
   : Convert adjacency matrix to graphNEL object
 
