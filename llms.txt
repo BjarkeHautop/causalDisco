@@ -74,7 +74,7 @@ causalDisco::check_tetrad_install()
 #> [1] TRUE
 #> 
 #> $version
-#> [1] "7.6.8"
+#> [1] "7.6.10"
 #> 
 #> $java_ok
 #> [1] TRUE
@@ -83,7 +83,7 @@ causalDisco::check_tetrad_install()
 #> [1] "25.0.1"
 #> 
 #> $message
-#> [1] "Tetrad found (version 7.6.8). Java version 25.0.1 is OK."
+#> [1] "Tetrad found (version 7.6.10). Java version 25.0.1 is OK."
 ```
 
 ## Example
@@ -93,11 +93,10 @@ the package causalDisco itself, the Java library Tetrad, the R package
 bnlearn, and the R package pcalg.
 
 ``` r
-# options(causalDisco.tetrad.version = "7.6.9") # Memory issues are fixed on v7.6.9
 library(causalDisco)
 #> causalDisco startup:
 #>   Java heap size requested: 2 GB
-#>   Tetrad version: 7.6.8
+#>   Tetrad version: 7.6.10
 #>   Java successfully initialized with 2 GB.
 #>   To change heap size, set options(java.heap.size = 'Ng') or Sys.setenv(JAVA_HEAP_SIZE = 'Ng') *before* loading.
 #>   Restart R to apply changes.
@@ -215,10 +214,13 @@ If we want any changes we can modify the tikz code after generation.
   calls `tpdag`, so look into that…
 
 - Make score/test/alg names consistent. Currently a mix of snake_case,
-  kebab-case, and period.case. - done?
+  kebab-case, and period.case. - done? Still missing algorithms.
 
 - In documentation of defaults for tests maybe add the underlying engine
   defaults if they differ?
+
+- In documentation of test / scores say which data types they support
+  (continuous, discrete, mixed).
 
 ### Longterm
 
@@ -229,15 +231,9 @@ If we want any changes we can modify the tikz code after generation.
 
 - bnlearn has bug for old version of caugi. Fixed in PR \#149 in caugi.
 
-- All of our algorithm does not work with required edges from knowledge
-  objects (see e.g. [unit tests for
-  tfci](https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tfci.R)),
-  `tpc`, `tges`, … Currently does nothing. Either make it work or throw
-  error/warning if required edges are given.
-
-  - Tried implementing it in the scores (e.g. `TemporalBdeu`) by giving
-    it score -Inf if missing a required edge, but then it runs forever.
-    I.e. adding the following to `local.score`
+- Tried implementing it in the scores (e.g. `TemporalBdeu`) by giving it
+  score -Inf if missing a required edge, but then it runs forever. I.e.
+  adding the following to `local.score`
 
 ``` r
 vertex_name <- colnames(pp.dat$data)[vertex]
@@ -269,8 +265,6 @@ fixedEdges in pcalg.
 
 #### Tetrad issues
 
-- v7.6.9 of Tetrad seems to fix the memory issues.
-
 - Tetrad does not use required correctly in `fci` algorithm
 
 ``` r
@@ -298,31 +292,6 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 ```
 
 Fixed in unreleased version of Tetrad (see \#1947 in Tetrad issues).
-
-- Non-working Tetrad test/score arguments `"cci"` and
-  `"mixed_variable_polynomial"`:
-
-``` r
-if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
-  data("tpc_example")
-
-  tetrad_pc <- pc(engine = "tetrad", test = "cci", alpha = 0.05)
-  output <- disco(data = tpc_example, method = tetrad_pc)
-}
-#> Error in `.jcall()`:
-#> ! java.lang.RuntimeException: java.lang.IllegalArgumentException: Unrecognized basis type: 4
-```
-
-``` r
-if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
-  data("tpc_example")
-  
-  tetrad_ges <- ges(engine = "tetrad", score = "mixed_variable_polynomial")
-  output <- disco(data = tpc_example, method = tetrad_ges)
-}
-#> Error in `.jcall()`:
-#> ! java.lang.IllegalArgumentException: Variables list must not be null or empty.
-```
 
 ### Documentation
 
@@ -373,46 +342,6 @@ nodes.knowledgeable_caugi <- function(x) {
 
 I.e., allow user to call `edges(output)` and `nodes(output)` to get
 edges and nodes as tibbles.
-
-### Adopt Tetrad v7.6.9
-
-- Move to Tetrad v7.6.9. v7.6.9 removes the folder
-  [algcomparison/algorithm/cluster](https://github.com/cmu-phil/tetrad/tree/v7.6.8/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/cluster)
-
-Was removed in this commit
-<https://github.com/cmu-phil/tetrad/commit/295dceef6b83ac08ff0032fb194cf3ee5e429337#diff-adf829223cc59eac11682310f8a77c0ec3cf26a5b4310d75ec8edfaa86dd285b>
-
-[Changelog](https://github.com/cmu-phil/tetrad/releases) item 14 says
-“and a generalization of GFFC (Generalized Find Factor Clusters) of FOFC
-and FTFC, providing multiple strategies for discovering latent
-clusterings from measurement data.”
-
-so we need to implement this in `causalDisco` (help?)
-
-This also doesn’t work on 7.6.9:
-
-``` r
-> load_all()
-ℹ Loading causalDisco
-causalDisco startup:
-  Java heap size requested: 2 GB
-  Tetrad version: 7.6.9
-  Java successfully initialized with 2 GB.
-  To change heap size, set options(java.heap.size = 'Ng') or Sys.setenv(JAVA_HEAP_SIZE = 'Ng') *before* loading.
-  Restart R to apply changes.
-  
-> var1 <- c(1.2, 2.3, 3.1, 4.5)
-> var2 <- c(5.1, 6.2, 7.3, 8.4)
-> df <- data.frame(var1, var2)
-> tetrad_data <- rdata_to_tetrad(df)
-Error in rdata_to_tetrad(df) : 
-  java.lang.ClassNotFoundException: edu/cmu/tetrad/data/DiscreteVariable
-```
-
-KCI test from Tetrad in pc algorithm gives wrong graph in getting
-started vignette (non-linear data) when version is 7.6.9? Works
-correctly in 7.6.8. Fixed in unreleased version of Tetrad (see \#1946 in
-Tetrad issues).
 
 ### CRAN TODO
 

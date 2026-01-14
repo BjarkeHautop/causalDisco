@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9025</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9026</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,7 +111,7 @@
 <span><span class="co">#&gt; [1] TRUE</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $version</span></span>
-<span><span class="co">#&gt; [1] "7.6.8"</span></span>
+<span><span class="co">#&gt; [1] "7.6.10"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $java_ok</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
@@ -120,7 +120,7 @@
 <span><span class="co">#&gt; [1] "25.0.1"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $message</span></span>
-<span><span class="co">#&gt; [1] "Tetrad found (version 7.6.8). Java version 25.0.1 is OK."</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Tetrad found (version 7.6.10). Java version 25.0.1 is OK."</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -128,11 +128,10 @@
 </h2>
 <p>With causalDisco you can currently run causal discovery algorithms from the package causalDisco itself, the Java library Tetrad, the R package bnlearn, and the R package pcalg.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># options(causalDisco.tetrad.version = "7.6.9") # Memory issues are fixed on v7.6.9</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/annennenne/causalDisco" class="external-link">causalDisco</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/annennenne/causalDisco" class="external-link">causalDisco</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; causalDisco startup:</span></span>
 <span><span class="co">#&gt;   Java heap size requested: 2 GB</span></span>
-<span><span class="co">#&gt;   Tetrad version: 7.6.8</span></span>
+<span><span class="co">#&gt;   Tetrad version: 7.6.10</span></span>
 <span><span class="co">#&gt;   Java successfully initialized with 2 GB.</span></span>
 <span><span class="co">#&gt;   To change heap size, set options(java.heap.size = 'Ng') or Sys.setenv(JAVA_HEAP_SIZE = 'Ng') *before* loading.</span></span>
 <span><span class="co">#&gt;   Restart R to apply changes.</span></span>
@@ -236,8 +235,9 @@
 <p>If we want any changes we can modify the tikz code after generation.</p>
 <ul>
 <li><p>Make required work for our algorithms. It breaks when it internally calls <code>tpdag</code>, so look into that…</p></li>
-<li><p>Make score/test/alg names consistent. Currently a mix of snake_case, kebab-case, and period.case. - done?</p></li>
+<li><p>Make score/test/alg names consistent. Currently a mix of snake_case, kebab-case, and period.case. - done? Still missing algorithms.</p></li>
 <li><p>In documentation of defaults for tests maybe add the underlying engine defaults if they differ?</p></li>
+<li><p>In documentation of test / scores say which data types they support (continuous, discrete, mixed).</p></li>
 </ul>
 <div class="section level3">
 <h3 id="longterm">Longterm<a class="anchor" aria-label="anchor" href="#longterm"></a>
@@ -251,13 +251,7 @@
 </h3>
 <ul>
 <li><p>bnlearn has bug for old version of caugi. Fixed in PR #149 in caugi.</p></li>
-<li>
-<p>All of our algorithm does not work with required edges from knowledge objects (see e.g. <a href="https://github.com/BjarkeHautop/causalDisco/tree/master/tests/testthat/test-tfci.R" class="external-link">unit tests for tfci</a>), <code>tpc</code>, <code>tges</code>, … Currently does nothing. Either make it work or throw error/warning if required edges are given.</p>
-<ul>
-<li>Tried implementing it in the scores (e.g. <code>TemporalBdeu</code>) by giving it score -Inf if missing a required edge, but then it runs forever. I.e. adding the following to <code>local.score</code>
-</li>
-</ul>
-</li>
+<li><p>Tried implementing it in the scores (e.g. <code>TemporalBdeu</code>) by giving it score -Inf if missing a required edge, but then it runs forever. I.e. adding the following to <code>local.score</code></p></li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vertex_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pp.dat</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="va">vertex</span><span class="op">]</span></span>
@@ -285,8 +279,7 @@
 <h4 id="tetrad-issues">Tetrad issues<a class="anchor" aria-label="anchor" href="#tetrad-issues"></a>
 </h4>
 <ul>
-<li><p>v7.6.9 of Tetrad seems to fix the memory issues.</p></li>
-<li><p>Tetrad does not use required correctly in <code>fci</code> algorithm</p></li>
+<li>Tetrad does not use required correctly in <code>fci</code> algorithm</li>
 </ul>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
@@ -311,27 +304,6 @@
 <span><span class="co">#&gt; 5:  youth_x3    o-&gt; oldage_x5</span></span>
 <span><span class="co">#&gt; 6:  youth_x4    --&gt; oldage_x6</span></span></code></pre></div>
 <p>Fixed in unreleased version of Tetrad (see #1947 in Tetrad issues).</p>
-<ul>
-<li>Non-working Tetrad test/score arguments <code>"cci"</code> and <code>"mixed_variable_polynomial"</code>:</li>
-</ul>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"cci"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
-<span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span><span class="co">#&gt; Error in `.jcall()`:</span></span>
-<span><span class="co">#&gt; ! java.lang.RuntimeException: java.lang.IllegalArgumentException: Unrecognized basis type: 4</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="va">tetrad_ges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ges.html">ges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, score <span class="op">=</span> <span class="st">"mixed_variable_polynomial"</span><span class="op">)</span></span>
-<span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tetrad_ges</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span><span class="co">#&gt; Error in `.jcall()`:</span></span>
-<span><span class="co">#&gt; ! java.lang.IllegalArgumentException: Variables list must not be null or empty.</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
@@ -357,7 +329,7 @@
 </li>
 </ul>
 <p>Call <code>caugi@edges &lt;- tibble::as_tibble(caugi@edges)</code> internally to standardize to tibble? And instead of forcing users to do <code>output$caugi@edges</code> (mix S3 and S7) we could implement something like this:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">edges</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">UseMethod</a></span><span class="op">(</span><span class="st">"edges"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
@@ -374,34 +346,6 @@
 <span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">caugi</span><span class="op">@</span><span class="va">edges</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>I.e., allow user to call <code>edges(output)</code> and <code>nodes(output)</code> to get edges and nodes as tibbles.</p>
-</div>
-<div class="section level3">
-<h3 id="adopt-tetrad-v769">Adopt Tetrad v7.6.9<a class="anchor" aria-label="anchor" href="#adopt-tetrad-v769"></a>
-</h3>
-<ul>
-<li>Move to Tetrad v7.6.9. v7.6.9 removes the folder <a href="https://github.com/cmu-phil/tetrad/tree/v7.6.8/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/cluster" class="external-link">algcomparison/algorithm/cluster</a>
-</li>
-</ul>
-<p>Was removed in this commit <a href="https://github.com/cmu-phil/tetrad/commit/295dceef6b83ac08ff0032fb194cf3ee5e429337#diff-adf829223cc59eac11682310f8a77c0ec3cf26a5b4310d75ec8edfaa86dd285b" class="external-link uri">https://github.com/cmu-phil/tetrad/commit/295dceef6b83ac08ff0032fb194cf3ee5e429337#diff-adf829223cc59eac11682310f8a77c0ec3cf26a5b4310d75ec8edfaa86dd285b</a></p>
-<p><a href="https://github.com/cmu-phil/tetrad/releases" class="external-link">Changelog</a> item 14 says “and a generalization of GFFC (Generalized Find Factor Clusters) of FOFC and FTFC, providing multiple strategies for discovering latent clusterings from measurement data.”</p>
-<p>so we need to implement this in <code>causalDisco</code> (help?)</p>
-<p>This also doesn’t work on 7.6.9:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">load_all</span>()</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>ℹ Loading causalDisco</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>causalDisco startup<span class="sc">:</span></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>  Java heap size requested<span class="sc">:</span> <span class="dv">2</span> GB</span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>  Tetrad version<span class="sc">:</span> <span class="dv">7</span>.<span class="fl">6.9</span></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>  Java successfully initialized with <span class="dv">2</span> GB.</span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>  To change heap size, set <span class="fu">options</span>(<span class="at">java.heap.size =</span> <span class="st">'Ng'</span>) or <span class="fu">Sys.setenv</span>(<span class="at">JAVA_HEAP_SIZE =</span> <span class="st">'Ng'</span>) <span class="sc">*</span>before<span class="sc">*</span> loading.</span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>  Restart R to apply changes.</span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>  </span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="sc">&gt;</span> var1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">2.3</span>, <span class="fl">3.1</span>, <span class="fl">4.5</span>)</span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="sc">&gt;</span> var2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.1</span>, <span class="fl">6.2</span>, <span class="fl">7.3</span>, <span class="fl">8.4</span>)</span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="sc">&gt;</span> df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(var1, var2)</span>
-<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a><span class="sc">&gt;</span> tetrad_data <span class="ot">&lt;-</span> <span class="fu">rdata_to_tetrad</span>(df)</span>
-<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">rdata_to_tetrad</span>(df) <span class="sc">:</span> </span>
-<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a>  java.lang.ClassNotFoundException<span class="sc">:</span> edu<span class="sc">/</span>cmu<span class="sc">/</span>tetrad<span class="sc">/</span>data<span class="sc">/</span>DiscreteVariable</span></code></pre></div>
-<p>KCI test from Tetrad in pc algorithm gives wrong graph in getting started vignette (non-linear data) when version is 7.6.9? Works correctly in 7.6.8. Fixed in unreleased version of Tetrad (see #1946 in Tetrad issues).</p>
 </div>
 <div class="section level3">
 <h3 id="cran-todo">CRAN TODO<a class="anchor" aria-label="anchor" href="#cran-todo"></a>

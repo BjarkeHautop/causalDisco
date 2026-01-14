@@ -13,7 +13,7 @@ resulting graph or statistics."><meta property="og:image" content="https://bjark
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9025</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1.9026</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,7 +93,6 @@ This is a generalization of the Degenerate Gaussian score.</p></li>
 probabilistic conditional independence judgments.</p></li>
 <li><p><code>"fisher_z"</code> - Fisher \(Z\) (partial correlation) test</p></li>
 <li><p><code>"degenerate_gaussian"</code> - Degenerate Gaussian test as a likelihood ratio test</p></li>
-<li><p><code>"cci"</code> - Conditional independence of variable in a continuous data set using Daudin's method.</p></li>
 <li><p><code>"conditional_gaussian"</code> - Mixed discrete/continuous test</p></li>
 <li><p><code>"kci"</code> - Kernel Conditional Independence Test (KCI) by Kun Zhang</p></li>
 </ul></dd>
@@ -105,7 +104,6 @@ Supply one of the method strings for <code>set_alg()</code>.
 Recognised values are:</p>
 <ul><li><p><code>"boss"</code> - BOSS algorithm.</p></li>
 <li><p><code>"boss_fci"</code> - BOSS-FCI algorithm.</p></li>
-<li><p><code>"boss_pod"</code> - BOSS-POD (BOSS-PAG of DAG) algorithm.</p></li>
 <li><p><code>"ccd"</code> - Cyclic Causal Discovery.</p></li>
 <li><p><code>"cfci"</code> - Adjusts FCI to use conservative orientation as in CPC.</p></li>
 <li><p><code>"cpc"</code> - Conservative PC algorithm.</p></li>
@@ -116,7 +114,6 @@ Recognised values are:</p>
 <li><p><code>"fci"</code> - FCI algorithm.</p></li>
 <li><p><code>"fges"</code> - Fast Greedy Equivalence Search (FGES) algorithm.</p></li>
 <li><p><code>"fges_mb"</code> - Fast Greedy Equivalence Search with Markov Blanket (FGES-MB) algorithm.</p></li>
-<li><p><code>"fofc"</code> - Find One Factor Clusters (FOFC)/MIMBUILD algorithm.</p></li>
 <li><p><code>"gfci"</code> - GFCI algorithm. Combines FGES and FCI.</p></li>
 <li><p><code>"grasp"</code> - GRaSP (Greedy Relations of Sparsest Permutation) algorithm.</p></li>
 <li><p><code>"grasp_fci"</code> - GRaSP-FCI algorithm. Combines GRaSP and FCI.</p></li>
@@ -129,9 +126,6 @@ Recognised values are:</p>
 <li><p><code>"rfci"</code> - Restricted FCI algorithm</p></li>
 <li><p><code>"sp"</code> - Sparsest Permutation algorithm</p></li>
 <li><p><code>"sp_fci"</code> - Sparsest Permutation using FCI</p></li>
-<li><p><code>"svar_fci"</code> - SvarFCI algorithm (for timeseries data)</p></li>
-<li><p><code>"svar_gfci"</code> - SvarGFCI algorithm. Similar to SvarFCI,
-but uses a BIC score to search for a skeleton.</p></li>
 </ul></dd>
 
 
@@ -219,7 +213,6 @@ resampling, if that feature was requested.</p></dd>
 probabilistic conditional independence judgments.</p></li>
 <li><p><code>"fisher_z"</code> - Fisher \(Z\) (partial correlation) test</p></li>
 <li><p><code>"degenerate_gaussian"</code> - Degenerate Gaussian test as a likelihood ratio test</p></li>
-<li><p><code>"cci"</code> - Conditional independence of variable in a continuous data set using Daudin's method.</p></li>
 <li><p><code>"conditional_gaussian"</code> - Mixed discrete/continuous test</p></li>
 <li><p><code>"kci"</code> - Kernel Conditional Independence Test (KCI) by Kun Zhang</p></li>
 </ul></dd>
@@ -274,21 +267,6 @@ likelihood ratio test</p><ul><li><p><code>alpha = 0.01</code> - Significance lev
 independence test,</p></li>
 <li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
 lambda to the diagonal, &lt; 0 Pseudoinverse.</p></li>
-</ul></li>
-<li><p><code>"cci"</code> - Conditional independence of variable in a
-continuous data set using Daudin's method.</p><ul><li><p><code>alpha = 0.01</code> - Significance level for the
-independence test,</p></li>
-<li><p><code>scaling_factor = 2</code> - For Gaussian kernel: The
-scaling factor * Silverman bandwidth.</p></li>
-<li><p><code>basis_type = "legendre"</code> -
-The type of basis function to use. Available types are
-<code>"polynomial"</code>, <code>"hermite1"</code>, <code>"hermite2"</code>,
-<code>"legendre"</code>, or <code>"chebyshev"</code>.</p></li>
-<li><p><code>basis_scale = 0.0</code> - The scale of the basis function.
-Variables are scaled to <code>[-b, b]</code> for this b (0 = standardized).</p></li>
-<li><p><code>truncation_limit = 3</code> - Basis functions 1 through
-this number will be used. The Degenerate Gaussian category
-indicator variables for mixed data are also used.</p></li>
 </ul></li>
 <li><p><code>"conditional_gaussian"</code> - Mixed discrete/continuous test</p><ul><li><p><code>alpha = 0.01</code> - Significance level for the
 independence test,</p></li>
@@ -358,7 +336,6 @@ This is a generalization of the Degenerate Gaussian score.</p></li>
 <li><p><code>"discrete_bic"</code> - BIC score for discrete data.</p></li>
 <li><p><code>"gic"</code> - Generalized Information Criterion (GIC) score.</p></li>
 <li><p><code>"mag_degenerate_gaussian_bic"</code> - MAG Degenerate Gaussian BIC Score.</p></li>
-<li><p><code>"mixed_variable_polynomial"</code> - Mixed variable polynomial BIC score.</p></li>
 <li><p><code>"poisson_prior"</code> - Poisson prior score.</p></li>
 <li><p><code>"zhang_shen_bound"</code> - Gaussian Extended BIC score.</p></li>
 </ul></dd>
@@ -464,8 +441,7 @@ weights are distributed according to a binomial distribution,</p></li>
 <li><p><code>precompute_covariances = TRUE</code> - For more than 5000
 variables or so, set this to FALSE in order to calculate
 covariances on the fly from data.</p></li>
-</ul></li>
-<li><p><code>"mixed_variable_polynomial"</code> - Mixed variable polynomial BIC score.</p><ul><li><p><code>structure_prior = 0</code> - The default number of parents
+</ul><ul><li><p><code>structure_prior = 0</code> - The default number of parents
 for any conditional probability table. Higher weight is accorded
 to tables with about that number of parents. The prior structure
 weights are distributed according to a binomial distribution,</p></li>
@@ -546,20 +522,6 @@ completeness, should be used; TRUE if the (fuller) set due to
 J. Zhang, should be used guaranteeing additional tail completeness,</p></li>
 <li><p><code>guarantee_pag = FALSE</code> - Ensure the output is a legal PAG
 (where feasible).</p></li>
-</ul></li>
-<li><p><code>"boss_pod"</code> - BOSS-POD (BOSS-PAG of DAG) algorithm.</p><ul><li><p><code>use_bes = TRUE</code> - If TRUE, the algorithm uses the
-backward equivalence search from the GES algorithm as one of its
-steps,</p></li>
-<li><p><code>use_data_order = TRUE</code> - If TRUE, the data variable
-order should be used for the first initial permutation,</p></li>
-<li><p><code>num_starts = 1</code> - The number of times the algorithm
-should be started from different initializations. By default, the
-algorithm will be run through at least once using the initialized
-parameters,</p></li>
-<li><p><code>complete_rule_set_used = TRUE</code> - FALSE if the (simpler)
-final orientation rules set due to P. Spirtes, guaranteeing arrow
-completeness, should be used; TRUE if the (fuller) set due to
-J. Zhang, should be used guaranteeing additional tail completeness.</p></li>
 </ul></li>
 <li><p><code>"ccd"</code> - Cyclic Causal Discovery.</p><ul><li><p><code>depth = -1</code> - Maximum size of conditioning set,</p></li>
 <li><p><code>apply_r1 = TRUE</code> - Set this parameter to FALSE if a
@@ -687,26 +649,6 @@ algorithm away from the target,</p></li>
 <li><p><code>faithfulness_assumed = FALSE</code> - If TRUE, assume that if
 \(X \perp\!\!\!\perp Y\) (by an independence test) then
 \(X \perp\!\!\!\perp Y\) | Z for nonempty Z.</p></li>
-</ul></li>
-<li><p><code>"fofc"</code> - Find One Factor Clusters (FOFC)/MIMBUILD
-algorithm.</p><ul><li><p><code>alpha = 0.001</code> - Cutoff for p values (alpha),</p></li>
-<li><p><code>penalty_discount = 2.0</code> - Penalty discount factor used
-in BIC = 2L - ck log N, where c is the penalty. Higher c yields
-sparser graphs,</p></li>
-<li><p><code>tetrad_test = "cca"</code> -  The tetrad test used. Available
-options are: <code>"cca"</code> for CCA, <code>"bt"</code> for Bollen-Ting,
-<code>"wishart"</code> for Wishart, and <code>"ark"</code> for Ark.</p></li>
-<li><p><code>include_structure_model = TRUE</code> - If <code>TRUE</code>
-FOFC goes beyond the clustering step and calls a MIMBUILD routine
-(PCA or Bollen, chosen via <code>mimbuild_type</code>) to learn the
-causal relationships <strong>between</strong> the latent factors.
-The returned graph then contains both the measurement model
-(latent –&gt; indicator edges) <em>and</em> the latent-level structure.
-When <code>FALSE</code> FOFC stops after the clustering phase and returns
-only the measurement model.</p></li>
-<li><p><code>precompute_covariances = TRUE</code> - For more than 5000
-variables or so, set this to FALSE in order to calculate
-covariances on the fly from data.</p></li>
 </ul></li>
 <li><p><code>"gfci"</code> - GFCI algorithm. Combines FGES and FCI.</p><ul><li><p><code>depth = -1</code> - Maximum size of conditioning set,</p></li>
 <li><p><code>max_degree = -1</code> - Maximum degree of any node in the
@@ -853,15 +795,6 @@ completeness, should be used; TRUE if the (fuller) set due to
 J. Zhang, should be used guaranteeing additional tail completeness,</p></li>
 <li><p><code>guarantee_pag = FALSE</code> - Ensure the output is a legal
 PAG (where feasible).</p></li>
-</ul></li>
-<li><p><code>"svar_fci"</code> - SvarFCI algorithm (for timeseries data)</p><ul><li><p><code>penalty_discount = 2</code> - Penalty discount factor used
-in BIC = 2L - ck log N, where c is the penalty. Higher c yields
-sparser graphs.</p></li>
-</ul></li>
-<li><p><code>"svar_gfci"</code> - SvarGFCI algorithm. Similar to SvarFCI,
-but uses a BIC score to search for a skeleton.</p><ul><li><p><code>penalty_discount = 2</code> - Penalty discount factor used
-in BIC = 2L - ck log N, where c is the penalty. Higher c yields
-sparser graphs.</p></li>
 </ul></li>
 </ul></dd>
 

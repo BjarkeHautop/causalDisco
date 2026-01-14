@@ -67,9 +67,6 @@ the resulting graph or statistics.
   - `"degenerate_gaussian"` - Degenerate Gaussian test as a likelihood
     ratio test
 
-  - `"cci"` - Conditional independence of variable in a continuous data
-    set using Daudin's method.
-
   - `"conditional_gaussian"` - Mixed discrete/continuous test
 
   - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang
@@ -82,8 +79,6 @@ the resulting graph or statistics.
   - `"boss"` - BOSS algorithm.
 
   - `"boss_fci"` - BOSS-FCI algorithm.
-
-  - `"boss_pod"` - BOSS-POD (BOSS-PAG of DAG) algorithm.
 
   - `"ccd"` - Cyclic Causal Discovery.
 
@@ -105,8 +100,6 @@ the resulting graph or statistics.
 
   - `"fges_mb"` - Fast Greedy Equivalence Search with Markov Blanket
     (FGES-MB) algorithm.
-
-  - `"fofc"` - Find One Factor Clusters (FOFC)/MIMBUILD algorithm.
 
   - `"gfci"` - GFCI algorithm. Combines FGES and FCI.
 
@@ -132,11 +125,6 @@ the resulting graph or statistics.
   - `"sp"` - Sparsest Permutation algorithm
 
   - `"sp_fci"` - Sparsest Permutation using FCI
-
-  - `"svar_fci"` - SvarFCI algorithm (for timeseries data)
-
-  - `"svar_gfci"` - SvarGFCI algorithm. Similar to SvarFCI, but uses a
-    BIC score to search for a skeleton.
 
 - `mc_test`:
 
@@ -252,9 +240,6 @@ Sets the independence test to use in Tetrad.
   - `"degenerate_gaussian"` - Degenerate Gaussian test as a likelihood
     ratio test
 
-  - `"cci"` - Conditional independence of variable in a continuous data
-    set using Daudin's method.
-
   - `"conditional_gaussian"` - Mixed discrete/continuous test
 
   - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang
@@ -326,25 +311,6 @@ Sets the independence test to use in Tetrad.
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
-
-  - `"cci"` - Conditional independence of variable in a continuous data
-    set using Daudin's method.
-
-    - `alpha = 0.01` - Significance level for the independence test,
-
-    - `scaling_factor = 2` - For Gaussian kernel: The scaling factor \*
-      Silverman bandwidth.
-
-    - `basis_type = "legendre"` - The type of basis function to use.
-      Available types are `"polynomial"`, `"hermite1"`, `"hermite2"`,
-      `"legendre"`, or `"chebyshev"`.
-
-    - `basis_scale = 0.0` - The scale of the basis function. Variables
-      are scaled to `[-b, b]` for this b (0 = standardized).
-
-    - `truncation_limit = 3` - Basis functions 1 through this number
-      will be used. The Degenerate Gaussian category indicator variables
-      for mixed data are also used.
 
   - `"conditional_gaussian"` - Mixed discrete/continuous test
 
@@ -429,8 +395,6 @@ Sets the scoring function to use in Tetrad.
   - `"gic"` - Generalized Information Criterion (GIC) score.
 
   - `"mag_degenerate_gaussian_bic"` - MAG Degenerate Gaussian BIC Score.
-
-  - `"mixed_variable_polynomial"` - Mixed variable polynomial BIC score.
 
   - `"poisson_prior"` - Poisson prior score.
 
@@ -576,7 +540,7 @@ Sets the scoring function to use in Tetrad.
       so, set this to FALSE in order to calculate covariances on the fly
       from data.
 
-  - `"mixed_variable_polynomial"` - Mixed variable polynomial BIC score.
+    &nbsp;
 
     - `structure_prior = 0` - The default number of parents for any
       conditional probability table. Higher weight is accorded to tables
@@ -675,24 +639,6 @@ Sets the causal discovery algorithm to use in Tetrad.
 
     - `guarantee_pag = FALSE` - Ensure the output is a legal PAG (where
       feasible).
-
-  - `"boss_pod"` - BOSS-POD (BOSS-PAG of DAG) algorithm.
-
-    - `use_bes = TRUE` - If TRUE, the algorithm uses the backward
-      equivalence search from the GES algorithm as one of its steps,
-
-    - `use_data_order = TRUE` - If TRUE, the data variable order should
-      be used for the first initial permutation,
-
-    - `num_starts = 1` - The number of times the algorithm should be
-      started from different initializations. By default, the algorithm
-      will be run through at least once using the initialized
-      parameters,
-
-    - `complete_rule_set_used = TRUE` - FALSE if the (simpler) final
-      orientation rules set due to P. Spirtes, guaranteeing arrow
-      completeness, should be used; TRUE if the (fuller) set due to J.
-      Zhang, should be used guaranteeing additional tail completeness.
 
   - `"ccd"` - Cyclic Causal Discovery.
 
@@ -876,30 +822,6 @@ Sets the causal discovery algorithm to use in Tetrad.
     - `faithfulness_assumed = FALSE` - If TRUE, assume that if \\X
       \perp\\\\\\\perp Y\\ (by an independence test) then \\X
       \perp\\\\\\\perp Y\\ \| Z for nonempty Z.
-
-  - `"fofc"` - Find One Factor Clusters (FOFC)/MIMBUILD algorithm.
-
-    - `alpha = 0.001` - Cutoff for p values (alpha),
-
-    - `penalty_discount = 2.0` - Penalty discount factor used in BIC =
-      2L - ck log N, where c is the penalty. Higher c yields sparser
-      graphs,
-
-    - `tetrad_test = "cca"` - The tetrad test used. Available options
-      are: `"cca"` for CCA, `"bt"` for Bollen-Ting, `"wishart"` for
-      Wishart, and `"ark"` for Ark.
-
-    - `include_structure_model = TRUE` - If `TRUE` FOFC goes beyond the
-      clustering step and calls a MIMBUILD routine (PCA or Bollen,
-      chosen via `mimbuild_type`) to learn the causal relationships
-      **between** the latent factors. The returned graph then contains
-      both the measurement model (latent –\> indicator edges) *and* the
-      latent-level structure. When `FALSE` FOFC stops after the
-      clustering phase and returns only the measurement model.
-
-    - `precompute_covariances = TRUE` - For more than 5000 variables or
-      so, set this to FALSE in order to calculate covariances on the fly
-      from data.
 
   - `"gfci"` - GFCI algorithm. Combines FGES and FCI.
 
@@ -1101,19 +1023,6 @@ Sets the causal discovery algorithm to use in Tetrad.
 
     - `guarantee_pag = FALSE` - Ensure the output is a legal PAG (where
       feasible).
-
-  - `"svar_fci"` - SvarFCI algorithm (for timeseries data)
-
-    - `penalty_discount = 2` - Penalty discount factor used in BIC =
-      2L - ck log N, where c is the penalty. Higher c yields sparser
-      graphs.
-
-  - `"svar_gfci"` - SvarGFCI algorithm. Similar to SvarFCI, but uses a
-    BIC score to search for a skeleton.
-
-    - `penalty_discount = 2` - Penalty discount factor used in BIC =
-      2L - ck log N, where c is the penalty. Higher c yields sparser
-      graphs.
 
 #### Returns
 

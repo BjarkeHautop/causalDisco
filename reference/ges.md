@@ -43,7 +43,7 @@ For specific details on the supported scores, tests, and parameters for
 each engine, see:
 
 - [`TetradSearch`](https://bjarkehautop.github.io/causalDisco/reference/TetradSearch.md)
-  for Tetrad,
+  for Tetrad (note, Tetrad refers to it as "FGES"),
 
 - [`PcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/PcalgSearch.md)
   for pcalg.
