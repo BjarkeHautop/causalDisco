@@ -90,4 +90,7 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
   fci_tetrad <- fci_tetrad |> set_knowledge(kn)
   fci_tetrad(tpc_example)
 }
+#> 
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
 ```

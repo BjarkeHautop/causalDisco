@@ -1,20 +1,48 @@
-# List of edges in adjacency matrix
+# Retrieve edges from a `knowledgeable_caugi` object
 
-Produces a list of edges from an adjacency matrix.
+`edges()` extracts the edges from a `knowledgeable_caugi` object.
 
 ## Usage
 
 ``` r
-edges(amat)
+edges(x)
+
+# S3 method for class 'knowledgeable_caugi'
+edges(x)
 ```
 
 ## Arguments
 
-- amat:
+- x:
 
-  An adjacency matrix.
+  A `knowledgeable_caugi` object.
 
 ## Value
 
-A list consisting of two lists: One for oriented edges (`$dir`), and one
-for unoriented edges (`$undir`).
+A tibble containing the edges.
+
+## Examples
+
+``` r
+data("tpc_example")
+cd_tges <- tges(engine = "causalDisco", score = "tbic")
+kn <- knowledge(
+  tpc_example,
+  tier(
+    child ~ starts_with("child"),
+    youth ~ starts_with("youth"),
+    old ~ starts_with("old")
+  )
+)
+disco_cd_tges <- disco(data = tpc_example, method = cd_tges, knowledge = kn)
+edges(disco_cd_tges)
+#> # A tibble: 6 × 3
+#>   from      edge  to       
+#>   <chr>     <chr> <chr>    
+#> 1 child_x1  ---   child_x2 
+#> 2 child_x2  -->   oldage_x5
+#> 3 child_x2  -->   youth_x4 
+#> 4 oldage_x5 -->   oldage_x6
+#> 5 youth_x3  -->   oldage_x5
+#> 6 youth_x4  -->   oldage_x6
+```

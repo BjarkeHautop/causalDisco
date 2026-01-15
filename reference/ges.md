@@ -87,4 +87,7 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
   ges_tetrad <- ges_tetrad |> set_knowledge(kn)
   ges_tetrad(tpc_example)
 }
+#> 
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
 ```

@@ -174,6 +174,16 @@ Low-level functions that execute search algorithms.
 
   Create a new `knowledgeable_caugi` object
 
+- [`edges()`](https://bjarkehautop.github.io/causalDisco/reference/edges.md)
+  :
+
+  Retrieve edges from a `knowledgeable_caugi` object
+
+- [`nodes()`](https://bjarkehautop.github.io/causalDisco/reference/nodes.md)
+  :
+
+  Retrieve nodes from a `knowledgeable_caugi` object
+
 - [`knowledge.knowledgeable_caugi()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.knowledgeable_caugi.md)
   : Extract the knowledge from a knowledgeable_caugi
 

@@ -1379,4 +1379,7 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 
   print(g)
 }
+#> 
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
 ```
