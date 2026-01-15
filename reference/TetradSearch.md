@@ -22,11 +22,17 @@ the resulting graph or statistics.
   Supply one of the method strings for `set_score()`. Recognised values
   are:
 
+  **Discrete – categorical**
+
+  - `"bdeu"` - Bayes Dirichlet Equivalent score with uniform priors.
+
+  - `"discrete_bic"` - BIC score for discrete data.
+
+  **Continuous – ?**
+
   - `"sem_bic"` - SEM BIC score.
 
   - `"ebic"` - Extended BIC score.
-
-  - `"bdeu"` - Bayes Dirichlet Equivalent score with uniform priors.
 
   - `"basis_function_bic"` - BIC score for basis-function models. This
     is a generalization of the Degenerate Gaussian score.
@@ -34,8 +40,6 @@ the resulting graph or statistics.
   - `"conditional_gaussian"` - Mixed discrete/continuous BIC score.
 
   - `"degenerate_gaussian"` - Degenerate Gaussian BIC score.
-
-  - `"discrete_bic"` - BIC score for discrete data.
 
   - `"gic"` - Generalized Information Criterion (GIC) score.
 
@@ -53,6 +57,8 @@ the resulting graph or statistics.
   Supply one of the method strings for `set_test()`. Recognised values
   are:
 
+  **Discrete – categorical**
+
   - `"chi_square"` - chi-squared test
 
   - `"g_square"` - likelihood-ratio \\G^2\\ test
@@ -62,12 +68,16 @@ the resulting graph or statistics.
   - `"probabilistic"` - Uses BCInference by Cooper and Bui to calculate
     probabilistic conditional independence judgments.
 
-  - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test
-
   - `"degenerate_gaussian"` - Degenerate Gaussian test as a likelihood
     ratio test
 
   - `"conditional_gaussian"` - Mixed discrete/continuous test
+
+  **Continuous – Gaussian**
+
+  - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test
+
+  **Continuous – nonparametric**
 
   - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang
 

@@ -13,7 +13,7 @@ resulting graph or statistics."><meta property="og:image" content="https://bjark
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9027</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9028</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,14 +67,14 @@ used by Tetrad.</p></dd>
 <dd><p>Java object holding the scoring function selected with
 <code>set_score()</code>. Supply one of the method strings for
 <code>set_score()</code>. Recognised values are:</p>
-<ul><li><p><code>"sem_bic"</code> - SEM BIC score.</p></li>
+<p><strong>Discrete – categorical</strong></p><ul><li><p><code>"bdeu"</code> - Bayes Dirichlet Equivalent score with uniform priors.</p></li>
+<li><p><code>"discrete_bic"</code> - BIC score for discrete data.</p></li>
+</ul><p><strong>Continuous – ?</strong></p><ul><li><p><code>"sem_bic"</code> - SEM BIC score.</p></li>
 <li><p><code>"ebic"</code> - Extended BIC score.</p></li>
-<li><p><code>"bdeu"</code> - Bayes Dirichlet Equivalent score with uniform priors.</p></li>
 <li><p><code>"basis_function_bic"</code> - BIC score for basis-function models.
 This is a generalization of the Degenerate Gaussian score.</p></li>
 <li><p><code>"conditional_gaussian"</code> - Mixed discrete/continuous BIC score.</p></li>
 <li><p><code>"degenerate_gaussian"</code> - Degenerate Gaussian BIC score.</p></li>
-<li><p><code>"discrete_bic"</code> - BIC score for discrete data.</p></li>
 <li><p><code>"gic"</code> - Generalized Information Criterion (GIC) score.</p></li>
 <li><p><code>"mag_degenerate_gaussian_bic"</code> - MAG Degenerate Gaussian BIC Score.</p></li>
 <li><p><code>"mixed_variable_polynomial"</code> - Mixed variable polynomial BIC score.</p></li>
@@ -87,15 +87,15 @@ This is a generalization of the Degenerate Gaussian score.</p></li>
 <dd><p>Java object holding the independence test selected with
 <code>set_test()</code>. Supply one of the method strings for
 <code>set_test()</code>. Recognised values are:</p>
-<ul><li><p><code>"chi_square"</code> - chi-squared test</p></li>
+<p><strong>Discrete – categorical</strong></p><ul><li><p><code>"chi_square"</code> - chi-squared test</p></li>
 <li><p><code>"g_square"</code>   - likelihood-ratio \(G^2\) test</p></li>
 <li><p><code>"basis_function_lrt"</code> - basis-function likelihood-ratio</p></li>
 <li><p><code>"probabilistic"</code> - Uses BCInference by Cooper and Bui to calculate
 probabilistic conditional independence judgments.</p></li>
-<li><p><code>"fisher_z"</code> - Fisher \(Z\) (partial correlation) test</p></li>
 <li><p><code>"degenerate_gaussian"</code> - Degenerate Gaussian test as a likelihood ratio test</p></li>
 <li><p><code>"conditional_gaussian"</code> - Mixed discrete/continuous test</p></li>
-<li><p><code>"kci"</code> - Kernel Conditional Independence Test (KCI) by Kun Zhang</p></li>
+</ul><p><strong>Continuous – Gaussian</strong></p><ul><li><p><code>"fisher_z"</code> - Fisher \(Z\) (partial correlation) test</p></li>
+</ul><p><strong>Continuous – nonparametric</strong></p><ul><li><p><code>"kci"</code> - Kernel Conditional Independence Test (KCI) by Kun Zhang</p></li>
 </ul></dd>
 
 

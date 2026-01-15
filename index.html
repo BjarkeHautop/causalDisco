@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9027</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9028</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,7 +99,7 @@
 <h3 id="installing-java--jdk">Installing Java / JDK<a class="anchor" aria-label="anchor" href="#installing-java--jdk"></a>
 </h3>
 <p>causalDisco provides an interface to the Java library <a href="https://github.com/cmu-phil/tetrad" class="external-link">Tetrad</a> for causal discovery algorithms. To use algorithms from Tetrad you need to install a Java Development Kit (JDK) &gt;= 21. We recommend Eclipse Temurin (OpenJDK), available at <a href="https://adoptium.net" class="external-link uri">https://adoptium.net</a> for all major operating systems.</p>
-<p>We provide a helper function to install Temurin JDK 25 on macOS and Windows:</p>
+<p>Alternatively, we provide a helper function to install Temurin JDK 25 on macOS and Windows:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">causalDisco</span><span class="fu">::</span><span class="fu"><a href="reference/install_java.html">install_java</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>The current supported version of Tetrad can then be installed by calling</p>
@@ -168,6 +168,20 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">disco_cd_tges</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot-1.png" alt="A causal graph with the known tiers indicated by vertical positioning of the nodes." width="100%"><img src="reference/figures/README-plot-2.png" alt="A causal graph with the known tiers indicated by vertical positioning of the nodes." width="100%"></p>
+</div>
+<div class="section level2">
+<h2 id="questions">Questions<a class="anchor" aria-label="anchor" href="#questions"></a>
+</h2>
+<ul>
+<li>
+<p>Added the datasets from the webtool (<a href="https://shiny.sund.ku.dk/zms499/causalDisco/" class="external-link uri">https://shiny.sund.ku.dk/zms499/causalDisco/</a>) to the package, see <a href="https://bjarkehautop.github.io/causalDisco/reference/index.html#example-datasets" class="uri">https://bjarkehautop.github.io/causalDisco/reference/index.html#example-datasets</a>. Are these fine?</p>
+<ul>
+<li>Add a Discrete – ordered factors dataset (bnlearn has tests arguments that works on that only).</li>
+</ul>
+</li>
+<li><p>Updated getting started and knowledge vignettes based on the feedback. Anything missing?</p></li>
+<li><p>Documentation of Tetrad score arguments?</p></li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
@@ -240,9 +254,11 @@
 <p>If we want any changes we can modify the tikz code after generation.</p>
 <ul>
 <li><p>Make required work for our algorithms. It breaks when it internally calls <code>tpdag</code>, so look into that…</p></li>
-<li><p>Make score/test/alg names consistent. Currently a mix of snake_case, kebab-case, and period.case. - done? Still missing algorithms.</p></li>
 <li><p>In documentation of defaults for tests maybe add the underlying engine defaults if they differ?</p></li>
 <li><p>In documentation of test / scores say which data types they support (continuous, discrete, mixed). It’s written for some of the engines, but even that is unclear sometimes.</p></li>
+<li><p>In tests (and examples) don’t use <code>tpc_example</code> all the time and instead also use other datasets (e.g. num_data, cat_data, mix_data). (this also avoids that we currently simulate data in tests when needing an e.g. numerical dataset).</p></li>
+<li><p>Improve examples in documentation (currently very minimal).</p></li>
+<li><p>Add all algs/scores/tests from the backends (start with Tetrad). Check if we currently document ones we haven’t implemented yet.</p></li>
 <li><p>Update simulation functions (use caugi?)</p></li>
 <li><p>Update evaluation and confusion metrics (use caugi?)</p></li>
 </ul>

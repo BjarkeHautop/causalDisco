@@ -52,8 +52,8 @@ algorithms. To use algorithms from Tetrad you need to install a Java
 Development Kit (JDK) \>= 21. We recommend Eclipse Temurin (OpenJDK),
 available at <https://adoptium.net> for all major operating systems.
 
-We provide a helper function to install Temurin JDK 25 on macOS and
-Windows:
+Alternatively, we provide a helper function to install Temurin JDK 25 on
+macOS and Windows:
 
 ``` r
 causalDisco::install_java()
@@ -142,6 +142,21 @@ of the nodes.](reference/figures/README-plot-1.png)![A causal graph with
 the known tiers indicated by vertical positioning of the
 nodes.](reference/figures/README-plot-2.png)
 
+## Questions
+
+- Added the datasets from the webtool
+  (<https://shiny.sund.ku.dk/zms499/causalDisco/>) to the package, see
+  <https://bjarkehautop.github.io/causalDisco/reference/index.html#example-datasets>.
+  Are these fine?
+
+  - Add a Discrete – ordered factors dataset (bnlearn has tests
+    arguments that works on that only).
+
+- Updated getting started and knowledge vignettes based on the feedback.
+  Anything missing?
+
+- Documentation of Tetrad score arguments?
+
 ## TODO
 
 - Improve plot (use caugi)
@@ -217,15 +232,22 @@ If we want any changes we can modify the tikz code after generation.
 - Make required work for our algorithms. It breaks when it internally
   calls `tpdag`, so look into that…
 
-- Make score/test/alg names consistent. Currently a mix of snake_case,
-  kebab-case, and period.case. - done? Still missing algorithms.
-
 - In documentation of defaults for tests maybe add the underlying engine
   defaults if they differ?
 
 - In documentation of test / scores say which data types they support
   (continuous, discrete, mixed). It’s written for some of the engines,
   but even that is unclear sometimes.
+
+- In tests (and examples) don’t use `tpc_example` all the time and
+  instead also use other datasets (e.g. num_data, cat_data, mix_data).
+  (this also avoids that we currently simulate data in tests when
+  needing an e.g. numerical dataset).
+
+- Improve examples in documentation (currently very minimal).
+
+- Add all algs/scores/tests from the backends (start with Tetrad). Check
+  if we currently document ones we haven’t implemented yet.
 
 - Update simulation functions (use caugi?)
 
