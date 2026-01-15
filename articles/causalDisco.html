@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9026</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9027</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,19 +85,55 @@ offers tools for causal discovery from observational data. It covers the
 main features of the package, including various causal discovery
 algorithms, knowledge incorporation, and result visualization.</p>
 <div class="section level2">
-<h2 id="dataset">Dataset<a class="anchor" aria-label="anchor" href="#dataset"></a>
+<h2 id="running-causal-discovery-algorithms">Running causal discovery algorithms<a class="anchor" aria-label="anchor" href="#running-causal-discovery-algorithms"></a>
 </h2>
-<p>We will in this vignette use the <code>tpc_example</code> dataset
-available in the package. This dataset contains simulated data from a
-known causal structure, with a mix of continuous and categorical
-variables.</p>
+<p>We will for this section use the <code>num_data</code> dataset
+included in the package for demonstrating how to run causal discovery
+algorithms.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"num_data"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">num_data</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         X1        X2       X3         Z        Y</span></span>
+<span><span class="co">#&gt; 1 3.900715  7.048325 6.964806 10.272479 15.35505</span></span>
+<span><span class="co">#&gt; 2 4.736112  6.236746 5.666022 10.357262 23.36749</span></span>
+<span><span class="co">#&gt; 3 4.657992 12.169805 9.127046  9.138338 25.32495</span></span>
+<span><span class="co">#&gt; 4 5.176469  6.392344 6.101088 10.808335 26.75643</span></span>
+<span><span class="co">#&gt; 5 4.535538 10.305236 7.465185 10.612735 22.67612</span></span>
+<span><span class="co">#&gt; 6 4.885914 10.018856 7.413312  9.375931 28.03132</span></span></code></pre></div>
+<p>We can use several algorithms from the <code>causalDisco</code>
+package to discover the causal structure from this data. Here is an
+example using the Peter-Clark (PC) algorithm from Tetrad with the Kernel
+Conditional Independence Test (KCI).</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">pc_tetrad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"kci"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span>  <span class="va">pc_result_tetrad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">num_data</span>, method <span class="op">=</span> <span class="va">pc_tetrad</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_tetrad</span>, main <span class="op">=</span> <span class="st">"PC KCI (Tetrad)"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p><img src="pc-kci-tetrad.png"></p>
+<p>or the PC algorithm from bnlearn with Fisher’s Z test:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pc_bnlearn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"bnlearn"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="va">pc_result_bnlearn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">num_data</span>, method <span class="op">=</span> <span class="va">pc_bnlearn</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_bnlearn</span>, main <span class="op">=</span> <span class="st">"PC Fisher Z (bnlearn)"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="causalDisco_files/figure-html/pc%20algorithm%20fisher%20z-1.png" class="r-plt" alt="" width="700"></p>
+<p>or the generalized score equivalence (GES) algorithm from pcalg with
+the SEM-BIC score:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ges_pcalg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ges.html">ges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"pcalg"</span>, score <span class="op">=</span> <span class="st">"sem_bic"</span><span class="op">)</span></span>
+<span><span class="va">ges_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">num_data</span>, method <span class="op">=</span> <span class="va">ges_pcalg</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ges_result</span>, main <span class="op">=</span> <span class="st">"GES SEM-BIC (pcalg)"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="causalDisco_files/figure-html/ges%20algorithm%20sem-bic-1.png" class="r-plt" alt="" width="700"></p>
+</div>
+<div class="section level2">
+<h2 id="incorporating-knowledge">Incorporating knowledge<a class="anchor" aria-label="anchor" href="#incorporating-knowledge"></a>
+</h2>
+<p>We will for this section use the dataset <code>tpc_example</code>,
+which contains variables measured at three different life stages:
+childhood, youth, and old age.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
-<span><span class="co"># TODO change tpc_example to have child_x2 and youth_x3 as factors (or just use as numerical (or different dataset that isn't mixed))</span></span>
-<span><span class="va">tpc_example_cleaned</span> <span class="op">&lt;-</span> <span class="va">tpc_example</span></span>
-<span><span class="va">tpc_example_cleaned</span><span class="op">$</span><span class="va">child_x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">tpc_example_cleaned</span><span class="op">$</span><span class="va">child_x2</span><span class="op">)</span></span>
-<span><span class="va">tpc_example_cleaned</span><span class="op">$</span><span class="va">youth_x3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">tpc_example_cleaned</span><span class="op">$</span><span class="va">youth_x3</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tpc_example_cleaned</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   child_x2   child_x1    youth_x4 youth_x3  oldage_x6  oldage_x5</span></span>
 <span><span class="co">#&gt; 1        0 -0.7104066 -0.07355602        1  6.4984994  3.0740123</span></span>
 <span><span class="co">#&gt; 2        0  0.2568837 -1.16865142        1  0.3254685  1.9726530</span></span>
@@ -105,38 +141,15 @@ variables.</p>
 <span><span class="co">#&gt; 4        1  1.6524574  0.97115845        0 -7.9064009 -4.5160676</span></span>
 <span><span class="co">#&gt; 5        0 -0.9516186  0.67069597        0  1.7089134  0.7903853</span></span>
 <span><span class="co">#&gt; 6        1  1.9549723 -0.65054654        0 -6.9758928 -3.2107342</span></span></code></pre></div>
-<p>We can use several algorithms from the <code>causalDisco</code>
-package to discover the causal structure from this data. Here is an
-example using the test-based PC algorithm from Tetrad with the Kernel
-Conditional Independence Test (KCI), which can handle both continuous
-and categorical variables.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">pc_tetrad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"kci"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
-<span>  <span class="va">pc_result_tetrad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">tpc_example_cleaned</span>, method <span class="op">=</span> <span class="va">pc_tetrad</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_tetrad</span>, main <span class="op">=</span> <span class="st">"PC KCI (Tetrad)"</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<p><img src="PC-KCI-TETRAD.png"></p>
-<p>We can also use a score-based method like GES with the BIC score for
-basis-function models.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">ges_tetrad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ges.html">ges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, score <span class="op">=</span> <span class="st">"basis_function_bic"</span><span class="op">)</span></span>
-<span>  <span class="va">ges_result_tetrad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">tpc_example_cleaned</span>, method <span class="op">=</span> <span class="va">ges_tetrad</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ges_result_tetrad</span>, main <span class="op">=</span> <span class="st">"GES Basis Function BIC (Tetrad)"</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<p><img src="GES-SEM-BIC-TETRAD.png"> …</p>
-</div>
-<div class="section level2">
-<h2 id="incorporating-knowledge">Incorporating knowledge<a class="anchor" aria-label="anchor" href="#incorporating-knowledge"></a>
-</h2>
-<p>Since our dataset contains variables measured at childhood, youth,
-and old age, and thus the causal flow can’t go backwards in time. We can
-incorporate this temporal knowledge into the causal discovery process.
-This can be done as follows:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>Thus, we have some prior knowledge about the temporal ordering of the
+variables. That is, we know the variables measured in childhood cannot
+be caused by variables measured in youth or old age, and variables
+measured in youth cannot be caused by variables measured in old age.</p>
+<p>This can be encoded in a <code>knowledge</code> object as
+follows:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>  <span class="va">tpc_example_cleaned</span>,</span>
+<span>  <span class="va">tpc_example</span>,</span>
 <span>  <span class="fu">tier</span><span class="op">(</span></span>
 <span>    <span class="va">child</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>,</span>
 <span>    <span class="va">youth</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span>
@@ -145,23 +158,13 @@ This can be done as follows:</p>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causalDisco_files/figure-html/prior%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
-<p>We can then incorporate this knowledge into the PC algorithm as
-follows:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">pc_tetrad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"kci"</span><span class="op">)</span></span>
-<span>  <span class="va">pc_result_with_knowledge</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">tpc_example_cleaned</span>, method <span class="op">=</span> <span class="va">pc_tetrad</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_with_knowledge</span>, main <span class="op">=</span> <span class="st">"PC KCI with Temporal Knowledge (Tetrad)"</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<p><img src="PC-KCI-TKN-TETRAD.png"></p>
-<p>We can see that the resulting graph respects the temporal ordering
-specified in the knowledge object. We can also use other algorithms or
-engines, such as the Temporal Peter-Clark (tpc) algorithm implemented in
-this package with Regression-based information loss test:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p>We can then incorporate this knowledge into any algorithm like above.
+Here we use the Temporal Peter-Clark (tpc) algorithm from causalDisco
+with the regression-based information loss test:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tpc_method</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tpc.html">tpc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, test <span class="op">=</span> <span class="st">"reg"</span><span class="op">)</span></span>
-<span><span class="va">tpc_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">tpc_example_cleaned</span>, method <span class="op">=</span> <span class="va">tpc_method</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tpc_result</span>, main <span class="op">=</span> <span class="st">"TPC with Temporal Knowledge (causalDisco)"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">tpc_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tpc_method</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tpc_result</span>, main <span class="op">=</span> <span class="st">"TPC reg_test with Temporal Knowledge (causalDisco)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causalDisco_files/figure-html/tpc%20algorithm%20with%20knowledge-1.png" class="r-plt" alt="" width="700"><img src="causalDisco_files/figure-html/tpc%20algorithm%20with%20knowledge-2.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level2">
@@ -169,7 +172,6 @@ this package with Regression-based information loss test:</p>
 </h2>
 <p>For more information about how to incorporate knowledge, see the <a href="knowledge.html">knowledge vignette</a>.</p>
 <p>For more information about causal discovery, see the <a href="causal-discovery.html">causal discovery vignette</a>.</p>
-<p>TODO: Use other engines</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

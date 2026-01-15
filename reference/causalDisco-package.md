@@ -10,8 +10,11 @@ procedures.
 
 ## System requirements
 
-Requires Java (version 21 or newer) to run the Tetrad Java library.
-Requires Cargo (Rust's package manager), rustc \>= 1.80.0, xz
+Cargo (Rust's package manager), rustc \>= 1.80.0, xz.
+
+Java (\>= 21) for Tetrad functionality (optional; includes installer;
+see inst/java/LICENSE and inst/java/COPYRIGHT); Source code:
+<https://github.com/cmu-phil/tetrad>.
 
 ## See also
 

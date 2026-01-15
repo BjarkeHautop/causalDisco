@@ -104,7 +104,7 @@ library(causalDisco)
 # load data
 data("tpc_example")
 
-# define background knowledge object
+# Define background knowledge object
 kn <- knowledge(
   tpc_example,
   tier(
@@ -114,18 +114,18 @@ kn <- knowledge(
   )
 )
 
-# use Tetrad PC algorithm with conditional Gaussian test
+# Use Tetrad PC algorithm with conditional Gaussian test
 # Requires Tetrad to be installed
 if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
   tetrad_pc <- pc(engine = "tetrad", test = "conditional_gaussian", alpha = 0.05)
   disco_tetrad_pc <- disco(data = tpc_example, method = tetrad_pc, knowledge = kn)
 
-  # similarly, one could do
+  # Similarly, one could do
   tetrad_pc <- tetrad_pc |> set_knowledge(kn)
   disco_tetrad_pc_new <- tetrad_pc(tpc_example)
 }
 
-# use causalDisco's own tges algorithm with temporal BIC score
+# Use causalDisco's own tges algorithm with temporal BIC score
 cd_tges <- tges(engine = "causalDisco", score = "tbic")
 disco_cd_tges <- disco(data = tpc_example, method = cd_tges, knowledge = kn)
 ```
@@ -224,7 +224,12 @@ If we want any changes we can modify the tikz code after generation.
   defaults if they differ?
 
 - In documentation of test / scores say which data types they support
-  (continuous, discrete, mixed).
+  (continuous, discrete, mixed). It’s written for some of the engines,
+  but even that is unclear sometimes.
+
+- Update simulation functions (use caugi?)
+
+- Update evaluation and confusion metrics (use caugi?)
 
 ### Bugfixes
 
@@ -307,6 +312,12 @@ Fixed in unreleased version of Tetrad (see \#1947 in Tetrad issues).
   `caugi` are it uses `data.frame` and `S7`):
   - `tibble` vs `data.frame` (e.g. `knowledge` is `tibble` and
     `disco()$caugi@edges` is `data.frame`).
+    - I added a
+      [`nodes()`](https://bjarkehautop.github.io/causalDisco/reference/nodes.md)
+      and
+      [`edges()`](https://bjarkehautop.github.io/causalDisco/reference/edges.md)
+      method to `knowledgeable_caugi` objects to easily return as
+      `tibble`.
 
 ### CRAN TODO
 
@@ -391,9 +402,10 @@ Functions for installing and verifying the Tetrad Java backend.
 - [`TetradSearch`](https://bjarkehautop.github.io/causalDisco/reference/TetradSearch.md)
   : R6 Interface to Tetrad Search Algorithms
 
-## Algorithm Engines
+## causalDisco Algorithm Run Functions
 
-Low-level functions that execute search algorithms.
+Low-level functions that execute causalDisco search algorithms and
+detail their parameters.
 
 - [`tfci_run()`](https://bjarkehautop.github.io/causalDisco/reference/tfci_run.md)
   : Causal Discovery Using the Temporal FCI (TFCI) Algorithm
@@ -409,6 +421,23 @@ Low-level functions that execute search algorithms.
   : Simulate a random DAG
 - [`sim_gaus_from_dag()`](https://bjarkehautop.github.io/causalDisco/reference/sim_gaus_from_dag.md)
   : Simulate Gaussian data according to DAG
+
+## Example Datasets
+
+Small simulated datasets to illustrate causalDisco workflows.
+
+- [`tpc_example`](https://bjarkehautop.github.io/causalDisco/reference/tpc_example.md)
+  : Simulated data example
+- [`cat_data`](https://bjarkehautop.github.io/causalDisco/reference/cat_data.md)
+  : Simulated categorical data example
+- [`cat_data_mcar`](https://bjarkehautop.github.io/causalDisco/reference/cat_data_mcar.md)
+  : Simulated categorical data with MCAR (missing completely at random)
+- [`mix_data`](https://bjarkehautop.github.io/causalDisco/reference/mix_data.md)
+  : Simulated mixed data example
+- [`num_data`](https://bjarkehautop.github.io/causalDisco/reference/num_data.md)
+  : Simulated numerical data example
+- [`num_data_latent`](https://bjarkehautop.github.io/causalDisco/reference/num_data_latent.md)
+  : Simulated numerical data example with latent variable
 
 ## Plotting and Printing
 
@@ -525,11 +554,6 @@ Low-level functions that execute search algorithms.
 
   Merge two `knowledge` objects
 
-## Conversions
-
-- [`as.graphNEL()`](https://bjarkehautop.github.io/causalDisco/reference/as.graphNEL.md)
-  : Convert adjacency matrix to graphNEL object
-
 ## Evaluation & Confusion Metrics
 
 - [`precision()`](https://bjarkehautop.github.io/causalDisco/reference/precision.md)
@@ -555,8 +579,6 @@ Low-level functions that execute search algorithms.
 
 - [`engine_registry`](https://bjarkehautop.github.io/causalDisco/reference/engine_registry.md)
   : Supported engines for causalDisco
-- [`tpc_example`](https://bjarkehautop.github.io/causalDisco/reference/tpc_example.md)
-  : Simulated data example
 
 # Articles
 

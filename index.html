@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9026</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9027</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -140,7 +140,7 @@
 <span><span class="co"># load data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># define background knowledge object</span></span>
+<span><span class="co"># Define background knowledge object</span></span>
 <span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">tpc_example</span>,</span>
 <span>  <span class="fu">tier</span><span class="op">(</span></span>
@@ -150,18 +150,18 @@
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># use Tetrad PC algorithm with conditional Gaussian test</span></span>
+<span><span class="co"># Use Tetrad PC algorithm with conditional Gaussian test</span></span>
 <span><span class="co"># Requires Tetrad to be installed</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span>  <span class="va">disco_tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="co"># similarly, one could do</span></span>
+<span>  <span class="co"># Similarly, one could do</span></span>
 <span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="va">tetrad_pc</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/set_knowledge.html">set_knowledge</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span>
 <span>  <span class="va">disco_tetrad_pc_new</span> <span class="op">&lt;-</span> <span class="fu">tetrad_pc</span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="co"># use causalDisco's own tges algorithm with temporal BIC score</span></span>
+<span><span class="co"># Use causalDisco's own tges algorithm with temporal BIC score</span></span>
 <span><span class="va">cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tges.html">tges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, score <span class="op">=</span> <span class="st">"tbic"</span><span class="op">)</span></span>
 <span><span class="va">disco_cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">cd_tges</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
 <p>You can visualize the resulting causal graph using the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function:</p>
@@ -242,7 +242,9 @@
 <li><p>Make required work for our algorithms. It breaks when it internally calls <code>tpdag</code>, so look into that…</p></li>
 <li><p>Make score/test/alg names consistent. Currently a mix of snake_case, kebab-case, and period.case. - done? Still missing algorithms.</p></li>
 <li><p>In documentation of defaults for tests maybe add the underlying engine defaults if they differ?</p></li>
-<li><p>In documentation of test / scores say which data types they support (continuous, discrete, mixed).</p></li>
+<li><p>In documentation of test / scores say which data types they support (continuous, discrete, mixed). It’s written for some of the engines, but even that is unclear sometimes.</p></li>
+<li><p>Update simulation functions (use caugi?)</p></li>
+<li><p>Update evaluation and confusion metrics (use caugi?)</p></li>
 </ul>
 <div class="section level3">
 <h3 id="bugfixes">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes"></a>
@@ -319,7 +321,11 @@
 <li>We are mixing between different things currently (since we rely on <code>caugi</code> are it uses <code>data.frame</code> and <code>S7</code>):
 <ul>
 <li>
-<code>tibble</code> vs <code>data.frame</code> (e.g. <code>knowledge</code> is <code>tibble</code> and <code>disco()$caugi@edges</code> is <code>data.frame</code>).</li>
+<code>tibble</code> vs <code>data.frame</code> (e.g. <code>knowledge</code> is <code>tibble</code> and <code>disco()$caugi@edges</code> is <code>data.frame</code>).
+<ul>
+<li>I added a <code><a href="reference/nodes.html">nodes()</a></code> and <code><a href="reference/edges.html">edges()</a></code> method to <code>knowledgeable_caugi</code> objects to easily return as <code>tibble</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

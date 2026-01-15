@@ -66,9 +66,10 @@ Functions for installing and verifying the Tetrad Java backend.
 - [`TetradSearch`](https://bjarkehautop.github.io/causalDisco/reference/TetradSearch.md)
   : R6 Interface to Tetrad Search Algorithms
 
-## Algorithm Engines
+## causalDisco Algorithm Run Functions
 
-Low-level functions that execute search algorithms.
+Low-level functions that execute causalDisco search algorithms and
+detail their parameters.
 
 - [`tfci_run()`](https://bjarkehautop.github.io/causalDisco/reference/tfci_run.md)
   : Causal Discovery Using the Temporal FCI (TFCI) Algorithm
@@ -84,6 +85,23 @@ Low-level functions that execute search algorithms.
   : Simulate a random DAG
 - [`sim_gaus_from_dag()`](https://bjarkehautop.github.io/causalDisco/reference/sim_gaus_from_dag.md)
   : Simulate Gaussian data according to DAG
+
+## Example Datasets
+
+Small simulated datasets to illustrate causalDisco workflows.
+
+- [`tpc_example`](https://bjarkehautop.github.io/causalDisco/reference/tpc_example.md)
+  : Simulated data example
+- [`cat_data`](https://bjarkehautop.github.io/causalDisco/reference/cat_data.md)
+  : Simulated categorical data example
+- [`cat_data_mcar`](https://bjarkehautop.github.io/causalDisco/reference/cat_data_mcar.md)
+  : Simulated categorical data with MCAR (missing completely at random)
+- [`mix_data`](https://bjarkehautop.github.io/causalDisco/reference/mix_data.md)
+  : Simulated mixed data example
+- [`num_data`](https://bjarkehautop.github.io/causalDisco/reference/num_data.md)
+  : Simulated numerical data example
+- [`num_data_latent`](https://bjarkehautop.github.io/causalDisco/reference/num_data_latent.md)
+  : Simulated numerical data example with latent variable
 
 ## Plotting and Printing
 
@@ -200,11 +218,6 @@ Low-level functions that execute search algorithms.
 
   Merge two `knowledge` objects
 
-## Conversions
-
-- [`as.graphNEL()`](https://bjarkehautop.github.io/causalDisco/reference/as.graphNEL.md)
-  : Convert adjacency matrix to graphNEL object
-
 ## Evaluation & Confusion Metrics
 
 - [`precision()`](https://bjarkehautop.github.io/causalDisco/reference/precision.md)
@@ -230,5 +243,3 @@ Low-level functions that execute search algorithms.
 
 - [`engine_registry`](https://bjarkehautop.github.io/causalDisco/reference/engine_registry.md)
   : Supported engines for causalDisco
-- [`tpc_example`](https://bjarkehautop.github.io/causalDisco/reference/tpc_example.md)
-  : Simulated data example

@@ -17,7 +17,7 @@ A data.frame with 200 rows and 6 variables.
 - child_x1:
 
   Structural equation: \\X_1 := \epsilon_1\\ with \\\epsilon_1 \sim
-  \mathrm{Unif}(0,1)\\
+  \mathrm{Unif}\\0,1\\\\
 
 - child_x2:
 
@@ -27,7 +27,7 @@ A data.frame with 200 rows and 6 variables.
 - youth_x3:
 
   Structural equation: \\X_3 := \epsilon_3\\ with \\\epsilon_3 \sim
-  \mathrm{Unif}(0, 1)\\
+  \mathrm{Unif}\\0, 1\\\\
 
 - youth_x4:
 
