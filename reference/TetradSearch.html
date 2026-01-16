@@ -13,7 +13,7 @@ resulting graph or statistics."><meta property="og:image" content="https://bjark
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9028</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9029</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,7 @@ resulting graph or statistics."><meta property="og:image" content="https://bjark
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>R6 Interface to Tetrad Search Algorithms</h1>
-      <small class="dont-index">Source: <a href="https://github.com/annennenne/causalDisco/blob/master/R/tetrad_search.R" class="external-link"><code>R/tetrad_search.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/annennenne/causalDisco/blob/master/R/tetrad-search.R" class="external-link"><code>R/tetrad-search.R</code></a></small>
       <div class="d-none name"><code>TetradSearch.Rd</code></div>
     </div>
 
@@ -67,19 +67,20 @@ used by Tetrad.</p></dd>
 <dd><p>Java object holding the scoring function selected with
 <code>set_score()</code>. Supply one of the method strings for
 <code>set_score()</code>. Recognised values are:</p>
-<p><strong>Discrete – categorical</strong></p><ul><li><p><code>"bdeu"</code> - Bayes Dirichlet Equivalent score with uniform priors.</p></li>
+<p><strong>Discrete - categorical</strong></p><ul><li><p><code>"bdeu"</code> - Bayes Dirichlet Equivalent score with uniform priors.</p></li>
 <li><p><code>"discrete_bic"</code> - BIC score for discrete data.</p></li>
-</ul><p><strong>Continuous – ?</strong></p><ul><li><p><code>"sem_bic"</code> - SEM BIC score.</p></li>
-<li><p><code>"ebic"</code> - Extended BIC score.</p></li>
-<li><p><code>"basis_function_bic"</code> - BIC score for basis-function models.
-This is a generalization of the Degenerate Gaussian score.</p></li>
-<li><p><code>"conditional_gaussian"</code> - Mixed discrete/continuous BIC score.</p></li>
-<li><p><code>"degenerate_gaussian"</code> - Degenerate Gaussian BIC score.</p></li>
+</ul><p><strong>Continuous - Gaussian</strong></p><ul><li><p><code>"ebic"</code> - Extended BIC score.</p></li>
 <li><p><code>"gic"</code> - Generalized Information Criterion (GIC) score.</p></li>
-<li><p><code>"mag_degenerate_gaussian_bic"</code> - MAG Degenerate Gaussian BIC Score.</p></li>
-<li><p><code>"mixed_variable_polynomial"</code> - Mixed variable polynomial BIC score.</p></li>
 <li><p><code>"poisson_prior"</code> - Poisson prior score.</p></li>
 <li><p><code>"zhang_shen_bound"</code> - Gaussian Extended BIC score.</p></li>
+<li><p><code>"rank_bic"</code> - Rank-based BIC score.</p></li>
+</ul><p><strong>Mixed Discrete/Gaussian</strong></p><ul><li><p><code>"conditional_gaussian"</code> - Conditional Gaussian BIC score.</p></li>
+<li><p><code>"degenerate_gaussian"</code> - Degenerate Gaussian BIC score.</p></li>
+<li><p><code>"basis_function_bic"</code> - BIC score for basis-function models.
+This is a generalization of the Degenerate Gaussian score.</p></li>
+<li><p><code>"mag_degenerate_gaussian_bic"</code> - MAG Degenerate Gaussian BIC Score.</p></li>
+<li><p><code>"basis_function_blocks_bic"</code> - BIC score for mixed data using basis-function models.</p></li>
+<li><p><code>"basis_function_sem_bic"</code> - SEM BIC score for basis-function models.</p></li>
 </ul></dd>
 
 
@@ -87,15 +88,15 @@ This is a generalization of the Degenerate Gaussian score.</p></li>
 <dd><p>Java object holding the independence test selected with
 <code>set_test()</code>. Supply one of the method strings for
 <code>set_test()</code>. Recognised values are:</p>
-<p><strong>Discrete – categorical</strong></p><ul><li><p><code>"chi_square"</code> - chi-squared test</p></li>
-<li><p><code>"g_square"</code>   - likelihood-ratio \(G^2\) test</p></li>
-<li><p><code>"basis_function_lrt"</code> - basis-function likelihood-ratio</p></li>
+<p><strong>Discrete - categorical</strong></p><ul><li><p><code>"chi_square"</code> - chi-squared test</p></li>
+<li><p><code>"g_square"</code>   - likelihood-ratio \(G^2\) test.</p></li>
+<li><p><code>"basis_function_lrt"</code> - basis-function likelihood-ratio.</p></li>
 <li><p><code>"probabilistic"</code> - Uses BCInference by Cooper and Bui to calculate
 probabilistic conditional independence judgments.</p></li>
-<li><p><code>"degenerate_gaussian"</code> - Degenerate Gaussian test as a likelihood ratio test</p></li>
-<li><p><code>"conditional_gaussian"</code> - Mixed discrete/continuous test</p></li>
-</ul><p><strong>Continuous – Gaussian</strong></p><ul><li><p><code>"fisher_z"</code> - Fisher \(Z\) (partial correlation) test</p></li>
-</ul><p><strong>Continuous – nonparametric</strong></p><ul><li><p><code>"kci"</code> - Kernel Conditional Independence Test (KCI) by Kun Zhang</p></li>
+</ul><p><strong>Continuous - Gaussian</strong></p><ul><li><p><code>"fisher_z"</code> - Fisher \(Z\) (partial correlation) test.</p></li>
+</ul><p><strong>Mixed Discrete/Gaussian</strong></p><ul><li><p><code>"degenerate_gaussian"</code> - Degenerate Gaussian test as a likelihood ratio test.</p></li>
+<li><p><code>"conditional_gaussian"</code> - Conditional Gaussian test as a likelihood ratio test.</p></li>
+</ul><p><strong>General</strong></p><ul><li><p><code>"kci"</code> - Kernel Conditional Independence Test (KCI) by Kun Zhang.</p></li>
 </ul></dd>
 
 
@@ -119,14 +120,14 @@ Recognised values are:</p>
 <li><p><code>"grasp"</code> - GRaSP (Greedy Relations of Sparsest Permutation) algorithm.</p></li>
 <li><p><code>"grasp_fci"</code> - GRaSP-FCI algorithm. Combines GRaSP and FCI.</p></li>
 <li><p><code>"ica_lingam"</code> - ICA LiNGAM algorithm.</p></li>
-<li><p><code>"ica_lingd"</code> - ICA-LiNG-D algorithm</p></li>
-<li><p><code>"fcit"</code> - FCI Targeted Testing (FCIT) algorithm</p></li>
-<li><p><code>"pc"</code> - Peter-Clark (PC) algorithm</p></li>
-<li><p><code>"pc_max"</code> - PCMax algorithm</p></li>
-<li><p><code>"restricted_boss"</code> - Restricted BOSS algorithm</p></li>
-<li><p><code>"rfci"</code> - Restricted FCI algorithm</p></li>
-<li><p><code>"sp"</code> - Sparsest Permutation algorithm</p></li>
-<li><p><code>"sp_fci"</code> - Sparsest Permutation using FCI</p></li>
+<li><p><code>"ica_lingd"</code> - ICA-LiNG-D algorithm.</p></li>
+<li><p><code>"fcit"</code> - FCI Targeted Testing (FCIT) algorithm.</p></li>
+<li><p><code>"pc"</code> - Peter-Clark (PC) algorithm.</p></li>
+<li><p><code>"pc_max"</code> - PCMax algorithm.</p></li>
+<li><p><code>"restricted_boss"</code> - Restricted BOSS algorithm.</p></li>
+<li><p><code>"rfci"</code> - Restricted FCI algorithm.</p></li>
+<li><p><code>"sp"</code> - Sparsest Permutation algorithm.</p></li>
+<li><p><code>"sp_fci"</code> - Sparsest Permutation using FCI.</p></li>
 </ul></dd>
 
 
@@ -339,6 +340,9 @@ This is a generalization of the Degenerate Gaussian score.</p></li>
 <li><p><code>"mag_degenerate_gaussian_bic"</code> - MAG Degenerate Gaussian BIC Score.</p></li>
 <li><p><code>"poisson_prior"</code> - Poisson prior score.</p></li>
 <li><p><code>"zhang_shen_bound"</code> - Gaussian Extended BIC score.</p></li>
+<li><p><code>"basis_function_blocks_bic"</code> - BIC score for mixed data using basis-function models.</p></li>
+<li><p><code>"basis_function_sem_bic"</code> - SEM BIC score for basis-function models.</p></li>
+<li><p><code>"rank_bic"</code> - Rank-based BIC score.</p></li>
 </ul></dd>
 
 
@@ -359,7 +363,7 @@ of the likelihood difference,</p></li>
 variables or so, set this to FALSE in order to calculate
 covariances on the fly from data,</p></li>
 <li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
-lambda to the diagonal, &lt; 0 Pseudoinverse</p></li>
+lambda to the diagonal, &lt; 0 Pseudoinverse.</p></li>
 </ul></li>
 <li><p><code>ebic</code> - Extended BIC score.</p><ul><li><p><code>gamma</code> - The gamma parameter in the EBIC score.</p></li>
 <li><p><code>precompute_covariances = TRUE</code> - For more than 5000
@@ -414,7 +418,9 @@ lambda to the diagonal, &lt; 0 Pseudoinverse.</p></li>
 variables or so, set this to FALSE in order to calculate
 covariances on the fly from data.</p></li>
 </ul></li>
-<li><p><code>"discrete_bic"</code> - BIC score for discrete data.</p><ul><li><p><code>structure_prior = 0</code> - The default number of parents
+<li><p><code>"discrete_bic"</code> - BIC score for discrete data.</p><ul><li><p><code>penalty_discount = 2</code> - Penalty discount. Higher penalty
+yields sparser graphs,</p></li>
+<li><p><code>structure_prior = 0</code> - The default number of parents
 for any conditional probability table. Higher weight is accorded
 to tables with about that number of parents. The prior structure
 weights are distributed according to a binomial distribution.</p></li>
@@ -467,6 +473,29 @@ variables or so, set this to FALSE in order to calculate
 covariances on the fly from data,</p></li>
 <li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
 lambda to the diagonal, &lt; 0 Pseudoinverse.</p></li>
+</ul></li>
+<li><p><code>"basis_function_blocks_bic"</code> - BIC score for mixed data
+using basis-function embedding</p><ul><li><p><code>basis_type = "polynomial"</code> - The type of basis to use. Supported
+types are <code>"polynomial"</code>, <code>"legrende"</code>, <code>"hermite"</code>,
+and <code>"chebyshev"</code>,</p></li>
+<li><p><code>penalty_discount = 2</code> - Penalty discount factor used in
+BIC = 2L - ck log N, where c is the penalty. Higher c yield sparser
+graphs,</p></li>
+<li><p><code>truncation_limit = 3</code> - Basis functions 1 through this number will be used.
+The Degenerate Gaussian category indicator variables for mixed data are also used.</p></li>
+</ul></li>
+<li><p><code>"basis_function_sem_bic"</code> - SEM BIC score for basis-function models.</p><ul><li><p><code>penalty_discount = 2</code> - Penalty discount factor used in
+BIC = 2L - ck log N, where c is the penalty. Higher c yield sparser
+graphs,</p></li>
+<li><p><code>jitter = 1e-8</code> - Small non-negative constant added to the diagonal of
+covariance/correlation matrices for numerical stability,</p></li>
+<li><p><code>truncation_limit = 3</code> - Basis functions 1 through this number will be used.
+The Degenerate Gaussian category indicator variables for mixed data are also used.</p></li>
+</ul></li>
+<li><p><code>"rank_bic"</code> - Rank BIC score.</p><ul><li><p><code>gamma = 0.8</code> - Gamma parameter for Extended BIC (Chen and Chen, 2008). Between 0 and 1,</p></li>
+<li><p><code>penalty_discount = 2</code> - Penalty discount factor used in
+BIC = 2L - ck log N, where c is the penalty. Higher c yield sparser
+graphs.</p></li>
 </ul></li>
 </ul></dd>
 

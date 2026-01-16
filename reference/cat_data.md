@@ -38,7 +38,9 @@ A data.frame with 1000 rows and 5 variables.
 The R code used to generate this dataset is as follows:
 
     data(num_data)
-    cat_data <- as.data.frame(sapply(num_data, function(x) cut(x, breaks = 5, labels = letters[1:5])))
+    cat_data <- as.data.frame(
+      lapply(num_data, function(x) cut(x, breaks = 5, labels = letters[1:5]))
+    )
 
 ## See also
 

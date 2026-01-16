@@ -22,34 +22,40 @@ the resulting graph or statistics.
   Supply one of the method strings for `set_score()`. Recognised values
   are:
 
-  **Discrete – categorical**
+  **Discrete - categorical**
 
   - `"bdeu"` - Bayes Dirichlet Equivalent score with uniform priors.
 
   - `"discrete_bic"` - BIC score for discrete data.
 
-  **Continuous – ?**
-
-  - `"sem_bic"` - SEM BIC score.
+  **Continuous - Gaussian**
 
   - `"ebic"` - Extended BIC score.
 
-  - `"basis_function_bic"` - BIC score for basis-function models. This
-    is a generalization of the Degenerate Gaussian score.
-
-  - `"conditional_gaussian"` - Mixed discrete/continuous BIC score.
-
-  - `"degenerate_gaussian"` - Degenerate Gaussian BIC score.
-
   - `"gic"` - Generalized Information Criterion (GIC) score.
-
-  - `"mag_degenerate_gaussian_bic"` - MAG Degenerate Gaussian BIC Score.
-
-  - `"mixed_variable_polynomial"` - Mixed variable polynomial BIC score.
 
   - `"poisson_prior"` - Poisson prior score.
 
   - `"zhang_shen_bound"` - Gaussian Extended BIC score.
+
+  - `"rank_bic"` - Rank-based BIC score.
+
+  **Mixed Discrete/Gaussian**
+
+  - `"conditional_gaussian"` - Conditional Gaussian BIC score.
+
+  - `"degenerate_gaussian"` - Degenerate Gaussian BIC score.
+
+  - `"basis_function_bic"` - BIC score for basis-function models. This
+    is a generalization of the Degenerate Gaussian score.
+
+  - `"mag_degenerate_gaussian_bic"` - MAG Degenerate Gaussian BIC Score.
+
+  - `"basis_function_blocks_bic"` - BIC score for mixed data using
+    basis-function models.
+
+  - `"basis_function_sem_bic"` - SEM BIC score for basis-function
+    models.
 
 - `test`:
 
@@ -57,29 +63,32 @@ the resulting graph or statistics.
   Supply one of the method strings for `set_test()`. Recognised values
   are:
 
-  **Discrete – categorical**
+  **Discrete - categorical**
 
   - `"chi_square"` - chi-squared test
 
-  - `"g_square"` - likelihood-ratio \\G^2\\ test
+  - `"g_square"` - likelihood-ratio \\G^2\\ test.
 
-  - `"basis_function_lrt"` - basis-function likelihood-ratio
+  - `"basis_function_lrt"` - basis-function likelihood-ratio.
 
   - `"probabilistic"` - Uses BCInference by Cooper and Bui to calculate
     probabilistic conditional independence judgments.
 
+  **Continuous - Gaussian**
+
+  - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test.
+
+  **Mixed Discrete/Gaussian**
+
   - `"degenerate_gaussian"` - Degenerate Gaussian test as a likelihood
-    ratio test
+    ratio test.
 
-  - `"conditional_gaussian"` - Mixed discrete/continuous test
+  - `"conditional_gaussian"` - Conditional Gaussian test as a likelihood
+    ratio test.
 
-  **Continuous – Gaussian**
+  **General**
 
-  - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test
-
-  **Continuous – nonparametric**
-
-  - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang
+  - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang.
 
 - `alg`:
 
@@ -120,21 +129,21 @@ the resulting graph or statistics.
 
   - `"ica_lingam"` - ICA LiNGAM algorithm.
 
-  - `"ica_lingd"` - ICA-LiNG-D algorithm
+  - `"ica_lingd"` - ICA-LiNG-D algorithm.
 
-  - `"fcit"` - FCI Targeted Testing (FCIT) algorithm
+  - `"fcit"` - FCI Targeted Testing (FCIT) algorithm.
 
-  - `"pc"` - Peter-Clark (PC) algorithm
+  - `"pc"` - Peter-Clark (PC) algorithm.
 
-  - `"pc_max"` - PCMax algorithm
+  - `"pc_max"` - PCMax algorithm.
 
-  - `"restricted_boss"` - Restricted BOSS algorithm
+  - `"restricted_boss"` - Restricted BOSS algorithm.
 
-  - `"rfci"` - Restricted FCI algorithm
+  - `"rfci"` - Restricted FCI algorithm.
 
-  - `"sp"` - Sparsest Permutation algorithm
+  - `"sp"` - Sparsest Permutation algorithm.
 
-  - `"sp_fci"` - Sparsest Permutation using FCI
+  - `"sp_fci"` - Sparsest Permutation using FCI.
 
 - `mc_test`:
 
@@ -410,6 +419,14 @@ Sets the scoring function to use in Tetrad.
 
   - `"zhang_shen_bound"` - Gaussian Extended BIC score.
 
+  - `"basis_function_blocks_bic"` - BIC score for mixed data using
+    basis-function models.
+
+  - `"basis_function_sem_bic"` - SEM BIC score for basis-function
+    models.
+
+  - `"rank_bic"` - Rank-based BIC score.
+
 - `...`:
 
   Additional arguments passed to the private score-setting methods. For
@@ -436,7 +453,7 @@ Sets the scoring function to use in Tetrad.
       from data,
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
-      diagonal, \< 0 Pseudoinverse
+      diagonal, \< 0 Pseudoinverse.
 
   - `ebic` - Extended BIC score.
 
@@ -514,6 +531,9 @@ Sets the scoring function to use in Tetrad.
 
   - `"discrete_bic"` - BIC score for discrete data.
 
+    - `penalty_discount = 2` - Penalty discount. Higher penalty yields
+      sparser graphs,
+
     - `structure_prior = 0` - The default number of parents for any
       conditional probability table. Higher weight is accorded to tables
       with about that number of parents. The prior structure weights are
@@ -587,6 +607,45 @@ Sets the scoring function to use in Tetrad.
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
+
+  - `"basis_function_blocks_bic"` - BIC score for mixed data using
+    basis-function embedding
+
+    - `basis_type = "polynomial"` - The type of basis to use. Supported
+      types are `"polynomial"`, `"legrende"`, `"hermite"`, and
+      `"chebyshev"`,
+
+    - `penalty_discount = 2` - Penalty discount factor used in BIC =
+      2L - ck log N, where c is the penalty. Higher c yield sparser
+      graphs,
+
+    - `truncation_limit = 3` - Basis functions 1 through this number
+      will be used. The Degenerate Gaussian category indicator variables
+      for mixed data are also used.
+
+  - `"basis_function_sem_bic"` - SEM BIC score for basis-function
+    models.
+
+    - `penalty_discount = 2` - Penalty discount factor used in BIC =
+      2L - ck log N, where c is the penalty. Higher c yield sparser
+      graphs,
+
+    - `jitter = 1e-8` - Small non-negative constant added to the
+      diagonal of covariance/correlation matrices for numerical
+      stability,
+
+    - `truncation_limit = 3` - Basis functions 1 through this number
+      will be used. The Degenerate Gaussian category indicator variables
+      for mixed data are also used.
+
+  - `"rank_bic"` - Rank BIC score.
+
+    - `gamma = 0.8` - Gamma parameter for Extended BIC (Chen and Chen,
+      2008). Between 0 and 1,
+
+    - `penalty_discount = 2` - Penalty discount factor used in BIC =
+      2L - ck log N, where c is the penalty. Higher c yield sparser
+      graphs.
 
 #### Returns
 

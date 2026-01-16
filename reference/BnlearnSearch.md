@@ -61,7 +61,7 @@ An R6 object with the methods documented below.
 
   - `"pnal_g"` - penalised node-average log-likelihood
 
-  **Continuous - Conditional Gaussian**
+  **Mixed Discrete/Gaussian**
 
   - `"loglik_cg"`, `"aic_cg"`, `"bic_cg"`, `"ebic_cg"`,
     `"pred_loglik_cg"`, `"nal_cg"`, `"pnal_cg"`
@@ -127,7 +127,7 @@ An R6 object with the methods documented below.
 
   - `"mi_g_sh"` – mutual information (Gaussian, shrinkage)
 
-  **Continuous - Conditional Gaussian**
+  **Mixed Discrete/Gaussian**
 
   - `"mi_cg"` – mutual information (conditional Gaussian)
 

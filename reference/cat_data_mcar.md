@@ -39,6 +39,7 @@ The R code used to generate this dataset is as follows:
 
     data(cat_data)
     cat_data_mcar <- cat_data
+    n <- nrow(cat_data_mcar)
     set.seed(1405)
     cat_data_mcar$X1[sample(1:n, 100)] <- NA
     cat_data_mcar$X2[sample(1:n, 50)] <- NA
