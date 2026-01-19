@@ -61,6 +61,11 @@ TetradSearch <- R6Class(
     #'      \item \code{"basis_function_sem_bic"} - SEM BIC score for basis-function models.
     #'   }
     #'
+    #'   **?**
+    #'   \itemize{
+    #'      \item \code{"isa_sem_bic"} - Instance-specific augmented SEM BIC score.
+    #'   }
+    #'
     # #'   **General (non-linear Gaussian?)**
     # #'   \itemize{
     # #'      \item \code{"mixed_variable_polynomial"} - Mixed variable polynomial BIC score.
@@ -354,6 +359,7 @@ TetradSearch <- R6Class(
     #'      \item \code{"basis_function_blocks_bic"} - BIC score for mixed data using basis-function models.
     #'      \item \code{"basis_function_sem_bic"} - SEM BIC score for basis-function models.
     #'      \item \code{"rank_bic"} - Rank-based BIC score.
+    #'      \item \code{"isa_sem_bic"} - Instance-specific augmented SEM BIC score.
     #'   }
     #' @param ... Additional arguments passed to the private score-setting methods.
     #'    For the following scores, the following parameters are available:
@@ -538,6 +544,10 @@ TetradSearch <- R6Class(
     #'      BIC = 2L - ck log N, where c is the penalty. Higher c yield sparser
     #'      graphs.
     #'    }
+    #'    \item \code{"isa_sem_bic"} - Instance-specific augmented SEM BIC score.
+    #'    \itemize{
+    #'      \item \code{instance_weight = 1} - Weight for the instance-specific part component to the score,
+    #'      \item \code{penalty_discount = 2} - Penalty discount.
     #'  }
     #'
     #' @return Invisibly returns \code{self}.
@@ -589,6 +599,9 @@ TetradSearch <- R6Class(
         },
         "rank_bic" = {
           private$use_rank_bic_score(...)
+        },
+        "isa_sem_bic" = {
+          private$use_isa_sem_bic_score(...)
         },
         {
           stop(
@@ -1877,6 +1890,26 @@ TetradSearch <- R6Class(
       self$score <- rJava::.jnew(
         "edu/cmu/tetrad/algcomparison/score/RankBicScore"
       )
+      self$score <- cast_obj(self$score)
+    },
+    use_isa_sem_bic_score = function(
+      instance_weight = 1,
+      penalty_discount = 2
+    ) {
+      stopifnot(
+        is.numeric(c(instance_weight, penalty_discount)),
+        instance_weight >= 0,
+        penalty_discount >= 0
+      )
+      self$set_params(
+        INSTANCE_SPECIFIC_ALPHA = instance_weight,
+        INSTANCE_ROW = 1,
+        PENALTY_DISCOUNT = penalty_discount
+      )
+      self$score <- rJava::.jnew(
+        "edu/cmu/tetrad/algcomparison/score/InstanceAugmentedSemBicScoreWrapper"
+      )
+
       self$score <- cast_obj(self$score)
     },
     # Tests

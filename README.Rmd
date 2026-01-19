@@ -218,7 +218,7 @@ If we want any changes we can modify the tikz code after generation.
 
 - Add all algs/scores/tests from the backends (start with Tetrad). Check if we currently document ones we haven't
 implemented yet.
-  - Missing scores: `"SEM BIC Score", "Instance-specific Augmented SEM BIC Score"`
+  - Missing scores: `"Instance-specific Augmented SEM BIC Score"`
   
   - Missing tests: `"Basis Function Blocks Test", "GIN", "Poisson Prior Test", "RCIT", "Rank Independence Test TS", "SEM BIC Test"`.
 
