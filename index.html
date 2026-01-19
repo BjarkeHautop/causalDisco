@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9029</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9030</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -184,11 +184,16 @@
 </ul>
 <p>These scores: <code>"basis_function_bic"</code>, <code>mag_degenerate_gaussian_bic</code>, <code>mixed_variable_polynomial</code>.</p>
 <p>These tests: <code>chi_square</code>, <code>g_square</code>, <code>basis_function_lrt</code>, <code>probabilistic</code>.</p>
+<ul>
+<li>
+<code>use_for_mc</code> (Markov checker) argument and usage?</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
 </h2>
 <ul>
+<li><p>Rewrite add checks (numeric, logical, …) using checkmate package. Some of the checks aren’t working correctly atm either (we check is.numeric on a vector - which won’t work correctly). R converts <code>c(1, TRUE)</code> to a numeric vector, so is.numeric returns TRUE, but we want to catch that.</p></li>
 <li>
 <p>Improve plot (use caugi)</p>
 <ul>
@@ -261,8 +266,7 @@
 <li>
 <p>Add all algs/scores/tests from the backends (start with Tetrad). Check if we currently document ones we haven’t implemented yet.</p>
 <ul>
-<li><p>Missing scores: <code>"SEM BIC Score", "Instance-specific Augmented SEM BIC Score"</code></p></li>
-<li><p>Missing tests: <code>"Basis Function Blocks Test", "GIN", "Poisson Prior Test", "RCIT", "Rank Independence Test TS", "SEM BIC Test"</code>.</p></li>
+<li>Missing scores: <code>"Instance-specific Augmented SEM BIC Score"</code>. Get this error when implementing: <code>Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl, : java.lang.NullPointerException: Cannot invoke "edu.cmu.tetrad.data.Knowledge.getTestingData()" because "this.knowledge" is null</code> (see branch <code>Add-isa-sem-bic-score-to-Tetrad</code>).</li>
 </ul>
 </li>
 <li><p>Update simulation functions (use caugi?)</p></li>
@@ -272,6 +276,7 @@
 <h3 id="bugfixes">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes"></a>
 </h3>
 <ul>
+<li><p>Setting <code>mc = TRUE</code> (or <code>mc_test = TRUE</code>) errors in Tetrad.</p></li>
 <li><p>bnlearn has bug for old version of caugi. Fixed in PR #149 in caugi.</p></li>
 <li><p>Tried implementing it in the scores (e.g. <code>TemporalBdeu</code>) by giving it score -Inf if missing a required edge, but then it runs forever. I.e. adding the following to <code>local.score</code></p></li>
 </ul>

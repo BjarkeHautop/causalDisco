@@ -13,7 +13,7 @@ resulting graph or statistics."><meta property="og:image" content="https://bjark
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9029</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9030</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,6 +74,7 @@ used by Tetrad.</p></dd>
 <li><p><code>"poisson_prior"</code> - Poisson prior score.</p></li>
 <li><p><code>"zhang_shen_bound"</code> - Gaussian Extended BIC score.</p></li>
 <li><p><code>"rank_bic"</code> - Rank-based BIC score.</p></li>
+<li><p><code>"sem_bic"</code> - SEM BIC score.</p></li>
 </ul><p><strong>Mixed Discrete/Gaussian</strong></p><ul><li><p><code>"conditional_gaussian"</code> - Conditional Gaussian BIC score.</p></li>
 <li><p><code>"degenerate_gaussian"</code> - Degenerate Gaussian BIC score.</p></li>
 <li><p><code>"basis_function_bic"</code> - BIC score for basis-function models.
@@ -90,13 +91,19 @@ This is a generalization of the Degenerate Gaussian score.</p></li>
 <code>set_test()</code>. Recognised values are:</p>
 <p><strong>Discrete - categorical</strong></p><ul><li><p><code>"chi_square"</code> - chi-squared test</p></li>
 <li><p><code>"g_square"</code>   - likelihood-ratio \(G^2\) test.</p></li>
-<li><p><code>"basis_function_lrt"</code> - basis-function likelihood-ratio.</p></li>
 <li><p><code>"probabilistic"</code> - Uses BCInference by Cooper and Bui to calculate
 probabilistic conditional independence judgments.</p></li>
 </ul><p><strong>Continuous - Gaussian</strong></p><ul><li><p><code>"fisher_z"</code> - Fisher \(Z\) (partial correlation) test.</p></li>
+<li><p><code>"poisson_prior"</code> - Poisson prior test.</p></li>
+<li><p><code>"sem_bic"</code> - SEM BIC test.</p></li>
+<li><p><code>"rank_independence"</code> - Rank-based independence test.</p></li>
 </ul><p><strong>Mixed Discrete/Gaussian</strong></p><ul><li><p><code>"degenerate_gaussian"</code> - Degenerate Gaussian test as a likelihood ratio test.</p></li>
 <li><p><code>"conditional_gaussian"</code> - Conditional Gaussian test as a likelihood ratio test.</p></li>
+<li><p><code>"basis_function_lrt"</code> - basis-function likelihood-ratio.</p></li>
+<li><p><code>"basis_function_blocks"</code> - Basis-function blocks test.</p></li>
 </ul><p><strong>General</strong></p><ul><li><p><code>"kci"</code> - Kernel Conditional Independence Test (KCI) by Kun Zhang.</p></li>
+<li><p><code>"gin"</code> - Generalized Independence Noise test.</p></li>
+<li><p><code>"rcit"</code> - Randomized Conditional Independence Test (RCIT).</p></li>
 </ul></dd>
 
 
@@ -217,6 +224,12 @@ probabilistic conditional independence judgments.</p></li>
 <li><p><code>"degenerate_gaussian"</code> - Degenerate Gaussian test as a likelihood ratio test</p></li>
 <li><p><code>"conditional_gaussian"</code> - Mixed discrete/continuous test</p></li>
 <li><p><code>"kci"</code> - Kernel Conditional Independence Test (KCI) by Kun Zhang</p></li>
+<li><p><code>"poisson_prior"</code> - Poisson prior test</p></li>
+<li><p><code>"gin"</code> - Generalized Independence Noise test</p></li>
+<li><p><code>"rcit"</code> - Randomized Conditional Independence Test (RCIT)</p></li>
+<li><p><code>"sem_bic"</code> - SEM BIC test</p></li>
+<li><p><code>"rank_independence"</code> - Rank-based independence test</p></li>
+<li><p><code>"basis_function_blocks"</code> - Basis-function blocks test</p></li>
 </ul></dd>
 
 
@@ -225,7 +238,7 @@ probabilistic conditional independence judgments.</p></li>
 For the following tests, the following parameters are available:</p><ul><li><p><code>"chi_square"</code> - chi-squared test</p><ul><li><p><code>min_count = 1</code> - Minimum count for the chi-squared
 test per cell. Increasing this can improve accuracy of the test
 estimates,</p></li>
-<li><p><code>alpha = 0.01</code> - Significance level for the
+<li><p><code>alpha = 0.05</code> - Significance level for the
 independence test,</p></li>
 <li><p><code>cell_table_type = "ad"</code> - The type of cell table to
 use for optimization. Available types are:
@@ -234,7 +247,7 @@ use for optimization. Available types are:
 <li><p><code>"g_square"</code>   - likelihood-ratio \(G^2\) test</p><ul><li><p><code>min_count = 1</code> - Minimum count for the independence
 test. Increasing this can improve accuracy of chi square
 estimates,</p></li>
-<li><p><code>alpha = 0.01</code> - Significance level for the
+<li><p><code>alpha = 0.05</code> - Significance level for the
 chi-squared test,</p></li>
 <li><p><code>cell_table_type = "ad"</code> - The type of cell table to
 use for optimization. Available types are:
@@ -243,7 +256,7 @@ use for optimization. Available types are:
 <li><p><code>"basis_function_lrt"</code> - basis-function likelihood-ratio</p><ul><li><p><code>truncation_limit = 3</code> - Basis functions 1 through
 this number will be used. The Degenerate Gaussian category
 indicator variables for mixed data are also used,</p></li>
-<li><p><code>alpha = 0.01</code> - Significance level for the
+<li><p><code>alpha = 0.05</code> - Significance level for the
 likelihood-ratio test,</p></li>
 <li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
 lambda to the diagonal, &lt; 0 Pseudoinverse,</p></li>
@@ -259,18 +272,18 @@ for the independence test. This number is added to the sample
 size for each conditional probability table in the model and is
 divided equally among the cells in the table.</p></li>
 </ul></li>
-<li><p><code>"fisher_z"</code> - Fisher \(Z\) (partial correlation) test</p><ul><li><p><code>alpha = 0.01</code> - Significance level
+<li><p><code>"fisher_z"</code> - Fisher \(Z\) (partial correlation) test</p><ul><li><p><code>alpha = 0.05</code> - Significance level
 for the independence test,</p></li>
 <li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
 lambda to the diagonal, &lt; 0 Pseudoinverse.</p></li>
 </ul></li>
 <li><p><code>"degenerate_gaussian"</code> - Degenerate Gaussian
-likelihood ratio test</p><ul><li><p><code>alpha = 0.01</code> - Significance level for the
+likelihood ratio test</p><ul><li><p><code>alpha = 0.05</code> - Significance level for the
 independence test,</p></li>
 <li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
 lambda to the diagonal, &lt; 0 Pseudoinverse.</p></li>
 </ul></li>
-<li><p><code>"conditional_gaussian"</code> - Mixed discrete/continuous test</p><ul><li><p><code>alpha = 0.01</code> - Significance level for the
+<li><p><code>"conditional_gaussian"</code> - Mixed discrete/continuous test</p><ul><li><p><code>alpha = 0.05</code> - Significance level for the
 independence test,</p></li>
 <li><p><code>discretize = TRUE</code> - If TRUE for the conditional
 Gaussian likelihood, when scoring X –&gt; D where X is continuous
@@ -285,14 +298,14 @@ the continuous variables,</p></li>
 <li><p><code>min_sample_size_per_cell = 4</code> - Minimum sample size
 per cell for the independence test.</p></li>
 </ul></li>
-<li><p><code>"kci"</code> - Kernel Conditional Independence Test (KCI) by Kun Zhang</p><ul><li><p><code>alpha = 0.01</code> - Significance level for the
+<li><p><code>"kci"</code> - Kernel Conditional Independence Test (KCI) by Kun Zhang</p><ul><li><p><code>alpha = 0.05</code> - Significance level for the
 independence test,</p></li>
 <li><p><code>approximate = TRUE</code> - If TRUE, use the approximate
 Gamma approximation algorithm. If FALSE, use the exact,</p></li>
 <li><p><code>scaling_factor = 1</code> - For Gaussian kernel: The
 scaling factor * Silverman bandwidth.</p></li>
-<li><p><code>num_bootstraps = 5000</code> - Number of bootstrap
-samples to use for the KCI test.</p></li>
+<li><p><code>num_bootstraps = 1000</code> - Number of bootstrap
+samples to use for the KCI test. Only used if <code>approximate = FALSE</code>.</p></li>
 <li><p><code>threshold = 1e-3</code> - Threshold for the KCI test.
 Threshold to determine how many eigenvalues to use –
 the lower the more (0 to 1).</p></li>
@@ -303,6 +316,74 @@ use. Available types are <code>"gaussian"</code>, <code>"linear"</code>, or
 if used.</p></li>
 <li><p><code>polyc = 1</code> - The constant of the polynomial kernel,
 if used.</p></li>
+</ul></li>
+<li><p><code>"poisson_prior"</code> - Poisson prior test</p><ul><li><p><code>poisson_lambda = 1</code> - Lambda parameter for the Poisson
+distribution (&gt; 0),</p></li>
+<li><p><code>precompute_covariances = TRUE</code> - For more than 5000
+variables or so, set this to FALSE in order to calculate
+covariances on the fly from data,</p></li>
+<li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
+lambda to the diagonal, &lt; 0 Pseudoinverse.</p></li>
+</ul></li>
+<li><p><code>"gin"</code> - Generalized Independence Noise test.</p><ul><li><p><code>alpha = 0.05</code> - Significance level for the
+independence test,</p></li>
+<li><p><code>gin_backend = "dcor"</code> - Unconditional test for residual
+independence. Available types are <code>"dcor"</code> - Distance correlation (for non-linear)
+and <code>"pearson"</code> - Pearson correlation (for linear),</p></li>
+<li><p><code>num_permutations = 200</code> - Number of permutations used for
+<code>"dcor"</code> backend. If <code>"pearson"</code> backend is used, this parameter is ignored.</p></li>
+<li><p><code>gin_ridge = 1e-8</code> - Ridge parameter used when computing residuals.
+A small number &gt;= 0.</p></li>
+<li><p><code>seed = -1</code> - Random seed for the independence test. If -1, no seed is set.</p></li>
+</ul></li>
+<li><p><code>"rcit"</code> - Randomized Conditional Independence Test (RCIT).</p><ul><li><p><code>alpha = 0.05</code> - Significance level for the
+independence test,</p></li>
+<li><p><code>rcit_approx = "lpb4"</code> - Null approximation method. Recognized values are:
+<code>"lpb4"</code> - Lindsay-Pilla-Basak method with 4 support points,
+<code>"hbe"</code> - Hall-Buckley-Eagleson method,
+<code>"gamma"</code> - Gamma (Satterthwaite-Welch),
+<code>"chi_square"</code> - Chi-square (normalized),
+<code>"permutation"</code> - Permutation-based (computationally intensive),</p></li>
+<li><p><code>rcit_ridge = 1e-3</code> - Ridge parameter used when computing residuals.
+A small number &gt;= 0,</p></li>
+<li><p><code>num_feat = 10</code> - Number of random features to use
+for the regression of X and Y on Z. Values between 5 and 20 often suffice.</p></li>
+<li><p><code>num_fourier_feat_xy = 5</code> - Number of random Fourier features to use for
+the tested variables X and Y. Small values often suffice (e.g., 3 to 10),</p></li>
+<li><p><code>num_fourier_feat_z = 100</code> - Number of random Fourier features to use for
+the conditioning set Z. Values between 50 and 300 often suffice,</p></li>
+<li><p><code>center_features = TRUE</code> - If TRUE, center the random features to have mean zero. Recommended
+for better numerical stability,</p></li>
+<li><p><code>use_rcit = TRUE</code> - If TRUE, use RCIT; if FALSE, use RCoT
+(Randomized Conditional Correlation Test),</p></li>
+<li><p><code>num_permutations = 500</code> - Number of permutations used for
+the independence test when <code>rcit_approx = "permutation"</code> is selected.</p></li>
+<li><p><code>seed = -1</code> - Random seed for the independence test. If -1, no seed is set.</p></li>
+</ul></li>
+<li><p><code>"sem_bic"</code> - SEM BIC test.</p><ul><li><p><code>penalty_discount = 2</code> - Penalty discount factor used in
+BIC = 2L - ck log N, where c is the penalty. Higher c yield sparser
+graphs,</p></li>
+<li><p><code>structure_prior = 0</code> - The default number of parents
+for any conditional probability table. Higher weight is accorded
+to tables with about that number of parents. The prior structure
+weights are distributed according to a binomial distribution,</p></li>
+<li><p><code>precompute_covariances = TRUE</code> - For more than 5000
+variables or so, set this to FALSE in order to calculate
+covariances on the fly from data,</p></li>
+<li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
+lambda to the diagonal, &lt; 0 Pseudoinverse.</p></li>
+</ul></li>
+<li><p><code>"rank_independence"</code> - Rank-based independence test.</p><ul><li><p><code>alpha = 0.05</code> - Significance level for the
+independence test</p></li>
+</ul></li>
+<li><p><code>"basis_function_blocks"</code> - Basis-function blocks test.</p><ul><li><p><code>alpha = 0.05</code> - Significance level for the
+independence test,</p></li>
+<li><p><code>basis_type = "polynomial"</code> - The type of basis to use. Supported
+types are <code>"polynomial"</code>, <code>"legrende"</code>, <code>"hermite"</code>, and
+<code>"chebyshev"</code>,</p></li>
+<li><p><code>truncation_limit = 3</code> - Basis functions 1 through
+this number will be used. The Degenerate Gaussian category
+indicator variables for mixed data are also used.</p></li>
 </ul></li>
 </ul></dd>
 
@@ -458,7 +539,7 @@ Gaussian likelihood, when scoring X –&gt; D where X is continuous and
 D discrete, one should to simply discretize X for just those cases.
 If FALSE, the integration will be exact.</p></li>
 </ul></li>
-<li><p><code>"poisson_prior"</code> - Poisson prior score.</p><ul><li><p><code>poission_lambda = 2</code> - Lambda parameter for the Poisson
+<li><p><code>"poisson_prior"</code> - Poisson prior score.</p><ul><li><p><code>poisson_lambda = 1</code> - Lambda parameter for the Poisson
 distribution (&gt; 0),</p></li>
 <li><p><code>precompute_covariances = TRUE</code> - For more than 5000
 variables or so, set this to FALSE in order to calculate

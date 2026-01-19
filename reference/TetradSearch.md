@@ -40,6 +40,8 @@ the resulting graph or statistics.
 
   - `"rank_bic"` - Rank-based BIC score.
 
+  - `"sem_bic"` - SEM BIC score.
+
   **Mixed Discrete/Gaussian**
 
   - `"conditional_gaussian"` - Conditional Gaussian BIC score.
@@ -69,14 +71,18 @@ the resulting graph or statistics.
 
   - `"g_square"` - likelihood-ratio \\G^2\\ test.
 
-  - `"basis_function_lrt"` - basis-function likelihood-ratio.
-
   - `"probabilistic"` - Uses BCInference by Cooper and Bui to calculate
     probabilistic conditional independence judgments.
 
   **Continuous - Gaussian**
 
   - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test.
+
+  - `"poisson_prior"` - Poisson prior test.
+
+  - `"sem_bic"` - SEM BIC test.
+
+  - `"rank_independence"` - Rank-based independence test.
 
   **Mixed Discrete/Gaussian**
 
@@ -86,9 +92,17 @@ the resulting graph or statistics.
   - `"conditional_gaussian"` - Conditional Gaussian test as a likelihood
     ratio test.
 
+  - `"basis_function_lrt"` - basis-function likelihood-ratio.
+
+  - `"basis_function_blocks"` - Basis-function blocks test.
+
   **General**
 
   - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang.
+
+  - `"gin"` - Generalized Independence Noise test.
+
+  - `"rcit"` - Randomized Conditional Independence Test (RCIT).
 
 - `alg`:
 
@@ -263,6 +277,18 @@ Sets the independence test to use in Tetrad.
 
   - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang
 
+  - `"poisson_prior"` - Poisson prior test
+
+  - `"gin"` - Generalized Independence Noise test
+
+  - `"rcit"` - Randomized Conditional Independence Test (RCIT)
+
+  - `"sem_bic"` - SEM BIC test
+
+  - `"rank_independence"` - Rank-based independence test
+
+  - `"basis_function_blocks"` - Basis-function blocks test
+
 - `...`:
 
   Additional arguments passed to the private test-setting methods. For
@@ -273,7 +299,7 @@ Sets the independence test to use in Tetrad.
     - `min_count = 1` - Minimum count for the chi-squared test per cell.
       Increasing this can improve accuracy of the test estimates,
 
-    - `alpha = 0.01` - Significance level for the independence test,
+    - `alpha = 0.05` - Significance level for the independence test,
 
     - `cell_table_type = "ad"` - The type of cell table to use for
       optimization. Available types are: `"ad"` - AD tree, `"count"` -
@@ -284,7 +310,7 @@ Sets the independence test to use in Tetrad.
     - `min_count = 1` - Minimum count for the independence test.
       Increasing this can improve accuracy of chi square estimates,
 
-    - `alpha = 0.01` - Significance level for the chi-squared test,
+    - `alpha = 0.05` - Significance level for the chi-squared test,
 
     - `cell_table_type = "ad"` - The type of cell table to use for
       optimization. Available types are: `"ad"` - AD tree, `"count"` -
@@ -296,7 +322,7 @@ Sets the independence test to use in Tetrad.
       will be used. The Degenerate Gaussian category indicator variables
       for mixed data are also used,
 
-    - `alpha = 0.01` - Significance level for the likelihood-ratio test,
+    - `alpha = 0.05` - Significance level for the likelihood-ratio test,
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse,
@@ -319,21 +345,21 @@ Sets the independence test to use in Tetrad.
 
   - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test
 
-    - `alpha = 0.01` - Significance level for the independence test,
+    - `alpha = 0.05` - Significance level for the independence test,
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
   - `"degenerate_gaussian"` - Degenerate Gaussian likelihood ratio test
 
-    - `alpha = 0.01` - Significance level for the independence test,
+    - `alpha = 0.05` - Significance level for the independence test,
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
   - `"conditional_gaussian"` - Mixed discrete/continuous test
 
-    - `alpha = 0.01` - Significance level for the independence test,
+    - `alpha = 0.05` - Significance level for the independence test,
 
     - `discretize = TRUE` - If TRUE for the conditional Gaussian
       likelihood, when scoring X –\> D where X is continuous and D
@@ -350,7 +376,7 @@ Sets the independence test to use in Tetrad.
 
   - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang
 
-    - `alpha = 0.01` - Significance level for the independence test,
+    - `alpha = 0.05` - Significance level for the independence test,
 
     - `approximate = TRUE` - If TRUE, use the approximate Gamma
       approximation algorithm. If FALSE, use the exact,
@@ -358,8 +384,8 @@ Sets the independence test to use in Tetrad.
     - `scaling_factor = 1` - For Gaussian kernel: The scaling factor \*
       Silverman bandwidth.
 
-    - `num_bootstraps = 5000` - Number of bootstrap samples to use for
-      the KCI test.
+    - `num_bootstraps = 1000` - Number of bootstrap samples to use for
+      the KCI test. Only used if `approximate = FALSE`.
 
     - `threshold = 1e-3` - Threshold for the KCI test. Threshold to
       determine how many eigenvalues to use – the lower the more (0 to
@@ -371,6 +397,107 @@ Sets the independence test to use in Tetrad.
     - `polyd = 5` - The degree of the polynomial kernel, if used.
 
     - `polyc = 1` - The constant of the polynomial kernel, if used.
+
+  - `"poisson_prior"` - Poisson prior test
+
+    - `poisson_lambda = 1` - Lambda parameter for the Poisson
+      distribution (\> 0),
+
+    - `precompute_covariances = TRUE` - For more than 5000 variables or
+      so, set this to FALSE in order to calculate covariances on the fly
+      from data,
+
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
+      diagonal, \< 0 Pseudoinverse.
+
+  - `"gin"` - Generalized Independence Noise test.
+
+    - `alpha = 0.05` - Significance level for the independence test,
+
+    - `gin_backend = "dcor"` - Unconditional test for residual
+      independence. Available types are `"dcor"` - Distance correlation
+      (for non-linear) and `"pearson"` - Pearson correlation (for
+      linear),
+
+    - `num_permutations = 200` - Number of permutations used for
+      `"dcor"` backend. If `"pearson"` backend is used, this parameter
+      is ignored.
+
+    - `gin_ridge = 1e-8` - Ridge parameter used when computing
+      residuals. A small number \>= 0.
+
+    - `seed = -1` - Random seed for the independence test. If -1, no
+      seed is set.
+
+  - `"rcit"` - Randomized Conditional Independence Test (RCIT).
+
+    - `alpha = 0.05` - Significance level for the independence test,
+
+    - `rcit_approx = "lpb4"` - Null approximation method. Recognized
+      values are: `"lpb4"` - Lindsay-Pilla-Basak method with 4 support
+      points, `"hbe"` - Hall-Buckley-Eagleson method, `"gamma"` - Gamma
+      (Satterthwaite-Welch), `"chi_square"` - Chi-square (normalized),
+      `"permutation"` - Permutation-based (computationally intensive),
+
+    - `rcit_ridge = 1e-3` - Ridge parameter used when computing
+      residuals. A small number \>= 0,
+
+    - `num_feat = 10` - Number of random features to use for the
+      regression of X and Y on Z. Values between 5 and 20 often suffice.
+
+    - `num_fourier_feat_xy = 5` - Number of random Fourier features to
+      use for the tested variables X and Y. Small values often suffice
+      (e.g., 3 to 10),
+
+    - `num_fourier_feat_z = 100` - Number of random Fourier features to
+      use for the conditioning set Z. Values between 50 and 300 often
+      suffice,
+
+    - `center_features = TRUE` - If TRUE, center the random features to
+      have mean zero. Recommended for better numerical stability,
+
+    - `use_rcit = TRUE` - If TRUE, use RCIT; if FALSE, use RCoT
+      (Randomized Conditional Correlation Test),
+
+    - `num_permutations = 500` - Number of permutations used for the
+      independence test when `rcit_approx = "permutation"` is selected.
+
+    - `seed = -1` - Random seed for the independence test. If -1, no
+      seed is set.
+
+  - `"sem_bic"` - SEM BIC test.
+
+    - `penalty_discount = 2` - Penalty discount factor used in BIC =
+      2L - ck log N, where c is the penalty. Higher c yield sparser
+      graphs,
+
+    - `structure_prior = 0` - The default number of parents for any
+      conditional probability table. Higher weight is accorded to tables
+      with about that number of parents. The prior structure weights are
+      distributed according to a binomial distribution,
+
+    - `precompute_covariances = TRUE` - For more than 5000 variables or
+      so, set this to FALSE in order to calculate covariances on the fly
+      from data,
+
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
+      diagonal, \< 0 Pseudoinverse.
+
+  - `"rank_independence"` - Rank-based independence test.
+
+    - `alpha = 0.05` - Significance level for the independence test
+
+  - `"basis_function_blocks"` - Basis-function blocks test.
+
+    - `alpha = 0.05` - Significance level for the independence test,
+
+    - `basis_type = "polynomial"` - The type of basis to use. Supported
+      types are `"polynomial"`, `"legrende"`, `"hermite"`, and
+      `"chebyshev"`,
+
+    - `truncation_limit = 3` - Basis functions 1 through this number
+      will be used. The Degenerate Gaussian category indicator variables
+      for mixed data are also used.
 
 - `mc`:
 
@@ -586,7 +713,7 @@ Sets the scoring function to use in Tetrad.
 
   - `"poisson_prior"` - Poisson prior score.
 
-    - `poission_lambda = 2` - Lambda parameter for the Poisson
+    - `poisson_lambda = 1` - Lambda parameter for the Poisson
       distribution (\> 0),
 
     - `precompute_covariances = TRUE` - For more than 5000 variables or

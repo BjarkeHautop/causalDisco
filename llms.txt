@@ -166,7 +166,15 @@ These scores: `"basis_function_bic"`, `mag_degenerate_gaussian_bic`,
 These tests: `chi_square`, `g_square`, `basis_function_lrt`,
 `probabilistic`.
 
+- `use_for_mc` (Markov checker) argument and usage?
+
 ## TODO
+
+- Rewrite add checks (numeric, logical, …) using checkmate package. Some
+  of the checks aren’t working correctly atm either (we check is.numeric
+  on a vector - which won’t work correctly). R converts `c(1, TRUE)` to
+  a numeric vector, so is.numeric returns TRUE, but we want to catch
+  that.
 
 - Improve plot (use caugi)
 
@@ -252,17 +260,18 @@ If we want any changes we can modify the tikz code after generation.
 - Add all algs/scores/tests from the backends (start with Tetrad). Check
   if we currently document ones we haven’t implemented yet.
 
-  - Missing scores:
-    `"SEM BIC Score", "Instance-specific Augmented SEM BIC Score"`
-
-  - Missing tests:
-    `"Basis Function Blocks Test", "GIN", "Poisson Prior Test", "RCIT", "Rank Independence Test TS", "SEM BIC Test"`.
+  - Missing scores: `"Instance-specific Augmented SEM BIC Score"`. Get
+    this error when implementing:
+    `Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl, : java.lang.NullPointerException: Cannot invoke "edu.cmu.tetrad.data.Knowledge.getTestingData()" because "this.knowledge" is null`
+    (see branch `Add-isa-sem-bic-score-to-Tetrad`).
 
 - Update simulation functions (use caugi?)
 
 - Update evaluation and confusion metrics (use caugi?)
 
 ### Bugfixes
+
+- Setting `mc = TRUE` (or `mc_test = TRUE`) errors in Tetrad.
 
 - bnlearn has bug for old version of caugi. Fixed in PR \#149 in caugi.
 
