@@ -40,12 +40,12 @@ syntax too verbose.
 
 ### Specifying required and forbidden edges
 
-Suppose we want to require an edge from A to B, and forbid an edge from
-B to C:
+Suppose we want to require an edge from A to B, from A to C, and forbid
+an edge from B to C:
 
 ``` r
 kn_1 <- knowledge(
-  A %-->% B,
+  A %-->% c(B, C),
   B %!-->% C
 )
 ```
@@ -78,7 +78,7 @@ We will use the `tpc_example` dataset from the causalDisco package for
 the following examples:
 
 ``` r
-data("tpc_example")
+data(tpc_example)
 head(tpc_example)
 #>   child_x2   child_x1    youth_x4 youth_x3  oldage_x6  oldage_x5
 #> 1        0 -0.7104066 -0.07355602        1  6.4984994  3.0740123
@@ -345,7 +345,7 @@ can get a harmless(?) warning from bnlearn when using required
 knowledge.
 
 ``` r
-data("tpc_example")
+data(tpc_example)
 
 kn <- knowledge(
   tpc_example,
@@ -382,7 +382,7 @@ forbidden edges (`%!-->%`) without any directed knowledge or tiers, such
 as this:
 
 ``` r
-data("tpc_example")
+data(tpc_example)
 kn <- knowledge(
   tpc_example,
   child_x1 %!-->% youth_x3,

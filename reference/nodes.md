@@ -24,7 +24,7 @@ A tibble containing the nodes.
 ## Examples
 
 ``` r
-data("tpc_example")
+data(tpc_example)
 cd_tges <- tges(engine = "causalDisco", score = "tbic")
 kn <- knowledge(
   tpc_example,

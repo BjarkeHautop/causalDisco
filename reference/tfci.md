@@ -47,7 +47,7 @@ For additional parameters passed via `...`, see
 ## Examples
 
 ``` r
-data("tpc_example")
+data(tpc_example)
 
 kn <- knowledge(
   tpc_example,

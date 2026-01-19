@@ -274,12 +274,9 @@ The objects of this class are cloneable with this method.
 
 data(tpc_example)
 
-# small toy dataset
-dat <- head(tpc_example, 50)
-
 # background knowledge (tiers + one exogenous var)
 kn <- knowledge(
-  dat,
+  tpc_example,
   tier(
     child ~ starts_with("child"),
     youth ~ starts_with("youth"),
@@ -289,7 +286,7 @@ kn <- knowledge(
 
 # Recommended (TPC example):
 my_tpc <- tpc(engine = "causalDisco", test = "fisher_z", alpha = 0.05)
-result <- disco(data = dat, method = my_tpc, knowledge = kn)
+result <- disco(data = tpc_example, method = my_tpc, knowledge = kn)
 plot(result)
 
 
@@ -297,7 +294,7 @@ plot(result)
 # or
 my_tpc <- my_tpc |>
   set_knowledge(kn)
-result <- my_tpc(dat)
+result <- my_tpc(tpc_example)
 plot(result)
 
 
@@ -310,7 +307,7 @@ s_tpc$set_params(list(verbose = FALSE))
 s_tpc$set_test("fisher_z", alpha = 0.2)
 s_tpc$set_alg("tpc")
 s_tpc$set_knowledge(kn, directed_as_undirected = TRUE)
-s_tpc$set_data(dat)
+s_tpc$set_data(tpc_example)
 res_tpc <- s_tpc$run_search()
 print(res_tpc)
 #> 
@@ -364,7 +361,7 @@ print(res_tfci)
 s_tges <- CausalDiscoSearch$new()
 s_tges$set_score("tbic") # Gaussian temporal score
 s_tges$set_alg("tges")
-s_tges$set_data(dat, set_suff_stat = FALSE) # suff stat not used for TGES
+s_tges$set_data(tpc_example, set_suff_stat = FALSE) # suff stat not used for TGES
 s_tges$set_knowledge(kn)
 res_tges <- s_tges$run_search()
 print(res_tges)
@@ -374,14 +371,14 @@ print(res_tges)
 # --- Intentional error demonstrations ----------------------------------------
 
 # run_search() without setting an algorithm
-try(CausalDiscoSearch$new()$run_search(dat))
+try(CausalDiscoSearch$new()$run_search(tpc_example))
 #> Error : Test must be set before sufficient statistic.
 
 # set_suff_stat() requires data and test first
 s_err <- CausalDiscoSearch$new()
 try(s_err$set_suff_stat()) # no data & no test
 #> Error : Data must be set before sufficient statistic.
-s_err$set_data(dat, set_suff_stat = FALSE)
+s_err$set_data(tpc_example, set_suff_stat = FALSE)
 try(s_err$set_suff_stat()) # no test
 #> Error : Test must be set before sufficient statistic.
 

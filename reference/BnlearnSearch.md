@@ -1,7 +1,8 @@
 # R6 Interface to bnlearn Search Algorithms
 
-A wrapper that lets you drive `bnlearns`’s structure-learning algorithms
-within the `causalDisco` framework.
+A wrapper that lets you drive bnlearn algorithms within the causalDisco
+framework. For arguments to the test, score, and algorithm, see the
+bnlearn documentation.
 
 ## Value
 
@@ -370,22 +371,33 @@ The objects of this class are cloneable with this method.
 # use the disco() or any method function, for example pc(), instead.
 
 # Load data
-data("tpc_example")
+data(num_data)
 
 # Recommended:
 my_pc <- pc(engine = "bnlearn", test = "fisher_z", alpha = 0.05)
-result <- my_pc(tpc_example)
+result <- my_pc(num_data)
 
 # or
-result <- disco(data = tpc_example, method = my_pc)
+result <- disco(data = num_data, method = my_pc)
 
 plot(result)
 
 
+# Example with detailed settings:
+my_pc2 <- pc(
+  engine = "bnlearn",
+  test = "mi_g",
+  alpha = 0.01
+)
+disco(data = num_data, method = my_pc2)
+#> 
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
+
 # Using R6 class:
 s <- BnlearnSearch$new()
 
-s$set_data(tpc_example)
+s$set_data(num_data)
 s$set_test(method = "fisher_z", alpha = 0.05)
 s$set_alg("pc")
 

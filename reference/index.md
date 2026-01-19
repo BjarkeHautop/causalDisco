@@ -35,14 +35,16 @@ Core search algorithms implemented or wrapped by causalDisco.
 - [`tpc()`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md)
   : The Temporal Peter-Clark (PC) algorithm for causal discovery
 
-## Tests for TPC
+## R6 Classes
 
-Test functions implemented for use in the TPC algorithm.
-
-- [`cor_test()`](https://bjarkehautop.github.io/causalDisco/reference/cor_test.md)
-  : Test for vanishing partial correlations
-- [`reg_test()`](https://bjarkehautop.github.io/causalDisco/reference/reg_test.md)
-  : Regression-based information loss test
+- [`BnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/BnlearnSearch.md)
+  : R6 Interface to bnlearn Search Algorithms
+- [`CausalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/CausalDiscoSearch.md)
+  : R6 Interface to causalDisco Search Algorithms
+- [`PcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/PcalgSearch.md)
+  : R6 Interface to pcalg Search Algorithms
+- [`TetradSearch`](https://bjarkehautop.github.io/causalDisco/reference/TetradSearch.md)
+  : R6 Interface to Tetrad Search Algorithms
 
 ## Setup for Tetrad Engine
 
@@ -54,17 +56,6 @@ Functions for installing and verifying the Tetrad Java backend.
   : Install Tetrad GUI
 - [`check_tetrad_install()`](https://bjarkehautop.github.io/causalDisco/reference/check_tetrad_install.md)
   : Check Tetrad Installation
-
-## R6 Classes
-
-- [`BnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/BnlearnSearch.md)
-  : R6 Interface to bnlearn Search Algorithms
-- [`CausalDiscoSearch`](https://bjarkehautop.github.io/causalDisco/reference/CausalDiscoSearch.md)
-  : R6 Interface to causalDisco Search Algorithms
-- [`PcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/PcalgSearch.md)
-  : R6 Interface to pcalg Search Algorithms
-- [`TetradSearch`](https://bjarkehautop.github.io/causalDisco/reference/TetradSearch.md)
-  : R6 Interface to Tetrad Search Algorithms
 
 ## causalDisco Algorithm Run Functions
 
@@ -78,6 +69,15 @@ detail their parameters.
   Equivalence Search
 - [`tpc_run()`](https://bjarkehautop.github.io/causalDisco/reference/tpc_run.md)
   : Causal Discovery Using the Temporal PC Algorithm (TPC)
+
+## Tests for TPC
+
+Test functions implemented for use in the TPC algorithm.
+
+- [`cor_test()`](https://bjarkehautop.github.io/causalDisco/reference/cor_test.md)
+  : Test for vanishing partial correlations
+- [`reg_test()`](https://bjarkehautop.github.io/causalDisco/reference/reg_test.md)
+  : Regression-based information loss test
 
 ## Simulation
 

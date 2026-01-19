@@ -1,6 +1,6 @@
 # R6 Interface to Tetrad Search Algorithms
 
-High-level wrapper around the Java-based **Tetrad** causal-discovery
+High-level wrapper around the Java-based Tetrad causal-discovery
 library. The class lets you choose independence tests, scores, and
 search algorithms from Tetrad, run them on an R data set, and retrieve
 the resulting graph or statistics.
@@ -1238,8 +1238,7 @@ Sets the background knowledge object.
 
 - `knowledge_obj`:
 
-  An object containing Tetrad knowledge (must implement
-  `get_tetrad_knowledge`).
+  An object containing Tetrad knowledge.
 
 ------------------------------------------------------------------------
 
@@ -1555,20 +1554,31 @@ The objects of this class are cloneable with this method.
 
 # Requires Tetrad to be installed
 if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
-  data("tpc_example")
+  data(num_data)
 
   # Recommended:
-  my_pc <- pc(engine = "tetrad", test = "conditional_gaussian")
-  my_pc(tpc_example)
+  my_pc <- pc(engine = "tetrad", test = "fisher_z")
+  my_pc(num_data)
 
   # or
-  disco(data = tpc_example, method = my_pc)
+  disco(data = num_data, method = my_pc)
+
+  # Example with detailed settings:
+  my_pc2 <- pc(
+    engine = "tetrad",
+    test = "sem_bic",
+    penalty_discount = 1,
+    structure_prior = 1,
+    precompute_covariances = TRUE,
+    singularity_lambda = 0.1
+  )
+  disco(data = num_data, method = my_pc2)
 
   # Using R6 class:
   s <- TetradSearch$new()
 
-  s$set_data(tpc_example)
-  s$set_test(method = "conditional_gaussian", alpha = 0.05)
+  s$set_data(num_data)
+  s$set_test(method = "fisher_z", alpha = 0.05)
   s$set_alg("pc")
 
   g <- s$run_search()

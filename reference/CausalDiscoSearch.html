@@ -11,7 +11,7 @@ It allows to set the data, sufficient statistics, test, score, and algorithm."><
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9030</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9031</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,8 +43,8 @@ It allows to set the data, sufficient statistics, test, score, and algorithm."><
     </div>
 
     <div class="ref-description section level2">
-    <p>This class implements the search algorithms from the causalDisco
-package, which wraps and adds temporal order to pcalg algorithms.
+    <p>This class implements the search algorithms from the <span class="pkg">causalDisco</span>
+package, which wraps and adds temporal order to <span class="pkg">pcalg</span> algorithms.
 It allows to set the data, sufficient statistics, test, score, and algorithm.</p>
     </div>
 
@@ -304,12 +304,9 @@ nature of how <span class="pkg">pcalg</span> handles background knowledge when u
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># small toy dataset</span></span></span>
-<span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tpc_example</span>, <span class="fl">50</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># background knowledge (tiers + one exogenous var)</span></span></span>
 <span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="knowledge.html">knowledge</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">dat</span>,</span></span>
+<span class="r-in"><span>  <span class="va">tpc_example</span>,</span></span>
 <span class="r-in"><span>  <span class="fu">tier</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="va">child</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    <span class="va">youth</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span></span>
@@ -319,7 +316,7 @@ nature of how <span class="pkg">pcalg</span> handles background knowledge when u
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Recommended (TPC example):</span></span></span>
 <span class="r-in"><span><span class="va">my_tpc</span> <span class="op">&lt;-</span> <span class="fu"><a href="tpc.html">tpc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dat</span>, method <span class="op">=</span> <span class="va">my_tpc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">my_tpc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="CausalDiscoSearch-1.png" alt="" width="700" height="433"></span>
 <span class="r-plt img"><img src="CausalDiscoSearch-2.png" alt="" width="700" height="433"></span>
@@ -327,7 +324,7 @@ nature of how <span class="pkg">pcalg</span> handles background knowledge when u
 <span class="r-in"><span><span class="co"># or</span></span></span>
 <span class="r-in"><span><span class="va">my_tpc</span> <span class="op">&lt;-</span> <span class="va">my_tpc</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="set_knowledge.html">set_knowledge</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">my_tpc</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">my_tpc</span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="CausalDiscoSearch-3.png" alt="" width="700" height="433"></span>
 <span class="r-plt img"><img src="CausalDiscoSearch-4.png" alt="" width="700" height="433"></span>
@@ -340,7 +337,7 @@ nature of how <span class="pkg">pcalg</span> handles background knowledge when u
 <span class="r-in"><span><span class="va">s_tpc</span><span class="op">$</span><span class="fu">set_test</span><span class="op">(</span><span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">s_tpc</span><span class="op">$</span><span class="fu">set_alg</span><span class="op">(</span><span class="st">"tpc"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">s_tpc</span><span class="op">$</span><span class="fu">set_knowledge</span><span class="op">(</span><span class="va">kn</span>, directed_as_undirected <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">s_tpc</span><span class="op">$</span><span class="fu">set_data</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">s_tpc</span><span class="op">$</span><span class="fu">set_data</span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">res_tpc</span> <span class="op">&lt;-</span> <span class="va">s_tpc</span><span class="op">$</span><span class="fu">run_search</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://caugi.org/reference/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res_tpc</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
@@ -394,7 +391,7 @@ nature of how <span class="pkg">pcalg</span> handles background knowledge when u
 <span class="r-in"><span><span class="va">s_tges</span> <span class="op">&lt;-</span> <span class="va">CausalDiscoSearch</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">s_tges</span><span class="op">$</span><span class="fu">set_score</span><span class="op">(</span><span class="st">"tbic"</span><span class="op">)</span> <span class="co"># Gaussian temporal score</span></span></span>
 <span class="r-in"><span><span class="va">s_tges</span><span class="op">$</span><span class="fu">set_alg</span><span class="op">(</span><span class="st">"tges"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">s_tges</span><span class="op">$</span><span class="fu">set_data</span><span class="op">(</span><span class="va">dat</span>, set_suff_stat <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># suff stat not used for TGES</span></span></span>
+<span class="r-in"><span><span class="va">s_tges</span><span class="op">$</span><span class="fu">set_data</span><span class="op">(</span><span class="va">tpc_example</span>, set_suff_stat <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># suff stat not used for TGES</span></span></span>
 <span class="r-in"><span><span class="va">s_tges</span><span class="op">$</span><span class="fu">set_knowledge</span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">res_tges</span> <span class="op">&lt;-</span> <span class="va">s_tges</span><span class="op">$</span><span class="fu">run_search</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://caugi.org/reference/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res_tges</span><span class="op">)</span></span></span>
@@ -404,14 +401,14 @@ nature of how <span class="pkg">pcalg</span> handles background knowledge when u
 <span class="r-in"><span><span class="co"># --- Intentional error demonstrations ----------------------------------------</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># run_search() without setting an algorithm</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">CausalDiscoSearch</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">run_search</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">CausalDiscoSearch</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">run_search</span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error : Test must be set before sufficient statistic.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># set_suff_stat() requires data and test first</span></span></span>
 <span class="r-in"><span><span class="va">s_err</span> <span class="op">&lt;-</span> <span class="va">CausalDiscoSearch</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">s_err</span><span class="op">$</span><span class="fu">set_suff_stat</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># no data &amp; no test</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error : Data must be set before sufficient statistic.</span>
-<span class="r-in"><span><span class="va">s_err</span><span class="op">$</span><span class="fu">set_data</span><span class="op">(</span><span class="va">dat</span>, set_suff_stat <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">s_err</span><span class="op">$</span><span class="fu">set_data</span><span class="op">(</span><span class="va">tpc_example</span>, set_suff_stat <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">s_err</span><span class="op">$</span><span class="fu">set_suff_stat</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># no test</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error : Test must be set before sufficient statistic.</span>
 <span class="r-in"><span></span></span>

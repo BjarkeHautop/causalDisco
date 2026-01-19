@@ -13,7 +13,7 @@ resulting graph or statistics."><meta property="og:image" content="https://bjark
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9030</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9031</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,9 +45,9 @@ resulting graph or statistics."><meta property="og:image" content="https://bjark
     </div>
 
     <div class="ref-description section level2">
-    <p>High-level wrapper around the Java-based <strong>Tetrad</strong> causal-discovery
+    <p>High-level wrapper around the Java-based <span class="pkg">Tetrad</span> causal-discovery
 library. The class lets you choose independence tests, scores, and search
-algorithms from Tetrad, run them on an R data set, and retrieve the
+algorithms from <span class="pkg">Tetrad</span>, run them on an R data set, and retrieve the
 resulting graph or statistics.</p>
     </div>
 
@@ -56,7 +56,7 @@ resulting graph or statistics.</p>
     <h2 id="public-fields">Public fields<a class="anchor" aria-label="anchor" href="#public-fields"></a></h2>
     <p></p><div class="r6-fields"><dl><dt><code>data</code></dt>
 <dd><p>Java object that stores the (possibly converted) data set
-used by Tetrad.</p></dd>
+used by <span class="pkg">Tetrad</span>.</p></dd>
 
 
 <dt><code>rdata</code></dt>
@@ -927,7 +927,7 @@ PAG (where feasible).</p></li>
 <div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>knowledge_obj</code></dt>
-<dd><p>An object containing Tetrad knowledge (must implement <code>get_tetrad_knowledge</code>).</p></dd>
+<dd><p>An object containing <span class="pkg">Tetrad</span> knowledge.</p></dd>
 
 
 </dl><p></p></div>
@@ -1010,7 +1010,7 @@ generated.</p></dd>
 
 <dt><code>int_cols_as_cont</code></dt>
 <dd><p>(logical) If <code>TRUE</code>, integer columns are treated
-as continuous, since Tetrad does not support ordinal data, but only
+as continuous, since <span class="pkg">Tetrad</span> does not support ordinal data, but only
 either continuous or nominal data. Default is <code>TRUE.</code></p></dd>
 
 
@@ -1244,20 +1244,31 @@ either continuous or nominal data. Default is <code>TRUE.</code></p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Requires Tetrad to be installed</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tpc_example"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">num_data</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># Recommended:</span></span></span>
-<span class="r-in"><span>  <span class="va">my_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu">my_pc</span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">my_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">my_pc</span><span class="op">(</span><span class="va">num_data</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># or</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">my_pc</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">num_data</span>, method <span class="op">=</span> <span class="va">my_pc</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Example with detailed settings:</span></span></span>
+<span class="r-in"><span>  <span class="va">my_pc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="pc.html">pc</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    engine <span class="op">=</span> <span class="st">"tetrad"</span>,</span></span>
+<span class="r-in"><span>    test <span class="op">=</span> <span class="st">"sem_bic"</span>,</span></span>
+<span class="r-in"><span>    penalty_discount <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>    structure_prior <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>    precompute_covariances <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>    singularity_lambda <span class="op">=</span> <span class="fl">0.1</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">num_data</span>, method <span class="op">=</span> <span class="va">my_pc2</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># Using R6 class:</span></span></span>
 <span class="r-in"><span>  <span class="va">s</span> <span class="op">&lt;-</span> <span class="va">TetradSearch</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="va">s</span><span class="op">$</span><span class="fu">set_data</span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">s</span><span class="op">$</span><span class="fu">set_test</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">s</span><span class="op">$</span><span class="fu">set_data</span><span class="op">(</span><span class="va">num_data</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">s</span><span class="op">$</span><span class="fu">set_test</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">s</span><span class="op">$</span><span class="fu">set_alg</span><span class="op">(</span><span class="st">"pc"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">g</span> <span class="op">&lt;-</span> <span class="va">s</span><span class="op">$</span><span class="fu">run_search</span><span class="op">(</span><span class="op">)</span></span></span>

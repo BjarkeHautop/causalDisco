@@ -21,7 +21,7 @@ We will for this section use the `num_data` dataset included in the
 package for demonstrating how to run causal discovery algorithms.
 
 ``` r
-data("num_data")
+data(num_data)
 head(num_data)
 #>         X1        X2       X3         Z        Y
 #> 1 3.900715  7.048325 6.964806 10.272479 15.35505
@@ -32,7 +32,7 @@ head(num_data)
 #> 6 4.885914 10.018856 7.413312  9.375931 28.03132
 ```
 
-We can use several algorithms from the `causalDisco` package to discover
+We can use several algorithms from the causalDisco package to discover
 the causal structure from this data. Here is an example using the
 Peter-Clark (PC) algorithm from Tetrad with the Kernel Conditional
 Independence Test (KCI).
@@ -45,7 +45,7 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 }
 ```
 
-![](pc-kci-tetrad.png)
+![](PC-KCI-TETRAD.png)
 
 or the PC algorithm from bnlearn with Fisher’s Z test:
 
@@ -75,7 +75,7 @@ variables measured at three different life stages: childhood, youth, and
 old age.
 
 ``` r
-data("tpc_example")
+data(tpc_example)
 head(tpc_example)
 #>   child_x2   child_x1    youth_x4 youth_x3  oldage_x6  oldage_x5
 #> 1        0 -0.7104066 -0.07355602        1  6.4984994  3.0740123

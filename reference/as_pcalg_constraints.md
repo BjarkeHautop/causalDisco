@@ -34,7 +34,7 @@ as_pcalg_constraints(kn, labels = kn$vars$var, directed_as_undirected = FALSE)
 ## Value
 
 A list with two elements, each an `n × n` logical matrix corresponding
-to pcalg's `fixed_gaps` and `fixed_edges` arguments.
+to pcalg `fixed_gaps` and `fixed_edges` arguments.
 
 ## Details
 

@@ -1,8 +1,8 @@
 # R6 Interface to pcalg Search Algorithms
 
-This class implements the search algorithms from the pcalg package. It
-allows to set the data, sufficient statistics, test, score, and
-algorithm.
+A wrapper that lets you drive pcalg algorithms within the causalDisco
+framework. For arguments to the test, score, and algorithm, see the
+pcalg documentation, which we link to in the respective sections below.
 
 ## Public fields
 
@@ -287,25 +287,61 @@ The objects of this class are cloneable with this method.
 # use the disco() or any method function, for example pc(), instead.
 
 # Load data
-data("tpc_example")
+data(num_data)
 
 # Recommended:
-pc(engine = "pcalg", test = "fisher_z")(tpc_example)
-#> 
-#> ── Knowledge object ────────────────────────────────────────────────────────────
-#> 
-
-# or
 my_pc <- pc(engine = "pcalg", test = "fisher_z")
-my_pc(tpc_example)
+my_pc(num_data)
 #> 
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 
 # or
-disco(data = tpc_example, method = my_pc)
+disco(data = num_data, method = my_pc)
 #> 
 #> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
+
+# Example with detailed settings:
+my_pc2 <- pc(
+  engine = "pcalg",
+  test = "fisher_z",
+  alpha = 0.01,
+  m.max = 4,
+  skel.method = "original"
+)
+
+disco(data = num_data, method = my_pc2)
+#> 
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
+
+# With knowledge
+
+kn <- knowledge(
+  num_data,
+  X1 %!-->% X2,
+  X2 %!-->% X1
+)
+
+disco(data = num_data, method = my_pc2, knowledge = kn)
+#> 
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
+#> 
+#> ── Variables ──
+#> 
+#>   var   tier 
+#> 1 X1    NA   
+#> 2 X2    NA   
+#> 3 X3    NA   
+#> 4 Y     NA   
+#> 5 Z     NA   
+#> 
+#> ── Edges ──
+#> 
+#>  ✖  X1 → X2
+#>  ✖  X2 → X1
 #> 
 
 # Using R6 class:
@@ -318,7 +354,6 @@ s$set_alg("pc")
 g <- s$run_search()
 
 print(g)
-#> 
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 ```

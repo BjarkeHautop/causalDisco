@@ -31,7 +31,7 @@ A plot of the causal graph.
 ## Examples
 
 ``` r
-data("tpc_example")
+data(tpc_example)
 
 kn <- knowledge(
   tpc_example,
