@@ -43,8 +43,7 @@ process smoother:
 - Make your changes, commit to git, and then create a PR by running
   `usethis::pr_push()`, and follow the prompts in your browser.
 
-## Code Style
+## More Information
 
-Please try to follow the existing code style and conventions used in the
-project. When in doubt follow the tidyverse [style
-guide](https://style.tidyverse.org).
+For additional information please see
+[DEVELOPERS.md](https://github.com/BjarkeHautop/causalDisco/blob/master/.github/DEVELOPERS.md).
