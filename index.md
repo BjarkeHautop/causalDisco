@@ -131,7 +131,7 @@ disco_cd_tges <- disco(data = tpc_example, method = cd_tges, knowledge = kn)
 ```
 
 You can visualize the resulting causal graph using the
-[`plot()`](https://rdrr.io/r/graphics/plot.default.html) function:
+[`plot()`](https://caugi.org/reference/plot.html) function:
 
 ``` r
 plot(disco_cd_tges)
@@ -265,8 +265,6 @@ If we want any changes we can modify the tikz code after generation.
     `Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl, : java.lang.NullPointerException: Cannot invoke "edu.cmu.tetrad.data.Knowledge.getTestingData()" because "this.knowledge" is null`
     (see branch `Add-isa-sem-bic-score-to-Tetrad`).
 
-- Update simulation functions (use caugi?)
-
 - Update evaluation and confusion metrics (use caugi?)
 
 ### Bugfixes
@@ -352,24 +350,7 @@ Fixed in unreleased version of Tetrad (see \#1947 in Tetrad issues).
 - Figure out how to not repeat the documentation of e.g. penalty
   discount in TetradSearch R6 class.
 
-### Standardization
-
-- We are mixing between different things currently (since we rely on
-  `caugi` are it uses `data.frame` and `S7`):
-  - `tibble` vs `data.frame` (e.g. `knowledge` is `tibble` and
-    `disco()$caugi@edges` is `data.frame`).
-    - I added a
-      [`nodes()`](https://bjarkehautop.github.io/causalDisco/reference/nodes.md)
-      and
-      [`edges()`](https://bjarkehautop.github.io/causalDisco/reference/edges.md)
-      method to `knowledgeable_caugi` objects to easily return as
-      `tibble`.
-
 ### CRAN TODO
-
-- Add a copyright holder (`"cph"`) in persons field of DESCRIPTION
-  (needed for CRAN, see
-  [here](https://github.com/DavisVaughan/extrachecks))
 
 - Update Description: field in DESCRIPTION to mention it wraps other
   packages, …
@@ -378,4 +359,4 @@ Fixed in unreleased version of Tetrad (see \#1947 in Tetrad issues).
 
 Bug reports and feature requests are welcome:
 
-👉 [open an issue](https://github.com/BjarkeHautop/causalDisco/issues).
+[open an issue](https://github.com/BjarkeHautop/causalDisco/issues).

@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9031</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9032</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -164,7 +164,7 @@
 <span><span class="co"># Use causalDisco's own tges algorithm with temporal BIC score</span></span>
 <span><span class="va">cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tges.html">tges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, score <span class="op">=</span> <span class="st">"tbic"</span><span class="op">)</span></span>
 <span><span class="va">disco_cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">cd_tges</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
-<p>You can visualize the resulting causal graph using the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function:</p>
+<p>You can visualize the resulting causal graph using the <code><a href="https://caugi.org/reference/plot.html" class="external-link">plot()</a></code> function:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">disco_cd_tges</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot-1.png" alt="A causal graph with the known tiers indicated by vertical positioning of the nodes." width="100%"><img src="reference/figures/README-plot-2.png" alt="A causal graph with the known tiers indicated by vertical positioning of the nodes." width="100%"></p>
@@ -208,18 +208,18 @@
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/detach.html" class="external-link">detach</a></span><span class="op">(</span><span class="st">"package:causalDisco"</span>, unload <span class="op">=</span> <span class="cn">TRUE</span>, character.only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://frederikfabriciusbjerre.github.io/caugi/" class="external-link">caugi</a></span><span class="op">)</span> <span class="co"># Needs recent version from GitHub</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://caugi.org/" class="external-link">caugi</a></span><span class="op">)</span> <span class="co"># Needs recent version from GitHub</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/GuangchuangYu/ggplotify" class="external-link">ggplotify</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">cg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://caugi.org/reference/caugi.html" class="external-link">caugi</a></span><span class="op">(</span><span class="va">A</span> <span class="op">%--&gt;%</span> <span class="va">B</span>, <span class="va">C</span>, <span class="va">D</span><span class="op">)</span></span>
-<span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="fu">caugi_layout</span><span class="op">(</span><span class="va">cg</span><span class="op">)</span></span>
+<span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://caugi.org/reference/caugi_layout.html" class="external-link">caugi_layout</a></span><span class="op">(</span><span class="va">cg</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://caugi.org/reference/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">layout</span><span class="op">)</span></span>
 <span><span class="va">layout</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">layout</span><span class="op">$</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://caugi.org/reference/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">layout</span><span class="op">)</span></span>
-<span><span class="va">plot_cg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cg</span>, layout <span class="op">=</span> <span class="va">layout</span><span class="op">)</span></span>
+<span><span class="va">plot_cg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cg</span>, layout <span class="op">=</span> <span class="va">layout</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Wrap the grid plot as ggplot</span></span>
 <span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu">as.ggplot</span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">plot_cg</span><span class="op">@</span><span class="va">grob</span><span class="op">)</span><span class="op">)</span></span>
@@ -244,11 +244,11 @@
 <span><span class="kw">if</span> <span class="op">(</span><span class="st">"package:causalDisco"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/search.html" class="external-link">search</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/detach.html" class="external-link">detach</a></span><span class="op">(</span><span class="st">"package:causalDisco"</span>, unload <span class="op">=</span> <span class="cn">TRUE</span>, character.only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://frederikfabriciusbjerre.github.io/caugi/" class="external-link">caugi</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://caugi.org/" class="external-link">caugi</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/daqana/tikzDevice" class="external-link">tikzDevice</a></span><span class="op">)</span></span>
 <span><span class="va">cg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://caugi.org/reference/caugi.html" class="external-link">caugi</a></span><span class="op">(</span><span class="va">A</span> <span class="op">%--&gt;%</span> <span class="va">B</span> <span class="op">+</span> <span class="va">C</span><span class="op">)</span></span>
 <span><span class="fu">tikz</span><span class="op">(</span><span class="st">"cg_plot.tex"</span>, width <span class="op">=</span> <span class="fl">6</span>, height <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">cg</span>,</span>
 <span>  node_style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    by_node <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -269,7 +269,6 @@
 <li>Missing scores: <code>"Instance-specific Augmented SEM BIC Score"</code>. Get this error when implementing: <code>Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl, : java.lang.NullPointerException: Cannot invoke "edu.cmu.tetrad.data.Knowledge.getTestingData()" because "this.knowledge" is null</code> (see branch <code>Add-isa-sem-bic-score-to-Tetrad</code>).</li>
 </ul>
 </li>
-<li><p>Update simulation functions (use caugi?)</p></li>
 <li><p>Update evaluation and confusion metrics (use caugi?)</p></li>
 </ul>
 <div class="section level3">
@@ -344,27 +343,10 @@
 </ul>
 </div>
 <div class="section level3">
-<h3 id="standardization">Standardization<a class="anchor" aria-label="anchor" href="#standardization"></a>
-</h3>
-<ul>
-<li>We are mixing between different things currently (since we rely on <code>caugi</code> are it uses <code>data.frame</code> and <code>S7</code>):
-<ul>
-<li>
-<code>tibble</code> vs <code>data.frame</code> (e.g. <code>knowledge</code> is <code>tibble</code> and <code>disco()$caugi@edges</code> is <code>data.frame</code>).
-<ul>
-<li>I added a <code><a href="reference/nodes.html">nodes()</a></code> and <code><a href="reference/edges.html">edges()</a></code> method to <code>knowledgeable_caugi</code> objects to easily return as <code>tibble</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="section level3">
 <h3 id="cran-todo">CRAN TODO<a class="anchor" aria-label="anchor" href="#cran-todo"></a>
 </h3>
 <ul>
-<li><p>Add a copyright holder (<code>"cph"</code>) in persons field of DESCRIPTION (needed for CRAN, see <a href="https://github.com/DavisVaughan/extrachecks" class="external-link">here</a>)</p></li>
-<li><p>Update Description: field in DESCRIPTION to mention it wraps other packages, …</p></li>
+<li>Update Description: field in DESCRIPTION to mention it wraps other packages, …</li>
 </ul>
 </div>
 </div>
@@ -372,7 +354,7 @@
 <h2 id="bugs--requests">Bugs &amp; requests<a class="anchor" aria-label="anchor" href="#bugs--requests"></a>
 </h2>
 <p>Bug reports and feature requests are welcome:</p>
-<p>👉 <a href="https://github.com/BjarkeHautop/causalDisco/issues" class="external-link">open an issue</a>.</p>
+<p><a href="https://github.com/BjarkeHautop/causalDisco/issues" class="external-link">open an issue</a>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

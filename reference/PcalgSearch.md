@@ -293,14 +293,60 @@ data(num_data)
 my_pc <- pc(engine = "pcalg", test = "fisher_z")
 my_pc(num_data)
 #> 
-#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: PDAG
 #> 
+#> ── Edges ──
+#> 
+#> # A tibble: 6 × 3
+#>   from  edge  to   
+#>   <chr> <chr> <chr>
+#> 1 X1    -->   Y    
+#> 2 X1    ---   Z    
+#> 3 X2    ---   X3   
+#> 4 X2    -->   Y    
+#> 5 X3    -->   Y    
+#> 6 Z     -->   Y    
+#> ── Nodes ──
+#> 
+#> # A tibble: 5 × 1
+#>   name 
+#>   <chr>
+#> 1 X1   
+#> 2 X2   
+#> 3 X3   
+#> 4 Z    
+#> 5 Y    
+#> ── Knowledge object ────────────────────────────────────────────────────────────
 
 # or
 disco(data = num_data, method = my_pc)
 #> 
-#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: PDAG
 #> 
+#> ── Edges ──
+#> 
+#> # A tibble: 6 × 3
+#>   from  edge  to   
+#>   <chr> <chr> <chr>
+#> 1 X1    -->   Y    
+#> 2 X1    ---   Z    
+#> 3 X2    ---   X3   
+#> 4 X2    -->   Y    
+#> 5 X3    -->   Y    
+#> 6 Z     -->   Y    
+#> ── Nodes ──
+#> 
+#> # A tibble: 5 × 1
+#>   name 
+#>   <chr>
+#> 1 X1   
+#> 2 X2   
+#> 3 X3   
+#> 4 Z    
+#> 5 Y    
+#> ── Knowledge object ────────────────────────────────────────────────────────────
 
 # Example with detailed settings:
 my_pc2 <- pc(
@@ -313,8 +359,30 @@ my_pc2 <- pc(
 
 disco(data = num_data, method = my_pc2)
 #> 
-#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: PDAG
 #> 
+#> ── Edges ──
+#> 
+#> # A tibble: 5 × 3
+#>   from  edge  to   
+#>   <chr> <chr> <chr>
+#> 1 X1    -->   Y    
+#> 2 X2    ---   X3   
+#> 3 X2    -->   Y    
+#> 4 X3    -->   Y    
+#> 5 Z     -->   X1   
+#> ── Nodes ──
+#> 
+#> # A tibble: 5 × 1
+#>   name 
+#>   <chr>
+#> 1 X1   
+#> 2 X2   
+#> 3 X3   
+#> 4 Z    
+#> 5 Y    
+#> ── Knowledge object ────────────────────────────────────────────────────────────
 
 # With knowledge
 
@@ -326,23 +394,43 @@ kn <- knowledge(
 
 disco(data = num_data, method = my_pc2, knowledge = kn)
 #> 
-#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: PDAG
 #> 
+#> ── Edges ──
+#> 
+#> # A tibble: 5 × 3
+#>   from  edge  to   
+#>   <chr> <chr> <chr>
+#> 1 X1    -->   Y    
+#> 2 X2    ---   X3   
+#> 3 X2    -->   Y    
+#> 4 X3    -->   Y    
+#> 5 Z     -->   X1   
+#> ── Nodes ──
+#> 
+#> # A tibble: 5 × 1
+#>   name 
+#>   <chr>
+#> 1 X1   
+#> 2 X2   
+#> 3 X3   
+#> 4 Z    
+#> 5 Y    
+#> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 #> ── Variables ──
 #> 
-#>   var   tier 
+#>   <chr> <chr>
 #> 1 X1    NA   
 #> 2 X2    NA   
 #> 3 X3    NA   
 #> 4 Y     NA   
 #> 5 Z     NA   
-#> 
 #> ── Edges ──
 #> 
 #>  ✖  X1 → X2
 #>  ✖  X2 → X1
-#> 
 
 # Using R6 class:
 s <- PcalgSearch$new()
@@ -354,6 +442,30 @@ s$set_alg("pc")
 g <- s$run_search()
 
 print(g)
-#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: PDAG
 #> 
+#> ── Edges ──
+#> 
+#> # A tibble: 6 × 3
+#>   from      edge  to       
+#>   <chr>     <chr> <chr>    
+#> 1 child_x1  ---   child_x2 
+#> 2 child_x2  -->   oldage_x5
+#> 3 child_x2  ---   youth_x4 
+#> 4 oldage_x5 -->   oldage_x6
+#> 5 youth_x3  -->   oldage_x5
+#> 6 youth_x4  -->   oldage_x6
+#> ── Nodes ──
+#> 
+#> # A tibble: 6 × 1
+#>   name     
+#>   <chr>    
+#> 1 child_x2 
+#> 2 child_x1 
+#> 3 youth_x4 
+#> 4 youth_x3 
+#> 5 oldage_x6
+#> 6 oldage_x5
+#> ── Knowledge object ────────────────────────────────────────────────────────────
 ```

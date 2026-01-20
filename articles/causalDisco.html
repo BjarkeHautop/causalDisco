@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4.9031</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9032</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,21 +108,21 @@ Independence Test (KCI).</p>
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">pc_tetrad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"kci"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span>  <span class="va">pc_result_tetrad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">num_data</span>, method <span class="op">=</span> <span class="va">pc_tetrad</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_tetrad</span>, main <span class="op">=</span> <span class="st">"PC KCI (Tetrad)"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_tetrad</span>, main <span class="op">=</span> <span class="st">"PC KCI (Tetrad)"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p><img src="PC-KCI-TETRAD.png"></p>
 <p>or the PC algorithm from bnlearn with Fisher’s Z test:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pc_bnlearn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"bnlearn"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="va">pc_result_bnlearn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">num_data</span>, method <span class="op">=</span> <span class="va">pc_bnlearn</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_bnlearn</span>, main <span class="op">=</span> <span class="st">"PC Fisher Z (bnlearn)"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_bnlearn</span>, main <span class="op">=</span> <span class="st">"PC Fisher Z (bnlearn)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causalDisco_files/figure-html/pc%20algorithm%20fisher%20z-1.png" class="r-plt" alt="" width="700"></p>
 <p>or the generalized score equivalence (GES) algorithm from pcalg with
 the SEM-BIC score:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ges_pcalg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ges.html">ges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"pcalg"</span>, score <span class="op">=</span> <span class="st">"sem_bic"</span><span class="op">)</span></span>
 <span><span class="va">ges_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">num_data</span>, method <span class="op">=</span> <span class="va">ges_pcalg</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ges_result</span>, main <span class="op">=</span> <span class="st">"GES SEM-BIC (pcalg)"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ges_result</span>, main <span class="op">=</span> <span class="st">"GES SEM-BIC (pcalg)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causalDisco_files/figure-html/ges%20algorithm%20sem-bic-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level2">
@@ -155,17 +155,100 @@ follows:</p>
 <span>    <span class="va">youth</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span>
 <span>    <span class="va">oldage</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"oldage"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
-<p><img src="causalDisco_files/figure-html/prior%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
+<span><span class="op">)</span></span></code></pre></div>
+<p>You can view the knowledge object using <code><a href="https://caugi.org/reference/print.html" class="external-link">print()</a></code>,
+<code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> or <code><a href="https://caugi.org/reference/plot.html" class="external-link">plot()</a></code>:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://caugi.org/reference/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Knowledge object</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold;">Tiers</span> ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> child </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> youth </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> oldage</span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold;">Variables</span> ──</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> child_x1  child </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> child_x2  child </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> youth_x3  youth </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> youth_x4  youth </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> oldage_x5 oldage</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> oldage_x6 oldage</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold;">Knowledge summary</span> ──</span></span>
+<span><span class="co">#&gt; Tiers: <span style="font-weight: bold;">3</span></span></span>
+<span><span class="co">#&gt; Variables: <span style="font-weight: bold;">6</span></span></span>
+<span><span class="co">#&gt; Required edges: <span style="font-weight: bold;">0</span></span></span>
+<span><span class="co">#&gt; Forbidden edges: <span style="font-weight: bold;">0</span></span></span>
+<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span>, main <span class="op">=</span> <span class="st">"Temporal Knowledge"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="causalDisco_files/figure-html/view%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
 <p>We can then incorporate this knowledge into any algorithm like above.
 Here we use the Temporal Peter-Clark (tpc) algorithm from causalDisco
 with the regression-based information loss test:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tpc_method</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tpc.html">tpc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, test <span class="op">=</span> <span class="st">"reg"</span><span class="op">)</span></span>
-<span><span class="va">tpc_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tpc_method</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tpc_result</span>, main <span class="op">=</span> <span class="st">"TPC reg_test with Temporal Knowledge (causalDisco)"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="causalDisco_files/figure-html/tpc%20algorithm%20with%20knowledge-1.png" class="r-plt" alt="" width="700"><img src="causalDisco_files/figure-html/tpc%20algorithm%20with%20knowledge-2.png" class="r-plt" alt="" width="700"></p>
+<span><span class="va">tpc_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tpc_method</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
+<p>Similarly, we can view the results using <code><a href="https://caugi.org/reference/print.html" class="external-link">print()</a></code>,
+<code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> or <code><a href="https://caugi.org/reference/plot.html" class="external-link">plot()</a></code>:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://caugi.org/reference/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">tpc_result</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">caugi graph</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Graph class: <span style="font-weight: bold;">PDAG</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold;">Edges</span> ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
+<span><span class="co">#&gt;   from      edge  to       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> child_x1  --&gt;   child_x2 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> child_x2  --&gt;   oldage_x5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> child_x2  --&gt;   youth_x4 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> oldage_x5 ---   oldage_x6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> youth_x3  --&gt;   oldage_x5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> youth_x4  --&gt;   oldage_x6</span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold;">Nodes</span> ──</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 1</span></span></span>
+<span><span class="co">#&gt;   name     </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> child_x2 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> child_x1 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> youth_x4 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> youth_x3 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> oldage_x6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> oldage_x5</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Knowledge object</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold;">Tiers</span> ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> child </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> youth </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> oldage</span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold;">Variables</span> ──</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> child_x1  child </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> child_x2  child </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> youth_x3  youth </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> youth_x4  youth </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> oldage_x5 oldage</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> oldage_x6 oldage</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">tpc_result</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">caugi graph summary</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Graph class: <span style="font-weight: bold;">PDAG</span></span></span>
+<span><span class="co">#&gt; Nodes: <span style="font-weight: bold;">6</span></span></span>
+<span><span class="co">#&gt; Edges: <span style="font-weight: bold;">6</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold;">Knowledge summary</span> ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Tiers: <span style="font-weight: bold;">3</span></span></span>
+<span><span class="co">#&gt; Variables: <span style="font-weight: bold;">6</span></span></span>
+<span><span class="co">#&gt; Required edges: <span style="font-weight: bold;">0</span></span></span>
+<span><span class="co">#&gt; Forbidden edges: <span style="font-weight: bold;">0</span></span></span>
+<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tpc_result</span>, main <span class="op">=</span> <span class="st">"TPC reg_test with Temporal Knowledge (causalDisco)"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="causalDisco_files/figure-html/view%20tpc%20results-1.png" class="r-plt" alt="" width="700"><img src="causalDisco_files/figure-html/view%20tpc%20results-2.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="next-steps">Next steps<a class="anchor" aria-label="anchor" href="#next-steps"></a>

@@ -1,19 +1,16 @@
 # Retrieve nodes from a `knowledgeable_caugi` object
 
-`nodes()` extracts the edges from a `knowledgeable_caugi` object.
+Retrieve nodes from a `knowledgeable_caugi` object
 
 ## Usage
 
 ``` r
-nodes(x)
-
-# S3 method for class 'knowledgeable_caugi'
-nodes(x)
+nodes(kcg)
 ```
 
 ## Arguments
 
-- x:
+- kcg:
 
   A `knowledgeable_caugi` object.
 

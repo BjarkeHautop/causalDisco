@@ -48,6 +48,7 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/forbid_edge.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/g1_score.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/reference/generate_dag_data.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/ges.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/get_tiers.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/index.html</loc></url>
@@ -69,6 +70,7 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/plus-.knowledge.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/precision.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/print.knowledge.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/reference/print.knowledgeable_caugi.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/recall.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/reg_test.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/remove_edge.html</loc></url>
@@ -82,6 +84,8 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/sim_dag.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/sim_gaus_from_dag.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/specificity.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/reference/summary.knowledge.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/reference/summary.knowledgeable_caugi.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/tfci.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/tfci_run.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/tges.html</loc></url>

@@ -1586,6 +1586,29 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
   print(g)
 }
 #> 
-#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: UNKNOWN
 #> 
+#> ── Edges ──
+#> 
+#> # A tibble: 6 × 3
+#>   from  edge  to   
+#>   <chr> <chr> <chr>
+#> 1 X1    -->   Y    
+#> 2 X1    ---   Z    
+#> 3 X2    ---   X3   
+#> 4 X2    -->   Y    
+#> 5 X3    -->   Y    
+#> 6 Z     -->   Y    
+#> ── Nodes ──
+#> 
+#> # A tibble: 5 × 1
+#>   name 
+#>   <chr>
+#> 1 X1   
+#> 2 X2   
+#> 3 X3   
+#> 4 Z    
+#> 5 Y    
+#> ── Knowledge object ────────────────────────────────────────────────────────────
 ```

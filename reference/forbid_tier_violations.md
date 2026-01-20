@@ -66,45 +66,39 @@ print(kn)
 #> 
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
-#> 
 #> ── Tiers ──
 #> 
-#>   label
+#>   <chr>
 #> 1 child
 #> 2 youth
 #> 3 old  
-#> 
 #> ── Variables ──
 #> 
-#>   var       tier 
+#>   <chr>     <chr>
 #> 1 child_x1  child
 #> 2 child_x2  child
 #> 3 youth_x3  youth
 #> 4 youth_x4  youth
 #> 5 oldage_x5 old  
 #> 6 oldage_x6 old  
-#> 
 print(kn2)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
-#> 
 #> ── Tiers ──
 #> 
-#>   label
+#>   <chr>
 #> 1 child
 #> 2 youth
 #> 3 old  
-#> 
 #> ── Variables ──
 #> 
-#>   var       tier 
+#>   <chr>     <chr>
 #> 1 child_x1  child
 #> 2 child_x2  child
 #> 3 youth_x3  youth
 #> 4 youth_x4  youth
 #> 5 oldage_x5 old  
 #> 6 oldage_x6 old  
-#> 
 #> ── Edges ──
 #> 
 #>  ✖  oldage_x5 → child_x1
@@ -119,5 +113,4 @@ print(kn2)
 #>  ✖  youth_x3 → child_x2
 #>  ✖  youth_x4 → child_x1
 #>  ✖  youth_x4 → child_x2
-#> 
 ```

@@ -70,90 +70,77 @@ print(kn)
 #> 
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
-#> 
 #> ── Tiers ──
 #> 
-#>   label 
+#>   <chr> 
 #> 1 child 
 #> 2 youth 
 #> 3 oldage
-#> 
 #> ── Variables ──
 #> 
-#>   var       tier  
+#>   <chr>     <chr> 
 #> 1 child_x1  child 
 #> 2 child_x2  child 
 #> 3 youth_x3  youth 
 #> 4 youth_x4  youth 
 #> 5 oldage_x5 oldage
 #> 6 oldage_x6 oldage
-#> 
 #> ── Edges ──
 #> 
 #>  ✔  child_x1 → youth_x3
-#> 
 
 kn <- remove_edge(kn, child_x1, youth_x3)
 print(kn)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
-#> 
 #> ── Tiers ──
 #> 
-#>   label 
+#>   <chr> 
 #> 1 child 
 #> 2 youth 
 #> 3 oldage
-#> 
 #> ── Variables ──
 #> 
-#>   var       tier  
+#>   <chr>     <chr> 
 #> 1 child_x1  child 
 #> 2 child_x2  child 
 #> 3 youth_x3  youth 
 #> 4 youth_x4  youth 
 #> 5 oldage_x5 oldage
 #> 6 oldage_x6 oldage
-#> 
 
 kn <- remove_vars(kn, starts_with("child_"))
 print(kn)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
-#> 
 #> ── Tiers ──
 #> 
-#>   label 
+#>   <chr> 
 #> 1 child 
 #> 2 youth 
 #> 3 oldage
-#> 
 #> ── Variables ──
 #> 
-#>   var       tier  
+#>   <chr>     <chr> 
 #> 1 youth_x3  youth 
 #> 2 youth_x4  youth 
 #> 3 oldage_x5 oldage
 #> 4 oldage_x6 oldage
-#> 
 
 kn <- remove_tiers(kn, "child")
 print(kn)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
-#> 
 #> ── Tiers ──
 #> 
-#>   label 
+#>   <chr> 
 #> 1 youth 
 #> 2 oldage
-#> 
 #> ── Variables ──
 #> 
-#>   var       tier  
+#>   <chr>     <chr> 
 #> 1 youth_x3  youth 
 #> 2 youth_x4  youth 
 #> 3 oldage_x5 oldage
 #> 4 oldage_x6 oldage
-#> 
 ```

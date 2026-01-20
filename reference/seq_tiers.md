@@ -72,21 +72,18 @@ print(kn)
 #> 
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
-#> 
 #> ── Tiers ──
 #> 
-#>   label
+#>   <chr>
 #> 1 1    
 #> 2 2    
-#> 
 #> ── Variables ──
 #> 
-#>   var       tier 
+#>   <chr>     <chr>
 #> 1 child_x1  1    
 #> 2 child_x2  2    
 #> 3 oldage_x5 NA   
 #> 4 oldage_x6 NA   
 #> 5 youth_x3  NA   
 #> 6 youth_x4  NA   
-#> 
 ```

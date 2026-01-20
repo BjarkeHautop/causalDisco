@@ -81,6 +81,8 @@ Test functions implemented for use in the TPC algorithm.
 
 ## Simulation
 
+- [`generate_dag_data()`](https://bjarkehautop.github.io/causalDisco/reference/generate_dag_data.md)
+  : Simulate data from a DAG with linear Gaussian relationships
 - [`sim_dag()`](https://bjarkehautop.github.io/causalDisco/reference/sim_dag.md)
   : Simulate a random DAG
 - [`sim_gaus_from_dag()`](https://bjarkehautop.github.io/causalDisco/reference/sim_gaus_from_dag.md)
@@ -96,6 +98,8 @@ Small simulated datasets to illustrate causalDisco workflows.
   : Simulated categorical data example
 - [`cat_data_mcar`](https://bjarkehautop.github.io/causalDisco/reference/cat_data_mcar.md)
   : Simulated categorical data with MCAR (missing completely at random)
+- [`generate_dag_data()`](https://bjarkehautop.github.io/causalDisco/reference/generate_dag_data.md)
+  : Simulate data from a DAG with linear Gaussian relationships
 - [`mix_data`](https://bjarkehautop.github.io/causalDisco/reference/mix_data.md)
   : Simulated mixed data example
 - [`num_data`](https://bjarkehautop.github.io/causalDisco/reference/num_data.md)
@@ -103,7 +107,21 @@ Small simulated datasets to illustrate causalDisco workflows.
 - [`num_data_latent`](https://bjarkehautop.github.io/causalDisco/reference/num_data_latent.md)
   : Simulated numerical data example with latent variable
 
-## Plotting and Printing
+## Printing, Summarizing, and Plotting Objects
+
+- [`print(`*`<knowledge>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/print.knowledge.md)
+  :
+
+  Print a `knowledge` object
+
+- [`print(`*`<knowledgeable_caugi>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/print.knowledgeable_caugi.md)
+  : Print method for knowledgeable_caugi objects
+
+- [`summary(`*`<knowledge>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/summary.knowledge.md)
+  : Summary method for knowledge objects
+
+- [`summary(`*`<knowledgeable_caugi>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/summary.knowledgeable_caugi.md)
+  : Summary method for knowledgeable_caugi objects
 
 - [`plot(`*`<knowledge>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/plot.knowledge.md)
   : Plot a Knowledge Object
@@ -112,11 +130,6 @@ Small simulated datasets to illustrate causalDisco workflows.
   :
 
   Plot a Causal Graph from a `knowledgeable_caugi` Object
-
-- [`print(`*`<knowledge>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/print.knowledge.md)
-  :
-
-  Print a `knowledge` object
 
 - [`make_tikz()`](https://bjarkehautop.github.io/causalDisco/reference/make_tikz.md)
   : Generate Latex tikz code for plotting a temporal DAG, PDAG or PAG.

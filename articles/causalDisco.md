@@ -102,10 +102,42 @@ kn <- knowledge(
     oldage ~ starts_with("oldage")
   )
 )
-plot(kn)
 ```
 
-![](causalDisco_files/figure-html/prior%20knowledge-1.png)
+You can view the knowledge object using
+[`print()`](https://caugi.org/reference/print.html),
+[`summary()`](https://rdrr.io/r/base/summary.html) or
+[`plot()`](https://caugi.org/reference/plot.html):
+
+``` r
+print(kn)
+#> 
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
+#> ── Tiers ──
+#> 
+#>   <chr> 
+#> 1 child 
+#> 2 youth 
+#> 3 oldage
+#> ── Variables ──
+#>   <chr>     <chr> 
+#> 1 child_x1  child 
+#> 2 child_x2  child 
+#> 3 youth_x3  youth 
+#> 4 youth_x4  youth 
+#> 5 oldage_x5 oldage
+#> 6 oldage_x6 oldage
+summary(kn)
+#> ── Knowledge summary ──
+#> Tiers: 3
+#> Variables: 6
+#> Required edges: 0
+#> Forbidden edges: 0
+plot(kn, main = "Temporal Knowledge")
+```
+
+![](causalDisco_files/figure-html/view%20knowledge-1.png)
 
 We can then incorporate this knowledge into any algorithm like above.
 Here we use the Temporal Peter-Clark (tpc) algorithm from causalDisco
@@ -114,10 +146,71 @@ with the regression-based information loss test:
 ``` r
 tpc_method <- tpc(engine = "causalDisco", test = "reg")
 tpc_result <- disco(tpc_example, method = tpc_method, knowledge = kn)
+```
+
+Similarly, we can view the results using
+[`print()`](https://caugi.org/reference/print.html),
+[`summary()`](https://rdrr.io/r/base/summary.html) or
+[`plot()`](https://caugi.org/reference/plot.html):
+
+``` r
+print(tpc_result)
+#> 
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: PDAG
+#> 
+#> ── Edges ──
+#> 
+#> # A tibble: 6 × 3
+#>   from      edge  to       
+#>   <chr>     <chr> <chr>    
+#> 1 child_x1  -->   child_x2 
+#> 2 child_x2  -->   oldage_x5
+#> 3 child_x2  -->   youth_x4 
+#> 4 oldage_x5 ---   oldage_x6
+#> 5 youth_x3  -->   oldage_x5
+#> 6 youth_x4  -->   oldage_x6
+#> ── Nodes ──
+#> # A tibble: 6 × 1
+#>   name     
+#>   <chr>    
+#> 1 child_x2 
+#> 2 child_x1 
+#> 3 youth_x4 
+#> 4 youth_x3 
+#> 5 oldage_x6
+#> 6 oldage_x5
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> ── Tiers ──
+#> 
+#>   <chr> 
+#> 1 child 
+#> 2 youth 
+#> 3 oldage
+#> ── Variables ──
+#>   <chr>     <chr> 
+#> 1 child_x1  child 
+#> 2 child_x2  child 
+#> 3 youth_x3  youth 
+#> 4 youth_x4  youth 
+#> 5 oldage_x5 oldage
+#> 6 oldage_x6 oldage
+summary(tpc_result)
+#> ── caugi graph summary ─────────────────────────────────────────────────────────
+#> Graph class: PDAG
+#> Nodes: 6
+#> Edges: 6
+#> 
+#> ── Knowledge summary ──
+#> 
+#> Tiers: 3
+#> Variables: 6
+#> Required edges: 0
+#> Forbidden edges: 0
 plot(tpc_result, main = "TPC reg_test with Temporal Knowledge (causalDisco)")
 ```
 
-![](causalDisco_files/figure-html/tpc%20algorithm%20with%20knowledge-1.png)![](causalDisco_files/figure-html/tpc%20algorithm%20with%20knowledge-2.png)
+![](causalDisco_files/figure-html/view%20tpc%20results-1.png)![](causalDisco_files/figure-html/view%20tpc%20results-2.png)
 
 ## Next steps
 

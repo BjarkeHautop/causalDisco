@@ -68,14 +68,62 @@ data(tpc_example)
 pc_pcalg <- pc(engine = "pcalg", test = "fisher_z", alpha = 0.05)
 disco(tpc_example, pc_pcalg)
 #> 
-#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: PDAG
 #> 
+#> ── Edges ──
+#> 
+#> # A tibble: 6 × 3
+#>   from      edge  to       
+#>   <chr>     <chr> <chr>    
+#> 1 child_x1  ---   child_x2 
+#> 2 child_x2  -->   oldage_x5
+#> 3 child_x2  ---   youth_x4 
+#> 4 oldage_x5 -->   oldage_x6
+#> 5 youth_x3  -->   oldage_x5
+#> 6 youth_x4  -->   oldage_x6
+#> ── Nodes ──
+#> 
+#> # A tibble: 6 × 1
+#>   name     
+#>   <chr>    
+#> 1 child_x2 
+#> 2 child_x1 
+#> 3 youth_x4 
+#> 4 youth_x3 
+#> 5 oldage_x6
+#> 6 oldage_x5
+#> ── Knowledge object ────────────────────────────────────────────────────────────
 
 # or using pc_pcalg directly
 pc_pcalg(tpc_example)
 #> 
-#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: PDAG
 #> 
+#> ── Edges ──
+#> 
+#> # A tibble: 6 × 3
+#>   from      edge  to       
+#>   <chr>     <chr> <chr>    
+#> 1 child_x1  ---   child_x2 
+#> 2 child_x2  -->   oldage_x5
+#> 3 child_x2  ---   youth_x4 
+#> 4 oldage_x5 -->   oldage_x6
+#> 5 youth_x3  -->   oldage_x5
+#> 6 youth_x4  -->   oldage_x6
+#> ── Nodes ──
+#> 
+#> # A tibble: 6 × 1
+#>   name     
+#>   <chr>    
+#> 1 child_x2 
+#> 2 child_x1 
+#> 3 youth_x4 
+#> 4 youth_x3 
+#> 5 oldage_x6
+#> 6 oldage_x5
+#> ── Knowledge object ────────────────────────────────────────────────────────────
 
 
 #### Using bnlearn engine with required knowledge ####
@@ -90,33 +138,85 @@ pc_bnlearn <- pc(engine = "bnlearn", test = "fisher_z", alpha = 0.05)
 disco(tpc_example, pc_bnlearn, knowledge = kn)
 #> Warning: vstructure youth_x4 -> oldage_x6 <- oldage_x5 is not applicable, because one or both arcs are oriented in the opposite direction.
 #> 
-#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: PDAG
 #> 
+#> ── Edges ──
+#> 
+#> # A tibble: 9 × 3
+#>   from      edge  to       
+#>   <chr>     <chr> <chr>    
+#> 1 child_x1  ---   child_x2 
+#> 2 child_x1  -->   youth_x3 
+#> 3 child_x1  -->   youth_x4 
+#> 4 child_x2  ---   oldage_x5
+#> 5 child_x2  -->   youth_x3 
+#> 6 child_x2  -->   youth_x4 
+#> 7 oldage_x5 ---   oldage_x6
+#> 8 oldage_x5 -->   youth_x3 
+#> 9 oldage_x6 -->   youth_x4 
+#> ── Nodes ──
+#> 
+#> # A tibble: 6 × 1
+#>   name     
+#>   <chr>    
+#> 1 child_x2 
+#> 2 child_x1 
+#> 3 youth_x4 
+#> 4 youth_x3 
+#> 5 oldage_x6
+#> 6 oldage_x5
+#> ── Knowledge object ────────────────────────────────────────────────────────────
 #> 
 #> ── Variables ──
 #> 
-#>   var       tier 
+#>   <chr>     <chr>
 #> 1 child_x1  NA   
 #> 2 child_x2  NA   
 #> 3 oldage_x5 NA   
 #> 4 oldage_x6 NA   
 #> 5 youth_x3  NA   
 #> 6 youth_x4  NA   
-#> 
 #> ── Edges ──
 #> 
 #>  ✔  child_x1 → youth_x3
 #>  ✔  child_x1 → youth_x4
 #>  ✔  child_x2 → youth_x3
 #>  ✔  child_x2 → youth_x4
-#> 
 
 # or using pc_bnlearn directly
 pc_bnlearn <- pc_bnlearn |> set_knowledge(kn)
 pc_bnlearn(tpc_example)
 #> Warning: vstructure youth_x4 -> oldage_x6 <- oldage_x5 is not applicable, because one or both arcs are oriented in the opposite direction.
-#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: PDAG
 #> 
+#> ── Edges ──
+#> 
+#> # A tibble: 9 × 3
+#>   from      edge  to       
+#>   <chr>     <chr> <chr>    
+#> 1 child_x1  ---   child_x2 
+#> 2 child_x1  -->   youth_x3 
+#> 3 child_x1  -->   youth_x4 
+#> 4 child_x2  ---   oldage_x5
+#> 5 child_x2  -->   youth_x3 
+#> 6 child_x2  -->   youth_x4 
+#> 7 oldage_x5 ---   oldage_x6
+#> 8 oldage_x5 -->   youth_x3 
+#> 9 oldage_x6 -->   youth_x4 
+#> ── Nodes ──
+#> 
+#> # A tibble: 6 × 1
+#>   name     
+#>   <chr>    
+#> 1 child_x2 
+#> 2 child_x1 
+#> 3 youth_x4 
+#> 4 youth_x3 
+#> 5 oldage_x6
+#> 6 oldage_x5
+#> ── Knowledge object ────────────────────────────────────────────────────────────
 
 
 #### Using tetrad engine with tier knowledge ####
@@ -140,6 +240,30 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
   pc_tetrad(tpc_example)
 }
 #> 
-#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: UNKNOWN
 #> 
+#> ── Edges ──
+#> 
+#> # A tibble: 6 × 3
+#>   from      edge  to       
+#>   <chr>     <chr> <chr>    
+#> 1 child_x2  ---   child_x1 
+#> 2 child_x2  -->   oldage_x5
+#> 3 child_x2  -->   youth_x4 
+#> 4 oldage_x5 -->   oldage_x6
+#> 5 youth_x3  -->   oldage_x5
+#> 6 youth_x4  -->   oldage_x6
+#> ── Nodes ──
+#> 
+#> # A tibble: 6 × 1
+#>   name     
+#>   <chr>    
+#> 1 child_x2 
+#> 2 child_x1 
+#> 3 youth_x4 
+#> 4 youth_x3 
+#> 5 oldage_x6
+#> 6 oldage_x5
+#> ── Knowledge object ────────────────────────────────────────────────────────────
 ```
