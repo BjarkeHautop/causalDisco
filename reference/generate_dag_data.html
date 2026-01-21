@@ -17,7 +17,7 @@ automatic linear generation."><meta property="og:image" content="https://bjarkeh
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9032</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9033</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,24 +135,24 @@ of <code>parent</code> in the equation for <code>child</code>.</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        A      B      C</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">2.18</span>   0.509 -<span style="color: #BB0000;">0.277</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.816</span>  1.09   1.25 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.313</span> -<span style="color: #BB0000;">0.683</span>  0.591</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.811</span> -<span style="color: #BB0000;">0.605</span>  1.24 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  1.60  -<span style="color: #BB0000;">2.65</span>   1.76 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>  1.03  -<span style="color: #BB0000;">1.50</span>   1.24 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        A      B       C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.820</span>  0.336  2.82  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.316</span> -<span style="color: #BB0000;">0.821</span> -<span style="color: #BB0000;">0.528</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.815</span> -<span style="color: #BB0000;">1.12</span>   0.088<span style="text-decoration: underline;">2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  1.60  -<span style="color: #BB0000;">1.10</span>  -<span style="color: #BB0000;">0.450</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  1.03  -<span style="color: #BB0000;">0.540</span>  0.184 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> -<span style="color: #BB0000;">0.310</span>  1.30   2.65  </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">sim_data</span>, <span class="st">"generating_model"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dgp</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dgp$A</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rnorm(n, sd = 0.606)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> rnorm(n, sd = 0.597)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dgp$B</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A * -0.451 + rnorm(n, sd = 1.043)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A * 0.79 + rnorm(n, sd = 0.792)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dgp$C</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A * -0.684 + B * -0.796 + rnorm(n, sd = 0.676)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A * -0.274 + B * 0.707 + rnorm(n, sd = 0.992)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>

@@ -19,6 +19,10 @@ summary(object, ...)
 
   Additional arguments (not used).
 
+## Value
+
+Invisibly returns the `knowledgeable_caugi` object.
+
 ## Examples
 
 ``` r
@@ -46,4 +50,9 @@ summary(disco_cd_tges)
 #> Variables: 6
 #> Required edges: 0
 #> Forbidden edges: 0
+#> 
+#> ── Variables per Tier 
+#> child: 2 variables
+#> old: 2 variables
+#> youth: 2 variables
 ```

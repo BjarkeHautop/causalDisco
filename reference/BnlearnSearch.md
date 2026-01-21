@@ -396,7 +396,6 @@ disco(data = num_data, method = my_pc2)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from  edge  to   
 #>   <chr> <chr> <chr>
 #> 1 X1    -->   Y    
@@ -407,7 +406,6 @@ disco(data = num_data, method = my_pc2)
 #> 6 Z     -->   Y    
 #> ── Nodes ──
 #> 
-#> # A tibble: 5 × 1
 #>   name 
 #>   <chr>
 #> 1 X1   

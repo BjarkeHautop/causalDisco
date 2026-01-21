@@ -116,11 +116,13 @@ print(kn)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier  
 #>   <chr> 
 #> 1 child 
 #> 2 youth 
 #> 3 oldage
 #> ── Variables ──
+#>   var       tier  
 #>   <chr>     <chr> 
 #> 1 child_x1  child 
 #> 2 child_x2  child 
@@ -134,6 +136,11 @@ summary(kn)
 #> Variables: 6
 #> Required edges: 0
 #> Forbidden edges: 0
+#> 
+#> ── Variables per Tier
+#> child: 2 variables
+#> oldage: 2 variables
+#> youth: 2 variables
 plot(kn, main = "Temporal Knowledge")
 ```
 
@@ -161,7 +168,6 @@ print(tpc_result)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  -->   child_x2 
@@ -171,7 +177,6 @@ print(tpc_result)
 #> 5 youth_x3  -->   oldage_x5
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -183,11 +188,13 @@ print(tpc_result)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 #> ── Tiers ──
 #> 
+#>   tier  
 #>   <chr> 
 #> 1 child 
 #> 2 youth 
 #> 3 oldage
 #> ── Variables ──
+#>   var       tier  
 #>   <chr>     <chr> 
 #> 1 child_x1  child 
 #> 2 child_x2  child 
@@ -207,6 +214,11 @@ summary(tpc_result)
 #> Variables: 6
 #> Required edges: 0
 #> Forbidden edges: 0
+#> 
+#> ── Variables per Tier
+#> child: 2 variables
+#> oldage: 2 variables
+#> youth: 2 variables
 plot(tpc_result, main = "TPC reg_test with Temporal Knowledge (causalDisco)")
 ```
 

@@ -316,7 +316,6 @@ print(res_tpc)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  -->   child_x2 
@@ -327,7 +326,6 @@ print(res_tpc)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -340,12 +338,14 @@ print(res_tpc)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier 
 #>   <chr>
 #> 1 child
 #> 2 youth
 #> 3 old  
 #> ── Variables ──
 #> 
+#>   var       tier 
 #>   <chr>     <chr>
 #> 1 child_x1  child
 #> 2 child_x2  child
@@ -363,7 +363,6 @@ print(res_tfci)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x2  o-o   child_x1 
@@ -374,7 +373,6 @@ print(res_tfci)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -387,12 +385,14 @@ print(res_tfci)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier 
 #>   <chr>
 #> 1 child
 #> 2 youth
 #> 3 old  
 #> ── Variables ──
 #> 
+#>   var       tier 
 #>   <chr>     <chr>
 #> 1 child_x1  child
 #> 2 child_x2  child
@@ -414,7 +414,6 @@ print(res_tges)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  ---   child_x2 
@@ -425,7 +424,6 @@ print(res_tges)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 

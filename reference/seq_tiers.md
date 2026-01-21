@@ -74,11 +74,13 @@ print(kn)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier 
 #>   <chr>
 #> 1 1    
 #> 2 2    
 #> ── Variables ──
 #> 
+#>   var       tier 
 #>   <chr>     <chr>
 #> 1 child_x1  1    
 #> 2 child_x2  2    

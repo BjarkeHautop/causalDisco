@@ -19,6 +19,10 @@ summary(object, ...)
 
   Additional arguments (not used).
 
+## Value
+
+Invisibly returns the `knowledge` object.
+
 ## Examples
 
 ``` r
@@ -38,4 +42,9 @@ summary(kn)
 #> Variables: 6
 #> Required edges: 0
 #> Forbidden edges: 0
+#> 
+#> ── Variables per Tier 
+#> child: 2 variables
+#> old: 2 variables
+#> youth: 2 variables
 ```

@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9032</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9033</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -165,11 +165,13 @@ follows:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Tiers</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   <span style="font-weight: bold;">tier</span>  </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> child </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> youth </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> oldage</span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Variables</span> ──</span></span>
+<span><span class="co">#&gt;   <span style="font-weight: bold;">var</span>       <span style="font-weight: bold;">tier</span>  </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> child_x1  child </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> child_x2  child </span></span>
@@ -183,6 +185,11 @@ follows:</p>
 <span><span class="co">#&gt; Variables: <span style="font-weight: bold;">6</span></span></span>
 <span><span class="co">#&gt; Required edges: <span style="font-weight: bold;">0</span></span></span>
 <span><span class="co">#&gt; Forbidden edges: <span style="font-weight: bold;">0</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Variables per Tier</span></span>
+<span><span class="co">#&gt; child: <span style="font-weight: bold;">2</span> variables</span></span>
+<span><span class="co">#&gt; oldage: <span style="font-weight: bold;">2</span> variables</span></span>
+<span><span class="co">#&gt; youth: <span style="font-weight: bold;">2</span> variables</span></span>
 <span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span>, main <span class="op">=</span> <span class="st">"Temporal Knowledge"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causalDisco_files/figure-html/view%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
 <p>We can then incorporate this knowledge into any algorithm like above.
@@ -201,7 +208,6 @@ with the regression-based information loss test:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Edges</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
 <span><span class="co">#&gt;   from      edge  to       </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> child_x1  --&gt;   child_x2 </span></span>
@@ -211,7 +217,6 @@ with the regression-based information loss test:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> youth_x3  --&gt;   oldage_x5</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> youth_x4  --&gt;   oldage_x6</span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Nodes</span> ──</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 1</span></span></span>
 <span><span class="co">#&gt;   name     </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> child_x2 </span></span>
@@ -223,11 +228,13 @@ with the regression-based information loss test:</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Knowledge object</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Tiers</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   <span style="font-weight: bold;">tier</span>  </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> child </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> youth </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> oldage</span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Variables</span> ──</span></span>
+<span><span class="co">#&gt;   <span style="font-weight: bold;">var</span>       <span style="font-weight: bold;">tier</span>  </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> child_x1  child </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> child_x2  child </span></span>
@@ -247,6 +254,11 @@ with the regression-based information loss test:</p>
 <span><span class="co">#&gt; Variables: <span style="font-weight: bold;">6</span></span></span>
 <span><span class="co">#&gt; Required edges: <span style="font-weight: bold;">0</span></span></span>
 <span><span class="co">#&gt; Forbidden edges: <span style="font-weight: bold;">0</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Variables per Tier</span></span>
+<span><span class="co">#&gt; child: <span style="font-weight: bold;">2</span> variables</span></span>
+<span><span class="co">#&gt; oldage: <span style="font-weight: bold;">2</span> variables</span></span>
+<span><span class="co">#&gt; youth: <span style="font-weight: bold;">2</span> variables</span></span>
 <span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tpc_result</span>, main <span class="op">=</span> <span class="st">"TPC reg_test with Temporal Knowledge (causalDisco)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causalDisco_files/figure-html/view%20tpc%20results-1.png" class="r-plt" alt="" width="700"><img src="causalDisco_files/figure-html/view%20tpc%20results-2.png" class="r-plt" alt="" width="700"></p>
 </div>

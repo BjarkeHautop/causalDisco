@@ -73,7 +73,6 @@ disco(tpc_example, pc_pcalg)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  ---   child_x2 
@@ -84,7 +83,6 @@ disco(tpc_example, pc_pcalg)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -103,7 +101,6 @@ pc_pcalg(tpc_example)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  ---   child_x2 
@@ -114,7 +111,6 @@ pc_pcalg(tpc_example)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -143,7 +139,6 @@ disco(tpc_example, pc_bnlearn, knowledge = kn)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 9 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  ---   child_x2 
@@ -157,7 +152,6 @@ disco(tpc_example, pc_bnlearn, knowledge = kn)
 #> 9 oldage_x6 -->   youth_x4 
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -170,6 +164,7 @@ disco(tpc_example, pc_bnlearn, knowledge = kn)
 #> 
 #> ── Variables ──
 #> 
+#>   var       tier 
 #>   <chr>     <chr>
 #> 1 child_x1  NA   
 #> 2 child_x2  NA   
@@ -193,7 +188,6 @@ pc_bnlearn(tpc_example)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 9 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  ---   child_x2 
@@ -207,7 +201,6 @@ pc_bnlearn(tpc_example)
 #> 9 oldage_x6 -->   youth_x4 
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -245,7 +238,6 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x2  ---   child_x1 
@@ -256,7 +248,6 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 

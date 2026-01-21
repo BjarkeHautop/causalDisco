@@ -98,6 +98,8 @@ Small simulated datasets to illustrate causalDisco workflows.
   : Simulated categorical data example
 - [`cat_data_mcar`](https://bjarkehautop.github.io/causalDisco/reference/cat_data_mcar.md)
   : Simulated categorical data with MCAR (missing completely at random)
+- [`cat_ord_data`](https://bjarkehautop.github.io/causalDisco/reference/cat_ord_data.md)
+  : Simulated ordered categorical data example
 - [`generate_dag_data()`](https://bjarkehautop.github.io/causalDisco/reference/generate_dag_data.md)
   : Simulate data from a DAG with linear Gaussian relationships
 - [`mix_data`](https://bjarkehautop.github.io/causalDisco/reference/mix_data.md)

@@ -55,7 +55,6 @@ disco(tpc_example, my_tges, knowledge = kn)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  ---   child_x2 
@@ -66,7 +65,6 @@ disco(tpc_example, my_tges, knowledge = kn)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -79,12 +77,14 @@ disco(tpc_example, my_tges, knowledge = kn)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier 
 #>   <chr>
 #> 1 child
 #> 2 youth
 #> 3 old  
 #> ── Variables ──
 #> 
+#>   var       tier 
 #>   <chr>     <chr>
 #> 1 child_x1  child
 #> 2 child_x2  child
@@ -103,7 +103,6 @@ my_tges(tpc_example)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  ---   child_x2 
@@ -114,7 +113,6 @@ my_tges(tpc_example)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -145,7 +143,6 @@ res_bic
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  ---   child_x2 
@@ -156,7 +153,6 @@ res_bic
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 

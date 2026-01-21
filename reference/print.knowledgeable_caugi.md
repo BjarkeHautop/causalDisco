@@ -6,7 +6,7 @@ Print method for knowledgeable_caugi objects
 
 ``` r
 # S3 method for class 'knowledgeable_caugi'
-print(x, compact = FALSE, ...)
+print(x, compact = FALSE, wide_vars = FALSE, ...)
 ```
 
 ## Arguments
@@ -17,11 +17,19 @@ print(x, compact = FALSE, ...)
 
 - compact:
 
-  Logical; if `TRUE`, prints a more compact representation.
+  Logical. If `TRUE`, prints a more compact summary.
+
+- wide_vars:
+
+  Logical. If `TRUE`, prints the variables in a wide format.
 
 - ...:
 
   Additional arguments (not used).
+
+## Value
+
+Invisibly returns the `knowledgeable_caugi` object.
 
 ## Examples
 
@@ -44,7 +52,6 @@ print(disco_cd_tges)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  -->   child_x2 
@@ -55,7 +62,6 @@ print(disco_cd_tges)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -68,12 +74,14 @@ print(disco_cd_tges)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier 
 #>   <chr>
 #> 1 child
 #> 2 youth
 #> 3 old  
 #> ── Variables ──
 #> 
+#>   var       tier 
 #>   <chr>     <chr>
 #> 1 child_x1  child
 #> 2 child_x2  child
@@ -81,6 +89,46 @@ print(disco_cd_tges)
 #> 4 youth_x4  youth
 #> 5 oldage_x5 old  
 #> 6 oldage_x6 old  
+print(disco_cd_tges, wide_vars = TRUE)
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: PDAG
+#> 
+#> ── Edges ──
+#> 
+#>   from      edge  to       
+#>   <chr>     <chr> <chr>    
+#> 1 child_x1  -->   child_x2 
+#> 2 child_x2  -->   oldage_x5
+#> 3 child_x2  -->   youth_x4 
+#> 4 oldage_x5 ---   oldage_x6
+#> 5 youth_x3  -->   oldage_x5
+#> 6 youth_x4  -->   oldage_x6
+#> ── Nodes ──
+#> 
+#>   name     
+#>   <chr>    
+#> 1 child_x2 
+#> 2 child_x1 
+#> 3 youth_x4 
+#> 4 youth_x3 
+#> 5 oldage_x6
+#> 6 oldage_x5
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
+#> ── Tiers ──
+#> 
+#>   tier 
+#>   <chr>
+#> 1 child
+#> 2 youth
+#> 3 old  
+#> ── Variables ──
+#> 
+#>   tier  var1      var2     
+#>   <chr> <chr>     <chr>    
+#> 1 child child_x1  child_x2 
+#> 2 old   oldage_x5 oldage_x6
+#> 3 youth youth_x3  youth_x4 
 print(disco_cd_tges, compact = TRUE)
 #> ── caugi graph ─────────────────────────────────────────────────────────────────
 #> Graph class: PDAG
@@ -90,16 +138,17 @@ print(disco_cd_tges, compact = TRUE)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier 
 #>   <chr>
 #> 1 child
 #> 2 youth
 #> 3 old  
 #> ── Variables ──
 #> 
+#>   var       tier 
 #>   <chr>     <chr>
 #> 1 child_x1  child
 #> 2 child_x2  child
 #> 3 youth_x3  youth
-#> 4 youth_x4  youth
-#> ... and 2 more rows
+#> ... and 3 more rows
 ```

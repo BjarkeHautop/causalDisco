@@ -298,7 +298,6 @@ my_pc(num_data)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from  edge  to   
 #>   <chr> <chr> <chr>
 #> 1 X1    -->   Y    
@@ -309,7 +308,6 @@ my_pc(num_data)
 #> 6 Z     -->   Y    
 #> ── Nodes ──
 #> 
-#> # A tibble: 5 × 1
 #>   name 
 #>   <chr>
 #> 1 X1   
@@ -327,7 +325,6 @@ disco(data = num_data, method = my_pc)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from  edge  to   
 #>   <chr> <chr> <chr>
 #> 1 X1    -->   Y    
@@ -338,7 +335,6 @@ disco(data = num_data, method = my_pc)
 #> 6 Z     -->   Y    
 #> ── Nodes ──
 #> 
-#> # A tibble: 5 × 1
 #>   name 
 #>   <chr>
 #> 1 X1   
@@ -364,7 +360,6 @@ disco(data = num_data, method = my_pc2)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 5 × 3
 #>   from  edge  to   
 #>   <chr> <chr> <chr>
 #> 1 X1    -->   Y    
@@ -374,7 +369,6 @@ disco(data = num_data, method = my_pc2)
 #> 5 Z     -->   X1   
 #> ── Nodes ──
 #> 
-#> # A tibble: 5 × 1
 #>   name 
 #>   <chr>
 #> 1 X1   
@@ -399,7 +393,6 @@ disco(data = num_data, method = my_pc2, knowledge = kn)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 5 × 3
 #>   from  edge  to   
 #>   <chr> <chr> <chr>
 #> 1 X1    -->   Y    
@@ -409,7 +402,6 @@ disco(data = num_data, method = my_pc2, knowledge = kn)
 #> 5 Z     -->   X1   
 #> ── Nodes ──
 #> 
-#> # A tibble: 5 × 1
 #>   name 
 #>   <chr>
 #> 1 X1   
@@ -421,6 +413,7 @@ disco(data = num_data, method = my_pc2, knowledge = kn)
 #> 
 #> ── Variables ──
 #> 
+#>   var   tier 
 #>   <chr> <chr>
 #> 1 X1    NA   
 #> 2 X2    NA   
@@ -447,7 +440,6 @@ print(g)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  ---   child_x2 
@@ -458,7 +450,6 @@ print(g)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 

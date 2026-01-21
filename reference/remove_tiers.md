@@ -67,12 +67,14 @@ print(kn)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier  
 #>   <chr> 
 #> 1 child 
 #> 2 youth 
 #> 3 oldage
 #> ── Variables ──
 #> 
+#>   var       tier  
 #>   <chr>     <chr> 
 #> 1 child_x1  child 
 #> 2 child_x2  child 
@@ -90,12 +92,14 @@ print(kn)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier  
 #>   <chr> 
 #> 1 child 
 #> 2 youth 
 #> 3 oldage
 #> ── Variables ──
 #> 
+#>   var       tier  
 #>   <chr>     <chr> 
 #> 1 child_x1  child 
 #> 2 child_x2  child 
@@ -110,12 +114,14 @@ print(kn)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier  
 #>   <chr> 
 #> 1 child 
 #> 2 youth 
 #> 3 oldage
 #> ── Variables ──
 #> 
+#>   var       tier  
 #>   <chr>     <chr> 
 #> 1 youth_x3  youth 
 #> 2 youth_x4  youth 
@@ -128,11 +134,13 @@ print(kn)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier  
 #>   <chr> 
 #> 1 youth 
 #> 2 oldage
 #> ── Variables ──
 #> 
+#>   var       tier  
 #>   <chr>     <chr> 
 #> 1 youth_x3  youth 
 #> 2 youth_x4  youth 

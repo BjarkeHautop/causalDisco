@@ -146,7 +146,6 @@ disco(tpc_example, my_tfci, knowledge = kn)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x2  o-o   child_x1 
@@ -157,7 +156,6 @@ disco(tpc_example, my_tfci, knowledge = kn)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -170,12 +168,14 @@ disco(tpc_example, my_tfci, knowledge = kn)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier  
 #>   <chr> 
 #> 1 child 
 #> 2 youth 
 #> 3 oldage
 #> ── Variables ──
 #> 
+#>   var       tier  
 #>   <chr>     <chr> 
 #> 1 child_x1  child 
 #> 2 child_x2  child 
@@ -192,7 +192,6 @@ my_tfci(tpc_example)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x2  o-o   child_x1 
@@ -203,7 +202,6 @@ my_tfci(tpc_example)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -216,12 +214,14 @@ my_tfci(tpc_example)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier  
 #>   <chr> 
 #> 1 child 
 #> 2 youth 
 #> 3 oldage
 #> ── Variables ──
 #> 
+#>   var       tier  
 #>   <chr>     <chr> 
 #> 1 child_x1  child 
 #> 2 child_x2  child 
@@ -237,7 +237,6 @@ tfci_run(tpc_example, test = cor_test, knowledge = kn)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x2  o-o   child_x1 
@@ -248,7 +247,6 @@ tfci_run(tpc_example, test = cor_test, knowledge = kn)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -261,12 +259,14 @@ tfci_run(tpc_example, test = cor_test, knowledge = kn)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier  
 #>   <chr> 
 #> 1 child 
 #> 2 youth 
 #> 3 oldage
 #> ── Variables ──
 #> 
+#>   var       tier  
 #>   <chr>     <chr> 
 #> 1 child_x1  child 
 #> 2 child_x2  child 

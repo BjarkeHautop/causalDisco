@@ -53,4 +53,12 @@ The R code used to generate this dataset is as follows:
 
 ``` r
 data(mix_data)
+head(mix_data)
+#>   X1 X2 X3         Z        Y
+#> 1  c  b  b 10.272479 15.35505
+#> 2  d  b  a 10.357262 23.36749
+#> 3  d  d  e  9.138338 25.32495
+#> 4  e  b  b 10.808335 26.75643
+#> 5  d  c  c 10.612735 22.67612
+#> 6  d  c  c  9.375931 28.03132
 ```

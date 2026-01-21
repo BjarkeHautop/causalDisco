@@ -68,6 +68,7 @@ print(kn)
 #> 
 #> ── Variables ──
 #> 
+#>   var       tier 
 #>   <chr>     <chr>
 #> 1 child_x1  NA   
 #> 2 child_x2  NA   

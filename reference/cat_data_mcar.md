@@ -53,4 +53,12 @@ The R code used to generate this dataset is as follows:
 
 ``` r
 data(cat_data_mcar)
+head(cat_data_mcar)
+#>   X1 X2 X3 Z Y
+#> 1  c  b  b c b
+#> 2  d  b  a c c
+#> 3  d  d  e b d
+#> 4  e  b  b d d
+#> 5  d  c  c c c
+#> 6  d  c  c b d
 ```

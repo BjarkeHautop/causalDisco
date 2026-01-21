@@ -172,7 +172,6 @@ disco(tpc_example, my_tpc, knowledge = kn)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  -->   child_x2 
@@ -183,7 +182,6 @@ disco(tpc_example, my_tpc, knowledge = kn)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -196,12 +194,14 @@ disco(tpc_example, my_tpc, knowledge = kn)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier 
 #>   <chr>
 #> 1 child
 #> 2 youth
 #> 3 old  
 #> ── Variables ──
 #> 
+#>   var       tier 
 #>   <chr>     <chr>
 #> 1 child_x1  child
 #> 2 child_x2  child
@@ -219,7 +219,6 @@ my_tpc(tpc_example)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  -->   child_x2 
@@ -230,7 +229,6 @@ my_tpc(tpc_example)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -243,12 +241,14 @@ my_tpc(tpc_example)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier 
 #>   <chr>
 #> 1 child
 #> 2 youth
 #> 3 old  
 #> ── Variables ──
 #> 
+#>   var       tier 
 #>   <chr>     <chr>
 #> 1 child_x1  child
 #> 2 child_x2  child
@@ -265,7 +265,6 @@ tpc_run(tpc_example, knowledge = kn, alpha = 0.01)
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
 #> 1 child_x1  -->   child_x2 
@@ -276,7 +275,6 @@ tpc_run(tpc_example, knowledge = kn, alpha = 0.01)
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
-#> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
 #> 1 child_x2 
@@ -289,12 +287,14 @@ tpc_run(tpc_example, knowledge = kn, alpha = 0.01)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier 
 #>   <chr>
 #> 1 child
 #> 2 youth
 #> 3 old  
 #> ── Variables ──
 #> 
+#>   var       tier 
 #>   <chr>     <chr>
 #> 1 child_x1  child
 #> 2 child_x2  child

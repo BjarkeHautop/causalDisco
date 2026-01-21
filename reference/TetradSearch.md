@@ -1591,7 +1591,6 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 #> 
 #> ── Edges ──
 #> 
-#> # A tibble: 6 × 3
 #>   from  edge  to   
 #>   <chr> <chr> <chr>
 #> 1 X1    -->   Y    
@@ -1602,7 +1601,6 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 #> 6 Z     -->   Y    
 #> ── Nodes ──
 #> 
-#> # A tibble: 5 × 1
 #>   name 
 #>   <chr>
 #> 1 X1   

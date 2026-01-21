@@ -68,12 +68,14 @@ print(kn)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier 
 #>   <chr>
 #> 1 child
 #> 2 youth
 #> 3 old  
 #> ── Variables ──
 #> 
+#>   var       tier 
 #>   <chr>     <chr>
 #> 1 child_x1  child
 #> 2 child_x2  child
@@ -86,12 +88,14 @@ print(kn2)
 #> 
 #> ── Tiers ──
 #> 
+#>   tier 
 #>   <chr>
 #> 1 child
 #> 2 youth
 #> 3 old  
 #> ── Variables ──
 #> 
+#>   var       tier 
 #>   <chr>     <chr>
 #> 1 child_x1  child
 #> 2 child_x2  child
