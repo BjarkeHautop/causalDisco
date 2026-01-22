@@ -89,5 +89,4 @@ pc_tiered_bnlearn <- disco(
   knowledge = kn
 )
 plot(pc_tiered_bnlearn)
-
 ```

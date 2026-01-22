@@ -222,7 +222,7 @@ summary(tpc_result)
 plot(tpc_result, main = "TPC reg_test with Temporal Knowledge (causalDisco)")
 ```
 
-![](causalDisco_files/figure-html/view%20tpc%20results-1.png)![](causalDisco_files/figure-html/view%20tpc%20results-2.png)
+![](causalDisco_files/figure-html/view%20tpc%20results-1.png)
 
 ## Next steps
 

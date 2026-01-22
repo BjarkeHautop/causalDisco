@@ -290,13 +290,11 @@ result <- disco(data = tpc_example, method = my_tpc, knowledge = kn)
 plot(result)
 
 
-
 # or
 my_tpc <- my_tpc |>
   set_knowledge(kn)
 result <- my_tpc(tpc_example)
 plot(result)
-
 
 
 # Using R6 class:

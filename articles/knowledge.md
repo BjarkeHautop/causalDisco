@@ -59,7 +59,7 @@ plot(kn_1)
 ![](knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge-1.png)
 
 The blue solid edge represents the required edge from A to B, while the
-red dashed edge represents the forbidden edge from B to C.
+red edge represents the forbidden edge from B to C.
 
 If one wishes to remove some edges (either required or forbidden)
 knowledge from an existing knowledge object, the `remove_edge` function
@@ -332,7 +332,7 @@ plot the resulting causal graph:
 plot(disco_cd_tges)
 ```
 
-![](knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-1.png)![](knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-2.png)
+![](knowledge_files/figure-html/plot%20causal%20discovery%20with%20tier%20knowledge-1.png)
 
 The black edges are those inferred from the data.
 
@@ -366,7 +366,7 @@ nevertheless.
 plot(output)
 ```
 
-![](knowledge_files/figure-html/plot%20bnlearn-1.png)![](knowledge_files/figure-html/plot%20bnlearn-2.png)
+![](knowledge_files/figure-html/plot%20bnlearn-1.png)
 
 ### causalDisco
 
