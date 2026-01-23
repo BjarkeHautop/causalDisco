@@ -7,13 +7,7 @@ Visualize a `knowledge` object as a directed graph using
 
 ``` r
 # S3 method for class 'knowledge'
-plot(
-  x,
-  orientation = c("columns", "rows"),
-  required_col = "blue",
-  forbidden_col = "red",
-  ...
-)
+plot(x, required_col = "blue", forbidden_col = "red", ...)
 ```
 
 ## Arguments
@@ -22,11 +16,6 @@ plot(
 
   A `knowledge` object, created using
   [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md).
-
-- orientation:
-
-  Character(1). Orientation of the tiers in the plot. Either `"columns"`
-  (default) or `"rows"`. Only used if tiered knowledge is provided.
 
 - required_col:
 
@@ -53,7 +42,8 @@ the plot.
   via `required_col`).
 
 - **Forbidden edges** are drawn in **red** by default (can be changed
-  via `forbidden_col`).
+  via `forbidden_col`). If A to B and B to a is forbidden, a edge `<->`
+  is drawn.
 
 - If tiered knowledge is provided, nodes are arranged according to their
   tiers.

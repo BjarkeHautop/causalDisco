@@ -30,6 +30,12 @@ head(num_data)
 #> 4 5.176469  6.392344 6.101088 10.808335 26.75643
 #> 5 4.535538 10.305236 7.465185 10.612735 22.67612
 #> 6 4.885914 10.018856 7.413312  9.375931 28.03132
+
+plot_layout <- data.frame(
+  name = c("Z", "X3", "X1", "X2", "Y"),
+  x = c(0.00, 0.50, 0.00, 0.50, 0.25),
+  y = c(0.0, 0.0, 0.5, 0.5, 1.0)
+)
 ```
 
 We can use several algorithms from the causalDisco package to discover
@@ -41,18 +47,18 @@ Independence Test (KCI).
 if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
   pc_tetrad <- pc(engine = "tetrad", test = "kci", alpha = 0.05)
   pc_result_tetrad <- disco(num_data, method = pc_tetrad)
-  plot(pc_result_tetrad, main = "PC KCI (Tetrad)")
+  plot(pc_result_tetrad, layout = plot_layout, main = "PC KCI (Tetrad)")
 }
 ```
 
-![](PC-KCI-TETRAD.png)
+![](kci-tetrad-plot.png)
 
 or the PC algorithm from bnlearn with Fisher’s Z test:
 
 ``` r
 pc_bnlearn <- pc(engine = "bnlearn", test = "fisher_z", alpha = 0.05)
 pc_result_bnlearn <- disco(num_data, method = pc_bnlearn)
-plot(pc_result_bnlearn, main = "PC Fisher Z (bnlearn)")
+plot(pc_result_bnlearn, layout = plot_layout, main = "PC Fisher Z (bnlearn)")
 ```
 
 ![](causalDisco_files/figure-html/pc%20algorithm%20fisher%20z-1.png)
@@ -63,7 +69,7 @@ SEM-BIC score:
 ``` r
 ges_pcalg <- ges(engine = "pcalg", score = "sem_bic")
 ges_result <- disco(num_data, method = ges_pcalg)
-plot(ges_result, main = "GES SEM-BIC (pcalg)")
+plot(ges_result, layout = plot_layout, main = "GES SEM-BIC (pcalg)")
 ```
 
 ![](causalDisco_files/figure-html/ges%20algorithm%20sem-bic-1.png)

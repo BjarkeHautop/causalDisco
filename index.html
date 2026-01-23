@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9034</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9035</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -181,10 +181,11 @@
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
 </h2>
 <ul>
-<li>Register a custom edge type for caugi to represent forbidden edges differently than normal directed edges. Would simplify plotting logic and easier to extend later.</li>
+<li><p>Make more complex plotting examples + tests for plot.</p></li>
+<li><p>Register a custom edge type for caugi to represent forbidden edges differently than normal directed edges. Would simplify plotting logic and easier to extend later.</p></li>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Doesn't work atm because they enforce glyph to be length 3</span></span>
+<code class="sourceCode R"><span><span class="co"># Doesn't work atm because CRAN version requires length 3 (will work in next release)</span></span>
 <span><span class="fu">caugi</span><span class="fu">::</span><span class="fu"><a href="https://caugi.org/reference/register_caugi_edge.html" class="external-link">register_caugi_edge</a></span><span class="op">(</span></span>
 <span>  glyph <span class="op">=</span> <span class="st">"!--&gt;"</span>,</span>
 <span>  tail_mark <span class="op">=</span> <span class="st">"arrow"</span>,</span>
@@ -193,30 +194,39 @@
 <span>  symmetric <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>Don’t clash namespaces with caugi to avoid issues when both are loaded.</li>
+<li>Don’t clash namespaces with caugi. We currently share <code><a href="reference/nodes.html">nodes()</a></code> and <code><a href="reference/edges.html">edges()</a></code>. Make PR in caugi that makes their <code><a href="reference/nodes.html">nodes()</a></code> and <code><a href="reference/edges.html">edges()</a></code> it a S3/S7 class? Merged in caugi. But if we want to submit to CRAN before they do we can’t use it for now…</li>
 </ul>
 <p>A rough WIP is here, which colors a rectangle around A and B:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Make sure causalDisco is not loaded to avoid namespace conflicts with caugi</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="st">"package:causalDisco"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/search.html" class="external-link">search</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/detach.html" class="external-link">detach</a></span><span class="op">(</span><span class="st">"package:causalDisco"</span>, unload <span class="op">=</span> <span class="cn">TRUE</span>, character.only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://caugi.org/" class="external-link">caugi</a></span><span class="op">)</span> <span class="co"># Needs recent version from GitHub</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://caugi.org/" class="external-link">caugi</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'caugi'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:causalDisco':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     edges, nodes</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/GuangchuangYu/ggplotify" class="external-link">ggplotify</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">cg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://caugi.org/reference/caugi.html" class="external-link">caugi</a></span><span class="op">(</span><span class="va">A</span> <span class="op">%--&gt;%</span> <span class="va">B</span>, <span class="va">C</span>, <span class="va">D</span><span class="op">)</span></span>
 <span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://caugi.org/reference/caugi_layout.html" class="external-link">caugi_layout</a></span><span class="op">(</span><span class="va">cg</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://caugi.org/reference/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">layout</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   name   x   y</span></span>
+<span><span class="co">#&gt; 1    A 0.0 0.0</span></span>
+<span><span class="co">#&gt; 2    B 0.0 1.0</span></span>
+<span><span class="co">#&gt; 3    C 0.1 0.5</span></span>
+<span><span class="co">#&gt; 4    D 0.2 0.5</span></span>
 <span><span class="va">layout</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">layout</span><span class="op">$</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://caugi.org/reference/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">layout</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   name   x   y</span></span>
+<span><span class="co">#&gt; 1    A 0.5 0.0</span></span>
+<span><span class="co">#&gt; 2    B 0.5 1.0</span></span>
+<span><span class="co">#&gt; 3    C 0.0 0.5</span></span>
+<span><span class="co">#&gt; 4    D 1.0 0.5</span></span>
 <span><span class="va">plot_cg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cg</span>, layout <span class="op">=</span> <span class="va">layout</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Wrap the grid plot as ggplot</span></span>
-<span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu">as.ggplot</span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">plot_cg</span><span class="op">@</span><span class="va">grob</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu">as.ggplot</span><span class="op">(</span><span class="va">plot_cg</span><span class="op">@</span><span class="va">grob</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Add rectangle</span></span>
 <span><span class="va">gg</span> <span class="op">+</span></span>
@@ -229,30 +239,25 @@
 <span>    fill <span class="op">=</span> <span class="st">"red"</span>,</span>
 <span>    alpha <span class="op">=</span> <span class="fl">0.3</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/caugi-modified-plot.png"></p>
+<p><img src="reference/figures/README-plot%20wip-1.png" alt="" width="100%"></p>
 <ul>
-<li>Implement a working <code>make_tikz</code> for these plots. See tikzDevice package, which can do it automatically from R plots:</li>
+<li>Implement a working <code>make_tikz</code> for these plots. Something like this (coordinates are from <code>caugi::caugi_layout_sugiyama(cg)</code> scaled by 10)? Should be easy to make a function that generates code like this, and we can then bend curves.</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Make sure causalDisco is not loaded to avoid namespace conflicts with caugi</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="st">"package:causalDisco"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/search.html" class="external-link">search</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/detach.html" class="external-link">detach</a></span><span class="op">(</span><span class="st">"package:causalDisco"</span>, unload <span class="op">=</span> <span class="cn">TRUE</span>, character.only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://caugi.org/" class="external-link">caugi</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/daqana/tikzDevice" class="external-link">tikzDevice</a></span><span class="op">)</span></span>
-<span><span class="va">cg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://caugi.org/reference/caugi.html" class="external-link">caugi</a></span><span class="op">(</span><span class="va">A</span> <span class="op">%--&gt;%</span> <span class="va">B</span> <span class="op">+</span> <span class="va">C</span><span class="op">)</span></span>
-<span><span class="fu">tikz</span><span class="op">(</span><span class="st">"cg_plot.tex"</span>, width <span class="op">=</span> <span class="fl">6</span>, height <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
-<span>  <span class="va">cg</span>,</span>
-<span>  node_style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    by_node <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>      A <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"lightblue"</span>, col <span class="op">=</span> <span class="st">"darkblue"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
-<span>      B <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>If we want any changes we can modify the tikz code after generation.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="bu">\usepackage</span>{<span class="ex">tikz</span>}</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="fu">\usetikzlibrary</span>{positioning,arrows.meta}</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="fu">\tikzset</span>{arrows={[scale=2]}}</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">% Nodes</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="fu">\node</span>[draw, circle, fill=blue] (A) at (5,0) {A};</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="fu">\node</span>[draw, circle, fill=red] (B) at (10,10) {B};</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="fu">\node</span>[draw, circle, fill=gray] (C) at (0,10) {C};</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="fu">\path</span> (A) edge[-Latex] (B) </span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>      (A) edge[-Latex] (C);</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code></pre></div>
 <ul>
 <li><p>Make required work for our algorithms. It breaks when it internally calls <code>tpdag</code>, so look into that…</p></li>
 <li><p>In documentation of defaults for tests maybe add the underlying engine defaults if they differ?</p></li>
@@ -313,17 +318,16 @@
 <span>  </span>
 <span>  <span class="va">tetrad_fci</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fci.html">fci</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tetrad_fci</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="reference/edges.html">edges</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="reference/edges.html">edges</a></span><span class="op">(</span><span class="va">output</span><span class="op">$</span><span class="va">caugi</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 3</span></span>
-<span><span class="co">#&gt;   from      edge  to       </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;    </span></span>
-<span><span class="co">#&gt; 1 child_x2  o-o   child_x1 </span></span>
-<span><span class="co">#&gt; 2 child_x2  o-&gt;   oldage_x5</span></span>
-<span><span class="co">#&gt; 3 child_x2  o-o   youth_x4 </span></span>
-<span><span class="co">#&gt; 4 oldage_x5 --&gt;   oldage_x6</span></span>
-<span><span class="co">#&gt; 5 youth_x3  o-&gt;   oldage_x5</span></span>
-<span><span class="co">#&gt; 6 youth_x4  --&gt;   oldage_x6</span></span></code></pre></div>
+<span><span class="co">#&gt;         from   edge        to</span></span>
+<span><span class="co">#&gt;       &lt;char&gt; &lt;char&gt;    &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:  child_x2    o-o  child_x1</span></span>
+<span><span class="co">#&gt; 2:  child_x2    o-&gt; oldage_x5</span></span>
+<span><span class="co">#&gt; 3:  child_x2    o-o  youth_x4</span></span>
+<span><span class="co">#&gt; 4: oldage_x5    --&gt; oldage_x6</span></span>
+<span><span class="co">#&gt; 5:  youth_x3    o-&gt; oldage_x5</span></span>
+<span><span class="co">#&gt; 6:  youth_x4    --&gt; oldage_x6</span></span></code></pre></div>
 <p>Fixed in unreleased version of Tetrad (see #1947 in Tetrad issues).</p>
 </div>
 </div>

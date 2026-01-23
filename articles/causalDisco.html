@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9034</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9035</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,7 +99,13 @@ algorithms.</p>
 <span><span class="co">#&gt; 3 4.657992 12.169805 9.127046  9.138338 25.32495</span></span>
 <span><span class="co">#&gt; 4 5.176469  6.392344 6.101088 10.808335 26.75643</span></span>
 <span><span class="co">#&gt; 5 4.535538 10.305236 7.465185 10.612735 22.67612</span></span>
-<span><span class="co">#&gt; 6 4.885914 10.018856 7.413312  9.375931 28.03132</span></span></code></pre></div>
+<span><span class="co">#&gt; 6 4.885914 10.018856 7.413312  9.375931 28.03132</span></span>
+<span></span>
+<span><span class="va">plot_layout</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Z"</span>, <span class="st">"X3"</span>, <span class="st">"X1"</span>, <span class="st">"X2"</span>, <span class="st">"Y"</span><span class="op">)</span>,</span>
+<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.00</span>, <span class="fl">0.50</span>, <span class="fl">0.00</span>, <span class="fl">0.50</span>, <span class="fl">0.25</span><span class="op">)</span>,</span>
+<span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>We can use several algorithms from the causalDisco package to
 discover the causal structure from this data. Here is an example using
 the Peter-Clark (PC) algorithm from Tetrad with the Kernel Conditional
@@ -108,21 +114,21 @@ Independence Test (KCI).</p>
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">pc_tetrad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"kci"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span>  <span class="va">pc_result_tetrad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">num_data</span>, method <span class="op">=</span> <span class="va">pc_tetrad</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_tetrad</span>, main <span class="op">=</span> <span class="st">"PC KCI (Tetrad)"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_tetrad</span>, layout <span class="op">=</span> <span class="va">plot_layout</span>, main <span class="op">=</span> <span class="st">"PC KCI (Tetrad)"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p><img src="PC-KCI-TETRAD.png"></p>
+<p><img src="kci-tetrad-plot.png"></p>
 <p>or the PC algorithm from bnlearn with Fisher’s Z test:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pc_bnlearn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"bnlearn"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="va">pc_result_bnlearn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">num_data</span>, method <span class="op">=</span> <span class="va">pc_bnlearn</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_bnlearn</span>, main <span class="op">=</span> <span class="st">"PC Fisher Z (bnlearn)"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_bnlearn</span>, layout <span class="op">=</span> <span class="va">plot_layout</span>, main <span class="op">=</span> <span class="st">"PC Fisher Z (bnlearn)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causalDisco_files/figure-html/pc%20algorithm%20fisher%20z-1.png" class="r-plt" alt="" width="700"></p>
 <p>or the generalized score equivalence (GES) algorithm from pcalg with
 the SEM-BIC score:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ges_pcalg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ges.html">ges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"pcalg"</span>, score <span class="op">=</span> <span class="st">"sem_bic"</span><span class="op">)</span></span>
 <span><span class="va">ges_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">num_data</span>, method <span class="op">=</span> <span class="va">ges_pcalg</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ges_result</span>, main <span class="op">=</span> <span class="st">"GES SEM-BIC (pcalg)"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ges_result</span>, layout <span class="op">=</span> <span class="va">plot_layout</span>, main <span class="op">=</span> <span class="st">"GES SEM-BIC (pcalg)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causalDisco_files/figure-html/ges%20algorithm%20sem-bic-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level2">

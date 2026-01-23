@@ -168,9 +168,6 @@ Small simulated datasets to illustrate causalDisco workflows.
 - [`forbid_edge()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_edge.md)
   : Add forbidden edges
 
-- [`forbid_tier_violations()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.md)
-  : Forbid all tier violations
-
 - [`get_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/get_tiers.md)
   : Get tiers
 
@@ -182,6 +179,9 @@ Small simulated datasets to illustrate causalDisco workflows.
 
 - [`reposition_tier()`](https://bjarkehautop.github.io/causalDisco/reference/reposition_tier.md)
   : Move one tier before / after another
+
+- [`convert_tiers_to_forbidden()`](https://bjarkehautop.github.io/causalDisco/reference/convert_tiers_to_forbidden.md)
+  : Convert tiered knowledge to forbidden knowledge
 
 - [`set_knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/set_knowledge.md)
   : Set background knowledge into a disco_method
@@ -196,6 +196,9 @@ Small simulated datasets to illustrate causalDisco workflows.
 
 - [`as_pcalg_constraints()`](https://bjarkehautop.github.io/causalDisco/reference/as_pcalg_constraints.md)
   : Convert background knowledge to pcalg constraint matrices
+
+- [`knowledge_to_caugi()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge_to_caugi.md)
+  : Convert background knowledge to caugi object
 
 - [`knowledgeable_caugi()`](https://bjarkehautop.github.io/causalDisco/reference/knowledgeable_caugi.md)
   :
@@ -217,9 +220,6 @@ Small simulated datasets to illustrate causalDisco workflows.
 
   Retrieve nodes from a `knowledgeable_caugi` object
 
-- [`knowledge.knowledgeable_caugi()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.knowledgeable_caugi.md)
-  : Extract the knowledge from a knowledgeable_caugi
-
 - [`deparse_knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/deparse_knowledge.md)
   : Deparse a knowledge object to knowledge() mini-DSL code
 
@@ -232,6 +232,9 @@ Small simulated datasets to illustrate causalDisco workflows.
   :
 
   Merge two `knowledge` objects
+
+- [`knowledge.knowledgeable_caugi()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.knowledgeable_caugi.md)
+  : Extract the knowledge from a knowledgeable_caugi
 
 ## Evaluation & Confusion Metrics
 

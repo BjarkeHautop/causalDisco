@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9034</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9035</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,12 +94,13 @@ simulated data.</p>
 <p>Suppose we have this DAG:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://caugi.org/reference/caugi.html" class="external-link">caugi</a></span><span class="op">(</span></span>
-<span>  <span class="va">Z</span> <span class="op">%--&gt;%</span> <span class="va">X1</span>,</span>
-<span>  <span class="va">X3</span> <span class="op">%--&gt;%</span> <span class="va">X2</span>,</span>
-<span>  <span class="va">X1</span> <span class="op">%--&gt;%</span> <span class="va">Y</span>,</span>
-<span>  <span class="va">X2</span> <span class="op">%--&gt;%</span> <span class="va">Y</span></span>
+<span>    <span class="va">Z</span> <span class="op">%--&gt;%</span> <span class="va">X1</span>,</span>
+<span>    <span class="va">X3</span> <span class="op">%--&gt;%</span> <span class="va">X2</span>,</span>
+<span>    <span class="va">X1</span> <span class="op">%--&gt;%</span> <span class="va">Y</span>,</span>
+<span>    <span class="va">X2</span> <span class="op">%--&gt;%</span> <span class="va">Y</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cg</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://caugi.org/reference/caugi_layout_sugiyama.html" class="external-link">caugi_layout_sugiyama</a></span><span class="op">(</span><span class="va">cg</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cg</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"True DAG"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causal-discovery_files/figure-html/dag-1.png" class="r-plt" alt="" width="700"></p>
 <p>We can create data from a linear Gaussian model corresponding to the
 above DAG using <code><a href="../reference/generate_dag_data.html">generate_dag_data()</a></code></p>
@@ -148,7 +149,7 @@ level of 0.05, and use pcalg as engine.</p>
 <p>We can visualize the results using the <code><a href="https://caugi.org/reference/plot.html" class="external-link">plot()</a></code>
 function:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_pcalg</span>, main <span class="op">=</span> <span class="st">"PC (pcalg)"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_pcalg</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"PC (pcalg)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causal-discovery_files/figure-html/plot%20pc%20results%20simple-1.png" class="r-plt" alt="" width="700"></p>
 <p>The first notable feature of this plot is that some edges are
 directed, while others are undirected. For example, the edge from
@@ -178,7 +179,7 @@ algorithm to the resulting data set.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">pc_result_reverse</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">data_linear_reverse</span>, method <span class="op">=</span> <span class="va">pc_pcalg</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_reverse</span>, main <span class="op">=</span> <span class="st">"PC (pcalg) reversed"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_reverse</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"PC (pcalg) reversed"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causal-discovery_files/figure-html/pc%20algorithm%20reversed-1.png" class="r-plt" alt="" width="700"></p>
 <p>We learn the same causal structure as before, demonstrating that the
 direction of influence between <code>X2</code> and <code>X3</code>
@@ -199,7 +200,7 @@ nonlinear equations manually.</p>
 <span>  X3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">2</span>, max <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
 <span>  X1 <span class="op">=</span> <span class="va">Z</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span>, sd <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
 <span>  X2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="fl">0.7</span> <span class="op">*</span> <span class="va">X3</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span>  Y <span class="op">=</span> <span class="fl">0.6</span> <span class="op">*</span> <span class="va">X1</span> <span class="op">+</span> <span class="fl">0.4</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="va">X2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span>, sd <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>,</span>
+<span>  Y <span class="op">=</span> <span class="fl">0.6</span> <span class="op">*</span> <span class="va">X1</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">0.4</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="va">X2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span>, sd <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>,</span>
 <span>  seed <span class="op">=</span> <span class="fl">1405</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">data_nonlinear</span>, <span class="st">"generating_model"</span><span class="op">)</span></span>
@@ -217,29 +218,18 @@ nonlinear equations manually.</p>
 <span><span class="co">#&gt; Z^2 + rnorm(n, sd = 0.5)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $dgp$Y</span></span>
-<span><span class="co">#&gt; 0.6 * X1 + 0.4 * exp(X2) + rnorm(n, sd = 1.5)</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.6 * X1^2 + 0.4 * exp(X2) + rnorm(n, sd = 1.5)</span></span></code></pre></div>
 <p>If we try to use the PC algorithm with Fisher’s Z test again it will
 not perform well due to the non-linear relationships in the data.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pc_pcalg_nonlinear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"pcalg"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="va">pc_result_nonlinear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">data_nonlinear</span>, method <span class="op">=</span> <span class="va">pc_pcalg_nonlinear</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_nonlinear</span>, main <span class="op">=</span> <span class="st">"PC (pcalg) non-linear"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_nonlinear</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"PC (pcalg) non-linear"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causal-discovery_files/figure-html/pc%20algorithm%20non-linear-1.png" class="r-plt" alt="" width="700"></p>
 <p>As expected, the PC algorithm with Fisher’s Z test does not recover
 the correct causal structure in this non-linear setting at all. Note,
 that increasing the sample size does not help.</p>
-<p>To handle non-linear relationships, we can for instance use the
-Kernel Conditional Independence Test (KCI) test in Tetrad.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">pc_tetrad_nonlinear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"kci"</span><span class="op">)</span></span>
-<span>  <span class="va">pc_result_nonlinear_kci</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">data_nonlinear</span>, method <span class="op">=</span> <span class="va">pc_tetrad_nonlinear</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_nonlinear_kci</span>, main <span class="op">=</span> <span class="st">"PC (Tetrad kci) non-linear"</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<p><img src="tetrad-kci-nonlinear.png"></p>
-<p>The result of the PC algorithm using the KCI test look like what we’d
-expect to see. Note, that this test is much more computationally
-demanding than using Fisher’s Z test.</p>
+<p>TODO: Find something that finds correct CPDAG in nonlinear-case?</p>
 </div>
 </div>
 <div class="section level2">
@@ -252,7 +242,7 @@ the accuracy of causal discovery, and, in particular, resolve cases
 where the data alone are insufficient to determine causal direction.</p>
 <p>Suppose we know that <code>v</code> and <code>w</code> do not cause
 <code>x</code>. This can be specified as follows:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">data_linear</span>,</span>
 <span>  <span class="va">X1</span> <span class="op">%!--&gt;%</span> <span class="va">Z</span>,  <span class="co"># X1 does not cause Z</span></span>
@@ -262,10 +252,10 @@ where the data alone are insufficient to determine causal direction.</p>
 <p><img src="causal-discovery_files/figure-html/prior%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
 <p>We can then incorporate this knowledge into the PC algorithm as
 follows:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pc_pcalg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"bnlearn"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="va">pc_result_with_knowledge</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">data_linear</span>, method <span class="op">=</span> <span class="va">pc_pcalg</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_with_knowledge</span><span class="op">$</span><span class="va">caugi</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_with_knowledge</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"PC (pcalg) with knowledge"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causal-discovery_files/figure-html/pc%20algorithm%20with%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
 <p>It now correctly recovers the true DAG structure with this extra
 knowledge.</p>

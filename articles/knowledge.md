@@ -8,6 +8,12 @@ library(causalDisco)
 #>   Java successfully initialized with 2 GB.
 #>   To change heap size, set options(java.heap.size = 'Ng') or Sys.setenv(JAVA_HEAP_SIZE = 'Ng') *before* loading.
 #>   Restart R to apply changes.
+library(caugi)
+#> 
+#> Attaching package: 'caugi'
+#> The following objects are masked from 'package:causalDisco':
+#> 
+#>     edges, nodes
 ```
 
 This vignette demonstrates how to use the `knowledge` function to
@@ -100,10 +106,15 @@ kn_2 <- knowledge(
 )
 ```
 
-This knowledge object can also be visualized:
+This knowledge object can also be visualized (we manually adjust the
+layout for better appearance):
 
 ``` r
-plot(kn_2)
+cg <- knowledge_to_caugi(kn_2)$caugi
+layout <- caugi_layout_sugiyama(cg)
+layout[6,2] <- layout[4,2]
+
+plot(kn_2, layout = layout)
 ```
 
 ![](knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge%20with%20data-1.png)
@@ -213,7 +224,7 @@ kn_mixed <- knowledge(
 )
 ```
 
-We can visualize the tiers using:
+We can visualize the tiers:
 
 ``` r
 plot(kn)
@@ -223,6 +234,44 @@ plot(kn)
 
 The plot then shows the tiers as layers, with the earliest tiers to the
 left and latest to the right.
+
+We can convert the meaning of the tiered knowledge into explicit
+forbidden edges using
+[`convert_tiers_to_forbidden()`](https://bjarkehautop.github.io/causalDisco/reference/convert_tiers_to_forbidden.md):
+
+``` r
+kn_converted <- convert_tiers_to_forbidden(kn)
+print(kn_converted)
+#> 
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> 
+#> ── Variables ──
+#> 
+#>   var   tier 
+#>   <chr> <chr>
+#> 1 A1    NA   
+#> 2 A2    NA   
+#> 3 B1    NA   
+#> 4 B2    NA   
+#> 5 C1    NA   
+#> 6 C2    NA
+#> ── Edges ──
+#>  ✖  B1 → A1
+#>  ✖  B1 → A2
+#>  ✖  B2 → A1
+#>  ✖  B2 → A2
+#>  ✖  C1 → A1
+#>  ✖  C1 → A2
+#>  ✖  C1 → B1
+#>  ✖  C1 → B2
+#>  ✖  C2 → A1
+#>  ✖  C2 → A2
+#>  ✖  C2 → B1
+#>  ✖  C2 → B2
+plot(kn_converted)
+```
+
+![](knowledge_files/figure-html/convert%20tiers%20to%20forbidden-1.png)
 
 Tidyselect helpers such as `starts_with` can also be used to define
 tiers in a concise way, just as with required and forbidden edges.
@@ -259,7 +308,8 @@ kn_exo_1 <- knowledge(
 )
 ```
 
-Instead of `exogenous`, you can also use the shorthand functions `exo`.
+Instead of `exogenous`, you can also use the shorthand functions
+`exo()`.
 
 This knowledge object can be visualized:
 
@@ -277,7 +327,7 @@ kn_exo_2 <- knowledge(
   tpc_example,
   exogenous(starts_with("child"))
 )
-plot(kn_exo_2)
+plot(kn_exo_2, layout = "bipartite", orientation = "columns")
 ```
 
 ![](knowledge_files/figure-html/exogenous%20knowledge%20with%20tidyselect-1.png)

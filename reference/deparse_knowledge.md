@@ -41,10 +41,11 @@ Other knowledge functions:
 [`as_bnlearn_knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/as_bnlearn_knowledge.md),
 [`as_pcalg_constraints()`](https://bjarkehautop.github.io/causalDisco/reference/as_pcalg_constraints.md),
 [`as_tetrad_knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/as_tetrad_knowledge.md),
+[`convert_tiers_to_forbidden()`](https://bjarkehautop.github.io/causalDisco/reference/convert_tiers_to_forbidden.md),
 [`forbid_edge()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_edge.md),
-[`forbid_tier_violations()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_tier_violations.md),
 [`get_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/get_tiers.md),
 [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md),
+[`knowledge_to_caugi()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge_to_caugi.md),
 [`remove_edge()`](https://bjarkehautop.github.io/causalDisco/reference/remove_edge.md),
 [`remove_tiers()`](https://bjarkehautop.github.io/causalDisco/reference/remove_tiers.md),
 [`remove_vars()`](https://bjarkehautop.github.io/causalDisco/reference/remove_vars.md),
@@ -85,6 +86,7 @@ cat(code)
 
 # Explicitly add all forbidden edges implied by tiers
 kn <- forbid_tier_violations(kn)
+#> Error in forbid_tier_violations(kn): could not find function "forbid_tier_violations"
 code <- deparse_knowledge(kn, df_name = "tpc_example")
 cat(code)
 #> knowledge(tpc_example,
@@ -94,9 +96,6 @@ cat(code)
 #>     old ~ oldage_x5 + oldage_x6
 #>   ),
 #>   child_x1 %-->% youth_x3,
-#>   oldage_x5 %!-->% c(child_x1, child_x2, youth_x3, youth_x4),
-#>   oldage_x6 %!-->% c(child_x1, child_x2, youth_x3, youth_x4),
-#>   youth_x3 %!-->% c(child_x1, child_x2),
-#>   youth_x4 %!-->% c(child_x1, child_x2)
+#>   oldage_x6 %!-->% child_x1
 #> )
 ```

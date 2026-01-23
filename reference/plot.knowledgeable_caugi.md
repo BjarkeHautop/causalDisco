@@ -4,13 +4,13 @@ Visualize a causal graph stored within a `knowledgeable_caugi` object.
 This function extends
 [`plot.knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/plot.knowledge.md)
 by combining the causal graph from a `caugi` object with background
-knowledge, highlighting required edges.
+knowledge.
 
 ## Usage
 
 ``` r
 # S3 method for class 'knowledgeable_caugi'
-plot(x, orientation = c("columns", "rows"), required_col = "blue", ...)
+plot(x, required_col = "blue", ...)
 ```
 
 ## Arguments
@@ -19,11 +19,6 @@ plot(x, orientation = c("columns", "rows"), required_col = "blue", ...)
 
   A `knowledgeable_caugi` object containing both the causal graph and
   the associated knowledge.
-
-- orientation:
-
-  Character(1). Orientation of the tiers in the plot. Either `"columns"`
-  (default) or `"rows"`. Only used if tiered knowledge is provided.
 
 - required_col:
 

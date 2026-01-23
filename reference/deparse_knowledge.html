@@ -11,7 +11,7 @@ that would rebuild that same object."><meta property="og:image" content="https:/
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9034</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9035</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,10 +82,11 @@ that would rebuild that same object.</p>
 <code><a href="as_bnlearn_knowledge.html">as_bnlearn_knowledge()</a></code>,
 <code><a href="as_pcalg_constraints.html">as_pcalg_constraints()</a></code>,
 <code><a href="as_tetrad_knowledge.html">as_tetrad_knowledge()</a></code>,
+<code><a href="convert_tiers_to_forbidden.html">convert_tiers_to_forbidden()</a></code>,
 <code><a href="forbid_edge.html">forbid_edge()</a></code>,
-<code><a href="forbid_tier_violations.html">forbid_tier_violations()</a></code>,
 <code><a href="get_tiers.html">get_tiers()</a></code>,
 <code><a href="knowledge.html">knowledge()</a></code>,
+<code><a href="knowledge_to_caugi.html">knowledge_to_caugi()</a></code>,
 <code><a href="remove_edge.html">remove_edge()</a></code>,
 <code><a href="remove_tiers.html">remove_tiers()</a></code>,
 <code><a href="remove_vars.html">remove_vars()</a></code>,
@@ -125,7 +126,8 @@ that would rebuild that same object.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> )</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Explicitly add all forbidden edges implied by tiers</span></span></span>
-<span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="forbid_tier_violations.html">forbid_tier_violations</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu">forbid_tier_violations</span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in forbid_tier_violations(kn):</span> could not find function "forbid_tier_violations"</span>
 <span class="r-in"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="fu">deparse_knowledge</span><span class="op">(</span><span class="va">kn</span>, df_name <span class="op">=</span> <span class="st">"tpc_example"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> knowledge(tpc_example,</span>
@@ -135,10 +137,7 @@ that would rebuild that same object.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     old ~ oldage_x5 + oldage_x6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ),</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   child_x1 %--&gt;% youth_x3,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   oldage_x5 %!--&gt;% c(child_x1, child_x2, youth_x3, youth_x4),</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   oldage_x6 %!--&gt;% c(child_x1, child_x2, youth_x3, youth_x4),</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   youth_x3 %!--&gt;% c(child_x1, child_x2),</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   youth_x4 %!--&gt;% c(child_x1, child_x2)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   oldage_x6 %!--&gt;% child_x1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> )</span>
 </code></pre></div>
     </div>
