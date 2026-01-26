@@ -54,9 +54,7 @@ kn <- knowledge(
     youth ~ starts_with("youth"),
     old ~ starts_with("old")
   ),
-  child_x1 %-->% youth_x3,
+  child_x1 %-->% youth_x3
 )
-#> Error in knowledge(tpc_example, tier(child ~ starts_with("child"), youth ~     starts_with("youth"), old ~ starts_with("old")), child_x1 %-->%     youth_x3, ): argument "expr" is missing, with no default
 cg <- knowledge_to_caugi(kn)
-#> Error: object 'kn' not found
 ```
