@@ -85,17 +85,14 @@ cat(code)
 #> )
 
 # Explicitly add all forbidden edges implied by tiers
-kn <- forbid_tier_violations(kn)
-#> Error in forbid_tier_violations(kn): could not find function "forbid_tier_violations"
+kn <- convert_tiers_to_forbidden(kn)
 code <- deparse_knowledge(kn, df_name = "tpc_example")
 cat(code)
 #> knowledge(tpc_example,
-#>   tier(
-#>     child ~ child_x1 + child_x2,
-#>     youth ~ youth_x3 + youth_x4,
-#>     old ~ oldage_x5 + oldage_x6
-#>   ),
 #>   child_x1 %-->% youth_x3,
-#>   oldage_x6 %!-->% child_x1
+#>   oldage_x5 %!-->% c(child_x1, child_x2, youth_x3, youth_x4),
+#>   oldage_x6 %!-->% c(child_x1, child_x2, youth_x3, youth_x4),
+#>   youth_x3 %!-->% c(child_x1, child_x2),
+#>   youth_x4 %!-->% c(child_x1, child_x2)
 #> )
 ```

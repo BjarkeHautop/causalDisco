@@ -134,6 +134,11 @@ Small simulated datasets to illustrate causalDisco workflows.
   Plot a Causal Graph from a `knowledgeable_caugi` Object
 
 - [`make_tikz()`](https://bjarkehautop.github.io/causalDisco/reference/make_tikz.md)
+  :
+
+  Convert a `caugi_plot` object to TikZ code
+
+- [`make_tikz_old()`](https://bjarkehautop.github.io/causalDisco/reference/make_tikz_old.md)
   : Generate Latex tikz code for plotting a temporal DAG, PDAG or PAG.
 
 ## Knowledge helpers
