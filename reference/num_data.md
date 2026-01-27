@@ -1,6 +1,6 @@
-# Simulated numerical data example
+# Simulated Numerical Data
 
-Simulated numerical data example
+Simulated Numerical Data
 
 ## Usage
 

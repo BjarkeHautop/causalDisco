@@ -1,4 +1,4 @@
-# Simulated categorical data example
+# Simulated Categorical Data
 
 A dataset created by discretizing the continuous `num_data` into 5
 categorical levels per variable.

@@ -1,4 +1,4 @@
-# Add forbidden edges
+# Add Forbidden Edges to Knowledge
 
 Forbid one or more directed edges. Each argument **must** be a two–sided
 formula, e.g. `X ~ Y`. Formulas can use tidy-select on either side, so

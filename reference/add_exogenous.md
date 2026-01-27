@@ -1,4 +1,4 @@
-# Add exogenous variables
+# Add Exogenous Variables to Knowledge
 
 Adds variables that cannot have incoming edges (exogenous nodes). Every
 possible incoming edge to these nodes is automatically forbidden. This

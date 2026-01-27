@@ -1,4 +1,4 @@
-# Convert background knowledge to caugi object
+# Convert Knowledge to Caugi
 
 Converts a `knowledge` object to a `caugi` object used for plotting.
 

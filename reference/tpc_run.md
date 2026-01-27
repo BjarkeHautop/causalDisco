@@ -1,4 +1,4 @@
-# Causal Discovery Using the Temporal PC Algorithm (TPC)
+# Run the TPC Algorithm for Causal Discovery
 
 Run a tier-aware variant of the PC algorithm that respects background
 knowledge about a partial temporal order. Supply the temporal order via

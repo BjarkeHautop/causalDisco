@@ -1,4 +1,4 @@
-# Remove entire tiers from a knowledge object
+# Remove Tiers from Knowledge
 
 Drops tier definitions (and un‐tiers any vars assigned to them).
 

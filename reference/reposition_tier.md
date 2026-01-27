@@ -1,6 +1,6 @@
-# Move one tier before / after another
+# Move a Tier Relative to Another in Knowledge
 
-Move one tier before / after another
+Move a Tier Relative to Another in Knowledge
 
 ## Usage
 

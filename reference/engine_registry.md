@@ -1,4 +1,4 @@
-# Supported engines for causalDisco
+# Supported Engines
 
 Available engines: bnlearn, causalDisco, pcalg, tetrad.
 

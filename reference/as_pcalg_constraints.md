@@ -1,4 +1,4 @@
-# Convert background knowledge to pcalg constraint matrices
+# Convert Knowledge to pcalg Knowledge
 
 pcalg only supports *undirected* (symmetric) background constraints:
 

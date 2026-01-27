@@ -1,6 +1,6 @@
-# Add variables to an existing tier
+# Add Variables to a Tier in Knowledge
 
-Add variables to an existing tier
+Add Variables to a Tier in Knowledge
 
 ## Usage
 

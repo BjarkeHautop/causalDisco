@@ -1,6 +1,6 @@
-# Summary method for knowledge objects
+# Summarize a Knowledge Object
 
-Summary method for knowledge objects
+Summarize a Knowledge Object
 
 ## Usage
 

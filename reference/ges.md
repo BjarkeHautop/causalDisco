@@ -1,4 +1,4 @@
-# The GES algorithm for causal discovery
+# GES Algorithm for Causal Discovery
 
 Run the GES algorithm for causal discovery using one of several engines.
 

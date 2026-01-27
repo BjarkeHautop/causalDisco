@@ -1,6 +1,6 @@
-# Summary method for knowledgeable_caugi objects
+# Summarize a Knowledgeable Caugi Object
 
-Summary method for knowledgeable_caugi objects
+Summarize a Knowledgeable Caugi Object
 
 ## Usage
 

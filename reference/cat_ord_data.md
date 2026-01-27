@@ -1,4 +1,4 @@
-# Simulated ordered categorical data example
+# Simulated Ordered Categorical Data
 
 A dataset created by discretizing the continuous `num_data` into 5
 ordered categorical levels per variable.

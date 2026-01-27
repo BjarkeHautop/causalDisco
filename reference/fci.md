@@ -1,4 +1,4 @@
-# The FCI algorithm for causal discovery
+# FCI Algorithm for Causal Discovery
 
 Run the FCI algorithm for causal discovery using one of several engines.
 

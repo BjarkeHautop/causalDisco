@@ -1,6 +1,6 @@
-# Reorder all tiers at once
+# Reorder Tiers in Knowledge
 
-Reorder all tiers at once
+Reorder Tiers in Knowledge
 
 ## Usage
 

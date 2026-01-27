@@ -1,4 +1,4 @@
-# Simulated mixed data example
+# Simulated Mixed Data
 
 A dataset combining continuous and categorical variables. The first
 three variables are replaced with categorical versions from `cat_data`.

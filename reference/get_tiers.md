@@ -1,4 +1,4 @@
-# Get tiers
+# Get Tiers from Knowledge
 
 Get tiers from a `knowledge` object.
 

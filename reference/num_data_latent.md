@@ -1,4 +1,4 @@
-# Simulated numerical data example with latent variable
+# Simulated Numerical Data with Latent Variable
 
 A dataset similar to `num_data` but with the variable `Z` treated as a
 latent variable and thus omitted.

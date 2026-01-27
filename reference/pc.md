@@ -1,6 +1,7 @@
-# The Peter-Clark (PC) Algorithm for Causal Discovery
+# PC Algorithm for Causal Discovery
 
-Run the PC algorithm for causal discovery using one of several engines.
+Run the PC (Peter-Clark) algorithm for causal discovery using one of
+several engines.
 
 ## Usage
 

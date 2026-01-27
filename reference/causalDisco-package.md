@@ -1,4 +1,4 @@
-# Causal Disco package
+# causalDisco: Causal Discovery in R
 
 Various tools for inferring causal models from observational data. The
 package includes an implementation of the temporal Peter-Clark (TPC)

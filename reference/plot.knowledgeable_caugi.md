@@ -1,4 +1,4 @@
-# Plot a Causal Graph from a `knowledgeable_caugi` Object
+# Plot a Knowledgeable Caugi Object
 
 Visualize a causal graph stored within a `knowledgeable_caugi` object.
 This function extends

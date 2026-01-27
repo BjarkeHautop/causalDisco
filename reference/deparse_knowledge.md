@@ -1,4 +1,4 @@
-# Deparse a knowledge object to knowledge() mini-DSL code
+# Deparse a Knowledge Object into Knowledge DSL Code
 
 Given a `knowledge` object, return a single string containing the R code
 (using

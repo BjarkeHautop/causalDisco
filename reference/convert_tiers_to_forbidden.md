@@ -1,4 +1,4 @@
-# Convert tiered knowledge to forbidden knowledge
+# Convert Tiered Knowledge to Forbidden Knowledge
 
 Converts tier assignments into forbidden edges, and drops tiers in the
 output.

@@ -1,6 +1,6 @@
-# Print a `knowledge` object
+# Print a Knowledge Object
 
-Print a `knowledge` object
+Print a Knowledge Object
 
 ## Usage
 

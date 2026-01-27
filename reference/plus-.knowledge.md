@@ -1,6 +1,6 @@
-# Merge two `knowledge` objects
+# Merge Knowledge Objects
 
-Merge two `knowledge` objects
+Merge Knowledge Objects
 
 ## Usage
 

@@ -1,4 +1,4 @@
-# Unfreeze a `knowledge` object.
+# Unfreeze a Knowledge Object.
 
 This allows you to add new variables to the `knowledge` object, even
 though it was frozen earlier by adding a data frame to the knowledge

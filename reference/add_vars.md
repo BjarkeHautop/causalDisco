@@ -1,4 +1,4 @@
-# Add variables to `knowledge` object
+# Add Variables to Knowledge
 
 Adds variables to the `knowledge` object. If the object is frozen, an
 error is thrown if any of the variables are not present in the data

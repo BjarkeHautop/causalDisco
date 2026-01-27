@@ -1,4 +1,4 @@
-# Convert to Tetrad `edu.cmu.tetrad.data.Knowledge`
+# Convert Knowledge to Tetrad Knowledge
 
 Converts a `knowledge` object to a Tetrad
 `edu.cmu.tetrad.data.Knowledge`. This requires `rJava`. This is used

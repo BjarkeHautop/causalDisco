@@ -1,4 +1,4 @@
-# Remove variables (and their edges) from a knowledge object
+# Remove Variables Along with Their Edges from Knowledge
 
 Drops the given variables from `kn$vars`, and automatically removes any
 edges that mention them.

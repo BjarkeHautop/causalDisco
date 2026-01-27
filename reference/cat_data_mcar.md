@@ -1,4 +1,4 @@
-# Simulated categorical data with MCAR (missing completely at random)
+# Simulated Categorical Data with MCAR
 
 A dataset based on `cat_data` where some values are randomly removed to
 simulate MCAR.

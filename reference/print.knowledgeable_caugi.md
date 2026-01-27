@@ -1,6 +1,6 @@
-# Print method for knowledgeable_caugi objects
+# Print a Knowledgeable Caugi Object
 
-Print method for knowledgeable_caugi objects
+Print a Knowledgeable Caugi Object
 
 ## Usage
 

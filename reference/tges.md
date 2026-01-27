@@ -1,4 +1,4 @@
-# The Temporal GES algorithm for causal discovery
+# TGES Algorithm for Causal Discovery
 
 Run the Temporal GES algorithm for causal discovery using the
 causalDisco engine.

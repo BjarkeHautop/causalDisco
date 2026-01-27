@@ -5,7 +5,8 @@ articles:
   causal-discovery: causal-discovery.html
   causalDisco: causalDisco.html
   knowledge: knowledge.html
-last_built: 2026-01-26T15:29Z
+  visualization: visualization.html
+last_built: 2026-01-27T14:37Z
 urls:
   reference: https://bjarkehautop.github.io/causalDisco/reference
   article: https://bjarkehautop.github.io/causalDisco/articles

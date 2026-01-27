@@ -1,4 +1,4 @@
-# Simulated data example
+# Simulated Life-Course Data
 
 A small simulated data example intended to showcase the TPC algorithm.
 Note that the variable name prefixes defines which period they are

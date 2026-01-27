@@ -1,4 +1,4 @@
-# Negative predictive value
+# Negative Predictive Value
 
 Computes negative predictive value recall from a confusion matrix, see
 [confusion](https://bjarkehautop.github.io/causalDisco/reference/confusion.md).

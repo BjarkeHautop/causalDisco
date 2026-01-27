@@ -1,4 +1,4 @@
-# A `caugi` with an attached `knowledge` object
+# Knowledgeable Caugi Object
 
 This S3 class wraps `caugi` graph object and a `knowledge` object. It is
 the output object of causal discovery methods used in causalDisco.

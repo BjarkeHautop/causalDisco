@@ -1,4 +1,4 @@
-# Remove an edge from a knowledge object
+# Remove an Edge from Knowledge
 
 Drop a single directed edge specified by `from` and `to`. Errors if the
 edge does not exist.

@@ -1,6 +1,7 @@
-# Add (and position) a tier
+# Add a Tier to Knowledge
 
-Add (and position) a tier
+Adds a new tier to the `knowledge` object, either at the start, end, or
+before/after an existing tier.
 
 ## Usage
 

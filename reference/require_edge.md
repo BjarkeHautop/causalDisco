@@ -1,4 +1,4 @@
-# Add required edges
+# Add Required Edges to Knowledge
 
 Require one or more directed edges. Arguments follow the same rules as
 **[`forbid_edge()`](https://bjarkehautop.github.io/causalDisco/reference/forbid_edge.md)**

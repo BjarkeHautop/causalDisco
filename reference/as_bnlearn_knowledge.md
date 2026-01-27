@@ -1,4 +1,4 @@
-# Convert background knowledge to bnlearns white- and blacklists
+# Convert Knowledge to bnlearn Knowledge
 
 Converts a `knowledge` object to a list of two data frames, namely
 `whitelist` and `blacklist`, which can be used as arguments for bnlearn
