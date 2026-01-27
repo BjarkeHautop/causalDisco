@@ -16,7 +16,7 @@ make_tikz(
   full_doc = TRUE,
   bend_edges = FALSE,
   bend_angle = 25,
-  tier_label_pos = "above"
+  tier_label_pos = c("above", "below", "left", "right")
 )
 ```
 
@@ -54,6 +54,12 @@ make_tikz(
 
   Numeric scalar. Angle in degrees for bending arrows when
   `bend_edges = TRUE`. Default is `25`.
+
+- tier_label_pos:
+
+  Character string specifying the position of tier labels relative to
+  the tier rectangles. Must be one of `"above"`, `"below"`, `"left"`, or
+  `"right"`. Default is `"above"`.
 
 ## Value
 

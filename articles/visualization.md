@@ -104,9 +104,9 @@ Variables are grouped by life stage, reflecting the tiered structure.
 This helps visually convey temporal or hierarchical relationships in the
 data.
 
-## Plotting Knowledable Caugi Objects
+## Plotting Knowledgeable Caugi Objects
 
-Here we create a knowledgeable caugi object by combining a causal
+Here we create a `knowledgeable_caugi` object by combining a causal
 discovery result with prior knowledge, and visualize it using the `plot`
 function.
 
@@ -323,7 +323,7 @@ cat(tikz_knowledge_snippet)
 #> \end{tikzpicture}
 ```
 
-### Exporting Caugi Objects to Tikz
+### Exporting Caugi Objects to TikZ
 
 The same export mechanism also applies to standard caugi objects:
 

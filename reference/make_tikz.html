@@ -61,7 +61,7 @@ directly compiled or modified.</p>
 <span>  full_doc <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  bend_edges <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  bend_angle <span class="op">=</span> <span class="fl">25</span>,</span>
-<span>  tier_label_pos <span class="op">=</span> <span class="st">"above"</span></span>
+<span>  tier_label_pos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"above"</span>, <span class="st">"below"</span>, <span class="st">"left"</span>, <span class="st">"right"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -98,6 +98,12 @@ to reduce overlap.</p></dd>
 <dt id="arg-bend-angle">bend_angle<a class="anchor" aria-label="anchor" href="#arg-bend-angle"></a></dt>
 <dd><p>Numeric scalar. Angle in degrees for bending arrows when
 <code>bend_edges = TRUE</code>. Default is <code>25</code>.</p></dd>
+
+
+<dt id="arg-tier-label-pos">tier_label_pos<a class="anchor" aria-label="anchor" href="#arg-tier-label-pos"></a></dt>
+<dd><p>Character string specifying the position of tier labels
+relative to the tier rectangles. Must be one of <code>"above"</code>, <code>"below"</code>, <code>"left"</code>, or <code>"right"</code>.
+Default is <code>"above"</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
