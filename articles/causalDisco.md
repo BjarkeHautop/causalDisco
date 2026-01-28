@@ -113,7 +113,7 @@ kn <- knowledge(
 You can view the knowledge object using
 [`print()`](https://caugi.org/reference/print.html),
 [`summary()`](https://rdrr.io/r/base/summary.html) or
-[`plot()`](https://caugi.org/reference/plot.html):
+[`plot()`](https://bjarkehautop.github.io/causalDisco/reference/plot.md):
 
 ``` r
 print(kn)
@@ -164,7 +164,7 @@ tpc_result <- disco(tpc_example, method = tpc_method, knowledge = kn)
 Similarly, we can view the results using
 [`print()`](https://caugi.org/reference/print.html),
 [`summary()`](https://rdrr.io/r/base/summary.html) or
-[`plot()`](https://caugi.org/reference/plot.html):
+[`plot()`](https://bjarkehautop.github.io/causalDisco/reference/plot.md):
 
 ``` r
 print(tpc_result)

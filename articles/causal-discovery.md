@@ -91,7 +91,8 @@ pc_result_pcalg <- disco(data_linear, method = pc_pcalg)
 ```
 
 We can visualize the results using the
-[`plot()`](https://caugi.org/reference/plot.html) function:
+[`plot()`](https://bjarkehautop.github.io/causalDisco/reference/plot.md)
+function:
 
 ``` r
 plot(pc_result_pcalg, layout = layout, main = "PC (pcalg)")

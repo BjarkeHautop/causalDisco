@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9036</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9037</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,21 +115,21 @@ Independence Test (KCI).</p>
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="../reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">pc_tetrad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"kci"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span>  <span class="va">pc_result_tetrad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">num_data</span>, method <span class="op">=</span> <span class="va">pc_tetrad</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_tetrad</span>, layout <span class="op">=</span> <span class="va">plot_layout</span>, main <span class="op">=</span> <span class="st">"PC KCI (Tetrad)"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">pc_result_tetrad</span>, layout <span class="op">=</span> <span class="va">plot_layout</span>, main <span class="op">=</span> <span class="st">"PC KCI (Tetrad)"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p><img src="kci-tetrad-plot.png"></p>
 <p>or the PC algorithm from bnlearn with Fisher’s Z test:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pc_bnlearn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"bnlearn"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="va">pc_result_bnlearn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">num_data</span>, method <span class="op">=</span> <span class="va">pc_bnlearn</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_bnlearn</span>, layout <span class="op">=</span> <span class="va">plot_layout</span>, main <span class="op">=</span> <span class="st">"PC Fisher Z (bnlearn)"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">pc_result_bnlearn</span>, layout <span class="op">=</span> <span class="va">plot_layout</span>, main <span class="op">=</span> <span class="st">"PC Fisher Z (bnlearn)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causalDisco_files/figure-html/pc%20algorithm%20fisher%20z-1.png" class="r-plt" alt="" width="700"></p>
 <p>or the generalized score equivalence (GES) algorithm from pcalg with
 the SEM-BIC score:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ges_pcalg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ges.html">ges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"pcalg"</span>, score <span class="op">=</span> <span class="st">"sem_bic"</span><span class="op">)</span></span>
 <span><span class="va">ges_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">num_data</span>, method <span class="op">=</span> <span class="va">ges_pcalg</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ges_result</span>, layout <span class="op">=</span> <span class="va">plot_layout</span>, main <span class="op">=</span> <span class="st">"GES SEM-BIC (pcalg)"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">ges_result</span>, layout <span class="op">=</span> <span class="va">plot_layout</span>, main <span class="op">=</span> <span class="st">"GES SEM-BIC (pcalg)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causalDisco_files/figure-html/ges%20algorithm%20sem-bic-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level2">
@@ -164,7 +164,7 @@ follows:</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>You can view the knowledge object using <code><a href="https://caugi.org/reference/print.html" class="external-link">print()</a></code>,
-<code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> or <code><a href="https://caugi.org/reference/plot.html" class="external-link">plot()</a></code>:</p>
+<code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> or <code><a href="../reference/plot.html">plot()</a></code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://caugi.org/reference/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -197,7 +197,7 @@ follows:</p>
 <span><span class="co">#&gt; child: <span style="font-weight: bold;">2</span> variables</span></span>
 <span><span class="co">#&gt; oldage: <span style="font-weight: bold;">2</span> variables</span></span>
 <span><span class="co">#&gt; youth: <span style="font-weight: bold;">2</span> variables</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span>, main <span class="op">=</span> <span class="st">"Temporal Knowledge"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">kn</span>, main <span class="op">=</span> <span class="st">"Temporal Knowledge"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causalDisco_files/figure-html/view%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
 <p>We can then incorporate this knowledge into any algorithm like above.
 Here we use the Temporal Peter-Clark (tpc) algorithm from causalDisco
@@ -206,7 +206,7 @@ with the regression-based information loss test:</p>
 <code class="sourceCode R"><span><span class="va">tpc_method</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tpc.html">tpc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, test <span class="op">=</span> <span class="st">"reg"</span><span class="op">)</span></span>
 <span><span class="va">tpc_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tpc_method</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
 <p>Similarly, we can view the results using <code><a href="https://caugi.org/reference/print.html" class="external-link">print()</a></code>,
-<code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> or <code><a href="https://caugi.org/reference/plot.html" class="external-link">plot()</a></code>:</p>
+<code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> or <code><a href="../reference/plot.html">plot()</a></code>:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://caugi.org/reference/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">tpc_result</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -266,7 +266,7 @@ with the regression-based information loss test:</p>
 <span><span class="co">#&gt; child: <span style="font-weight: bold;">2</span> variables</span></span>
 <span><span class="co">#&gt; oldage: <span style="font-weight: bold;">2</span> variables</span></span>
 <span><span class="co">#&gt; youth: <span style="font-weight: bold;">2</span> variables</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tpc_result</span>, main <span class="op">=</span> <span class="st">"TPC reg_test with Temporal Knowledge (causalDisco)"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">tpc_result</span>, main <span class="op">=</span> <span class="st">"TPC reg_test with Temporal Knowledge (causalDisco)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causalDisco_files/figure-html/view%20tpc%20results-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level2">
@@ -282,7 +282,7 @@ with the regression-based information loss test:</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Anne Helby Petersen, Frederik Fabricius-Bjerre, Bjarke Hautop Kristensen.</p>
+  <p>Developed by Bjarke Hautop Kristensen, Frederik Fabricius-Bjerre, Anne Helby Petersen.</p>
 </div>
 
 <div class="pkgdown-footer-right">

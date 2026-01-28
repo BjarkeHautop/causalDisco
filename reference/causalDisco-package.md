@@ -32,12 +32,12 @@ Useful links:
 
 Authors:
 
-- Anne Helby Petersen <ahpe@sund.ku.dk>
-
 - Frederik Fabricius-Bjerre <ffb@di.ku.dk>
+
+- Anne Helby Petersen <ahpe@sund.ku.dk>
 
 Other contributors:
 
-- Tobias Ellegaard Larsen <tobias.ellegaard@sund.ku.dk> \[contributor\]
-
 - Claus Thorn Ekstrøm <ekstrom@sund.ku.dk> \[contributor\]
+
+- Tobias Ellegaard Larsen <tobias.ellegaard@sund.ku.dk> \[contributor\]

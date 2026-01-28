@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9036</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9037</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -165,9 +165,9 @@
 <span><span class="co"># Use causalDisco's own tges algorithm with temporal BIC score</span></span>
 <span><span class="va">cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tges.html">tges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, score <span class="op">=</span> <span class="st">"tbic"</span><span class="op">)</span></span>
 <span><span class="va">disco_cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">cd_tges</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span></code></pre></div>
-<p>You can visualize the resulting causal graph using the <code><a href="https://caugi.org/reference/plot.html" class="external-link">plot()</a></code> function:</p>
+<p>You can visualize the resulting causal graph using the <code><a href="reference/plot.html">plot()</a></code> function:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">disco_cd_tges</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot.html">plot</a></span><span class="op">(</span><span class="va">disco_cd_tges</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot-1.png" alt="A causal graph with the known tiers indicated by vertical positioning of the nodes." width="100%"></p>
 </div>
 <div class="section level2">
@@ -176,15 +176,14 @@
 <ul>
 <li><p>Updated getting started, knowledge vignettes based on the feedback. Anything missing?</p></li>
 <li><p>Made a causal discovery vignette (essentially old content of getting started vignette, but examples modified). Anything missing?</p></li>
+<li><p>Made a visualization vignette showing knowledge plotting and TikZ export. Anything missing?</p></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
 </h2>
 <ul>
-<li><p>Make more complex plotting examples + tests for plot. Done?</p></li>
-<li><p>Modify <code><a href="reference/make_tikz.html">make_tikz()</a></code> examples to be on Knowledge+Knowledgeable caugi instead of on caugi directly.</p></li>
-<li><p>Register a custom edge type for caugi to represent forbidden edges differently than normal directed edges. Would simplify plotting logic and easier to extend later.</p></li>
+<li>Register a custom edge type for caugi to represent forbidden edges differently than normal directed edges. Would simplify plotting logic and easier to extend later.</li>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Doesn't work atm because CRAN version requires length 3 (will work in next release)</span></span>
@@ -225,7 +224,7 @@
 <span><span class="co">#&gt; 2    B 0.5 1.0</span></span>
 <span><span class="co">#&gt; 3    C 0.0 0.5</span></span>
 <span><span class="co">#&gt; 4    D 1.0 0.5</span></span>
-<span><span class="va">plot_cg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cg</span>, layout <span class="op">=</span> <span class="va">layout</span><span class="op">)</span></span>
+<span><span class="va">plot_cg</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/plot.html">plot</a></span><span class="op">(</span><span class="va">cg</span>, layout <span class="op">=</span> <span class="va">layout</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Wrap the grid plot as ggplot</span></span>
 <span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu">as.ggplot</span><span class="op">(</span><span class="va">plot_cg</span><span class="op">@</span><span class="va">grob</span><span class="op">)</span></span>
@@ -243,33 +242,17 @@
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot%20wip-1.png" alt="" width="100%"></p>
 <ul>
-<li>Implement a working <code>make_tikz</code> for these plots. Something like this (coordinates are from <code>caugi::caugi_layout_sugiyama(cg)</code> scaled by 10)? Should be easy to make a function that generates code like this, and we can then bend curves.</li>
-</ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="bu">\usepackage</span>{<span class="ex">tikz</span>}</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="fu">\usetikzlibrary</span>{positioning,arrows.meta}</span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="fu">\tikzset</span>{arrows={[scale=2]}}</span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}</span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">% Nodes</span></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="fu">\node</span>[draw, circle, fill=blue] (A) at (5,0) {A};</span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="fu">\node</span>[draw, circle, fill=red] (B) at (10,10) {B};</span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="fu">\node</span>[draw, circle, fill=gray] (C) at (0,10) {C};</span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="fu">\path</span> (A) edge[-Latex] (B) </span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>      (A) edge[-Latex] (C);</span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code></pre></div>
-<ul>
 <li><p>Make required work for our algorithms. It breaks when it internally calls <code>tpdag</code>, so look into that…</p></li>
 <li><p>In documentation of defaults for tests maybe add the underlying engine defaults if they differ?</p></li>
-<li><p>In tests (and examples) don’t use <code>tpc_example</code> all the time and instead also use other data sets (e.g. num_data, cat_data, mix_data). (this also avoids that we currently simulate data in tests when needing an e.g. numerical dataset). Done mostly I think? Just missing cat_ord_data usage iirc.</p></li>
+<li><p>In tests (and examples) don’t use <code>tpc_example</code> all the time and instead also use other data sets (e.g. num_data, cat_data, mix_data). (this also avoids that we currently simulate data in tests when needing an e.g. numerical dataset). Done mostly I think? Just missing <code>cat_ord_data</code> usage iirc.</p></li>
 <li>
 <p>Add all algs/scores/tests from the backends (start with Tetrad). Check if we currently document ones we haven’t implemented yet.</p>
 <ul>
 <li>Missing scores: <code>"Instance-specific Augmented SEM BIC Score"</code>. Get this error when implementing: <code>Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl, : java.lang.NullPointerException: Cannot invoke "edu.cmu.tetrad.data.Knowledge.getTestingData()" because "this.knowledge" is null</code> (see branch <code>Add-isa-sem-bic-score-to-Tetrad</code>).</li>
 </ul>
 </li>
+<li><p>Implement fci from pcalg</p></li>
+<li><p>Implement BOSS + grasp from Tetrad</p></li>
 <li><p>Update evaluation and confusion metrics (use caugi?)</p></li>
 </ul>
 <div class="section level3">
@@ -278,10 +261,9 @@
 <ul>
 <li><p>Setting <code>mc = TRUE</code> (or <code>mc_test = TRUE</code>) errors in Tetrad. Remove the argument for now (and maybe fix later).</p></li>
 <li><p>Setting <code>precompute_covariances = FALSE</code> errors in Tetrad. Remove the argument for now (and maybe fix later).</p></li>
-<li><p>bnlearn has bug for old version of caugi. Fixed in PR #149 in caugi.</p></li>
-<li><p>Tried implementing it in the scores (e.g. <code>TemporalBdeu</code>) by giving it score -Inf if missing a required edge, but then it runs forever. I.e. adding the following to <code>local.score</code></p></li>
+<li><p>Tried implementing required edges in the scores (e.g. <code>TemporalBdeu</code>) by giving it score -Inf if missing a required edge, but then it runs forever. I.e. adding the following to <code>local.score</code></p></li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vertex_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pp.dat</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="va">vertex</span><span class="op">]</span></span>
 <span><span class="va">req_parents</span> <span class="op">&lt;-</span> <span class="va">kn</span><span class="op">$</span><span class="va">edges</span> <span class="op">|&gt;</span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">status</span> <span class="op">==</span> <span class="st">"required"</span>, <span class="va">to</span> <span class="op">==</span> <span class="va">vertex_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -309,7 +291,7 @@
 <ul>
 <li>Tetrad does not use required correctly in <code>fci</code> algorithm</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span>
 <span></span>
@@ -390,9 +372,9 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Anne Helby Petersen <br><small class="roles"> Author </small>   </li>
-<li>Frederik Fabricius-Bjerre <br><small class="roles"> Author </small>   </li>
 <li>Bjarke Hautop Kristensen <br><small class="roles"> Author, maintainer </small>   </li>
+<li>Frederik Fabricius-Bjerre <br><small class="roles"> Author </small>   </li>
+<li>Anne Helby Petersen <br><small class="roles"> Author </small>   </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -411,7 +393,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Anne Helby Petersen, Frederik Fabricius-Bjerre, Bjarke Hautop Kristensen.</p>
+  <p>Developed by Bjarke Hautop Kristensen, Frederik Fabricius-Bjerre, Anne Helby Petersen.</p>
 </div>
 
 <div class="pkgdown-footer-right">

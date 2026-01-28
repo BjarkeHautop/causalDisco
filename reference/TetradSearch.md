@@ -1585,6 +1585,16 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 
   print(g)
 }
+#> Warning: The `file` argument of `vroom()` must use `I()` for literal data as of vroom
+#> 1.5.0.
+#>   
+#>   # Bad:
+#>   vroom("X,Y\n1.5,2.3\n")
+#>   
+#>   # Good:
+#>   vroom(I("X,Y\n1.5,2.3\n"))
+#> ℹ The deprecated feature was likely used in the readr package.
+#>   Please report the issue at <https://github.com/tidyverse/readr/issues>.
 #> 
 #> ── caugi graph ─────────────────────────────────────────────────────────────────
 #> Graph class: UNKNOWN

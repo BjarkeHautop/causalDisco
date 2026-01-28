@@ -117,6 +117,8 @@ Small simulated datasets to illustrate causalDisco workflows.
   : Summarize a Knowledge Object
 - [`summary(`*`<knowledgeable_caugi>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/summary.knowledgeable_caugi.md)
   : Summarize a Knowledgeable Caugi Object
+- [`plot`](https://bjarkehautop.github.io/causalDisco/reference/plot.md)
+  : Plot Method for causalDisco Objects
 - [`plot(`*`<knowledge>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/plot.knowledge.md)
   : Plot a Knowledge Object
 - [`plot(`*`<knowledgeable_caugi>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/plot.knowledgeable_caugi.md)

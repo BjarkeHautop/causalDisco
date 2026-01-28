@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9036</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9037</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,7 +90,7 @@ applied without additional knowledge.</p></dd>
 <span class="r-in"><span><span class="co"># use pc with engine bnlearn and test fisher_z</span></span></span>
 <span class="r-in"><span><span class="va">my_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"bnlearn"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">pc_bnlearn</span> <span class="op">&lt;-</span> <span class="fu">disco</span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">my_pc</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_bnlearn</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">pc_bnlearn</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="disco-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># define tiered background knowledge</span></span></span>
@@ -110,7 +110,7 @@ applied without additional knowledge.</p></dd>
 <span class="r-in"><span>  method <span class="op">=</span> <span class="va">my_pc_tiered</span>,</span></span>
 <span class="r-in"><span>  knowledge <span class="op">=</span> <span class="va">kn</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_tiered_bnlearn</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">pc_tiered_bnlearn</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="disco-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -119,7 +119,7 @@ applied without additional knowledge.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Anne Helby Petersen, Frederik Fabricius-Bjerre, Bjarke Hautop Kristensen.</p>
+  <p>Developed by Bjarke Hautop Kristensen, Frederik Fabricius-Bjerre, Anne Helby Petersen.</p>
 </div>
 
 <div class="pkgdown-footer-right">

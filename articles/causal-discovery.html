@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9036</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9037</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,7 +101,7 @@ simulated data.</p>
 <span>    <span class="va">X2</span> <span class="op">%--&gt;%</span> <span class="va">Y</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://caugi.org/reference/caugi_layout_sugiyama.html" class="external-link">caugi_layout_sugiyama</a></span><span class="op">(</span><span class="va">cg</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cg</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"True DAG"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">cg</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"True DAG"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causal-discovery_files/figure-html/dag-1.png" class="r-plt" alt="" width="700"></p>
 <p>We can create data from a linear Gaussian model corresponding to the
 above DAG using <code><a href="../reference/generate_dag_data.html">generate_dag_data()</a></code></p>
@@ -147,10 +147,10 @@ level of 0.05, and use pcalg as engine.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pc_pcalg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"pcalg"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="va">pc_result_pcalg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">data_linear</span>, method <span class="op">=</span> <span class="va">pc_pcalg</span><span class="op">)</span></span></code></pre></div>
-<p>We can visualize the results using the <code><a href="https://caugi.org/reference/plot.html" class="external-link">plot()</a></code>
+<p>We can visualize the results using the <code><a href="../reference/plot.html">plot()</a></code>
 function:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_pcalg</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"PC (pcalg)"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">pc_result_pcalg</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"PC (pcalg)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causal-discovery_files/figure-html/plot%20pc%20results%20simple-1.png" class="r-plt" alt="" width="700"></p>
 <p>The first notable feature of this plot is that some edges are
 directed, while others are undirected. For example, the edge from
@@ -180,7 +180,7 @@ algorithm to the resulting data set.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">pc_result_reverse</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">data_linear_reverse</span>, method <span class="op">=</span> <span class="va">pc_pcalg</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_reverse</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"PC (pcalg) reversed"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">pc_result_reverse</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"PC (pcalg) reversed"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causal-discovery_files/figure-html/pc%20algorithm%20reversed-1.png" class="r-plt" alt="" width="700"></p>
 <p>We learn the same causal structure as before, demonstrating that the
 direction of influence between <code>X2</code> and <code>X3</code>
@@ -225,7 +225,7 @@ not perform well due to the non-linear relationships in the data.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pc_pcalg_nonlinear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"pcalg"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="va">pc_result_nonlinear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">data_nonlinear</span>, method <span class="op">=</span> <span class="va">pc_pcalg_nonlinear</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_nonlinear</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"PC (pcalg) non-linear"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">pc_result_nonlinear</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"PC (pcalg) non-linear"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causal-discovery_files/figure-html/pc%20algorithm%20non-linear-1.png" class="r-plt" alt="" width="700"></p>
 <p>As expected, the PC algorithm with Fisher’s Z test does not recover
 the correct causal structure in this non-linear setting at all. Note,
@@ -249,14 +249,14 @@ where the data alone are insufficient to determine causal direction.</p>
 <span>  <span class="va">X1</span> <span class="op">%!--&gt;%</span> <span class="va">Z</span>,  <span class="co"># X1 does not cause Z</span></span>
 <span>  <span class="va">X2</span> <span class="op">%!--&gt;%</span> <span class="va">X3</span>   <span class="co"># X2 does not cause X3</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causal-discovery_files/figure-html/prior%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
 <p>We can then incorporate this knowledge into the PC algorithm as
 follows:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pc_pcalg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"bnlearn"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="va">pc_result_with_knowledge</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/disco.html">disco</a></span><span class="op">(</span><span class="va">data_linear</span>, method <span class="op">=</span> <span class="va">pc_pcalg</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://caugi.org/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pc_result_with_knowledge</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"PC (pcalg) with knowledge"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">pc_result_with_knowledge</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"PC (pcalg) with knowledge"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causal-discovery_files/figure-html/pc%20algorithm%20with%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
 <p>It now correctly recovers the true DAG structure with this extra
 knowledge.</p>
@@ -269,7 +269,7 @@ knowledge.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Anne Helby Petersen, Frederik Fabricius-Bjerre, Bjarke Hautop Kristensen.</p>
+  <p>Developed by Bjarke Hautop Kristensen, Frederik Fabricius-Bjerre, Anne Helby Petersen.</p>
 </div>
 
 <div class="pkgdown-footer-right">
