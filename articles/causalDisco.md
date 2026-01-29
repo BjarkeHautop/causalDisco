@@ -18,7 +18,8 @@ algorithms, knowledge incorporation, and result visualization.
 ## Running causal discovery algorithms
 
 We will for this section use the `num_data` dataset included in the
-package for demonstrating how to run causal discovery algorithms.
+package for demonstrating how to run causal discovery algorithms. It
+contains 5 numerical variables, `X1, X2, X3, Z`, and `Y`.
 
 ``` r
 data(num_data)
@@ -30,7 +31,12 @@ head(num_data)
 #> 4 5.176469  6.392344 6.101088 10.808335 26.75643
 #> 5 4.535538 10.305236 7.465185 10.612735 22.67612
 #> 6 4.885914 10.018856 7.413312  9.375931 28.03132
+```
 
+To make the different causal graphs easier to interpret, we define a
+custom fixed layout for plotting the results:
+
+``` r
 plot_layout <- data.frame(
   name = c("Z", "X3", "X1", "X2", "Y"),
   x = c(0.00, 0.50, 0.00, 0.50, 0.25),
@@ -38,47 +44,158 @@ plot_layout <- data.frame(
 )
 ```
 
-We can use several algorithms from the causalDisco package to discover
-the causal structure from this data. Here is an example using the
-Peter-Clark (PC) algorithm from Tetrad with the Kernel Conditional
-Independence Test (KCI).
-
-``` r
-if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
-  pc_tetrad <- pc(engine = "tetrad", test = "kci", alpha = 0.05)
-  pc_result_tetrad <- disco(num_data, method = pc_tetrad)
-  plot(pc_result_tetrad, layout = plot_layout, main = "PC KCI (Tetrad)")
-}
-```
-
-![](kci-tetrad-plot.png)
-
-or the PC algorithm from bnlearn with Fisher’s Z test:
+To run a causal discovery algorithm, we first define the algorithm using
+the corresponding function, and then pass it to the
+[`disco()`](https://bjarkehautop.github.io/causalDisco/reference/disco.md)
+function along with the data. Below we demonstrate this process using
+the Peter-Clark (PC) algorithm from bnlearn with Fisher’s Z test:
 
 ``` r
 pc_bnlearn <- pc(engine = "bnlearn", test = "fisher_z", alpha = 0.05)
 pc_result_bnlearn <- disco(num_data, method = pc_bnlearn)
+```
+
+We can visualize the results using
+[`plot()`](https://bjarkehautop.github.io/causalDisco/reference/plot.md):
+
+``` r
 plot(pc_result_bnlearn, layout = plot_layout, main = "PC Fisher Z (bnlearn)")
 ```
 
-![](causalDisco_files/figure-html/pc%20algorithm%20fisher%20z-1.png)
+![](causalDisco_files/figure-html/unnamed-chunk-3-1.png)
 
-or the generalized score equivalence (GES) algorithm from pcalg with the
-SEM-BIC score:
+The first notable feature of this plot is that some edges are directed,
+while others are undirected. For example, the edge from `X1` to `Y` is
+directed, indicating a causal effect of `X1` on `Y`. In contrast, the
+edge between `X1` and `X3` is undirected, indicating that the data alone
+do not provide sufficient information to determine the causal direction.
+Both orientations `X1 %-->% X3` and `X3 %-->% X1` are compatible with
+the observed conditional independencies.
+
+To view all engines available for a specific algorithm, you can see the
+documentation using
+[`?pc`](https://bjarkehautop.github.io/causalDisco/reference/pc.md),
+where all options are listed under the `engine` argument. Instead of
+using bnlearn, we can also use the PC implementation from the pcalg
+package with the same test:
 
 ``` r
-ges_pcalg <- ges(engine = "pcalg", score = "sem_bic")
-ges_result <- disco(num_data, method = ges_pcalg)
-plot(ges_result, layout = plot_layout, main = "GES SEM-BIC (pcalg)")
+pc_pcalg <- pc(engine = "pcalg", test = "fisher_z", alpha = 0.05)
+pc_result_pcalg <- disco(num_data, method = pc_pcalg)
+plot(pc_result_pcalg, layout = plot_layout, main = "PC Fisher Z (pcalg)")
 ```
 
-![](causalDisco_files/figure-html/ges%20algorithm%20sem-bic-1.png)
+![](causalDisco_files/figure-html/pc%20algorithm%20fisher%20z%20pcalg-1.png)
+
+We see that the results using the PC algorithm implemented in bnlearn
+and pcalg gives the same output on this dataset.
+
+You can also use a different algorithm altogether, such as the GES
+algorithm. It follows the same pattern, however GES is a score-based
+algorithm, so instead of a test and an alpha level, we need to specify a
+score. Below we will use the Extended Bayesian Information Criterion
+(EBIC) score from Tetrad.
+
+Tetrad is written in Java, so to use it we first need to ensure that
+Java is installed and that the Tetrad jar files are available. This can
+be done using the
+[`check_tetrad_install()`](https://bjarkehautop.github.io/causalDisco/reference/check_tetrad_install.md)
+function. If they aren’t installed, we provide the helper functions
+[`install_java()`](https://bjarkehautop.github.io/causalDisco/reference/install_java.md)
+and
+[`install_tetrad()`](https://bjarkehautop.github.io/causalDisco/reference/install_tetrad.md)
+to set them up.
+
+``` r
+if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
+  ges_tetrad <- ges(engine = "tetrad", score = "ebic")
+  ges_result_tetrad <- disco(num_data, method = ges_tetrad)
+  plot(ges_result_tetrad, layout = plot_layout, main = "GES EBIC (Tetrad)")
+}
+```
+
+![](ges-ebic-tetrad.png)
+
+If you want to customize the plot appearance further, you can pass
+additional arguments to
+[`plot()`](https://bjarkehautop.github.io/causalDisco/reference/plot.md).
+For example, to change the appearance of the nodes, you can use the
+`node_style` argument:
+
+``` r
+plot(
+  pc_result_bnlearn, 
+  layout = plot_layout,
+  main = "Customized plot",
+  node_style = list(
+    fill = "lightblue", # Fill color
+    col = "darkblue", # Border color
+    lwd = 2, # Border width
+    padding = 4, # Text padding (mm)
+    size = 1.2 # Size multiplier
+  )
+)
+```
+
+![](causalDisco_files/figure-html/custom%20plot-1.png)
+
+For more details on customizing plots and generating TikZ code for LaTeX
+documents, see the [visualization
+vignette](https://bjarkehautop.github.io/causalDisco/articles/visualization.md).
+
+Instead of using
+[`plot()`](https://bjarkehautop.github.io/causalDisco/reference/plot.md),
+another way to view and analyze the results is to use the
+[`print()`](https://caugi.org/reference/print.html) or
+[`summary()`](https://rdrr.io/r/base/summary.html) functions:
+
+``` r
+print(pc_result_bnlearn)
+#> 
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: PDAG
+#> 
+#> ── Edges ──
+#> 
+#>   from  edge  to   
+#>   <chr> <chr> <chr>
+#> 1 X1    -->   Y    
+#> 2 X1    ---   Z    
+#> 3 X2    ---   X3   
+#> 4 X2    -->   Y    
+#> 5 X3    -->   Y    
+#> 6 Z     -->   Y
+#> ── Nodes ──
+#>   name 
+#>   <chr>
+#> 1 X1   
+#> 2 X2   
+#> 3 X3   
+#> 4 Z    
+#> 5 Y
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+summary(pc_result_bnlearn)
+#> 
+#> ── caugi graph summary ─────────────────────────────────────────────────────────
+#> Graph class: PDAG
+#> Nodes: 5
+#> Edges: 6
+#> 
+#> ── Knowledge summary ──
+#> 
+#> Tiers: 0
+#> Variables: 0
+#> Required edges: 0
+#> Forbidden edges: 0
+#> 
+#> ── Variables per Tier
+```
 
 ## Incorporating knowledge
 
 We will for this section use the dataset `tpc_example`, which contains
-variables measured at three different life stages: childhood, youth, and
-old age.
+variables, which are measured at three different life stages: childhood,
+youth, and old age.
 
 ``` r
 data(tpc_example)
@@ -92,23 +209,32 @@ head(tpc_example)
 #> 6        1  1.9549723 -0.65054654        0 -6.9758928 -3.2107342
 ```
 
-Thus, we have some prior knowledge about the temporal ordering of the
-variables. That is, we know the variables measured in childhood cannot
-be caused by variables measured in youth or old age, and variables
-measured in youth cannot be caused by variables measured in old age.
+Since we know the temporal ordering of the variables, we can incorporate
+this background knowledge into the causal discovery algorithm.
+Specifically, we know that variables measured in childhood cannot be
+caused by variables measured in youth or old age, and variables measured
+in youth cannot be caused by variables measured in old age.
 
-This can be encoded in a `knowledge` object as follows:
+Knowledge is encoded by creating a `knowledge` object via the
+[`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md)
+function. The first argument (optional, but recommended for name
+matching) specifies the dataset. Tiered knowledge can then be defined
+using the `tier()` function. Here, we illustrate this by creating a
+tiered knowledge structure based on life stages:
 
 ``` r
 kn <- knowledge(
   tpc_example,
   tier(
-    child ~ starts_with("child"),
-    youth ~ starts_with("youth"),
+    child ~ c("child_x1", "child_x2"),
+    youth ~ starts_with("youth"), # tidyselect helper; equivalent to c("youth_x3", "youth_x4")
     oldage ~ starts_with("oldage")
   )
 )
 ```
+
+For more details on how to define knowledge, see the [knowledge
+vignette](https://bjarkehautop.github.io/causalDisco/articles/knowledge.md).
 
 You can view the knowledge object using
 [`print()`](https://caugi.org/reference/print.html),
@@ -152,9 +278,14 @@ plot(kn, main = "Temporal Knowledge")
 
 ![](causalDisco_files/figure-html/view%20knowledge-1.png)
 
-We can then incorporate this knowledge into any algorithm like above.
-Here we use the Temporal Peter-Clark (tpc) algorithm from causalDisco
-with the regression-based information loss test:
+The plot displays vertical tiers, each enclosed in a shaded rectangle
+and labeled with the corresponding tier name at the top.
+
+We can then incorporate this knowledge into any algorithm like above. To
+do so, you need to pass the `knowledge` object as an argument to the
+[`disco()`](https://bjarkehautop.github.io/causalDisco/reference/disco.md)
+function. Here we use the Temporal Peter-Clark (tpc) algorithm from
+causalDisco with the regression-based information loss test:
 
 ``` r
 tpc_method <- tpc(engine = "causalDisco", test = "reg")
@@ -230,6 +361,11 @@ plot(tpc_result, main = "TPC reg_test with Temporal Knowledge (causalDisco)")
 
 ![](causalDisco_files/figure-html/view%20tpc%20results-1.png)
 
+Like before, the tiered knowledge is reflected in the plot layout, with
+variables grouped by life stage. Additionally, you can customize the
+plot appearance further by passing additional arguments to
+[`plot()`](https://bjarkehautop.github.io/causalDisco/reference/plot.md).
+
 ## Next steps
 
 For more information about how to incorporate knowledge, see the
@@ -238,3 +374,6 @@ vignette](https://bjarkehautop.github.io/causalDisco/articles/knowledge.md).
 
 For more information about causal discovery, see the [causal discovery
 vignette](https://bjarkehautop.github.io/causalDisco/articles/causal-discovery.md).
+
+For more information about visualization options, see the [visualization
+vignette](https://bjarkehautop.github.io/causalDisco/articles/visualization.md).

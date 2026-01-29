@@ -8,12 +8,6 @@ library(causalDisco)
 #>   Java successfully initialized with 2 GB.
 #>   To change heap size, set options(java.heap.size = 'Ng') or Sys.setenv(JAVA_HEAP_SIZE = 'Ng') *before* loading.
 #>   Restart R to apply changes.
-library(caugi)
-#> 
-#> Attaching package: 'caugi'
-#> The following objects are masked from 'package:causalDisco':
-#> 
-#>     edges, nodes
 ```
 
 This vignette demonstrates how to use the `knowledge` function to
@@ -111,7 +105,7 @@ layout for better appearance):
 
 ``` r
 cg <- knowledge_to_caugi(kn_2)$caugi
-layout <- caugi_layout_sugiyama(cg)
+layout <- caugi::caugi_layout_sugiyama(cg)
 layout[6,2] <- layout[4,2]
 
 plot(kn_2, layout = layout)
@@ -120,7 +114,7 @@ plot(kn_2, layout = layout)
 ![](knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge%20with%20data-1.png)
 
 The plot then plots all variables in the dataset, with the required
-edges as blue solid edges and forbidden edges as red dashed edges.
+edges as blue edges and forbidden edges as red edges.
 
 #### Using tidyselect helpers
 
@@ -287,7 +281,10 @@ kn_tier_tidyselect <- knowledge(
     old   ~ starts_with("old")
   )
 )
+plot(kn_tier_tidyselect)
 ```
+
+![](knowledge_files/figure-html/tier%20knowledge%20with%20tidyselect-1.png)
 
 ## Exogenous variables knowledge
 
@@ -388,11 +385,17 @@ The black edges are those inferred from the data.
 
 ## Engine specific information about knowledge
 
+By engine we mean the underlying implementation of the causal discovery
+algorithm, i.e. the engine you specify to an algorithm such as
+`pc(engine = "bnlearn")` or `tges(engine = "causalDisco")`.
+
 ### bnlearn
 
-All knowledge types are supported with bnlearn engine. Note, that you
-can get a harmless(?) warning from bnlearn when using required
-knowledge.
+All knowledge types are supported with bnlearn engine. When required
+(directional) knowledge is provided, bnlearn may emit a warning during
+structure learning. This occurs when the algorithm identifies a
+candidate v-structure (collider) from the data whose orientation
+conflicts with edges already oriented due to background knowledge.
 
 ``` r
 data(tpc_example)
@@ -409,8 +412,7 @@ output <- disco(data = tpc_example, method = bnlearn_pc, knowledge = kn)
 #> both arcs are oriented in the opposite direction.
 ```
 
-But the resulting causal graph respects the knowledge correctly
-nevertheless.
+The resulting causal graph still respects the provided knowledge.
 
 ``` r
 plot(output)
@@ -420,16 +422,16 @@ plot(output)
 
 ### causalDisco
 
-WIP. Currently causalDisco only works correctly with tiered and
-forbidden knowledge.
+Currently causalDisco engine only supports tiered and forbidden
+knowledge.
 
 ### pcalg
 
-Only forbidden knowledge symmetric knowledge is supported for pcalg.
-That is, edges that are forbidden in both directions. Thus, the only
-type of knowledge that can be used with pcalg is knowledge created using
-forbidden edges (`%!-->%`) without any directed knowledge or tiers, such
-as this:
+Only forbidden symmetric knowledge is supported for pcalg engine. That
+is, edges that are forbidden in both directions. Thus, the only type of
+knowledge that can be used with pcalg is knowledge created using
+forbidden edges (`%!-->%`) without any directed knowledge or tiers. An
+example is shown below:
 
 ``` r
 data(tpc_example)
@@ -444,4 +446,4 @@ output <- disco(data = tpc_example, method = pc_pcalg, knowledge = kn)
 
 ### Tetrad
 
-WIP. All knowledge types are supported with Tetrad engine.
+All knowledge types are supported with Tetrad engine.

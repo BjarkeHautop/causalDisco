@@ -124,7 +124,7 @@ Small simulated datasets to illustrate causalDisco workflows.
 - [`plot(`*`<knowledgeable_caugi>`*`)`](https://bjarkehautop.github.io/causalDisco/reference/plot.knowledgeable_caugi.md)
   : Plot a Knowledgeable Caugi Object
 - [`make_tikz()`](https://bjarkehautop.github.io/causalDisco/reference/make_tikz.md)
-  : Generate TikZ Code from a Caugi Plot
+  : Generate TikZ Code from a Object
 - [`make_tikz_old()`](https://bjarkehautop.github.io/causalDisco/reference/make_tikz_old.md)
   : Generate Latex tikz code for plotting a temporal DAG, PDAG or PAG.
 
