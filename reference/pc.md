@@ -122,6 +122,23 @@ pc_pcalg(tpc_example)
 #> 6 oldage_x5
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 
+# With all algorithm arguments specified
+pc_pcalg <- pc(
+  engine = "pcalg",
+  test = "fisher_z",
+  alpha = 0.05,
+  fixedGaps = NULL,
+  fixedEdges = NULL,
+  NAdelete = FALSE,
+  m.max = 10,
+  u2pd = "relaxed",
+  skel.method = "original",
+  conservative = TRUE,
+  maj.rule = FALSE,
+  solve.confl = TRUE,
+  numCores = 1,
+  verbose = TRUE
+)
 
 #### Using bnlearn engine with required knowledge ####
 kn <- knowledge(
@@ -213,6 +230,43 @@ pc_bnlearn(tpc_example)
 #> ── Knowledge object ────────────────────────────────────────────────────────────
 
 
+# With all algorithm arguments specified
+pc_bnlearn <- pc(
+  engine = "bnlearn",
+  test = "fisher_z",
+  alpha = 0.05,
+  max.sx = 2,
+  debug = FALSE,
+  undirected = TRUE
+)
+
+disco(tpc_example, pc_bnlearn)
+#> 
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: PDAG
+#> 
+#> ── Edges ──
+#> 
+#>   from      edge  to       
+#>   <chr>     <chr> <chr>    
+#> 1 child_x1  ---   child_x2 
+#> 2 child_x2  ---   oldage_x5
+#> 3 child_x2  ---   youth_x4 
+#> 4 oldage_x5 ---   oldage_x6
+#> 5 oldage_x5 ---   youth_x3 
+#> 6 oldage_x6 ---   youth_x4 
+#> ── Nodes ──
+#> 
+#>   name     
+#>   <chr>    
+#> 1 child_x2 
+#> 2 child_x1 
+#> 3 youth_x4 
+#> 4 youth_x3 
+#> 5 oldage_x6
+#> 6 oldage_x5
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+
 #### Using tetrad engine with tier knowledge ####
 # Requires Tetrad to be installed
 if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
@@ -244,6 +298,45 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 #> 1 child_x2  ---   child_x1 
 #> 2 child_x2  -->   oldage_x5
 #> 3 child_x2  -->   youth_x4 
+#> 4 oldage_x5 -->   oldage_x6
+#> 5 youth_x3  -->   oldage_x5
+#> 6 youth_x4  -->   oldage_x6
+#> ── Nodes ──
+#> 
+#>   name     
+#>   <chr>    
+#> 1 child_x2 
+#> 2 child_x1 
+#> 3 youth_x4 
+#> 4 youth_x3 
+#> 5 oldage_x6
+#> 6 oldage_x5
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+
+# With all algorithm arguments specified
+if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
+  pc_tetrad <- pc(
+    engine = "tetrad",
+    test = "fisher_z",
+    alpha = 0.05,
+    conflict_rule = 2,
+    depth = 10,
+    stable_fas = FALSE,
+    guarantee_cpdag = TRUE
+  )
+  disco(tpc_example, pc_tetrad)
+}
+#> 
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: UNKNOWN
+#> 
+#> ── Edges ──
+#> 
+#>   from      edge  to       
+#>   <chr>     <chr> <chr>    
+#> 1 child_x2  ---   child_x1 
+#> 2 child_x2  -->   oldage_x5
+#> 3 child_x2  ---   youth_x4 
 #> 4 oldage_x5 -->   oldage_x6
 #> 5 youth_x3  -->   oldage_x5
 #> 6 youth_x4  -->   oldage_x6

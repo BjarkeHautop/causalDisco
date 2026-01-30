@@ -150,6 +150,8 @@ of the nodes.](reference/figures/README-plot-1.png)
 - Make examples for each engine with using all possible arguments (alg
   settings).
 
+- Check all args (that we want) are available.
+
 - Register a custom edge type for caugi to represent forbidden edges
   differently than normal directed edges. Would simplify plotting logic
   and easier to extend later.

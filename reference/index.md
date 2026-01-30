@@ -31,6 +31,8 @@ Core search algorithms implemented or wrapped by causalDisco.
   : GES Algorithm for Causal Discovery
 - [`grasp()`](https://bjarkehautop.github.io/causalDisco/reference/grasp.md)
   : GRaSP Algorithm for Causal Discovery
+- [`grasp_fci()`](https://bjarkehautop.github.io/causalDisco/reference/grasp_fci.md)
+  : GRaSP-FCI Algorithm for Causal Discovery
 - [`pc()`](https://bjarkehautop.github.io/causalDisco/reference/pc.md) :
   PC Algorithm for Causal Discovery
 - [`tfci()`](https://bjarkehautop.github.io/causalDisco/reference/tfci.md)
