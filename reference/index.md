@@ -21,10 +21,16 @@ High-level interface for running causal discovery.
 
 Core search algorithms implemented or wrapped by causalDisco.
 
+- [`boss()`](https://bjarkehautop.github.io/causalDisco/reference/boss.md)
+  : BOSS Algorithm. for Causal Discovery
+- [`boss_fci()`](https://bjarkehautop.github.io/causalDisco/reference/boss_fci.md)
+  : BOSS-FCI Algorithm. for Causal Discovery
 - [`fci()`](https://bjarkehautop.github.io/causalDisco/reference/fci.md)
   : FCI Algorithm for Causal Discovery
 - [`ges()`](https://bjarkehautop.github.io/causalDisco/reference/ges.md)
   : GES Algorithm for Causal Discovery
+- [`grasp()`](https://bjarkehautop.github.io/causalDisco/reference/grasp.md)
+  : GRaSP Algorithm for Causal Discovery
 - [`pc()`](https://bjarkehautop.github.io/causalDisco/reference/pc.md) :
   PC Algorithm for Causal Discovery
 - [`tfci()`](https://bjarkehautop.github.io/causalDisco/reference/tfci.md)

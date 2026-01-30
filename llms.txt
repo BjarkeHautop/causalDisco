@@ -147,6 +147,9 @@ of the nodes.](reference/figures/README-plot-1.png)
 
 ## TODO
 
+- Make examples for each engine with using all possible arguments (alg
+  settings).
+
 - Register a custom edge type for caugi to represent forbidden edges
   differently than normal directed edges. Would simplify plotting logic
   and easier to extend later.
@@ -240,8 +243,6 @@ gg +
     this error when implementing:
     `Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl, : java.lang.NullPointerException: Cannot invoke "edu.cmu.tetrad.data.Knowledge.getTestingData()" because "this.knowledge" is null`
     (see branch `Add-isa-sem-bic-score-to-Tetrad`).
-
-- Implement fci from pcalg
 
 - Implement BOSS + grasp from Tetrad
 
@@ -362,10 +363,16 @@ High-level interface for running causal discovery.
 
 Core search algorithms implemented or wrapped by causalDisco.
 
+- [`boss()`](https://bjarkehautop.github.io/causalDisco/reference/boss.md)
+  : BOSS Algorithm. for Causal Discovery
+- [`boss_fci()`](https://bjarkehautop.github.io/causalDisco/reference/boss_fci.md)
+  : BOSS-FCI Algorithm. for Causal Discovery
 - [`fci()`](https://bjarkehautop.github.io/causalDisco/reference/fci.md)
   : FCI Algorithm for Causal Discovery
 - [`ges()`](https://bjarkehautop.github.io/causalDisco/reference/ges.md)
   : GES Algorithm for Causal Discovery
+- [`grasp()`](https://bjarkehautop.github.io/causalDisco/reference/grasp.md)
+  : GRaSP Algorithm for Causal Discovery
 - [`pc()`](https://bjarkehautop.github.io/causalDisco/reference/pc.md) :
   PC Algorithm for Causal Discovery
 - [`tfci()`](https://bjarkehautop.github.io/causalDisco/reference/tfci.md)
