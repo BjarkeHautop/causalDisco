@@ -43,7 +43,7 @@ pc(engine = c("tetrad", "pcalg", "bnlearn"), test, alpha = 0.05, ...)
 ## Value
 
 A function of class `"pc"` that takes a single argument `data` (a data
-frame) and returns a `caugi` and a `knowledge` object.
+frame) and returns a `caugi` (of class "PDAG") and a `knowledge` object.
 
 ## Details
 
@@ -328,7 +328,7 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 }
 #> 
 #> ── caugi graph ─────────────────────────────────────────────────────────────────
-#> Graph class: UNKNOWN
+#> Graph class: PDAG
 #> 
 #> ── Edges ──
 #> 

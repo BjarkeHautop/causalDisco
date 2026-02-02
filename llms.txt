@@ -124,6 +124,19 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
   tetrad_pc <- tetrad_pc |> set_knowledge(kn)
   disco_tetrad_pc_new <- tetrad_pc(tpc_example)
 }
+#> Warning: The `file` argument of `vroom()` must use `I()` for literal data as of vroom
+#> 1.5.0.
+#>   
+#>   # Bad:
+#>   vroom("X,Y\n1.5,2.3\n")
+#>   
+#>   # Good:
+#>   vroom(I("X,Y\n1.5,2.3\n"))
+#> ℹ The deprecated feature was likely used in the readr package.
+#>   Please report the issue at <https://github.com/tidyverse/readr/issues>.
+#> This warning is displayed once per session.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 
 # Use causalDisco's own tges algorithm with temporal BIC score
 cd_tges <- tges(engine = "causalDisco", score = "tbic")
@@ -232,12 +245,6 @@ gg +
 - In documentation of defaults for tests maybe add the underlying engine
   defaults if they differ?
 
-- In tests (and examples) don’t use `tpc_example` all the time and
-  instead also use other data sets (e.g. num_data, cat_data, mix_data).
-  (this also avoids that we currently simulate data in tests when
-  needing an e.g. numerical dataset). Done mostly I think? Just missing
-  `cat_ord_data` usage iirc.
-
 - Add all algs/scores/tests from the backends (start with Tetrad). Check
   if we currently document ones we haven’t implemented yet.
 
@@ -246,17 +253,9 @@ gg +
     `Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl, : java.lang.NullPointerException: Cannot invoke "edu.cmu.tetrad.data.Knowledge.getTestingData()" because "this.knowledge" is null`
     (see branch `Add-isa-sem-bic-score-to-Tetrad`).
 
-- Implement BOSS + grasp from Tetrad
-
 - Update evaluation and confusion metrics (use caugi?)
 
 ### Bugfixes
-
-- Setting `mc = TRUE` (or `mc_test = TRUE`) errors in Tetrad. Remove the
-  argument for now (and maybe fix later).
-
-- Setting `precompute_covariances = FALSE` errors in Tetrad. Remove the
-  argument for now (and maybe fix later).
 
 - Tried implementing required edges in the scores (e.g. `TemporalBdeu`)
   by giving it score -Inf if missing a required edge, but then it runs
@@ -318,6 +317,64 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 ```
 
 Fixed in unreleased version of Tetrad (see \#1947 in Tetrad issues).
+
+- Tetrad introduces cycle in `pc` algorithm when required edges are used
+  (in unreleased Tetrad version it gives `X1 %---% X2` instead, i.e. not
+  respecting the required knowledge).
+
+``` r
+if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
+  data(num_data)
+
+  kn <- knowledge(
+    num_data,
+    X1 %-->% X2,
+    X3 %-->% Z
+  )
+  
+  tetrad_pc <- pc(engine = "tetrad", test = "fisher_z", alpha = 0.05)
+  disco(data = num_data, method = tetrad_pc, knowledge = kn)
+}
+#> Warning: Cannot mutate graph to class 'PDAG': Cannot convert caugi of class
+#> 'UNKNOWN' to 'PDAG'.FALSE.
+#> 
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: UNKNOWN
+#> 
+#> ── Edges ──
+#> 
+#>   from  edge  to   
+#>   <chr> <chr> <chr>
+#> 1 X1    -->   X2   
+#> 2 X1    -->   Y    
+#> 3 X2    -->   X3   
+#> 4 X2    -->   Y    
+#> 5 X3    -->   Y    
+#> 6 X3    -->   Z    
+#> 7 Z     -->   X1   
+#> 8 Z     -->   Y
+#> ── Nodes ──
+#>   name 
+#>   <chr>
+#> 1 X1   
+#> 2 X2   
+#> 3 X3   
+#> 4 Z    
+#> 5 Y
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+#> ── Variables ──
+#> 
+#>   var   tier 
+#>   <chr> <chr>
+#> 1 X1    <NA> 
+#> 2 X2    <NA> 
+#> 3 X3    <NA> 
+#> 4 Y     <NA> 
+#> 5 Z     <NA>
+#> ── Edges ──
+#>  ✔  X1 → X2
+#>  ✔  X3 → Z
+```
 
 ### Documentation
 

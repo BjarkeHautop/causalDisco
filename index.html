@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9039</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9040</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -161,6 +161,19 @@
 <span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="va">tetrad_pc</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/set_knowledge.html">set_knowledge</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span>
 <span>  <span class="va">disco_tetrad_pc_new</span> <span class="op">&lt;-</span> <span class="fu">tetrad_pc</span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
+<span><span class="co">#&gt; Warning: The `file` argument of `vroom()` must use `I()` for literal data as of vroom</span></span>
+<span><span class="co">#&gt; 1.5.0.</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   # Bad:</span></span>
+<span><span class="co">#&gt;   vroom("X,Y\n1.5,2.3\n")</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   # Good:</span></span>
+<span><span class="co">#&gt;   vroom(I("X,Y\n1.5,2.3\n"))</span></span>
+<span><span class="co">#&gt; ℹ The deprecated feature was likely used in the readr package.</span></span>
+<span><span class="co">#&gt;   Please report the issue at &lt;https://github.com/tidyverse/readr/issues&gt;.</span></span>
+<span><span class="co">#&gt; This warning is displayed once per session.</span></span>
+<span><span class="co">#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span>
+<span><span class="co">#&gt; generated.</span></span>
 <span></span>
 <span><span class="co"># Use causalDisco's own tges algorithm with temporal BIC score</span></span>
 <span><span class="va">cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tges.html">tges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, score <span class="op">=</span> <span class="st">"tbic"</span><span class="op">)</span></span>
@@ -244,23 +257,20 @@
 <ul>
 <li><p>Make required work for our algorithms. It breaks when it internally calls <code>tpdag</code>, so look into that…</p></li>
 <li><p>In documentation of defaults for tests maybe add the underlying engine defaults if they differ?</p></li>
-<li><p>In tests (and examples) don’t use <code>tpc_example</code> all the time and instead also use other data sets (e.g. num_data, cat_data, mix_data). (this also avoids that we currently simulate data in tests when needing an e.g. numerical dataset). Done mostly I think? Just missing <code>cat_ord_data</code> usage iirc.</p></li>
 <li>
 <p>Add all algs/scores/tests from the backends (start with Tetrad). Check if we currently document ones we haven’t implemented yet.</p>
 <ul>
 <li>Missing scores: <code>"Instance-specific Augmented SEM BIC Score"</code>. Get this error when implementing: <code>Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl, : java.lang.NullPointerException: Cannot invoke "edu.cmu.tetrad.data.Knowledge.getTestingData()" because "this.knowledge" is null</code> (see branch <code>Add-isa-sem-bic-score-to-Tetrad</code>).</li>
 </ul>
 </li>
-<li><p>Implement BOSS + grasp from Tetrad</p></li>
 <li><p>Update evaluation and confusion metrics (use caugi?)</p></li>
 </ul>
 <div class="section level3">
 <h3 id="bugfixes">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes"></a>
 </h3>
 <ul>
-<li><p>Setting <code>mc = TRUE</code> (or <code>mc_test = TRUE</code>) errors in Tetrad. Remove the argument for now (and maybe fix later).</p></li>
-<li><p>Setting <code>precompute_covariances = FALSE</code> errors in Tetrad. Remove the argument for now (and maybe fix later).</p></li>
-<li><p>Tried implementing required edges in the scores (e.g. <code>TemporalBdeu</code>) by giving it score -Inf if missing a required edge, but then it runs forever. I.e. adding the following to <code>local.score</code></p></li>
+<li>Tried implementing required edges in the scores (e.g. <code>TemporalBdeu</code>) by giving it score -Inf if missing a required edge, but then it runs forever. I.e. adding the following to <code>local.score</code>
+</li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vertex_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pp.dat</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="va">vertex</span><span class="op">]</span></span>
@@ -312,6 +322,61 @@
 <span><span class="co">#&gt; 5:  youth_x3    o-&gt; oldage_x5</span></span>
 <span><span class="co">#&gt; 6:  youth_x4    --&gt; oldage_x6</span></span></code></pre></div>
 <p>Fixed in unreleased version of Tetrad (see #1947 in Tetrad issues).</p>
+<ul>
+<li>Tetrad introduces cycle in <code>pc</code> algorithm when required edges are used (in unreleased Tetrad version it gives <code>X1 %---% X2</code> instead, i.e. not respecting the required knowledge).</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">num_data</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
+<span>    <span class="va">num_data</span>,</span>
+<span>    <span class="va">X1</span> <span class="op">%--&gt;%</span> <span class="va">X2</span>,</span>
+<span>    <span class="va">X3</span> <span class="op">%--&gt;%</span> <span class="va">Z</span></span>
+<span>  <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">num_data</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; Warning: Cannot mutate graph to class 'PDAG': Cannot convert caugi of class</span></span>
+<span><span class="co">#&gt; 'UNKNOWN' to 'PDAG'.FALSE.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── caugi graph ─────────────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt; Graph class: UNKNOWN</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Edges ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   from  edge  to   </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1 X1    --&gt;   X2   </span></span>
+<span><span class="co">#&gt; 2 X1    --&gt;   Y    </span></span>
+<span><span class="co">#&gt; 3 X2    --&gt;   X3   </span></span>
+<span><span class="co">#&gt; 4 X2    --&gt;   Y    </span></span>
+<span><span class="co">#&gt; 5 X3    --&gt;   Y    </span></span>
+<span><span class="co">#&gt; 6 X3    --&gt;   Z    </span></span>
+<span><span class="co">#&gt; 7 Z     --&gt;   X1   </span></span>
+<span><span class="co">#&gt; 8 Z     --&gt;   Y</span></span>
+<span><span class="co">#&gt; ── Nodes ──</span></span>
+<span><span class="co">#&gt;   name </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1 X1   </span></span>
+<span><span class="co">#&gt; 2 X2   </span></span>
+<span><span class="co">#&gt; 3 X3   </span></span>
+<span><span class="co">#&gt; 4 Z    </span></span>
+<span><span class="co">#&gt; 5 Y</span></span>
+<span><span class="co">#&gt; ── Knowledge object ────────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt; ── Variables ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   <span style="font-weight: bold;">var</span>   <span style="font-weight: bold;">tier</span> </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1 X1    &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 2 X2    &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 3 X3    &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 4 Y     &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 5 Z     &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; ── Edges ──</span></span>
+<span><span class="co">#&gt;  ✔  X1 → X2</span></span>
+<span><span class="co">#&gt;  ✔  X3 → Z</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">

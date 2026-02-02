@@ -251,7 +251,7 @@ Sets the independence test to use in Tetrad.
 
 #### Usage
 
-    TetradSearch$set_test(method, ..., mc = FALSE)
+    TetradSearch$set_test(method, ..., use_for_mc = FALSE)
 
 #### Arguments
 
@@ -401,11 +401,8 @@ Sets the independence test to use in Tetrad.
   - `"poisson_prior"` - Poisson prior test
 
     - `poisson_lambda = 1` - Lambda parameter for the Poisson
-      distribution (\> 0),
-
-    - `precompute_covariances = TRUE` - For more than 5000 variables or
-      so, set this to FALSE in order to calculate covariances on the fly
-      from data,
+      distribution (\> 0), variables or so, set this to FALSE in order
+      to calculate covariances on the fly from data,
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
@@ -474,10 +471,8 @@ Sets the independence test to use in Tetrad.
     - `structure_prior = 0` - The default number of parents for any
       conditional probability table. Higher weight is accorded to tables
       with about that number of parents. The prior structure weights are
-      distributed according to a binomial distribution,
-
-    - `precompute_covariances = TRUE` - For more than 5000 variables or
-      so, set this to FALSE in order to calculate covariances on the fly
+      distributed according to a binomial distribution, variables or so,
+      set this to FALSE in order to calculate covariances on the fly
       from data,
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
@@ -499,7 +494,7 @@ Sets the independence test to use in Tetrad.
       will be used. The Degenerate Gaussian category indicator variables
       for mixed data are also used.
 
-- `mc`:
+- `use_for_mc`:
 
   (logical) If TRUE, sets this test for the Markov checker `mc_test`.
 
@@ -573,21 +568,16 @@ Sets the scoring function to use in Tetrad.
     - `sem_bic_rule = 1` - The Chickering Rule uses the difference of
       BIC scores to add or remove edges. The Nandy et al. rule uses a
       single calculation of a partial correlation in place of the
-      likelihood difference,
-
-    - `precompute_covariances = TRUE` - For more than 5000 variables or
-      so, set this to FALSE in order to calculate covariances on the fly
-      from data,
+      likelihood difference, variables or so, set this to FALSE in order
+      to calculate covariances on the fly from data,
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
   - `ebic` - Extended BIC score.
 
-    - `gamma` - The gamma parameter in the EBIC score.
-
-    - `precompute_covariances = TRUE` - For more than 5000 variables or
-      so, set this to FALSE in order to calculate covariances on the fly
+    - `gamma` - The gamma parameter in the EBIC score. variables or so,
+      set this to FALSE in order to calculate covariances on the fly
       from data,
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
@@ -650,11 +640,8 @@ Sets the scoring function to use in Tetrad.
       distributed according to a binomial distribution,
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
-      diagonal, \< 0 Pseudoinverse.
-
-    - `precompute_covariances = TRUE` - For more than 5000 variables or
-      so, set this to FALSE in order to calculate covariances on the fly
-      from data.
+      diagonal, \< 0 Pseudoinverse. variables or so, set this to FALSE
+      in order to calculate covariances on the fly from data.
 
   - `"discrete_bic"` - BIC score for discrete data.
 
@@ -674,11 +661,8 @@ Sets the scoring function to use in Tetrad.
     - `sem_gic_rule = "bic"` - The following rules are available:
       `"bic"` - \\\ln n\\, `"gic2"` - \\p n^{1/3}\\, `"ric"` - \\2 \ln(p
       n)\\, `"ricc"` - \\2(\ln(p n) + \ln\ln(p n))\\, `"gic6"` - \\\ln n
-      \ln(p n)\\.
-
-    - `precompute_covariances = TRUE` - For more than 5000 variables or
-      so, set this to FALSE in order to calculate covariances on the fly
-      from data,
+      \ln(p n)\\. variables or so, set this to FALSE in order to
+      calculate covariances on the fly from data,
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
@@ -691,10 +675,8 @@ Sets the scoring function to use in Tetrad.
     - `structure_prior = 0` - The default number of parents for any
       conditional probability table. Higher weight is accorded to tables
       with about that number of parents. The prior structure weights are
-      distributed according to a binomial distribution,
-
-    - `precompute_covariances = TRUE` - For more than 5000 variables or
-      so, set this to FALSE in order to calculate covariances on the fly
+      distributed according to a binomial distribution, variables or so,
+      set this to FALSE in order to calculate covariances on the fly
       from data.
 
     &nbsp;
@@ -714,11 +696,8 @@ Sets the scoring function to use in Tetrad.
   - `"poisson_prior"` - Poisson prior score.
 
     - `poisson_lambda = 1` - Lambda parameter for the Poisson
-      distribution (\> 0),
-
-    - `precompute_covariances = TRUE` - For more than 5000 variables or
-      so, set this to FALSE in order to calculate covariances on the fly
-      from data,
+      distribution (\> 0), variables or so, set this to FALSE in order
+      to calculate covariances on the fly from data,
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
@@ -726,11 +705,9 @@ Sets the scoring function to use in Tetrad.
   - `"zhang_shen_bound"` - Gaussian Extended BIC score.
 
     - `risk_bound = 0.2` - This is the probability of getting the true
-      model if a correct model is discovered. Could underfit.
-
-    - `precompute_covariances = TRUE` - For more than 5000 variables or
-      so, set this to FALSE in order to calculate covariances on the fly
-      from data,
+      model if a correct model is discovered. Could underfit. variables
+      or so, set this to FALSE in order to calculate covariances on the
+      fly from data,
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
@@ -1569,7 +1546,6 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
     test = "sem_bic",
     penalty_discount = 1,
     structure_prior = 1,
-    precompute_covariances = TRUE,
     singularity_lambda = 0.1
   )
   disco(data = num_data, method = my_pc2)

@@ -13,7 +13,7 @@ resulting graph or statistics."><meta property="og:image" content="https://bjark
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9039</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9040</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -210,7 +210,7 @@ resampling, if that feature was requested.</p></dd>
 <h3 id="method-set-test-">Method <code>set_test()</code><a class="anchor" aria-label="anchor" href="#method-set-test-"></a></h3>
 <p>Sets the independence test to use in Tetrad.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">TetradSearch</span><span class="op">$</span><span class="fu">set_test</span><span class="op">(</span><span class="va">method</span>, <span class="va">...</span>, mc <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">TetradSearch</span><span class="op">$</span><span class="fu">set_test</span><span class="op">(</span><span class="va">method</span>, <span class="va">...</span>, use_for_mc <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -319,8 +319,7 @@ if used.</p></li>
 if used.</p></li>
 </ul></li>
 <li><p><code>"poisson_prior"</code> - Poisson prior test</p><ul><li><p><code>poisson_lambda = 1</code> - Lambda parameter for the Poisson
-distribution (&gt; 0),</p></li>
-<li><p><code>precompute_covariances = TRUE</code> - For more than 5000
+distribution (&gt; 0),
 variables or so, set this to FALSE in order to calculate
 covariances on the fly from data,</p></li>
 <li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
@@ -367,8 +366,7 @@ graphs,</p></li>
 <li><p><code>structure_prior = 0</code> - The default number of parents
 for any conditional probability table. Higher weight is accorded
 to tables with about that number of parents. The prior structure
-weights are distributed according to a binomial distribution,</p></li>
-<li><p><code>precompute_covariances = TRUE</code> - For more than 5000
+weights are distributed according to a binomial distribution,
 variables or so, set this to FALSE in order to calculate
 covariances on the fly from data,</p></li>
 <li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
@@ -389,7 +387,7 @@ indicator variables for mixed data are also used.</p></li>
 </ul></dd>
 
 
-<dt><code>mc</code></dt>
+<dt><code>use_for_mc</code></dt>
 <dd><p>(logical) If TRUE, sets this test for the Markov checker <code>mc_test</code>.</p></dd>
 
 
@@ -440,15 +438,13 @@ weights are distributed according to a binomial distribution,</p></li>
 <li><p><code>sem_bic_rule = 1</code> - The Chickering Rule uses the
 difference of BIC scores to add or remove edges. The Nandy et al.
 rule uses a single calculation of a partial correlation in place
-of the likelihood difference,</p></li>
-<li><p><code>precompute_covariances = TRUE</code> - For more than 5000
+of the likelihood difference,
 variables or so, set this to FALSE in order to calculate
 covariances on the fly from data,</p></li>
 <li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
 lambda to the diagonal, &lt; 0 Pseudoinverse.</p></li>
 </ul></li>
-<li><p><code>ebic</code> - Extended BIC score.</p><ul><li><p><code>gamma</code> - The gamma parameter in the EBIC score.</p></li>
-<li><p><code>precompute_covariances = TRUE</code> - For more than 5000
+<li><p><code>ebic</code> - Extended BIC score.</p><ul><li><p><code>gamma</code> - The gamma parameter in the EBIC score.
 variables or so, set this to FALSE in order to calculate
 covariances on the fly from data,</p></li>
 <li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
@@ -495,8 +491,7 @@ for any conditional probability table. Higher weight is accorded
 to tables with about that number of parents. The prior structure
 weights are distributed according to a binomial distribution,</p></li>
 <li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
-lambda to the diagonal, &lt; 0 Pseudoinverse.</p></li>
-<li><p><code>precompute_covariances = TRUE</code> - For more than 5000
+lambda to the diagonal, &lt; 0 Pseudoinverse.
 variables or so, set this to FALSE in order to calculate
 covariances on the fly from data.</p></li>
 </ul></li>
@@ -514,8 +509,7 @@ yields sparser graphs,</p></li>
 <code>"gic2"</code> - \(p n^{1/3}\),
 <code>"ric"</code> - \(2 \ln(p n)\),
 <code>"ricc"</code> - \(2(\ln(p n) + \ln\ln(p n))\),
-<code>"gic6"</code> - \(\ln n \ln(p n)\).</p></li>
-<li><p><code>precompute_covariances = TRUE</code> - For more than 5000
+<code>"gic6"</code> - \(\ln n \ln(p n)\).
 variables or so, set this to FALSE in order to calculate
 covariances on the fly from data,</p></li>
 <li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
@@ -526,8 +520,7 @@ yields sparser graphs,</p></li>
 <li><p><code>structure_prior = 0</code> - The default number of parents
 for any conditional probability table. Higher weight is accorded
 to tables with about that number of parents. The prior structure
-weights are distributed according to a binomial distribution,</p></li>
-<li><p><code>precompute_covariances = TRUE</code> - For more than 5000
+weights are distributed according to a binomial distribution,
 variables or so, set this to FALSE in order to calculate
 covariances on the fly from data.</p></li>
 </ul><ul><li><p><code>structure_prior = 0</code> - The default number of parents
@@ -541,16 +534,14 @@ D discrete, one should to simply discretize X for just those cases.
 If FALSE, the integration will be exact.</p></li>
 </ul></li>
 <li><p><code>"poisson_prior"</code> - Poisson prior score.</p><ul><li><p><code>poisson_lambda = 1</code> - Lambda parameter for the Poisson
-distribution (&gt; 0),</p></li>
-<li><p><code>precompute_covariances = TRUE</code> - For more than 5000
+distribution (&gt; 0),
 variables or so, set this to FALSE in order to calculate
 covariances on the fly from data,</p></li>
 <li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
 lambda to the diagonal, &lt; 0 Pseudoinverse.</p></li>
 </ul></li>
 <li><p><code>"zhang_shen_bound"</code> - Gaussian Extended BIC score.</p><ul><li><p><code>risk_bound = 0.2</code> - This is the probability of getting
-the true model if a correct model is discovered. Could underfit.</p></li>
-<li><p><code>precompute_covariances = TRUE</code> - For more than 5000
+the true model if a correct model is discovered. Could underfit.
 variables or so, set this to FALSE in order to calculate
 covariances on the fly from data,</p></li>
 <li><p><code>singularity_lambda = 0.0</code> - Small number &gt;= 0: Add
@@ -1260,7 +1251,6 @@ either continuous or nominal data. Default is <code>TRUE.</code></p></dd>
 <span class="r-in"><span>    test <span class="op">=</span> <span class="st">"sem_bic"</span>,</span></span>
 <span class="r-in"><span>    penalty_discount <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>    structure_prior <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>    precompute_covariances <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>    singularity_lambda <span class="op">=</span> <span class="fl">0.1</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">num_data</span>, method <span class="op">=</span> <span class="va">my_pc2</span><span class="op">)</span></span></span>

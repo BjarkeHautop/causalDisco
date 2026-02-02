@@ -38,8 +38,8 @@ fci(engine = c("tetrad", "pcalg"), test, alpha = 0.05, ...)
 ## Value
 
 A function of class `"fci"` that takes a single argument `data` (a data
-frame) and returns a `caugi` and a `knowledge` (`knowledgeable_caugi`)
-object.
+frame) and returns a `caugi` (of class "UNKNOWN") and a `knowledge`
+(`knowledgeable_caugi`) object.
 
 ## Details
 

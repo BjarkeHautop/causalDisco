@@ -31,8 +31,8 @@ boss(engine = "tetrad", score, ...)
 ## Value
 
 A function of class `"boss"` that takes a single argument `data` (a data
-frame) and returns a `caugi` and a `knowledge` (`knowledgeable_caugi`)
-object.
+frame) and returns a `caugi` (of class "PDAG") and a `knowledge`
+(`knowledgeable_caugi`) object.
 
 ## Details
 

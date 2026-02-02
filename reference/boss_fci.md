@@ -2,7 +2,7 @@
 
 Run the BOSS-FCI (Best Order Score Search FCI) algorithm for causal
 discovery using one of several engines. This uses BOSS in place of FGES
-for the intial step in the GFCI algorithm.
+for the initial step in the GFCI algorithm.
 
 ## Usage
 
@@ -32,7 +32,7 @@ boss_fci(engine = "tetrad", score, ...)
 ## Value
 
 A function of class `"boss_fci"` that takes a single argument `data` (a
-data frame) and returns a `caugi` and a `knowledge`
+data frame) and returns a `caugi` (of class "UNKNOWN") and a `knowledge`
 (`knowledgeable_caugi`) object.
 
 ## Details

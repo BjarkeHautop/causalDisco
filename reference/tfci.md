@@ -34,8 +34,8 @@ tfci(engine = c("causalDisco"), test, alpha = 0.05, ...)
 ## Value
 
 A function of class `"tfci"` that takes a single argument `data` (a data
-frame) and returns a `caugi` and `knowledge` (`knowledgeable_caugi`)
-object.
+frame) and returns a `caugi` (of class "UNKNOWN") and `knowledge`
+(`knowledgeable_caugi`) object.
 
 ## Details
 
