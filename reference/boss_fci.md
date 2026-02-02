@@ -7,7 +7,7 @@ for the initial step in the GFCI algorithm.
 ## Usage
 
 ``` r
-boss_fci(engine = "tetrad", score, ...)
+boss_fci(engine = "tetrad", score, test, alpha = 0.05, ...)
 ```
 
 ## Arguments
@@ -23,6 +23,14 @@ boss_fci(engine = "tetrad", score, ...)
 - score:
 
   Character; name of the scoring function to use.
+
+- test:
+
+  Character; name of the conditional‐independence test.
+
+- alpha:
+
+  Numeric; significance level for the CI tests.
 
 - ...:
 
@@ -51,7 +59,11 @@ data(tpc_example)
 # Requires Tetrad to be installed
 if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
   # Recommended path using disco()
-  boss_fci_tetrad <- boss_fci(engine = "tetrad", score = "sem_bic")
+  boss_fci_tetrad <- boss_fci(
+    engine = "tetrad",
+    score = "sem_bic",
+    test = "fisher_z"
+  )
   disco(tpc_example, boss_fci_tetrad)
 
   # or using boss_fci_tetrad directly
@@ -65,11 +77,11 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 #> 
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
-#> 1 child_x2  ---   child_x1 
-#> 2 child_x2  -->   oldage_x5
-#> 3 child_x2  ---   youth_x4 
+#> 1 child_x2  o-o   child_x1 
+#> 2 child_x2  o->   oldage_x5
+#> 3 child_x2  o-o   youth_x4 
 #> 4 oldage_x5 -->   oldage_x6
-#> 5 youth_x3  -->   oldage_x5
+#> 5 youth_x3  o->   oldage_x5
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 
@@ -95,7 +107,11 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
   )
 
   # Recommended path using disco()
-  boss_fci_tetrad <- boss_fci(engine = "tetrad", score = "sem_bic")
+  boss_fci_tetrad <- boss_fci(
+    engine = "tetrad",
+    score = "sem_bic",
+    test = "fisher_z"
+  )
   disco(tpc_example, boss_fci_tetrad, knowledge = kn)
 
   # or using boss_fci_tetrad directly
@@ -110,12 +126,49 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 #> 
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
-#> 1 child_x2  ---   child_x1 
-#> 2 child_x2  -->   oldage_x5
-#> 3 child_x2  -->   youth_x4 
+#> 1 child_x2  o-o   child_x1 
+#> 2 child_x2  o->   oldage_x5
+#> 3 child_x2  o-o   youth_x4 
 #> 4 oldage_x5 -->   oldage_x6
-#> 5 youth_x3  -->   oldage_x5
+#> 5 youth_x3  o->   oldage_x5
 #> 6 youth_x4  -->   oldage_x6
+#> ── Nodes ──
+#> 
+#>   name     
+#>   <chr>    
+#> 1 child_x2 
+#> 2 child_x1 
+#> 3 youth_x4 
+#> 4 youth_x3 
+#> 5 oldage_x6
+#> 6 oldage_x5
+#> ── Knowledge object ────────────────────────────────────────────────────────────
+
+# With all algorithm arguments specified
+if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
+  boss_fci_tetrad <- boss_fci(
+    engine = "tetrad",
+    score = "poisson_prior",
+    test = "rank_independence",
+    depth = 3,
+    max_disc_path_length = 5,
+    use_bes = FALSE,
+    use_heuristic = FALSE,
+    complete_rule_set_used = FALSE,
+    guarantee_pag = TRUE
+  )
+  disco(tpc_example, boss_fci_tetrad)
+}
+#> 
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: UNKNOWN
+#> 
+#> ── Edges ──
+#> 
+#>   from      edge  to       
+#>   <chr>     <chr> <chr>    
+#> 1 child_x2  o-o   child_x1 
+#> 2 oldage_x6 o-o   oldage_x5
 #> ── Nodes ──
 #> 
 #>   name     

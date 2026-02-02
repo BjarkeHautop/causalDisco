@@ -194,4 +194,42 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 #> 5 oldage_x6
 #> 6 oldage_x5
 #> ── Knowledge object ────────────────────────────────────────────────────────────
+
+# With all algorithm arguments specified
+if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
+  ges_tetrad <- ges(
+    engine = "tetrad",
+    score = "ebic",
+    symmetric_first_step = TRUE,
+    max_degree = 3,
+    parallelized = TRUE,
+    faithfulness_assumed = TRUE
+  )
+  disco(tpc_example, ges_tetrad)
+}
+#> 
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: PDAG
+#> 
+#> ── Edges ──
+#> 
+#>   from      edge  to       
+#>   <chr>     <chr> <chr>    
+#> 1 child_x2  ---   child_x1 
+#> 2 child_x2  -->   oldage_x5
+#> 3 child_x2  ---   youth_x4 
+#> 4 oldage_x5 -->   oldage_x6
+#> 5 youth_x3  -->   oldage_x5
+#> 6 youth_x4  -->   oldage_x6
+#> ── Nodes ──
+#> 
+#>   name     
+#>   <chr>    
+#> 1 child_x2 
+#> 2 child_x1 
+#> 3 youth_x4 
+#> 4 youth_x3 
+#> 5 oldage_x6
+#> 6 oldage_x5
+#> ── Knowledge object ────────────────────────────────────────────────────────────
 ```
