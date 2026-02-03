@@ -156,24 +156,7 @@
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"conditional_gaussian"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span>  <span class="va">disco_tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tpc_example</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="co"># Similarly, one could do</span></span>
-<span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="va">tetrad_pc</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/set_knowledge.html">set_knowledge</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span>
-<span>  <span class="va">disco_tetrad_pc_new</span> <span class="op">&lt;-</span> <span class="fu">tetrad_pc</span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; Warning: The `file` argument of `vroom()` must use `I()` for literal data as of vroom</span></span>
-<span><span class="co">#&gt; 1.5.0.</span></span>
-<span><span class="co">#&gt;   </span></span>
-<span><span class="co">#&gt;   # Bad:</span></span>
-<span><span class="co">#&gt;   vroom("X,Y\n1.5,2.3\n")</span></span>
-<span><span class="co">#&gt;   </span></span>
-<span><span class="co">#&gt;   # Good:</span></span>
-<span><span class="co">#&gt;   vroom(I("X,Y\n1.5,2.3\n"))</span></span>
-<span><span class="co">#&gt; ℹ The deprecated feature was likely used in the readr package.</span></span>
-<span><span class="co">#&gt;   Please report the issue at &lt;https://github.com/tidyverse/readr/issues&gt;.</span></span>
-<span><span class="co">#&gt; This warning is displayed once per session.</span></span>
-<span><span class="co">#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span>
-<span><span class="co">#&gt; generated.</span></span>
 <span></span>
 <span><span class="co"># Use causalDisco's own tges algorithm with temporal BIC score</span></span>
 <span><span class="va">cd_tges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tges.html">tges</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"causalDisco"</span>, score <span class="op">=</span> <span class="st">"tbic"</span><span class="op">)</span></span>
@@ -194,7 +177,6 @@
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
 </h2>
 <ul>
-<li><p>Make examples for each engine with using all possible arguments (alg settings).</p></li>
 <li><p>Check all args (that we want) are available.</p></li>
 <li><p>Register a custom edge type for caugi to represent forbidden edges differently than normal directed edges. Would simplify plotting logic and easier to extend later.</p></li>
 </ul>
@@ -255,7 +237,6 @@
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot%20wip-1.png" alt="" width="100%"></p>
 <ul>
-<li><p>Make required work for our algorithms. It breaks when it internally calls <code>tpdag</code>, so look into that…</p></li>
 <li><p>In documentation of defaults for tests maybe add the underlying engine defaults if they differ?</p></li>
 <li>
 <p>Add all algs/scores/tests from the backends (start with Tetrad). Check if we currently document ones we haven’t implemented yet.</p>
@@ -265,42 +246,13 @@
 </li>
 <li><p>Update evaluation and confusion metrics (use caugi?)</p></li>
 </ul>
-<div class="section level3">
-<h3 id="bugfixes">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes"></a>
-</h3>
-<ul>
-<li>Tried implementing required edges in the scores (e.g. <code>TemporalBdeu</code>) by giving it score -Inf if missing a required edge, but then it runs forever. I.e. adding the following to <code>local.score</code>
-</li>
-</ul>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vertex_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pp.dat</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="va">vertex</span><span class="op">]</span></span>
-<span><span class="va">req_parents</span> <span class="op">&lt;-</span> <span class="va">kn</span><span class="op">$</span><span class="va">edges</span> <span class="op">|&gt;</span></span>
-<span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">status</span> <span class="op">==</span> <span class="st">"required"</span>, <span class="va">to</span> <span class="op">==</span> <span class="va">vertex_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">from</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">parent_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pp.dat</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="va">parents</span><span class="op">]</span></span>
-<span><span class="va">missing_required</span> <span class="op">&lt;-</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">req_parents</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">parent_names</span><span class="op">)</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="va">missing_required</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<p>The algorithm needs to be modified when having required edges, I think.</p>
-<p>Should be easier to fix for test based algorithms? Just check if required edges are present after skeleton phase and add them if missing? (and forbid them from being removed in orientation phase). Look at fixedEdges in pcalg.</p>
-<ul>
-<li><p>Look into how (if) possible to pass to pcalg.</p></li>
-<li>
-<p>Piping as done above for Tetrad in the example section loses <code>$knowledge$tiers</code> information due to how builders/closures capture knowledge.</p>
-<ul>
-<li>Fixing requires refactoring the disco_method builder design I think.</li>
-</ul>
-</li>
-</ul>
 <div class="section level4">
 <h4 id="tetrad-issues">Tetrad issues<a class="anchor" aria-label="anchor" href="#tetrad-issues"></a>
 </h4>
 <ul>
 <li>Tetrad does not use required correctly in <code>fci</code> algorithm</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tpc_example</span><span class="op">)</span></span>
 <span></span>
@@ -323,9 +275,9 @@
 <span><span class="co">#&gt; 6:  youth_x4    --&gt; oldage_x6</span></span></code></pre></div>
 <p>Fixed in unreleased version of Tetrad (see #1947 in Tetrad issues).</p>
 <ul>
-<li>Tetrad introduces cycle in <code>pc</code> algorithm when required edges are used (in unreleased Tetrad version it gives <code>X1 %---% X2</code> instead, i.e. not respecting the required knowledge).</li>
+<li>Tetrad introduces cycle in <code>pc</code> algorithm when required edges are used (in unreleased Tetrad version it gives <code>X1 %---% X2</code> instead, i.e. not respecting the required knowledge). See #1951.</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">installed</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="reference/check_tetrad_install.html">check_tetrad_install</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">java_ok</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">num_data</span><span class="op">)</span></span>
 <span></span>
@@ -338,8 +290,8 @@
 <span>  <span class="va">tetrad_pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pc.html">pc</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"tetrad"</span>, test <span class="op">=</span> <span class="st">"fisher_z"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="reference/disco.html">disco</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">num_data</span>, method <span class="op">=</span> <span class="va">tetrad_pc</span>, knowledge <span class="op">=</span> <span class="va">kn</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; Warning: Cannot mutate graph to class 'PDAG': Cannot convert caugi of class</span></span>
-<span><span class="co">#&gt; 'UNKNOWN' to 'PDAG'.FALSE.</span></span>
+<span><span class="co">#&gt; Warning: Cannot mutate graph to class 'PDAG'. The graph contains a directed</span></span>
+<span><span class="co">#&gt; cycle.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── caugi graph ─────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; Graph class: UNKNOWN</span></span>
@@ -378,13 +330,11 @@
 <span><span class="co">#&gt;  ✔  X1 → X2</span></span>
 <span><span class="co">#&gt;  ✔  X3 → Z</span></span></code></pre></div>
 </div>
-</div>
 <div class="section level3">
 <h3 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h3>
 <ul>
 <li><p>Make it clear in <code><a href="reference/BnlearnSearch.html">?BnlearnSearch</a></code> (and similar for the others) that all algorithms aren’t currently fully supported.</p></li>
-<li><p>List in documentation of <code>tfci</code>, … what kind of graph it returns.</p></li>
 <li><p>Figure out how to not repeat the documentation of e.g. penalty discount in TetradSearch R6 class.</p></li>
 </ul>
 </div>

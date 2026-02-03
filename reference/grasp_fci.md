@@ -144,4 +144,51 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 #> 5 oldage_x6
 #> 6 oldage_x5
 #> ── Knowledge object ────────────────────────────────────────────────────────────
+
+# With all algorithm arguments specified
+if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
+  grasp_fci_tetrad <- grasp_fci(
+    engine = "tetrad",
+    test = "poisson_prior",
+    score = "rank_bic",
+    alpha = 0.05,
+    depth = 3,
+    stable_fas = FALSE,
+    max_disc_path_length = 5,
+    covered_depth = 3,
+    singular_depth = 2,
+    nonsingular_depth = 2,
+    ordered_alg = TRUE,
+    raskutti_uhler = TRUE,
+    use_data_order = FALSE,
+    num_starts = 3,
+    guarantee_pag = TRUE
+  )
+  disco(tpc_example, grasp_fci_tetrad)
+}
+#> 
+#> ── caugi graph ─────────────────────────────────────────────────────────────────
+#> Graph class: UNKNOWN
+#> 
+#> ── Edges ──
+#> 
+#>   from      edge  to       
+#>   <chr>     <chr> <chr>    
+#> 1 child_x2  o-o   child_x1 
+#> 2 child_x2  o->   oldage_x5
+#> 3 child_x2  o-o   youth_x4 
+#> 4 oldage_x5 -->   oldage_x6
+#> 5 youth_x3  o->   oldage_x5
+#> 6 youth_x4  -->   oldage_x6
+#> ── Nodes ──
+#> 
+#>   name     
+#>   <chr>    
+#> 1 child_x2 
+#> 2 child_x1 
+#> 3 youth_x4 
+#> 4 youth_x3 
+#> 5 oldage_x6
+#> 6 oldage_x5
+#> ── Knowledge object ────────────────────────────────────────────────────────────
 ```
