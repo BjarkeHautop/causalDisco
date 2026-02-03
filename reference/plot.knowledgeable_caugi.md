@@ -121,10 +121,10 @@ plot(res_untiered)
 
 # With a custom defined layout
 custom_layout <- data.frame(
- name = c("child_x1", "child_x2", "youth_x3", "youth_x4", "oldage_x5", "oldage_x6"),
- x = c(0, 1, 2, 2, 3, 4),
- y = c(0, 1, 0, -1, 0, 1)
+ name = c("X1", "X2", "X3", "Z", "Y"),
+ x = c(0, 1, 2, 2, 3),
+ y = c(0, 1, 0.25, -1, 0)
 )
 plot(res_untiered, layout = custom_layout)
-#> Error: Layout has 6 rows but graph has 5 nodes
+
 ```

@@ -11,7 +11,6 @@ come about when variables can be assigned to distinct tiers or periods
 tfci_run(
   data = NULL,
   knowledge = NULL,
-  order = NULL,
   alpha = 0.05,
   test = reg_test,
   suff_stat = NULL,
@@ -38,14 +37,6 @@ tfci_run(
   A *knowledge* object describing tiers/periods and optional
   forbidden/required edges. This replaces the legacy `order` interface
   and is the preferred way to supply temporal background knowledge.
-
-- order:
-
-  **Deprecated**. A character vector with period-prefixes in their
-  temporal order (e.g., `c("p1", "p2")`). If supplied (and `knowledge`
-  is `NULL`), a temporary `knowledge` object is constructed using
-  [tidyselect::starts_with](https://tidyselect.r-lib.org/reference/starts_with.html)
-  for each prefix. Supplying both `knowledge` and `order` is an error.
 
 - alpha:
 

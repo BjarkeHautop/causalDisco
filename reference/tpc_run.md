@@ -12,14 +12,12 @@ future release.
 tpc_run(
   data = NULL,
   knowledge = NULL,
-  order = NULL,
   alpha = 0.05,
   test = reg_test,
   suff_stat = NULL,
   method = "stable.fast",
   na_method = "none",
   orientation_method = "conservative",
-  output = "caugi",
   directed_as_undirected = FALSE,
   varnames = NULL,
   ...
@@ -41,14 +39,6 @@ tpc_run(
   [`knowledge()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.md),
   encoding tier assignments and optional forbidden/required edges. This
   is the preferred way to provide temporal background knowledge.
-
-- order:
-
-  A character vector of period prefixes in temporal order. Deprecated;
-  use `knowledge` instead. If supplied, it is converted internally to
-  tier knowledge using
-  [`tidyselect::starts_with()`](https://tidyselect.r-lib.org/reference/starts_with.html)
-  for each prefix.
 
 - alpha:
 
@@ -87,16 +77,6 @@ tpc_run(
   Conflict-handling method when orienting edges. Currently only the
   conservative method is available.
 
-- output:
-
-  One of `"tpdag"`, `"tskeleton"`, `"pcAlgo"`, or `"caugi"`. If
-  `"tskeleton"`, return the temporal skeleton without directions. If
-  `"tpdag"` (default), return a temporal partially directed acyclic
-  graph (TPDAG). If `"pcAlgo"`, return a
-  [`pcAlgo-class`](https://rdrr.io/pkg/pcalg/man/pcAlgo-class.html)
-  object for compatibility with pcalg. If `"caugi"`, return a `caugi`
-  and a `knowledge` (`knowledgeable_caugi`) object.
-
 - directed_as_undirected:
 
   Logical; if `TRUE`, treat any directed edges in `knowledge` as
@@ -117,12 +97,7 @@ tpc_run(
 
 ## Value
 
-If `output = "tpdag"` or `"tskeleton"`, an S3 list with entries `$tamat`
-(temporal adjacency matrix), `$psi` (alpha level), and `$ntests` (number
-of tests run). If `output = "pcAlgo"`, a
-[`pcAlgo-class`](https://rdrr.io/pkg/pcalg/man/pcAlgo-class.html)
-object. If `output = "caugi"`, a `caugi` and a `knowledge`
-(`knowledgeable_caugi`) object.
+A `caugi` and a `knowledge` (`knowledgeable_caugi`) object.
 
 ## Details
 

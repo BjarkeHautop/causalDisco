@@ -54,7 +54,6 @@ variables can be assigned to distinct tiers or periods (i.e., a temporal orderin
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tfci_run</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  knowledge <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  order <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  test <span class="op">=</span> <span class="va">reg_test</span>,</span>
 <span>  suff_stat <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -82,14 +81,6 @@ prefixed with their period name (see examples). When using
 <dd><p>A <em>knowledge</em> object describing tiers/periods and optional
 forbidden/required edges. This replaces the legacy <code>order</code> interface and
 is the preferred way to supply temporal background knowledge.</p></dd>
-
-
-<dt id="arg-order">order<a class="anchor" aria-label="anchor" href="#arg-order"></a></dt>
-<dd><p><strong>Deprecated</strong>. A character vector with period-prefixes in their
-temporal order (e.g., <code>c("p1", "p2")</code>). If supplied (and <code>knowledge</code>
-is <code>NULL</code>), a temporary <code>knowledge</code> object is constructed using
-<a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">tidyselect::starts_with</a> for each prefix. Supplying
-both <code>knowledge</code> and <code>order</code> is an error.</p></dd>
 
 
 <dt id="arg-alpha">alpha<a class="anchor" aria-label="anchor" href="#arg-alpha"></a></dt>

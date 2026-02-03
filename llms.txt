@@ -427,9 +427,7 @@ Test functions implemented for use in the TPC algorithm.
 - [`generate_dag_data()`](https://bjarkehautop.github.io/causalDisco/reference/generate_dag_data.md)
   : Generate Synthetic Data from a Linear Gaussian DAG
 - [`sim_dag()`](https://bjarkehautop.github.io/causalDisco/reference/sim_dag.md)
-  : Simulate a random DAG
-- [`sim_gaus_from_dag()`](https://bjarkehautop.github.io/causalDisco/reference/sim_gaus_from_dag.md)
-  : Simulate Gaussian data according to DAG
+  : Simulate a Random DAG
 
 ## Example Datasets
 
@@ -470,8 +468,6 @@ Small simulated datasets to illustrate causalDisco workflows.
   : Plot a Knowledgeable Caugi Object
 - [`make_tikz()`](https://bjarkehautop.github.io/causalDisco/reference/make_tikz.md)
   : Generate TikZ Code from a Object
-- [`make_tikz_old()`](https://bjarkehautop.github.io/causalDisco/reference/make_tikz_old.md)
-  : Generate Latex tikz code for plotting a temporal DAG, PDAG or PAG.
 
 ## Knowledge helpers
 
