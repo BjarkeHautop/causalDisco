@@ -355,8 +355,11 @@ plot(kn_combined)
 ## Using knowledge with causal discovery
 
 Once prior knowledge has been specified, it can be supplied to causal
-discovery algorithms. For example, we can use the temporal GES algorithm
-tges with engine “causalDisco” and temporal BIC (“tbic”):
+discovery algorithms by passing the knowledge object to the
+[`disco()`](https://bjarkehautop.github.io/causalDisco/reference/disco.md)
+function via the `knowledge` parameter. For example, we can use the
+temporal GES algorithm tges with engine “causalDisco” and temporal BIC
+(“tbic”):
 
 ``` r
 kn <- knowledge(
@@ -422,8 +425,9 @@ plot(output)
 
 ### causalDisco
 
-Currently causalDisco engine only supports tiered and forbidden
-knowledge.
+causalDisco engine only supports tiered and forbidden knowledge. If
+required knowledge is provided, it will give a warning and ignore the
+required knowledge.
 
 ### pcalg
 

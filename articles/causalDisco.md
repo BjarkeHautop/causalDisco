@@ -52,7 +52,7 @@ the Peter-Clark (PC) algorithm from bnlearn with Fisher’s Z test:
 
 ``` r
 pc_bnlearn <- pc(engine = "bnlearn", test = "fisher_z", alpha = 0.05)
-pc_result_bnlearn <- disco(num_data, method = pc_bnlearn)
+pc_result_bnlearn <- disco(data = num_data, method = pc_bnlearn)
 ```
 
 We can visualize the results using
@@ -81,7 +81,7 @@ package with the same test:
 
 ``` r
 pc_pcalg <- pc(engine = "pcalg", test = "fisher_z", alpha = 0.05)
-pc_result_pcalg <- disco(num_data, method = pc_pcalg)
+pc_result_pcalg <- disco(data = num_data, method = pc_pcalg)
 plot(pc_result_pcalg, layout = plot_layout, main = "PC Fisher Z (pcalg)")
 ```
 
@@ -109,7 +109,7 @@ to set them up.
 ``` r
 if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
   ges_tetrad <- ges(engine = "tetrad", score = "ebic")
-  ges_result_tetrad <- disco(num_data, method = ges_tetrad)
+  ges_result_tetrad <- disco(data = num_data, method = ges_tetrad)
   plot(ges_result_tetrad, layout = plot_layout, main = "GES EBIC (Tetrad)")
 }
 ```
@@ -289,7 +289,7 @@ causalDisco with the regression-based information loss test:
 
 ``` r
 tpc_method <- tpc(engine = "causalDisco", test = "reg")
-tpc_result <- disco(tpc_example, method = tpc_method, knowledge = kn)
+tpc_result <- disco(data = tpc_example, method = tpc_method, knowledge = kn)
 ```
 
 Similarly, we can view the results using
