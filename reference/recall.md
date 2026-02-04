@@ -1,23 +1,24 @@
 # Recall
 
-Computes recall from two `caugi` objects. It converts the `caugi`
+Computes recall from two PDAG `caugi` objects. It converts the `caugi`
 objects to adjacency matrices and computes recall as `TP/(TP + FN)`,
-where `TP` are true positives and `FN` are false negatives. If
-`TP + FN = 0`, `1` is returned.
+where `TP` are truth positives and `FN` are false negatives. If
+`TP + FN = 0`, `1` is returned. Only supports `caugi` objects with these
+edge types present `-->`, `<-->`, `---` and no edge.
 
 ## Usage
 
 ``` r
-recall(truth, guess, type = c("adj", "dir"))
+recall(truth, est, type = c("adj", "dir"))
 ```
 
 ## Arguments
 
 - truth:
 
-  A `caugi` object representing the true graph.
+  A `caugi` object representing the truth graph.
 
-- guess:
+- est:
 
   A `caugi` object representing the estimated graph.
 
@@ -37,13 +38,14 @@ A numeric in `[0,1]`.
 
 Other metrics:
 [`confusion()`](https://bjarkehautop.github.io/causalDisco/reference/confusion.md),
+[`evaluate()`](https://bjarkehautop.github.io/causalDisco/reference/evaluate.md),
 [`f1_score()`](https://bjarkehautop.github.io/causalDisco/reference/f1_score.md),
 [`false_omission_rate()`](https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.md),
 [`fdr()`](https://bjarkehautop.github.io/causalDisco/reference/fdr.md),
 [`g1_score()`](https://bjarkehautop.github.io/causalDisco/reference/g1_score.md),
 [`npv()`](https://bjarkehautop.github.io/causalDisco/reference/npv.md),
 [`precision()`](https://bjarkehautop.github.io/causalDisco/reference/precision.md),
-[`shd()`](https://bjarkehautop.github.io/causalDisco/reference/shd.md),
+`reexports`,
 [`specificity()`](https://bjarkehautop.github.io/causalDisco/reference/specificity.md)
 
 ## Examples

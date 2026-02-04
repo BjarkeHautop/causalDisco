@@ -1,76 +1,95 @@
-# Evaluate adjacency matrix estimation
+# Evaluate Causal Graph Estimates
 
-Applies several different metrics to evaluate difference between
-estimated and true adjacency matrices. Intended to be used to evaluate
-performance of causal discovery algorithms.
+Computes various metrics to evaluate the difference between estimated
+and truth causal graph. Designed primarily for assessing the performance
+of causal discovery algorithms.
+
+Metrics are supplied as a list with three slots: `$adj`, `$dir`, and
+`$other`.
+
+- `$adj`:
+
+  Metrics applied to the adjacency confusion matrix (see
+  [`confusion()`](https://bjarkehautop.github.io/causalDisco/reference/confusion.md)).
+
+- `$dir`:
+
+  Metrics applied to the conditional orientation confusion matrix (see
+  [`confusion()`](https://bjarkehautop.github.io/causalDisco/reference/confusion.md)).
+
+- `$other`:
+
+  Metrics applied directly to the adjacency matrices without computing
+  confusion matrices.
+
+Adjacency confusion matrix and conditional orientation confusion matrix
+only works for `caugi` objects with these edge types present `-->`,
+`<-->`, `---` and no edge.
 
 ## Usage
 
 ``` r
-evaluate(est, true, metrics, ...)
+evaluate(truth, est, metrics = "all")
 ```
 
 ## Arguments
 
+- truth:
+
+  truth `caugi` object.
+
 - est:
 
-  Estimated adjacency matrix/matrices.
-
-- true:
-
-  True adjacency matrix/matrices.
+  Estimated `caugi` object.
 
 - metrics:
 
-  List of metrics, see details.
-
-- ...:
-
-  Further arguments that depend on input type. Currently only `list_out`
-  is allowed, and only if the first argument is a matrix (see details
-  under Value).
+  List of metrics, see details. If `metrics = "all"`, all available
+  metrics are computed.
 
 ## Value
 
-A data.frame with one column for each computed metric and one row per
-evaluated matrix pair. Adjacency metrics are prefixed with "adj\_",
-orientation metrics are prefixed with "dir\_", other metrics do not get
-a prefix. If the first argument is a matrix, `list_out = TRUE` can be
-used to change the return object to a list instead. This list will
-contain three lists, where adjacency, orientation and other metrics are
-reported, respectively.
+A data.frame with one column for each computed metric. Adjacency metrics
+are prefixed with "adj\_", orientation metrics are prefixed with
+"dir\_", other metrics do not get a prefix.
 
-## Details
+## See also
 
-Two options for input are available: Either `est` and `true` can be two
-adjacency matrices, or they can be two arrays of adjacency matrices. The
-arrays should have shape \\n \* p \* p\\ where n is the number of of
-matrices, and p is the number of nodes/variables.
+Other metrics:
+[`confusion()`](https://bjarkehautop.github.io/causalDisco/reference/confusion.md),
+[`f1_score()`](https://bjarkehautop.github.io/causalDisco/reference/f1_score.md),
+[`false_omission_rate()`](https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.md),
+[`fdr()`](https://bjarkehautop.github.io/causalDisco/reference/fdr.md),
+[`g1_score()`](https://bjarkehautop.github.io/causalDisco/reference/g1_score.md),
+[`npv()`](https://bjarkehautop.github.io/causalDisco/reference/npv.md),
+[`precision()`](https://bjarkehautop.github.io/causalDisco/reference/precision.md),
+[`recall()`](https://bjarkehautop.github.io/causalDisco/reference/recall.md),
+`reexports`,
+[`specificity()`](https://bjarkehautop.github.io/causalDisco/reference/specificity.md)
 
-The metrics should be given as a list with slots `$adj`, `$dir` and
-`$other`. Metrics under `$adj` are applied to the adjacency confusion
-matrix, while metrics under `$dir` are applied to the conditional
-orientation confusion matrix (see
-[confusion](https://bjarkehautop.github.io/causalDisco/reference/confusion.md)).
-Metrics under `$other` are applied without computing confusion matrices
-first.
+## Examples
 
-Available metrics to be used with confusion matrices are
-[precision](https://bjarkehautop.github.io/causalDisco/reference/precision.md),
-[recall](https://bjarkehautop.github.io/causalDisco/reference/recall.md),
-[specificity](https://bjarkehautop.github.io/causalDisco/reference/specificity.md),
-[false_omission_rate](https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.md),
-[fdr](https://bjarkehautop.github.io/causalDisco/reference/fdr.md),
-[npv](https://bjarkehautop.github.io/causalDisco/reference/npv.md),
-[f1_score](https://bjarkehautop.github.io/causalDisco/reference/f1_score.md)
-and
-[g1_score](https://bjarkehautop.github.io/causalDisco/reference/g1_score.md).
-The user can supply custom metrics as well: They need to have the
-confusion matrix as their first argument and should return a numeric.
-
-Available metrics to be used as "other" is:
-[shd](https://bjarkehautop.github.io/causalDisco/reference/shd.md). The
-user can supply custom metrics as well: They need to have arguments
-`est_amat` and `true_amat`, where the former is the estimated adjacency
-matrix and the latter is the true adjacency matrix. The metrics should
-return a numeric.
+``` r
+cg1 <- caugi::caugi(A %-->% B + C)
+cg2 <- caugi::caugi(B %-->% A + C)
+evaluate(cg1, cg2)
+#>   adj_precision adj_recall adj_specificity adj_false_omission_rate adj_fdr
+#> 1           0.5        0.5               0                       1     0.5
+#>   adj_npv adj_f1_score adj_g1_score dir_precision dir_recall dir_specificity
+#> 1       0          0.5            0             0          0               0
+#>   dir_false_omission_rate dir_fdr dir_npv dir_f1_score dir_g1_score shd hd
+#> 1                       1       1       0            0            0   3  0
+#>         aid
+#> 1 0.6666667
+evaluate(
+  cg1,
+  cg2,
+  metrics = list(
+    adj = c("precision", "recall"),
+    dir = c("f1_score"),
+    other = c("shd")
+  )
+)
+#>   adj_precision adj_recall dir_f1_score shd
+#> 1           0.5        0.5            0   3
+```

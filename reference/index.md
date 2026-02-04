@@ -136,6 +136,8 @@ Small simulated datasets to illustrate causalDisco workflows.
 
 - [`confusion()`](https://bjarkehautop.github.io/causalDisco/reference/confusion.md)
   : Confusion Matrix
+- [`evaluate()`](https://bjarkehautop.github.io/causalDisco/reference/evaluate.md)
+  : Evaluate Causal Graph Estimates
 - [`f1_score()`](https://bjarkehautop.github.io/causalDisco/reference/f1_score.md)
   : F1 score
 - [`false_omission_rate()`](https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.md)
@@ -150,10 +152,13 @@ Small simulated datasets to illustrate causalDisco workflows.
   : Precision
 - [`recall()`](https://bjarkehautop.github.io/causalDisco/reference/recall.md)
   : Recall
-- [`shd()`](https://bjarkehautop.github.io/causalDisco/reference/shd.md)
-  : Structural Hamming Distance
 - [`specificity()`](https://bjarkehautop.github.io/causalDisco/reference/specificity.md)
   : Specificity
+- [`reexports`](https://bjarkehautop.github.io/causalDisco/reference/reexports.md)
+  [`shd`](https://bjarkehautop.github.io/causalDisco/reference/reexports.md)
+  [`hd`](https://bjarkehautop.github.io/causalDisco/reference/reexports.md)
+  [`aid`](https://bjarkehautop.github.io/causalDisco/reference/reexports.md)
+  : Objects exported from other packages
 
 ## Knowledge helpers
 

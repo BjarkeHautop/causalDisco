@@ -1,24 +1,25 @@
 # G1 score
 
 Computes G1 score from two `caugi` objects. It converts the `caugi`
-objects to adjacency matrices and computes G1 score defined as \\2 \*
-TN/(2 \* TN + FN + FP)\\, where `TN` are true negatives, `FP` are false
-positives, and FN are false negatives. If `TN + FN + FP = 0`, `1` is
-returned.
+objects to adjacency matrices and computes G1 score defined as \\2 \cdot
+TN/(2 \cdot TN + FN + FP)\\, where `TN` are truth negatives, `FP` are
+false positives, and FN are false negatives. If `TN + FN + FP = 0`, `1`
+is returned. Only supports `caugi` objects with these edge types present
+`-->`, `<-->`, `---` and no edge.
 
 ## Usage
 
 ``` r
-g1_score(truth, guess, type = c("adj", "dir"))
+g1_score(truth, est, type = c("adj", "dir"))
 ```
 
 ## Arguments
 
 - truth:
 
-  A `caugi` object representing the true graph.
+  A `caugi` object representing the truth graph.
 
-- guess:
+- est:
 
   A `caugi` object representing the estimated graph.
 
@@ -44,13 +45,14 @@ arXiv:2202.12813 (2022).
 
 Other metrics:
 [`confusion()`](https://bjarkehautop.github.io/causalDisco/reference/confusion.md),
+[`evaluate()`](https://bjarkehautop.github.io/causalDisco/reference/evaluate.md),
 [`f1_score()`](https://bjarkehautop.github.io/causalDisco/reference/f1_score.md),
 [`false_omission_rate()`](https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.md),
 [`fdr()`](https://bjarkehautop.github.io/causalDisco/reference/fdr.md),
 [`npv()`](https://bjarkehautop.github.io/causalDisco/reference/npv.md),
 [`precision()`](https://bjarkehautop.github.io/causalDisco/reference/precision.md),
 [`recall()`](https://bjarkehautop.github.io/causalDisco/reference/recall.md),
-[`shd()`](https://bjarkehautop.github.io/causalDisco/reference/shd.md),
+`reexports`,
 [`specificity()`](https://bjarkehautop.github.io/causalDisco/reference/specificity.md)
 
 ## Examples

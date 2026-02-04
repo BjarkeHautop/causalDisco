@@ -21,7 +21,6 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/add_tier.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/add_to_tier.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/add_vars.html</loc></url>
-<url><loc>https://bjarkehautop.github.io/causalDisco/reference/amat.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/as_bnlearn_knowledge.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/as_pcalg_constraints.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/as_tetrad_knowledge.html</loc></url>
@@ -45,6 +44,7 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/dot-get_suff_stat.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/edges.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/engine_registry.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/reference/evaluate.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/f1_score.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/fci.html</loc></url>
@@ -79,6 +79,7 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/print.knowledge.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/print.knowledgeable_caugi.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/recall.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/reference/reexports.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/reg_test.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/remove_edge.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/remove_tiers.html</loc></url>
@@ -88,7 +89,6 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/require_edge.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/seq_tiers.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/set_knowledge.html</loc></url>
-<url><loc>https://bjarkehautop.github.io/causalDisco/reference/shd.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/sim_dag.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/specificity.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/summary.knowledge.html</loc></url>

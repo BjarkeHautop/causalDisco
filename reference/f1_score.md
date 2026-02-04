@@ -1,24 +1,25 @@
 # F1 score
 
 Computes F1 score from two `caugi` objects. It converts the `caugi`
-objects to adjacency matrices and computes F1 score as \\2 \* TP/(2 \*
-TP + FP + FN)\\, where `TP` are true positives, `FP` are false
+objects to adjacency matrices and computes F1 score as \\2 \cdot TP/(2
+\cdot TP + FP + FN)\\, where `TP` are truth positives, `FP` are false
 positives, and `FN` are false negatives. If `TP + FP + FN = 0`, `1` is
-returned.
+returned. Only supports `caugi` objects with these edge types present
+`-->`, `<-->`, `---` and no edge.
 
 ## Usage
 
 ``` r
-f1_score(truth, guess, type = c("adj", "dir"))
+f1_score(truth, est, type = c("adj", "dir"))
 ```
 
 ## Arguments
 
 - truth:
 
-  A `caugi` object representing the true graph.
+  A `caugi` object representing the truth graph.
 
-- guess:
+- est:
 
   A `caugi` object representing the estimated graph.
 
@@ -38,13 +39,14 @@ A numeric in \[0,1\].
 
 Other metrics:
 [`confusion()`](https://bjarkehautop.github.io/causalDisco/reference/confusion.md),
+[`evaluate()`](https://bjarkehautop.github.io/causalDisco/reference/evaluate.md),
 [`false_omission_rate()`](https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.md),
 [`fdr()`](https://bjarkehautop.github.io/causalDisco/reference/fdr.md),
 [`g1_score()`](https://bjarkehautop.github.io/causalDisco/reference/g1_score.md),
 [`npv()`](https://bjarkehautop.github.io/causalDisco/reference/npv.md),
 [`precision()`](https://bjarkehautop.github.io/causalDisco/reference/precision.md),
 [`recall()`](https://bjarkehautop.github.io/causalDisco/reference/recall.md),
-[`shd()`](https://bjarkehautop.github.io/causalDisco/reference/shd.md),
+`reexports`,
 [`specificity()`](https://bjarkehautop.github.io/causalDisco/reference/specificity.md)
 
 ## Examples
