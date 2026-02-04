@@ -104,9 +104,9 @@ relationships between variables in our dataset:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">num_data</span><span class="op">)</span></span>
 <span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">num_data</span>,</span>
-<span>  <span class="va">X1</span> <span class="op">%--&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">X2</span>, <span class="va">X3</span><span class="op">)</span>,</span>
-<span>  <span class="va">X2</span> <span class="op">%!--&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">X3</span>, <span class="va">Y</span><span class="op">)</span>,</span>
-<span>  <span class="va">Y</span> <span class="op">%!--&gt;%</span> <span class="va">Z</span></span>
+<span>  <span class="va">X1</span> <span class="op">%--&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">X2</span>, <span class="va">X3</span><span class="op">)</span>, <span class="co"># Require edge from X1 to X2, and X1 to X3</span></span>
+<span>  <span class="va">X2</span> <span class="op">%!--&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">X3</span>, <span class="va">Y</span><span class="op">)</span>, <span class="co"># Forbid edge from X2 to X3, and X2 to Y</span></span>
+<span>  <span class="va">Y</span> <span class="op">%!--&gt;%</span> <span class="va">Z</span>  <span class="co"># Forbid edge from Y to Z</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">kn</span><span class="op">)</span></span></code></pre></div>
@@ -149,7 +149,7 @@ using a dataset with variables measured at different life stages:</p>
 <span><span class="va">kn_tiered</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">tpc_example</span>,</span>
 <span>  <span class="fu">tier</span><span class="op">(</span></span>
-<span>    <span class="va">child</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>,</span>
+<span>    <span class="va">child</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"child"</span><span class="op">)</span>, <span class="co"># tidyselect helper; equivalent to c("child_x1", "child_x2")</span></span>
 <span>    <span class="va">youth</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"youth"</span><span class="op">)</span>,</span>
 <span>    <span class="va">old</span> <span class="op">~</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"old"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span>,</span>

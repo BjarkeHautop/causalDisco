@@ -1,4 +1,4 @@
-# BOSS-FCI Algorithm. for Causal Discovery
+# BOSS-FCI Algorithm for Causal Discovery
 
 Run the BOSS-FCI (Best Order Score Search FCI) algorithm for causal
 discovery using one of several engines. This uses BOSS in place of FGES
@@ -165,9 +165,9 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 #> 
 #> ── Edges ──
 #> 
-#>   from     edge  to      
-#>   <chr>    <chr> <chr>   
-#> 1 child_x2 o-o   child_x1
+#>   from     edge  to       
+#>   <chr>    <chr> <chr>    
+#> 1 youth_x3 o-o   oldage_x5
 #> ── Nodes ──
 #> 
 #>   name     

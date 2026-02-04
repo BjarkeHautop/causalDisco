@@ -36,9 +36,9 @@ our dataset:
 data(num_data)
 kn <- knowledge(
   num_data,
-  X1 %-->% c(X2, X3),
-  X2 %!-->% c(X3, Y),
-  Y %!-->% Z
+  X1 %-->% c(X2, X3), # Require edge from X1 to X2, and X1 to X3
+  X2 %!-->% c(X3, Y), # Forbid edge from X2 to X3, and X2 to Y
+  Y %!-->% Z  # Forbid edge from Y to Z
 )
 
 plot(kn)
@@ -93,7 +93,7 @@ data(tpc_example)
 kn_tiered <- knowledge(
   tpc_example,
   tier(
-    child ~ starts_with("child"),
+    child ~ starts_with("child"), # tidyselect helper; equivalent to c("child_x1", "child_x2")
     youth ~ starts_with("youth"),
     old ~ starts_with("old")
   ),

@@ -45,8 +45,8 @@ an edge from B to C:
 
 ``` r
 kn_1 <- knowledge(
-  A %-->% c(B, C),
-  B %!-->% C
+  A %-->% c(B, C), # Require edges from A to B and A to C
+  B %!-->% C # Forbid edge from B to C
 )
 ```
 
@@ -58,8 +58,8 @@ plot(kn_1)
 
 ![](knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge-1.png)
 
-The blue solid edge represents the required edge from A to B, while the
-red edge represents the forbidden edge from B to C.
+The blue edge represents the required edge from A to B, while the red
+edge represents the forbidden edge from B to C.
 
 If one wishes to remove some edges (either required or forbidden)
 knowledge from an existing knowledge object, the `remove_edge` function
@@ -95,8 +95,8 @@ specified variables exist:
 ``` r
 kn_2 <- knowledge(
   tpc_example,
-  child_x1 %-->% youth_x3,
-  child_x2 %!-->% oldage_x5
+  child_x1 %-->% youth_x3, # Require edge from child_x1 to youth_x3
+  child_x2 %!-->% oldage_x5 # Forbid edge from child_x2 to oldage_x5
 )
 ```
 

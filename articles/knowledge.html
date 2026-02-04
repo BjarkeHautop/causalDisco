@@ -115,15 +115,15 @@ i.e. the absence of the edge. Conceptually, this could be written as
 forbid an edge from B to C:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kn_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
-<span>  <span class="va">A</span> <span class="op">%--&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">B</span>, <span class="va">C</span><span class="op">)</span>,</span>
-<span>  <span class="va">B</span> <span class="op">%!--&gt;%</span> <span class="va">C</span></span>
+<span>  <span class="va">A</span> <span class="op">%--&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">B</span>, <span class="va">C</span><span class="op">)</span>, <span class="co"># Require edges from A to B and A to C</span></span>
+<span>  <span class="va">B</span> <span class="op">%!--&gt;%</span> <span class="va">C</span> <span class="co"># Forbid edge from B to C</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>This knowledge object can be visualized:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">kn_1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="knowledge_files/figure-html/plot%20required%20and%20forbidden%20knowledge-1.png" class="r-plt" alt="" width="700"></p>
-<p>The blue solid edge represents the required edge from A to B, while
-the red edge represents the forbidden edge from B to C.</p>
+<p>The blue edge represents the required edge from A to B, while the red
+edge represents the forbidden edge from B to C.</p>
 <p>If one wishes to remove some edges (either required or forbidden)
 knowledge from an existing knowledge object, the
 <code>remove_edge</code> function can be used. For example, to remove
@@ -153,8 +153,8 @@ that the specified variables exist:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kn_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/knowledge.html">knowledge</a></span><span class="op">(</span></span>
 <span>  <span class="va">tpc_example</span>,</span>
-<span>  <span class="va">child_x1</span> <span class="op">%--&gt;%</span> <span class="va">youth_x3</span>,</span>
-<span>  <span class="va">child_x2</span> <span class="op">%!--&gt;%</span> <span class="va">oldage_x5</span></span>
+<span>  <span class="va">child_x1</span> <span class="op">%--&gt;%</span> <span class="va">youth_x3</span>, <span class="co"># Require edge from child_x1 to youth_x3</span></span>
+<span>  <span class="va">child_x2</span> <span class="op">%!--&gt;%</span> <span class="va">oldage_x5</span> <span class="co"># Forbid edge from child_x2 to oldage_x5</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>This knowledge object can also be visualized (we manually adjust the
 layout for better appearance):</p>

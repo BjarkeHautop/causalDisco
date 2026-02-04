@@ -51,7 +51,11 @@ function along with the data. Below we demonstrate this process using
 the Peter-Clark (PC) algorithm from bnlearn with Fisher’s Z test:
 
 ``` r
-pc_bnlearn <- pc(engine = "bnlearn", test = "fisher_z", alpha = 0.05)
+pc_bnlearn <- pc(
+  engine = "bnlearn", # Use the bnlearn implementation
+  test = "fisher_z", # Use Fisher's Z test for conditional independence
+  alpha = 0.05 # Significance level for the test
+)
 pc_result_bnlearn <- disco(data = num_data, method = pc_bnlearn)
 ```
 
@@ -80,7 +84,11 @@ using bnlearn, we can also use the PC implementation from the pcalg
 package with the same test:
 
 ``` r
-pc_pcalg <- pc(engine = "pcalg", test = "fisher_z", alpha = 0.05)
+pc_pcalg <- pc(
+  engine = "pcalg", # Use the pcalg implementation
+  test = "fisher_z", # Use Fisher's Z test for conditional independence
+  alpha = 0.05 # Significance level for the test
+)
 pc_result_pcalg <- disco(data = num_data, method = pc_pcalg)
 plot(pc_result_pcalg, layout = plot_layout, main = "PC Fisher Z (pcalg)")
 ```
@@ -108,7 +116,10 @@ to set them up.
 
 ``` r
 if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
-  ges_tetrad <- ges(engine = "tetrad", score = "ebic")
+  ges_tetrad <- ges(
+    engine = "tetrad", # Use the Tetrad implementation
+    score = "ebic" # Use the EBIC score
+  )
   ges_result_tetrad <- disco(data = num_data, method = ges_tetrad)
   plot(ges_result_tetrad, layout = plot_layout, main = "GES EBIC (Tetrad)")
 }
@@ -288,7 +299,10 @@ function. Here we use the Temporal Peter-Clark (tpc) algorithm from
 causalDisco with the regression-based information loss test:
 
 ``` r
-tpc_method <- tpc(engine = "causalDisco", test = "reg")
+tpc_method <- tpc(
+  engine = "causalDisco", # Use the causalDisco implementation
+  test = "reg" # Use the regression-based information loss test
+)
 tpc_result <- disco(data = tpc_example, method = tpc_method, knowledge = kn)
 ```
 
