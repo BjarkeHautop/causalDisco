@@ -29,8 +29,8 @@ A `caugi` and a `knowledge` object in a list.
 
 ## Details
 
-The conversion from any graph type to a `caugi` is handled by the
-`caugi` package.
+The conversion from any graph type to a `caugi` is handled by the caugi
+package.
 
 ## See also
 
