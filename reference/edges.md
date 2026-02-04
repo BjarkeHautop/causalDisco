@@ -1,18 +1,18 @@
-# Retrieve edges from a `knowledgeable_caugi` object
+# Retrieve Edges
 
-Retrieve edges from a `knowledgeable_caugi` object
+This function retrieves the edges from a `caugi` object as a tibble.
 
 ## Usage
 
 ``` r
-edges(kcg)
+edges(cg)
 ```
 
 ## Arguments
 
-- kcg:
+- cg:
 
-  A `knowledgeable_caugi` object.
+  A `caugi` object.
 
 ## Value
 
@@ -32,7 +32,7 @@ kn <- knowledge(
   )
 )
 disco_cd_tges <- disco(data = tpc_example, method = cd_tges, knowledge = kn)
-edges(disco_cd_tges)
+edges(disco_cd_tges$caugi)
 #> # A tibble: 6 × 3
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    

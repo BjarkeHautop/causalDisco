@@ -147,11 +147,11 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 #> 
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
-#> 1 child_x1  -->   child_x2 
+#> 1 child_x2  -->   child_x1 
 #> 2 child_x2  -->   oldage_x5
-#> 3 child_x2  -->   youth_x4 
-#> 4 oldage_x5 -->   oldage_x6
-#> 5 youth_x3  -->   oldage_x5
+#> 3 oldage_x5 -->   oldage_x6
+#> 4 youth_x3  -->   oldage_x5
+#> 5 youth_x4  -->   child_x2 
 #> 6 youth_x4  -->   oldage_x6
 #> ── Nodes ──
 #> 

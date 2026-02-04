@@ -119,10 +119,10 @@
 <span><span class="co">#&gt; [1] TRUE</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $java_version</span></span>
-<span><span class="co">#&gt; [1] "25.0.2"</span></span>
+<span><span class="co">#&gt; [1] "25.0.1"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $message</span></span>
-<span><span class="co">#&gt; [1] "Tetrad found (version 7.6.10). Java version 25.0.2 is OK."</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Tetrad found (version 7.6.10). Java version 25.0.1 is OK."</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -177,7 +177,7 @@
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
 </h2>
 <ul>
-<li><p>Check all args (that we want) are available.</p></li>
+<li><p>Check all args (that we want) are available from Tetrad.</p></li>
 <li><p>Register a custom edge type for caugi to represent forbidden edges differently than normal directed edges. Would simplify plotting logic and easier to extend later.</p></li>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -189,10 +189,7 @@
 <span>  class <span class="op">=</span> <span class="st">"directed"</span>,</span>
 <span>  symmetric <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<ul>
-<li>Don’t clash namespaces with caugi. We currently share <code><a href="reference/nodes.html">nodes()</a></code> and <code><a href="reference/edges.html">edges()</a></code>. Make PR in caugi that makes their <code><a href="reference/nodes.html">nodes()</a></code> and <code><a href="reference/edges.html">edges()</a></code> it a S3/S7 class? Merged in caugi. But if we want to submit to CRAN before they do we can’t use it for now…</li>
-</ul>
-<p>A rough WIP is here, which colors a rectangle around A and B:</p>
+<p>If we want custom modifications to plotting we could do smth like this (colors a rectangle around A –&gt; B edge):</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://caugi.org/" class="external-link">caugi</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -236,14 +233,6 @@
 <span>    alpha <span class="op">=</span> <span class="fl">0.3</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot%20wip-1.png" alt="" width="100%"></p>
-<ul>
-<li>Add all algs/scores/tests from the backends (start with Tetrad). Check if we currently document ones we haven’t implemented yet.
-<ul>
-<li>Missing scores: <code>"Instance-specific Augmented SEM BIC Score"</code>. Get this error when implementing: <code>Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl, : java.lang.NullPointerException: Cannot invoke "edu.cmu.tetrad.data.Knowledge.getTestingData()" because "this.knowledge" is null</code> (see branch <code>Add-isa-sem-bic-score-to-Tetrad</code>).</li>
-</ul>
-</li>
-<li>Update evaluation and confusion metrics (use caugi?)</li>
-</ul>
 <div class="section level4">
 <h4 id="tetrad-issues">Tetrad issues<a class="anchor" aria-label="anchor" href="#tetrad-issues"></a>
 </h4>
@@ -332,7 +321,7 @@
 <h3 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h3>
 <ul>
-<li><p>Make it clear in <code><a href="reference/BnlearnSearch.html">?BnlearnSearch</a></code> (and similar for the others) that all algorithms aren’t currently fully supported.</p></li>
+<li><p>Make it clear in <code><a href="reference/BnlearnSearch.html">?BnlearnSearch</a></code> (and similar for the others) that all algorithms aren’t currently fully supported. Shouldn’t take long to implement the missing ones though? So just do that…</p></li>
 <li><p>Figure out how to not repeat the documentation of e.g. penalty discount in TetradSearch R6 class.</p></li>
 </ul>
 </div>

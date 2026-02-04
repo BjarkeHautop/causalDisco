@@ -80,10 +80,10 @@ causalDisco::check_tetrad_install()
 #> [1] TRUE
 #> 
 #> $java_version
-#> [1] "25.0.2"
+#> [1] "25.0.1"
 #> 
 #> $message
-#> [1] "Tetrad found (version 7.6.10). Java version 25.0.2 is OK."
+#> [1] "Tetrad found (version 7.6.10). Java version 25.0.1 is OK."
 ```
 
 ## Example
@@ -143,7 +143,7 @@ of the nodes.](reference/figures/README-plot-1.png)
 
 ## TODO
 
-- Check all args (that we want) are available.
+- Check all args (that we want) are available from Tetrad.
 
 - Register a custom edge type for caugi to represent forbidden edges
   differently than normal directed edges. Would simplify plotting logic
@@ -160,18 +160,8 @@ caugi::register_caugi_edge(
 )
 ```
 
-- Don’t clash namespaces with caugi. We currently share
-  [`nodes()`](https://bjarkehautop.github.io/causalDisco/reference/nodes.md)
-  and
-  [`edges()`](https://bjarkehautop.github.io/causalDisco/reference/edges.md).
-  Make PR in caugi that makes their
-  [`nodes()`](https://bjarkehautop.github.io/causalDisco/reference/nodes.md)
-  and
-  [`edges()`](https://bjarkehautop.github.io/causalDisco/reference/edges.md)
-  it a S3/S7 class? Merged in caugi. But if we want to submit to CRAN
-  before they do we can’t use it for now…
-
-A rough WIP is here, which colors a rectangle around A and B:
+If we want custom modifications to plotting we could do smth like this
+(colors a rectangle around A –\> B edge):
 
 ``` r
 library(caugi)
@@ -218,14 +208,6 @@ gg +
 ```
 
 ![](reference/figures/README-plot%20wip-1.png)
-
-- Add all algs/scores/tests from the backends (start with Tetrad). Check
-  if we currently document ones we haven’t implemented yet.
-  - Missing scores: `"Instance-specific Augmented SEM BIC Score"`. Get
-    this error when implementing:
-    `Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl, : java.lang.NullPointerException: Cannot invoke "edu.cmu.tetrad.data.Knowledge.getTestingData()" because "this.knowledge" is null`
-    (see branch `Add-isa-sem-bic-score-to-Tetrad`).
-- Update evaluation and confusion metrics (use caugi?)
 
 #### Tetrad issues
 
@@ -319,7 +301,8 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 - Make it clear in
   [`?BnlearnSearch`](https://bjarkehautop.github.io/causalDisco/reference/BnlearnSearch.md)
   (and similar for the others) that all algorithms aren’t currently
-  fully supported.
+  fully supported. Shouldn’t take long to implement the missing ones
+  though? So just do that…
 
 - Figure out how to not repeat the documentation of e.g. penalty
   discount in TetradSearch R6 class.

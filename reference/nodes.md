@@ -1,18 +1,18 @@
-# Retrieve nodes from a `knowledgeable_caugi` object
+# Retrieve Nodes
 
-Retrieve nodes from a `knowledgeable_caugi` object
+This function retrieves the nodes from a `caugi` object as a tibble.
 
 ## Usage
 
 ``` r
-nodes(kcg)
+nodes(cg)
 ```
 
 ## Arguments
 
-- kcg:
+- cg:
 
-  A `knowledgeable_caugi` object.
+  A `caugi` object.
 
 ## Value
 
@@ -32,7 +32,7 @@ kn <- knowledge(
   )
 )
 disco_cd_tges <- disco(data = tpc_example, method = cd_tges, knowledge = kn)
-nodes(disco_cd_tges)
+nodes(disco_cd_tges$caugi)
 #> # A tibble: 6 × 1
 #>   name     
 #>   <chr>    
