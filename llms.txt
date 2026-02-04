@@ -469,6 +469,29 @@ Small simulated datasets to illustrate causalDisco workflows.
 - [`make_tikz()`](https://bjarkehautop.github.io/causalDisco/reference/make_tikz.md)
   : Generate TikZ Code from a Object
 
+## Graph Metrics
+
+- [`confusion()`](https://bjarkehautop.github.io/causalDisco/reference/confusion.md)
+  : Confusion Matrix
+- [`f1_score()`](https://bjarkehautop.github.io/causalDisco/reference/f1_score.md)
+  : F1 score
+- [`false_omission_rate()`](https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.md)
+  : False Omission Rate
+- [`fdr()`](https://bjarkehautop.github.io/causalDisco/reference/fdr.md)
+  : False Discovery Rate
+- [`g1_score()`](https://bjarkehautop.github.io/causalDisco/reference/g1_score.md)
+  : G1 score
+- [`npv()`](https://bjarkehautop.github.io/causalDisco/reference/npv.md)
+  : Negative Predictive Value
+- [`precision()`](https://bjarkehautop.github.io/causalDisco/reference/precision.md)
+  : Precision
+- [`recall()`](https://bjarkehautop.github.io/causalDisco/reference/recall.md)
+  : Recall
+- [`shd()`](https://bjarkehautop.github.io/causalDisco/reference/shd.md)
+  : Structural Hamming Distance
+- [`specificity()`](https://bjarkehautop.github.io/causalDisco/reference/specificity.md)
+  : Specificity
+
 ## Knowledge helpers
 
 - [`add_exogenous()`](https://bjarkehautop.github.io/causalDisco/reference/add_exogenous.md)
@@ -556,27 +579,6 @@ Small simulated datasets to illustrate causalDisco workflows.
 
 - [`knowledge.knowledgeable_caugi()`](https://bjarkehautop.github.io/causalDisco/reference/knowledge.knowledgeable_caugi.md)
   : Extract Knowledge from a Knowledgeable Caugi
-
-## Evaluation & Confusion Metrics
-
-- [`precision()`](https://bjarkehautop.github.io/causalDisco/reference/precision.md)
-  : Precision
-- [`recall()`](https://bjarkehautop.github.io/causalDisco/reference/recall.md)
-  : Recall
-- [`specificity()`](https://bjarkehautop.github.io/causalDisco/reference/specificity.md)
-  : Specificity
-- [`f1_score()`](https://bjarkehautop.github.io/causalDisco/reference/f1_score.md)
-  : F1 score
-- [`g1_score()`](https://bjarkehautop.github.io/causalDisco/reference/g1_score.md)
-  : G1 score
-- [`fdr()`](https://bjarkehautop.github.io/causalDisco/reference/fdr.md)
-  : False Discovery Rate
-- [`npv()`](https://bjarkehautop.github.io/causalDisco/reference/npv.md)
-  : Negative Predictive Value
-- [`false_omission_rate()`](https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.md)
-  : False Omission Rate
-- [`average_degree()`](https://bjarkehautop.github.io/causalDisco/reference/average_degree.md)
-  : Compute average degree for adjacency matrix
 
 ## Miscellaneous
 

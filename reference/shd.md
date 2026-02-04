@@ -1,32 +1,50 @@
-# Structural hamming distance between adjacency matrices
+# Structural Hamming Distance
 
-Computes the structural hamming distance between two adjacency matrices.
-This implementation is a modification of the
-[`pcalg::shd()`](https://rdrr.io/pkg/pcalg/man/shd.html) function from
-the pcalg package, but here we avoid working on the heavy `graphNEL`
-objects for representing graphs that are used in the pcalg package.
+Computes the Structural Hamming Distance (SHD) between two `caugi`
+objects. SHD is the number of edge additions, deletions, or orientation
+flips required to transform one graph into the other. Adjacency errors
+are counted fully, while orientation errors on shared adjacencies are
+counted as half an error, following the standard convention for
+partially directed graphs.
 
 ## Usage
 
 ``` r
-shd(est_amat, true_amat)
+shd(truth, guess)
 ```
 
 ## Arguments
 
-- est_amat:
+- truth:
 
-  Estimated adjacency matrix
+  A `caugi` object representing the true graph.
 
-- true_amat:
+- guess:
 
-  True adjacency matrix
+  A `caugi` object representing the estimated graph.
 
 ## Value
 
-A numeric (a non-negative integer).
+A numeric representing the SHD.
 
-## Details
+## See also
 
-Note that the function is symmetric in the two inputted adjacency
-matrices.
+Other metrics:
+[`confusion()`](https://bjarkehautop.github.io/causalDisco/reference/confusion.md),
+[`f1_score()`](https://bjarkehautop.github.io/causalDisco/reference/f1_score.md),
+[`false_omission_rate()`](https://bjarkehautop.github.io/causalDisco/reference/false_omission_rate.md),
+[`fdr()`](https://bjarkehautop.github.io/causalDisco/reference/fdr.md),
+[`g1_score()`](https://bjarkehautop.github.io/causalDisco/reference/g1_score.md),
+[`npv()`](https://bjarkehautop.github.io/causalDisco/reference/npv.md),
+[`precision()`](https://bjarkehautop.github.io/causalDisco/reference/precision.md),
+[`recall()`](https://bjarkehautop.github.io/causalDisco/reference/recall.md),
+[`specificity()`](https://bjarkehautop.github.io/causalDisco/reference/specificity.md)
+
+## Examples
+
+``` r
+cg1 <- caugi::caugi(A %-->% B + C)
+cg2 <- caugi::caugi(B %-->% A + C)
+shd(cg1, cg2)
+#> [1] 3
+```
