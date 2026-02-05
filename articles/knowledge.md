@@ -106,7 +106,7 @@ layout for better appearance):
 ``` r
 cg <- knowledge_to_caugi(kn_2)$caugi
 layout <- caugi::caugi_layout_sugiyama(cg)
-layout[6,2] <- layout[4,2]
+layout[6, 2] <- layout[4, 2]
 
 plot(kn_2, layout = layout)
 ```

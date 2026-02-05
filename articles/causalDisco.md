@@ -135,7 +135,7 @@ For example, to change the appearance of the nodes, you can use the
 
 ``` r
 plot(
-  pc_result_bnlearn, 
+  pc_result_bnlearn,
   layout = plot_layout,
   main = "Customized plot",
   node_style = list(
