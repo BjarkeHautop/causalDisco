@@ -22,36 +22,30 @@ the resulting graph or statistics.
   Supply one of the method strings for `set_score()`. Recognised values
   are:
 
-  **Discrete - categorical**
-
-  - `"bdeu"` - Bayes Dirichlet Equivalent score with uniform priors.
-
-  - `"discrete_bic"` - BIC score for discrete data.
-
   **Continuous - Gaussian**
 
   - `"ebic"` - Extended BIC score.
 
   - `"gic"` - Generalized Information Criterion (GIC) score.
 
-  - `"poisson_prior"` - Poisson prior score.
-
-  - `"zhang_shen_bound"` - Gaussian Extended BIC score.
+  - `"poisson_prior"` - Poisson prior score.'
 
   - `"rank_bic"` - Rank-based BIC score.
 
   - `"sem_bic"` - SEM BIC score.
 
+  - `"zhang_shen_bound"` - Zhang and Shen bound score.
+
+  **Discrete - categorical**
+
+  - `"bdeu"` - Bayes Dirichlet Equivalent score with uniform priors.
+
+  - `"discrete_bic"` - BIC score for discrete data.
+
   **Mixed Discrete/Gaussian**
-
-  - `"conditional_gaussian"` - Conditional Gaussian BIC score.
-
-  - `"degenerate_gaussian"` - Degenerate Gaussian BIC score.
 
   - `"basis_function_bic"` - BIC score for basis-function models. This
     is a generalization of the Degenerate Gaussian score.
-
-  - `"mag_degenerate_gaussian_bic"` - MAG Degenerate Gaussian BIC Score.
 
   - `"basis_function_blocks_bic"` - BIC score for mixed data using
     basis-function models.
@@ -59,11 +53,27 @@ the resulting graph or statistics.
   - `"basis_function_sem_bic"` - SEM BIC score for basis-function
     models.
 
+  - `"conditional_gaussian"` - Conditional Gaussian BIC score.
+
+  - `"degenerate_gaussian"` - Degenerate Gaussian BIC score.
+
+  - `"mag_degenerate_gaussian_bic"` - MAG Degenerate Gaussian BIC Score.
+
 - `test`:
 
   Java object holding the independence test selected with `set_test()`.
   Supply one of the method strings for `set_test()`. Recognised values
   are:
+
+  **Continuous - Gaussian**
+
+  - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test.
+
+  - `"poisson_prior"` - Poisson prior test.
+
+  - `"rank_independence"` - Rank-based independence test.
+
+  - `"sem_bic"` - SEM BIC test.
 
   **Discrete - categorical**
 
@@ -74,90 +84,59 @@ the resulting graph or statistics.
   - `"probabilistic"` - Uses BCInference by Cooper and Bui to calculate
     probabilistic conditional independence judgments.
 
-  **Continuous - Gaussian**
+  **General**
 
-  - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test.
+  - `"gin"` - Generalized Independence Noise test.
 
-  - `"poisson_prior"` - Poisson prior test.
+  - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang.
 
-  - `"sem_bic"` - SEM BIC test.
-
-  - `"rank_independence"` - Rank-based independence test.
+  - `"rcit"` - Randomized Conditional Independence Test (RCIT).
 
   **Mixed Discrete/Gaussian**
 
-  - `"degenerate_gaussian"` - Degenerate Gaussian test as a likelihood
-    ratio test.
+  - `"basis_function_blocks"` - Basis-function blocks test.
+
+  - `"basis_function_lrt"` - basis-function likelihood-ratio.
 
   - `"conditional_gaussian"` - Conditional Gaussian test as a likelihood
     ratio test.
 
-  - `"basis_function_lrt"` - basis-function likelihood-ratio.
-
-  - `"basis_function_blocks"` - Basis-function blocks test.
-
-  **General**
-
-  - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang.
-
-  - `"gin"` - Generalized Independence Noise test.
-
-  - `"rcit"` - Randomized Conditional Independence Test (RCIT).
+  - `"degenerate_gaussian"` - Degenerate Gaussian test as a likelihood
+    ratio test.
 
 - `alg`:
 
   Java object representing the search algorithm. Supply one of the
   method strings for `set_alg()`. Recognised values are:
 
-  - `"boss"` - BOSS algorithm.
-
-  - `"boss_fci"` - BOSS-FCI algorithm.
-
-  - `"ccd"` - Cyclic Causal Discovery.
-
-  - `"cfci"` - Adjusts FCI to use conservative orientation as in CPC.
-
-  - `"cpc"` - Conservative PC algorithm.
-
-  - `"cstar"` - CStaR algorithm (Causal Stability Ranking).
-
-  - `"dagma"` - DAGMA algorithm.
-
-  - `"direct_lingam"` - DirectLiNGAM algorithm.
-
-  - `"fask"` - FASK algorithm.
+  **Constraint-based**
 
   - `"fci"` - FCI algorithm.
 
-  - `"fges"` - Fast Greedy Equivalence Search (FGES) algorithm.
+  - `"pc"` - Peter-Clark (PC) algorithm.
 
-  - `"fges_mb"` - Fast Greedy Equivalence Search with Markov Blanket
-    (FGES-MB) algorithm.
+  - `"rfci"` - Restricted FCI algorithm.
+
+  **Hybrid**
+
+  - `"boss_fci"` - BOSS-FCI algorithm.
 
   - `"gfci"` - GFCI algorithm. Combines FGES and FCI.
+
+  - `"grasp_fci"` - GRaSP-FCI algorithm. Combines GRaSP and FCI.
+
+  - `"sp_fci"` - Sparsest Permutation using FCI.
+
+  **Score-based**
+
+  - `"boss"` - BOSS algorithm.
+
+  - `"ges" ("fges")` - Fast Greedy Equivalence Search (FGES) algorithm.
 
   - `"grasp"` - GRaSP (Greedy Relations of Sparsest Permutation)
     algorithm.
 
-  - `"grasp_fci"` - GRaSP-FCI algorithm. Combines GRaSP and FCI.
-
-  - `"ica_lingam"` - ICA LiNGAM algorithm.
-
-  - `"ica_lingd"` - ICA-LiNG-D algorithm.
-
-  - `"fcit"` - FCI Targeted Testing (FCIT) algorithm.
-
-  - `"pc"` - Peter-Clark (PC) algorithm.
-
-  - `"pc_max"` - PCMax algorithm.
-
   - `"restricted_boss"` - Restricted BOSS algorithm.
-
-  - `"rfci"` - Restricted FCI algorithm.
-
-  - `"sp"` - Sparsest Permutation algorithm.
-
-  - `"sp_fci"` - Sparsest Permutation using FCI.
 
 - `mc_test`:
 
@@ -259,62 +238,50 @@ Sets the independence test to use in Tetrad.
 
   (character) Name of the test method (e.g., "chi_square", "fisher_z").
 
-  - `"chi_square"` - chi-squared test
-
-  - `"g_square"` - likelihood-ratio \\G^2\\ test
+  - `"basis_function_blocks"` - Basis-function blocks test
 
   - `"basis_function_lrt"` - basis-function likelihood-ratio
 
-  - `"probabilistic"` - Uses BCInference by Cooper and Bui to calculate
-    probabilistic conditional independence judgments.
+  - `"chi_square"` - chi-squared test
 
-  - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test
+  - `"conditional_gaussian"` - Mixed discrete/continuous test
 
   - `"degenerate_gaussian"` - Degenerate Gaussian test as a likelihood
     ratio test
 
-  - `"conditional_gaussian"` - Mixed discrete/continuous test
+  - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test
+
+  - `"gin"` - Generalized Independence Noise test
 
   - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang
 
   - `"poisson_prior"` - Poisson prior test
 
-  - `"gin"` - Generalized Independence Noise test
+  - `"probabilistic"` - Uses BCInference by Cooper and Bui to calculate
+    probabilistic conditional independence judgments.
 
   - `"rcit"` - Randomized Conditional Independence Test (RCIT)
 
-  - `"sem_bic"` - SEM BIC test
-
   - `"rank_independence"` - Rank-based independence test
 
-  - `"basis_function_blocks"` - Basis-function blocks test
+  - `"sem_bic"` - SEM BIC test
 
 - `...`:
 
   Additional arguments passed to the private test-setting methods. For
   the following tests, the following parameters are available:
 
-  - `"chi_square"` - chi-squared test
-
-    - `min_count = 1` - Minimum count for the chi-squared test per cell.
-      Increasing this can improve accuracy of the test estimates,
+  - `"basis_function_blocks"` - Basis-function blocks test.
 
     - `alpha = 0.05` - Significance level for the independence test,
 
-    - `cell_table_type = "ad"` - The type of cell table to use for
-      optimization. Available types are: `"ad"` - AD tree, `"count"` -
-      Count sample.
+    - `basis_type = "polynomial"` - The type of basis to use. Supported
+      types are `"polynomial"`, `"legendre"`, `"hermite"`, and
+      `"chebyshev"`,
 
-  - `"g_square"` - likelihood-ratio \\G^2\\ test
-
-    - `min_count = 1` - Minimum count for the independence test.
-      Increasing this can improve accuracy of chi square estimates,
-
-    - `alpha = 0.05` - Significance level for the chi-squared test,
-
-    - `cell_table_type = "ad"` - The type of cell table to use for
-      optimization. Available types are: `"ad"` - AD tree, `"count"` -
-      Count sample.
+    - `truncation_limit = 3` - Basis functions 1 through this number
+      will be used. The Degenerate Gaussian category indicator variables
+      for mixed data are also used.
 
   - `"basis_function_lrt"` - basis-function likelihood-ratio
 
@@ -330,32 +297,16 @@ Sets the independence test to use in Tetrad.
     - `do_one_equation_only = FALSE` - If TRUE, only one equation should
       be used when expanding the basis.
 
-  - `"probabilistic"` - Uses BCInference by Cooper and Bui to calculate
-    probabilistic conditional independence judgments.
+  - `"chi_square"` - chi-squared test
 
-    - `threshold = FALSE` - Set to TRUE if using the cutoff threshold
-      for the independence test,
-
-    - `cutoff = 0.5` - Cutoff for the independence test,
-
-    - `prior_ess = 10` - Prior equivalent sample size for the
-      independence test. This number is added to the sample size for
-      each conditional probability table in the model and is divided
-      equally among the cells in the table.
-
-  - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test
+    - `min_count = 1` - Minimum count for the chi-squared test per cell.
+      Increasing this can improve accuracy of the test estimates,
 
     - `alpha = 0.05` - Significance level for the independence test,
 
-    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
-      diagonal, \< 0 Pseudoinverse.
-
-  - `"degenerate_gaussian"` - Degenerate Gaussian likelihood ratio test
-
-    - `alpha = 0.05` - Significance level for the independence test,
-
-    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
-      diagonal, \< 0 Pseudoinverse.
+    - `cell_table_type = "ad"` - The type of cell table to use for
+      optimization. Available types are: `"ad"` - AD tree, `"count"` -
+      Count sample.
 
   - `"conditional_gaussian"` - Mixed discrete/continuous test
 
@@ -373,6 +324,39 @@ Sets the independence test to use in Tetrad.
 
     - `min_sample_size_per_cell = 4` - Minimum sample size per cell for
       the independence test.
+
+  - `"degenerate_gaussian"` - Degenerate Gaussian likelihood ratio test
+
+    - `alpha = 0.05` - Significance level for the independence test,
+
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
+      diagonal, \< 0 Pseudoinverse.
+
+  - `"fisher_z"` - Fisher \\Z\\ (partial correlation) test
+
+    - `alpha = 0.05` - Significance level for the independence test,
+
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
+      diagonal, \< 0 Pseudoinverse.
+
+  - `"gin"` - Generalized Independence Noise test.
+
+    - `alpha = 0.05` - Significance level for the independence test,
+
+    - `gin_backend = "dcor"` - Unconditional test for residual
+      independence. Available types are `"dcor"` - Distance correlation
+      (for non-linear) and `"pearson"` - Pearson correlation (for
+      linear),
+
+    - `num_permutations = 200` - Number of permutations used for
+      `"dcor"` backend. If `"pearson"` backend is used, this parameter
+      is ignored.
+
+    - `gin_ridge = 1e-8` - Ridge parameter used when computing
+      residuals. A small number \>= 0.
+
+    - `seed = -1` - Random seed for the independence test. If -1, no
+      seed is set.
 
   - `"kci"` - Kernel Conditional Independence Test (KCI) by Kun Zhang
 
@@ -406,24 +390,18 @@ Sets the independence test to use in Tetrad.
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
-  - `"gin"` - Generalized Independence Noise test.
+  - `"probabilistic"` - Uses BCInference by Cooper and Bui to calculate
+    probabilistic conditional independence judgments.
 
-    - `alpha = 0.05` - Significance level for the independence test,
+    - `threshold = FALSE` - Set to TRUE if using the cutoff threshold
+      for the independence test,
 
-    - `gin_backend = "dcor"` - Unconditional test for residual
-      independence. Available types are `"dcor"` - Distance correlation
-      (for non-linear) and `"pearson"` - Pearson correlation (for
-      linear),
+    - `cutoff = 0.5` - Cutoff for the independence test,
 
-    - `num_permutations = 200` - Number of permutations used for
-      `"dcor"` backend. If `"pearson"` backend is used, this parameter
-      is ignored.
-
-    - `gin_ridge = 1e-8` - Ridge parameter used when computing
-      residuals. A small number \>= 0.
-
-    - `seed = -1` - Random seed for the independence test. If -1, no
-      seed is set.
+    - `prior_ess = 10` - Prior equivalent sample size for the
+      independence test. This number is added to the sample size for
+      each conditional probability table in the model and is divided
+      equally among the cells in the table.
 
   - `"rcit"` - Randomized Conditional Independence Test (RCIT).
 
@@ -461,6 +439,10 @@ Sets the independence test to use in Tetrad.
     - `seed = -1` - Random seed for the independence test. If -1, no
       seed is set.
 
+  - `"rank_independence"` - Rank-based independence test.
+
+    - `alpha = 0.05` - Significance level for the independence test.
+
   - `"sem_bic"` - SEM BIC test.
 
     - `penalty_discount = 2` - Penalty discount factor used in BIC =
@@ -474,22 +456,6 @@ Sets the independence test to use in Tetrad.
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
-
-  - `"rank_independence"` - Rank-based independence test.
-
-    - `alpha = 0.05` - Significance level for the independence test
-
-  - `"basis_function_blocks"` - Basis-function blocks test.
-
-    - `alpha = 0.05` - Significance level for the independence test,
-
-    - `basis_type = "polynomial"` - The type of basis to use. Supported
-      types are `"polynomial"`, `"legrende"`, `"hermite"`, and
-      `"chebyshev"`,
-
-    - `truncation_limit = 3` - Basis functions 1 through this number
-      will be used. The Degenerate Gaussian category indicator variables
-      for mixed data are also used.
 
 - `use_for_mc`:
 
@@ -515,28 +481,10 @@ Sets the scoring function to use in Tetrad.
 
   (character) Name of the score (e.g., "sem_bic", "ebic", "bdeu").
 
-  - `"sem_bic"` - SEM BIC score.
-
-  - `"ebic"` - Extended BIC score.
-
   - `"bdeu"` - Bayes Dirichlet Equivalent score with uniform priors.
 
   - `"basis_function_bic"` - BIC score for basis-function models. This
     is a generalization of the Degenerate Gaussian score.
-
-  - `"conditional_gaussian"` - Mixed discrete/continuous BIC score.
-
-  - `"degenerate_gaussian"` - Degenerate Gaussian BIC score.
-
-  - `"discrete_bic"` - BIC score for discrete data.
-
-  - `"gic"` - Generalized Information Criterion (GIC) score.
-
-  - `"mag_degenerate_gaussian_bic"` - MAG Degenerate Gaussian BIC Score.
-
-  - `"poisson_prior"` - Poisson prior score.
-
-  - `"zhang_shen_bound"` - Gaussian Extended BIC score.
 
   - `"basis_function_blocks_bic"` - BIC score for mixed data using
     basis-function models.
@@ -544,40 +492,32 @@ Sets the scoring function to use in Tetrad.
   - `"basis_function_sem_bic"` - SEM BIC score for basis-function
     models.
 
+  - `"conditional_gaussian"` - Mixed discrete/continuous BIC score.
+
+  - `"degenerate_gaussian"` - Degenerate Gaussian BIC score.
+
+  - `"discrete_bic"` - BIC score for discrete data.
+
+  - `"ebic"` - Extended BIC score.
+
+  - `"gic"` - Generalized Information Criterion (GIC) score.
+
+  - `"mag_degenerate_gaussian_bic"` - MAG Degenerate Gaussian BIC Score.
+
+  - `"poisson_prior"` - Poisson prior score.
+
   - `"rank_bic"` - Rank-based BIC score.
+
+  - `"sem_bic"` - SEM BIC score.
+
+  - `"zhang_shen_bound"` - Zhang and Shen bound score.
 
 - `...`:
 
   Additional arguments passed to the private score-setting methods. For
   the following scores, the following parameters are available:
 
-  - `sem_bic` - SEM BIC score.
-
-    - `penalty_discount = 2` - Penalty discount factor used in BIC =
-      2L - ck log N, where c is the penalty. Higher c yield sparser
-      graphs,
-
-    - `structure_prior = 0` - The default number of parents for any
-      conditional probability table. Higher weight is accorded to tables
-      with about that number of parents. The prior structure weights are
-      distributed according to a binomial distribution,
-
-    - `sem_bic_rule = 1` - The Chickering Rule uses the difference of
-      BIC scores to add or remove edges. The Nandy et al. rule uses a
-      single calculation of a partial correlation in place of the
-      likelihood difference,
-
-    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
-      diagonal, \< 0 Pseudoinverse.
-
-  - `ebic` - Extended BIC score.
-
-    - `gamma` - The gamma parameter in the EBIC score.
-
-    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
-      diagonal, \< 0 Pseudoinverse.
-
-  - `bdeu` - Bayes Dirichlet Equivalent score with uniform priors.
+  - `"bdeu"` - Bayes Dirichlet Equivalent score with uniform priors.
 
     - `sample_prior = 10` - This sets the prior equivalent sample size.
       This number is added to the sample size for each conditional
@@ -587,8 +527,8 @@ Sets the scoring function to use in Tetrad.
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
-  - `basis_function_bic` - BIC score for basis-function models. This is
-    a generalization of the Degenerate Gaussian score.
+  - `"basis_function_bic"` - BIC score for basis-function models. This
+    is a generalization of the Degenerate Gaussian score.
 
     - `truncation_limit = 3` - Basis functions 1 though this number will
       be used. The Degenerate Gaussian category indicator variables for
@@ -603,7 +543,37 @@ Sets the scoring function to use in Tetrad.
     - `do_one_equation_only = FALSE` - If TRUE, only one equation should
       be used when expanding the basis.
 
-  - `conditional_gaussian` - Mixed discrete/continuous BIC score.
+  - `"basis_function_blocks_bic"` - BIC score for mixed data using
+    basis-function models.
+
+    - `basis_type = "polynomial"` - The type of basis to use. Supported
+      types are `"polynomial"`, `"legendre"`, `"hermite"`, and
+      `"chebyshev"`,
+
+    - `penalty_discount = 2` - Penalty discount factor used in BIC =
+      2L - ck log N, where c is the penalty. Higher c yield sparser
+      graphs,
+
+    - `truncation_limit = 3` - Basis functions 1 through this number
+      will be used. The Degenerate Gaussian category indicator variables
+      for mixed data are also used.
+
+  - `"basis_function_sem_bic"` - SEM BIC score for basis-function
+    models.
+
+    - `penalty_discount = 2` - Penalty discount factor used in BIC =
+      2L - ck log N, where c is the penalty. Higher c yield sparser
+      graphs,
+
+    - `jitter = 1e-8` - Small non-negative constant added to the
+      diagonal of covariance/correlation matrices for numerical
+      stability,
+
+    - `truncation_limit = 3` - Basis functions 1 through this number
+      will be used. The Degenerate Gaussian category indicator variables
+      for mixed data are also used.
+
+  - `"conditional_gaussian"` - Mixed discrete/continuous BIC score.
 
     - `penalty_discount = 1` - Penalty discount. Higher penalty yields
       sparser graphs,
@@ -646,6 +616,13 @@ Sets the scoring function to use in Tetrad.
       with about that number of parents. The prior structure weights are
       distributed according to a binomial distribution.
 
+  - `"ebic"` - Extended BIC score.
+
+    - `gamma` - The gamma parameter in the EBIC score.
+
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
+      diagonal, \< 0 Pseudoinverse.
+
   - `"gic"` - Generalized Information Criterion (GIC) score.
 
     - `penalty_discount = 1` - Penalty discount. Higher penalty yields
@@ -669,20 +646,6 @@ Sets the scoring function to use in Tetrad.
       with about that number of parents. The prior structure weights are
       distributed according to a binomial distribution,
 
-    &nbsp;
-
-    - `structure_prior = 0` - The default number of parents for any
-      conditional probability table. Higher weight is accorded to tables
-      with about that number of parents. The prior structure weights are
-      distributed according to a binomial distribution,
-
-    - `f_degree = 0` - The f degree.
-
-    - `discretize = FALSE` - If TRUE for the conditional Gaussian
-      likelihood, when scoring X –\> D where X is continuous and D
-      discrete, one should to simply discretize X for just those cases.
-      If FALSE, the integration will be exact.
-
   - `"poisson_prior"` - Poisson prior score.
 
     - `poisson_lambda = 1` - Lambda parameter for the Poisson
@@ -691,45 +654,21 @@ Sets the scoring function to use in Tetrad.
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
-  - `"zhang_shen_bound"` - Gaussian Extended BIC score.
+  - `"sem_bic"` - SEM BIC score.
 
-    - `risk_bound = 0.2` - This is the probability of getting the true
-      model if a correct model is discovered. Could underfit.
+    - `penalty_discount = 2` - Penalty discount factor used in BIC =
+      2L - ck log N, where c is the penalty. Higher c yield sparser
+      graphs,
+
+    - `structure_prior = 0` - The default number of parents for any
+      conditional probability table. Higher weight is accorded to tables
+      with about that number of parents. The prior structure weights are
+      distributed according to a binomial distribution,
 
     - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
       diagonal, \< 0 Pseudoinverse.
 
-  - `"basis_function_blocks_bic"` - BIC score for mixed data using
-    basis-function embedding
-
-    - `basis_type = "polynomial"` - The type of basis to use. Supported
-      types are `"polynomial"`, `"legrende"`, `"hermite"`, and
-      `"chebyshev"`,
-
-    - `penalty_discount = 2` - Penalty discount factor used in BIC =
-      2L - ck log N, where c is the penalty. Higher c yield sparser
-      graphs,
-
-    - `truncation_limit = 3` - Basis functions 1 through this number
-      will be used. The Degenerate Gaussian category indicator variables
-      for mixed data are also used.
-
-  - `"basis_function_sem_bic"` - SEM BIC score for basis-function
-    models.
-
-    - `penalty_discount = 2` - Penalty discount factor used in BIC =
-      2L - ck log N, where c is the penalty. Higher c yield sparser
-      graphs,
-
-    - `jitter = 1e-8` - Small non-negative constant added to the
-      diagonal of covariance/correlation matrices for numerical
-      stability,
-
-    - `truncation_limit = 3` - Basis functions 1 through this number
-      will be used. The Degenerate Gaussian category indicator variables
-      for mixed data are also used.
-
-  - `"rank_bic"` - Rank BIC score.
+  - `"rank_bic"` - Rank-based BIC score.
 
     - `gamma = 0.8` - Gamma parameter for Extended BIC (Chen and Chen,
       2008). Between 0 and 1,
@@ -737,6 +676,14 @@ Sets the scoring function to use in Tetrad.
     - `penalty_discount = 2` - Penalty discount factor used in BIC =
       2L - ck log N, where c is the penalty. Higher c yield sparser
       graphs.
+
+  - `"zhang_shen_bound"` - Zhang and Shen bound score.
+
+    - `risk_bound = 0.2` - This is the probability of getting the true
+      model if a correct model is discovered. Could underfit.
+
+    - `singularity_lambda = 0.0` - Small number \>= 0: Add lambda to the
+      diagonal, \< 0 Pseudoinverse.
 
 #### Returns
 
@@ -790,7 +737,8 @@ Sets the causal discovery algorithm to use in Tetrad.
     - `use_bes = TRUE` - If TRUE, the algorithm uses the backward
       equivalence search from the GES algorithm as one of its steps,
 
-    - `use_heuristic` - If TRUE, use the max p heuristic version,
+    - `use_heuristic = FALSE` - If TRUE, use the max p heuristic
+      version,
 
     - `complete_rule_set_used = TRUE` - FALSE if the (simpler) final
       orientation rules set due to P. Spirtes, guaranteeing arrow
@@ -799,104 +747,6 @@ Sets the causal discovery algorithm to use in Tetrad.
 
     - `guarantee_pag = FALSE` - Ensure the output is a legal PAG (where
       feasible).
-
-  - `"ccd"` - Cyclic Causal Discovery.
-
-    - `depth = -1` - Maximum size of conditioning set,
-
-    - `apply_r1 = TRUE` - Set this parameter to FALSE if a chain of
-      directed edges pointing in the same direction, when only the first
-      few such orientations are justified based on the data.
-
-  - `"cfci"` - Adjusts FCI to use conservative orientation as in CPC.
-
-    - `depth = -1` - Maximum size of conditioning set,
-
-    - `max_disc_path_length = -1` - Maximum length for any
-      discriminating path,
-
-    - `complete_rule_set_used = TRUE` - FALSE if the (simpler) final
-      orientation rules set due to P. Spirtes, guaranteeing arrow
-      completeness, should be used; TRUE if the (fuller) set due to J.
-      Zhang, should be used guaranteeing additional tail completeness.
-
-  - `"cpc"` - Conservative PC algorithm.
-
-    - `conflict_rule = 1` - The value of `conflict_rule` determines how
-      collider conflicts are handled. `1` corresponds to the "overwrite"
-      rule as introduced in the pcalg package, see
-      [`pcalg::pc()`](https://rdrr.io/pkg/pcalg/man/pc.html). `2` means
-      that all collider conflicts using bidirected edges should be
-      prioritized, while `3` means that existing colliders should be
-      prioritized, ignoring subsequent conflicting information.
-
-    - `depth = -1` - Maximum size of conditioning set,
-
-    - `stable_fas = TRUE` - If TRUE, the "stable" version of the PC
-      adjacency search is used, which for k \> 0 fixes the graph for
-      depth k + 1 to that of the previous depth k.
-
-    - `guarantee_cpdag = FALSE` - If TRUE, ensure the output is a legal
-      CPDAG.
-
-  - `"cstar"` - CStaR algorithm (Causal Stability Ranking).
-
-    - `targets = ""` - Target names (comma or space separated),
-
-    - `file_out_path = "cstar_out"` - Path to a directory in which
-      results can be stored
-
-    - `selection_min_effect = 0.0` - Minimum effect size for listing
-      effects in the CStaR table
-
-    - `num_subsamples = 50` - CStaR works by generating subsamples and
-      summarizing across them; this specifies the number of subsamples
-      to generate. Must be \>= 1,
-
-    - `top_bracket = 10` - Top bracket to look for causes in,
-
-    - `parallelized = FALSE` - If TRUE, the algorithm should be
-      parallelized,
-
-    - `cpdag_algorithm = "restricted_boss"` - The CPDAG algorithm to
-      use. `"pc"` corresponds to PC Stable, `"fges"` selects the FGES
-      algorithm, `"boss"` selects the BOSS algorithm, and
-      `"restricted_boss"` selects the restricted BOSS variant.
-
-    - `remove_effect_nodes = TRUE` - If TRUE, the effect nodes should be
-      removed from possible causes,
-
-    - `sample_style = "subsample"` - The sampling style to use.
-      Available options are `"subsample"` and `"bootstrap"`.
-
-  - `"dagma"` - DAGMA algorithm.
-
-    - `lambda1 = 0.05` - Tuning parameter for DAGMA,
-
-    - `w_threshold = 0.1` - Second tuning parameter for DAGMA,
-
-    - `cpdag = TRUE` - The algorithm returns a DAG; if this is set to
-      TRUE, this DAG is converted to a CPDAG.
-
-  - `"direct_lingam"` - DirectLiNGAM algorithm. No parameters.
-
-  - `"fask"` - FASK algorithm.
-
-    - `alpha = 0.05` - Significance level for the independence test,
-
-    - `depth = -1` - Maximum size of conditioning set,
-
-    - `fask_delta = -0.3` - The bias for orienting with negative
-      coefficients (`0` means no bias) for `FASK v1`,
-
-    - `left_right_rule = 1` - The FASK left right rule v2 is default,
-      but two other (related) left-right rules are given for relation to
-      the literature, and the v1 FASK rule is included for backward
-      compatibility,
-
-    - `skew_edge_threshold = 0.3` - For FASK, this includes an adjacency
-      X — Y in the model if \|corr(X, Y \| X \> 0) - corr(X, Y \| Y \>
-      0)\| exceeds some threshold.
 
   - `"fci"` - FCI algorithm.
 
@@ -917,37 +767,7 @@ Sets the causal discovery algorithm to use in Tetrad.
     - `guarantee_pag = FALSE` - Ensure the output is a legal PAG (where
       feasible).
 
-  - `"fcit"` - FCI Targeted Testing (FCIT) algorithm
-
-    - `use_bes = TRUE` - If TRUE, the algorithm uses the backward
-      equivalence search from the GES algorithm as one of its steps,
-
-    - `use_data_order = TRUE` - If TRUE, the data variable order should
-      be used for the first initial permutation,
-
-    - `num_starts = 1` - The number of times the algorithm should be
-      started from different initializations. By default, the algorithm
-      will be run through at least once using the initialized
-      parameters,
-
-    - `max_disc_path_length = -1` - Maximum length for any
-      discriminating path,
-
-    - `start_with = "BOSS"` - What algorithm to run first to get the
-      initial CPDAG that the rest of the FCIT procedure refines.
-      Available options are: `"BOSS"`, `"GRaSP"`, and `"SP"`.
-
-    - `complete_rule_set_used = TRUE` - FALSE if the (simpler) final
-      orientation rules set due to P. Spirtes, guaranteeing arrow
-      completeness, should be used; TRUE if the (fuller) set due to J.
-      Zhang, should be used guaranteeing additional tail completeness,
-
-    - `depth = -1` - Maximum size of conditioning set,
-
-    - `guarantee_pag = FALSE` - Ensure the output is a legal PAG (where
-      feasible).
-
-  - `"fges"` - Fast Greedy Equivalence Search (FGES) algorithm.
+  - `"ges" ("fges")` - Fast Greedy Equivalence Search (FGES) algorithm.
 
     - `symmetric_first_step = FALSE` - If TRUE, scores for both X –\> Y
       and X \<– Y will be calculated and the higher score used.
@@ -957,27 +777,6 @@ Sets the causal discovery algorithm to use in Tetrad.
 
     - `parallelized = FALSE` - If TRUE, the algorithm should be
       parallelized,
-
-    - `faithfulness_assumed = FALSE` - If TRUE, assume that if \\X
-      \perp\\\\\\\perp Y\\ (by an independence test) then \\X
-      \perp\\\\\\\perp Y\\ \| Z for nonempty Z.
-
-  - `"fges_mb"` - Fast Greedy Equivalence Search with Markov Blanket
-    (FGES-MB) algorithm.
-
-    - `targets = ""` - Target names (comma or space separated),
-
-    - `max_degree = -1` - Maximum degree of any node in the graph. Set
-      to -1 for unlimited,
-
-    - `trimming_style = "mb_dags"` - The trimming style to use: `"none"`
-      applies no trimming. `"adj"` trims to the adjacencies of the
-      targets. `"mb_dags"` trims to Union(MB(targets)) U targets.
-      `"semidir_paths"` trims to nodes with semidirected paths to the
-      targets.
-
-    - `number_of_expansions = 2` - Number of expansions of the algorithm
-      away from the target,
 
     - `faithfulness_assumed = FALSE` - If TRUE, assume that if \\X
       \perp\\\\\\\perp Y\\ (by an independence test) then \\X
@@ -996,10 +795,14 @@ Sets the causal discovery algorithm to use in Tetrad.
     - `complete_rule_set_used = TRUE` - FALSE if the (simpler) final
       orientation rules set due to P. Spirtes, guaranteeing arrow
       completeness, should be used; TRUE if the (fuller) set due to J.
-      Zhang, should be used guaranteeing additional tail completeness.
+      Zhang, should be used guaranteeing additional tail completeness,
 
     - `guarantee_pag = FALSE` - Ensure the output is a legal PAG (where
-      feasible).
+      feasible),
+
+    - `use_heuristic = FALSE` - If TRUE, use the max p heuristic.
+
+    - `start_complete = FALSE` - If TRUE, start from a complete graph.
 
   - `"grasp"` - GRaSP (Greedy Relations of Sparsest Permutation)
     algorithm.
@@ -1063,35 +866,6 @@ Sets the causal discovery algorithm to use in Tetrad.
     - `guarantee_pag = FALSE` - If TRUE, ensure the output is a legal
       PAG (where feasible).
 
-  - `"ica_lingam"` - ICA LiNGAM algorithm.
-
-    - `ica_a = 1.1` - The 'a' parameter of Fast ICA (see Hyvarinen, A.
-      (2001)). It ranges between 1 and 2.
-
-    - `ica_max_iter = 5000` - Maximum number if iterations of the
-      optimization procedure of ICA.
-
-    - `ica_tolerance = 1e-8` - Fast ICA tolerance parameter.
-
-    - `threshold_b = 0.1` - The estimated B matrix is thresholded by
-      setting small entries less than this threshold to zero.
-
-  - `"ica_lingd"` - ICA-LiNG-D algorithm
-
-    - `ica_a = 1.1` - The 'a' parameter of Fast ICA (see Hyvarinen, A.
-      (2001)). It ranges between 1 and 2.
-
-    - `ica_max_iter = 5000` - Maximum number if iterations of the
-      optimization procedure of ICA.
-
-    - `ica_tolerance = 1e-8` - Fast ICA tolerance parameter.
-
-    - `threshold_b = 0.1` - The estimated B matrix is thresholded by
-      setting small entries less than this threshold to zero.
-
-    - `threshold_w` - The estimated W matrix is thresholded by setting
-      small entries less than this threshold to zero.
-
   - `"pc"` - Peter-Clark (PC) algorithm
 
     - `conflict_rule = 1` - The value of `conflict_rule` determines how
@@ -1110,27 +884,6 @@ Sets the causal discovery algorithm to use in Tetrad.
 
     - `guarantee_cpdag = FALSE` - If TRUE, ensure the output is a legal
       CPDAG.
-
-  - `"pc_max"` - PCMax algorithm
-
-    - `conflict_rule = 1` - The value of `conflict_rule` determines how
-      collider conflicts are handled. `1` corresponds to the "overwrite"
-      rule as introduced in the pcalg package, see
-      [`pcalg::pc()`](https://rdrr.io/pkg/pcalg/man/pc.html). `2` means
-      that all collider conflicts using bidirected edges should be
-      prioritized, while `3` means that existing colliders should be
-      prioritized, ignoring subsequent conflicting information.
-
-    - `depth = -1` - Maximum size of conditioning set,
-
-    - `use_heuristic = TRUE` - If TRUE, use the max p heuristic version
-
-    - `max_disc_path_length = -1` - The maximum path length to use for
-      the max p heuristic version. If -1, no limit is used.
-
-    - `stable_fas = TRUE` - If TRUE, the "stable" version of the PC
-      adjacency search is used, which for k \> 0 fixes the graph for
-      depth k + 1 to that of the previous depth k.
 
   - `"restricted_boss"` - Restricted BOSS algorithm
 
@@ -1167,8 +920,6 @@ Sets the causal discovery algorithm to use in Tetrad.
     - `guarantee_pag = FALSE` - Ensure the output is a legal PAG (where
       feasible).
 
-  - `"sp"` - Sparsest Permutation algorithm. No parameters.
-
   - `"sp_fci"` - Sparsest Permutation using FCI
 
     - `depth = -1` - Maximum size of conditioning set,
@@ -1182,7 +933,10 @@ Sets the causal discovery algorithm to use in Tetrad.
       Zhang, should be used guaranteeing additional tail completeness,
 
     - `guarantee_pag = FALSE` - Ensure the output is a legal PAG (where
-      feasible).
+      feasible),
+
+    - `use_heuristic = FALSE` - If TRUE, use the max p heuristic
+      version.
 
 #### Returns
 

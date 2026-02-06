@@ -80,10 +80,10 @@ causalDisco::check_tetrad_install()
 #> [1] TRUE
 #> 
 #> $java_version
-#> [1] "25.0.1"
+#> [1] "25.0.2"
 #> 
 #> $message
-#> [1] "Tetrad found (version 7.6.10). Java version 25.0.1 is OK."
+#> [1] "Tetrad found (version 7.6.10). Java version 25.0.2 is OK."
 ```
 
 ## Example
@@ -149,6 +149,11 @@ of the nodes.](reference/figures/README-plot-1.png)
 - Updated all the vignettes - anything missing?
 
 ## TODO
+
+- Update doc (and implement algs we want) from bnlearn and pcalg like I
+  did with Tetrad.
+
+- Add references to algs/scores/tests?
 
 - Check all args (that we want) are available from Tetrad.
 

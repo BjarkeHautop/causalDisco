@@ -41,14 +41,14 @@ pcalg documentation, which we link to in the respective sections below.
   A function that will be used to run the search algorithm. Can be set
   with `$set_alg()`. Recognized values are:
 
-  - `"pc"` - PC algorithm. See
-    [`pcalg::pc()`](https://rdrr.io/pkg/pcalg/man/pc.html).
-
   - `"fci"` - FCI algorithm. See
     [`pcalg::fci()`](https://rdrr.io/pkg/pcalg/man/fci.html).
 
   - `"ges"` - GES algorithm. See
     [`pcalg::ges()`](https://rdrr.io/pkg/pcalg/man/ges.html).
+
+  - `"pc"` - PC algorithm. See
+    [`pcalg::pc()`](https://rdrr.io/pkg/pcalg/man/pc.html).
 
 - `params`:
 

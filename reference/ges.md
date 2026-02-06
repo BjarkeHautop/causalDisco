@@ -43,10 +43,25 @@ For specific details on the supported scores, and parameters for each
 engine, see:
 
 - [`TetradSearch`](https://bjarkehautop.github.io/causalDisco/reference/TetradSearch.md)
-  for Tetrad (note, Tetrad refers to it as "FGES"),
+  for Tetrad (note, Tetrad refers to it as "fges"),
 
 - [`PcalgSearch`](https://bjarkehautop.github.io/causalDisco/reference/PcalgSearch.md)
   for pcalg.
+
+## See also
+
+Other causal discovery algorithms:
+[`boss()`](https://bjarkehautop.github.io/causalDisco/reference/boss.md),
+[`boss_fci()`](https://bjarkehautop.github.io/causalDisco/reference/boss_fci.md),
+[`fci()`](https://bjarkehautop.github.io/causalDisco/reference/fci.md),
+[`gfci()`](https://bjarkehautop.github.io/causalDisco/reference/gfci.md),
+[`grasp()`](https://bjarkehautop.github.io/causalDisco/reference/grasp.md),
+[`grasp_fci()`](https://bjarkehautop.github.io/causalDisco/reference/grasp_fci.md),
+[`pc()`](https://bjarkehautop.github.io/causalDisco/reference/pc.md),
+[`sp_fci()`](https://bjarkehautop.github.io/causalDisco/reference/sp_fci.md),
+[`tfci()`](https://bjarkehautop.github.io/causalDisco/reference/tfci.md),
+[`tges()`](https://bjarkehautop.github.io/causalDisco/reference/tges.md),
+[`tpc()`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md)
 
 ## Examples
 

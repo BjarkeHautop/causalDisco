@@ -9,7 +9,7 @@ For arguments to the test, score, and algorithm, see the bnlearn documentation."
 
     <a class="navbar-brand me-2" href="../index.html">causalDisco</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9042</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5.9043</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,28 +63,28 @@ search object. Can be set with <code>set_data()</code>.</p></dd>
 <span class="pkg">bnlearn</span>. Can be set with <code>$set_score()</code>. Kebab-case score names (as used in <span class="pkg">bnlearn</span>, e.g.
 <code>"pred-loglik"</code>) are also accepted and automatically translated to snake_case.
 Recognised values are:</p>
-<p><strong>Discrete – categorical</strong></p><ul><li><p><code>"loglik"</code> - log-likelihood</p></li>
-<li><p><code>"aic"</code> - Akaike Information Criterion</p></li>
-<li><p><code>"bic"</code> - Bayesian Information Criterion</p></li>
-<li><p><code>"ebic"</code> - Extended BIC</p></li>
-<li><p><code>"pred_loglik"</code> - predictive log-likelihood</p></li>
-<li><p><code>"bde"</code> - Bayesian Dirichlet equivalent (uniform)</p></li>
-<li><p><code>"bds"</code> - Bayesian Dirichlet score</p></li>
-<li><p><code>"mbde"</code> - modified BDE</p></li>
-<li><p><code>"bdla"</code> - locally averaged BDE</p></li>
-<li><p><code>"k2"</code> - K2 score</p></li>
-<li><p><code>"fnml"</code> - factorised NML</p></li>
-<li><p><code>"qnml"</code> - quotient NML</p></li>
-<li><p><code>"nal"</code> - node-average log-likelihood</p></li>
-<li><p><code>"pnal"</code> - penalised node-average log-likelihood</p></li>
-</ul><p><strong>Continuous - Gaussian</strong></p><ul><li><p><code>"loglik_g"</code>, <code>"aic_g"</code>, <code>"bic_g"</code>,
-<code>"ebic_g"</code>, <code>"pred_loglik_g"</code></p></li>
-<li><p><code>"bge"</code> - Gaussian posterior density</p></li>
-<li><p><code>"nal_g"</code> - node-average log-likelihood</p></li>
-<li><p><code>"pnal_g"</code> - penalised node-average log-likelihood</p></li>
-</ul><p><strong>Mixed Discrete/Gaussian</strong></p><ul><li><p><code>"loglik_cg"</code>, <code>"aic_cg"</code>, <code>"bic_cg"</code>,
-<code>"ebic_cg"</code>, <code>"pred_loglik_cg"</code>,
-<code>"nal_cg"</code>, <code>"pnal_cg"</code></p></li>
+<p><strong>Continuous - Gaussian</strong></p><ul><li><p><code>"aic_g"</code>, <code>"bic_g"</code>, <code>"ebic_g"</code>, <code>"loglik_g"</code>, <code>"pred_loglik_g"</code> -
+gaussian versions of the respective scores for discrete data.</p></li>
+<li><p><code>"bge"</code> - Gaussian posterior density.</p></li>
+<li><p><code>"nal_g"</code> - node-average log-likelihood.</p></li>
+<li><p><code>"pnal_g"</code> - penalised node-average log-likelihood.</p></li>
+</ul><p><strong>Discrete – categorical</strong></p><ul><li><p><code>"aic"</code> - Akaike Information Criterion.</p></li>
+<li><p><code>"bdla"</code> - locally averaged BDE.</p></li>
+<li><p><code>"bde"</code> - Bayesian Dirichlet equivalent (uniform).</p></li>
+<li><p><code>"bds"</code> - Bayesian Dirichlet score.</p></li>
+<li><p><code>"bic"</code> - Bayesian Information Criterion.</p></li>
+<li><p><code>"ebic"</code> - Extended BIC.</p></li>
+<li><p><code>"fnml"</code> - factorised NML.</p></li>
+<li><p><code>"k2"</code> - K2 score.</p></li>
+<li><p><code>"loglik"</code> - log-likelihood.</p></li>
+<li><p><code>"mbde"</code> - modified BDE.</p></li>
+<li><p><code>"nal"</code> - node-average log-likelihood.</p></li>
+<li><p><code>"pnal"</code> - penalised node-average log-likelihood.</p></li>
+<li><p><code>"pred_loglik"</code> - predictive log-likelihood.</p></li>
+<li><p><code>"qnml"</code> - quotient NML.</p></li>
+</ul><p><strong>Mixed Discrete/Gaussian</strong></p><ul><li><p><code>"aic_cg"</code>, <code>"bic_cg"</code>, <code>"ebic_cg"</code>, <code>"loglik_cg"</code>, <code>"nal_cg"</code>,
+<code>"pnal_cg"</code>, <code>"pred_loglik_cg"</code> - conditional Gaussian versions of the respective scores for
+discrete data.</p></li>
 </ul></dd>
 
 
@@ -93,30 +93,30 @@ Recognised values are:</p>
 passed to <span class="pkg">bnlearn</span>. Can be set with <code>$set_score()</code>. Kebab-case test names
 (as used in <span class="pkg">bnlearn</span>, e.g. "mi-adf") are also accepted and automatically translated to snake_case.
 Recognised values are:</p>
-<p><strong>Discrete – categorical</strong></p><ul><li><p><code>"mi"</code> – mutual information</p></li>
+<p><strong>Continuous - Gaussian</strong></p><ul><li><p><code>"cor"</code> – Pearson correlation</p></li>
+<li><p><code>"fisher_z"</code> / <code>"zf"</code> – Fisher Z test</p></li>
+<li><p><code>"mc_cor"</code> – Monte Carlo Pearson correlation</p></li>
+<li><p><code>"mc_mi_g"</code> – Monte Carlo mutual information (Gaussian)</p></li>
+<li><p><code>"mc_zf"</code> – Monte Carlo Fisher Z</p></li>
+<li><p><code>"mi_g"</code> – mutual information (Gaussian)</p></li>
+<li><p><code>"mi_g_sh"</code> – mutual information (Gaussian, shrinkage)</p></li>
+<li><p><code>"smc_cor"</code> – sequential Monte Carlo Pearson correlation</p></li>
+<li><p><code>"smc_mi_g"</code> – sequential Monte Carlo mutual information (Gaussian)</p></li>
+<li><p><code>"smc_zf"</code> – sequential Monte Carlo Fisher Z</p></li>
+</ul><p><strong>Discrete – categorical</strong></p><ul><li><p><code>"mc_mi"</code> – Monte Carlo mutual information</p></li>
+<li><p><code>"mc_x2"</code> – Monte Carlo chi-squared</p></li>
+<li><p><code>"mi"</code> – mutual information</p></li>
 <li><p><code>"mi_adf"</code> – mutual information with adjusted d.f.</p></li>
-<li><p><code>"mc_mi"</code> – Monte Carlo mutual information</p></li>
-<li><p><code>"smc_mi"</code> – sequential Monte Carlo mutual information</p></li>
-<li><p><code>"sp_mi"</code> – semi-parametric mutual information</p></li>
 <li><p><code>"mi_sh"</code> – mutual information (shrinkage)</p></li>
+<li><p><code>"smc_mi"</code> – sequential Monte Carlo mutual information</p></li>
+<li><p><code>"smc_x2"</code> – sequential Monte Carlo chi-squared</p></li>
+<li><p><code>"sp_mi"</code> – semi-parametric mutual information</p></li>
+<li><p><code>"sp_x2"</code> – semi-parametric chi-squared</p></li>
 <li><p><code>"x2"</code> – chi-squared</p></li>
 <li><p><code>"x2_adf"</code> – chi-squared with adjusted d.f.</p></li>
-<li><p><code>"mc_x2"</code> – Monte Carlo chi-squared</p></li>
-<li><p><code>"smc_x2"</code> – sequential Monte Carlo chi-squared</p></li>
-<li><p><code>"sp_x2"</code> – semi-parametric chi-squared</p></li>
 </ul><p><strong>Discrete – ordered factors</strong></p><ul><li><p><code>"jt"</code> – Jonckheere–Terpstra</p></li>
 <li><p><code>"mc_jt"</code> – Monte Carlo Jonckheere–Terpstra</p></li>
 <li><p><code>"smc_jt"</code> – sequential Monte Carlo Jonckheere–Terpstra</p></li>
-</ul><p><strong>Continuous - Gaussian</strong></p><ul><li><p><code>"cor"</code> – Pearson correlation</p></li>
-<li><p><code>"mc_cor"</code> – Monte Carlo Pearson correlation</p></li>
-<li><p><code>"smc_cor"</code> – sequential Monte Carlo Pearson correlation</p></li>
-<li><p><code>"zf"</code> / <code>"fisher_z"</code> – Fisher Z test</p></li>
-<li><p><code>"mc_zf"</code> – Monte Carlo Fisher Z</p></li>
-<li><p><code>"smc_zf"</code> – sequential Monte Carlo Fisher Z</p></li>
-<li><p><code>"mi_g"</code> – mutual information (Gaussian)</p></li>
-<li><p><code>"mc_mi_g"</code> – Monte Carlo mutual information (Gaussian)</p></li>
-<li><p><code>"smc_mi_g"</code> – sequential Monte Carlo mutual information (Gaussian)</p></li>
-<li><p><code>"mi_g_sh"</code> – mutual information (Gaussian, shrinkage)</p></li>
 </ul><p><strong>Mixed Discrete/Gaussian</strong></p><ul><li><p><code>"mi_cg"</code> – mutual information (conditional Gaussian)</p></li>
 </ul></dd>
 
@@ -126,22 +126,22 @@ Recognised values are:</p>
 structure-learning algorithm from <span class="pkg">bnlearn</span>. Period.case alg names
 (as used in <span class="pkg">bnlearn</span>, e.g. "fast.iamb") are also accepted and automatically translated to snake_case.
 Recognised values are:</p>
-<p><strong>Constraint-based</strong></p><ul><li><p><code>"pc"</code> – PC-stable algorithm</p></li>
+<p><strong>Constraint-based</strong></p><ul><li><p><code>"fast_iamb"</code> – Fast-IAMB</p></li>
 <li><p><code>"gs"</code> – Grow-Shrink</p></li>
 <li><p><code>"iamb"</code> – Incremental Association Markov Blanket</p></li>
-<li><p><code>"fast_iamb"</code> – Fast-IAMB</p></li>
-<li><p><code>"inter_iamb"</code> – Interleaved-IAMB</p></li>
 <li><p><code>"iamb_fdr"</code> – IAMB with FDR control</p></li>
-</ul><p><strong>Local / skeleton discovery</strong></p><ul><li><p><code>"mmpc"</code> – Max–Min Parents and Children</p></li>
+<li><p><code>"inter_iamb"</code> – Interleaved-IAMB</p></li>
+<li><p><code>"pc"</code> – PC-stable algorithm</p></li>
+</ul><p><strong>Hybrid</strong></p><ul><li><p><code>"h2pc"</code> – Hybrid HPC–PC</p></li>
+<li><p><code>"mmhc"</code> – Max–Min Hill-Climbing</p></li>
+<li><p><code>"rsmax2"</code> – Restricted Maximisation (two-stage)</p></li>
+</ul><p><strong>Local / skeleton discovery</strong></p><ul><li><p><code>"hpc"</code> – Hybrid Parents and Children</p></li>
+<li><p><code>"mmpc"</code> – Max–Min Parents and Children</p></li>
 <li><p><code>"si_hiton_pc"</code> – Semi-Interleaved HITON-PC</p></li>
-<li><p><code>"hpc"</code> – Hybrid Parents and Children</p></li>
+</ul><p><strong>Pairwise mutual-information learners</strong></p><ul><li><p><code>"aracne"</code> – ARACNE network</p></li>
+<li><p><code>"chow_liu"</code> – Chow–Liu tree</p></li>
 </ul><p><strong>Score-based</strong></p><ul><li><p><code>"hc"</code> – Hill-Climbing</p></li>
 <li><p><code>"tabu"</code> – Tabu search</p></li>
-</ul><p><strong>Hybrid</strong></p><ul><li><p><code>"mmhc"</code> – Max–Min Hill-Climbing</p></li>
-<li><p><code>"rsmax2"</code> – Restricted Maximisation (two-stage)</p></li>
-<li><p><code>"h2pc"</code> – Hybrid HPC–PC</p></li>
-</ul><p><strong>Pairwise mutual-information learners</strong></p><ul><li><p><code>"chow_liu"</code> – Chow–Liu tree</p></li>
-<li><p><code>"aracne"</code> – ARACNE network</p></li>
 </ul></dd>
 
 

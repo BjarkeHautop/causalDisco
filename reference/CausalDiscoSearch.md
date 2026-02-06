@@ -32,25 +32,25 @@ algorithm.
   A function that will be used to test independence. Can be set with
   `$set_test()`. Recognized values are:
 
-  - `"fisher_z"` - Fisher Z test for Gaussian data. See
-    [`cor_test()`](https://bjarkehautop.github.io/causalDisco/reference/cor_test.md).
-
   - `"reg"` - Regression test for discrete or binary data. See
     [`reg_test()`](https://bjarkehautop.github.io/causalDisco/reference/reg_test.md).
+
+  - `"fisher_z"` - Fisher Z test for Gaussian data. See
+    [`cor_test()`](https://bjarkehautop.github.io/causalDisco/reference/cor_test.md).
 
 - `alg`:
 
   A function that will be used to run the search algorithm. Can be set
   with `$set_alg()`. Recognized values are:
 
-  - `"tpc"` - TPC algorithm. See
-    [`tpc()`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md).
-
   - `"tfci"` - TFCI algorithm. See
     [`tfci()`](https://bjarkehautop.github.io/causalDisco/reference/tfci.md).
 
   - `"tges"` - TGES algorithm. See
     [`tges()`](https://bjarkehautop.github.io/causalDisco/reference/tges.md).
+
+  - `"tpc"` - TPC algorithm. See
+    [`tpc()`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md).
 
 - `params`:
 

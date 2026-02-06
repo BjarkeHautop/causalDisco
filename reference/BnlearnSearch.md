@@ -22,50 +22,52 @@ An R6 object with the methods documented below.
   `"pred-loglik"`) are also accepted and automatically translated to
   snake_case. Recognised values are:
 
-  **Discrete – categorical**
-
-  - `"loglik"` - log-likelihood
-
-  - `"aic"` - Akaike Information Criterion
-
-  - `"bic"` - Bayesian Information Criterion
-
-  - `"ebic"` - Extended BIC
-
-  - `"pred_loglik"` - predictive log-likelihood
-
-  - `"bde"` - Bayesian Dirichlet equivalent (uniform)
-
-  - `"bds"` - Bayesian Dirichlet score
-
-  - `"mbde"` - modified BDE
-
-  - `"bdla"` - locally averaged BDE
-
-  - `"k2"` - K2 score
-
-  - `"fnml"` - factorised NML
-
-  - `"qnml"` - quotient NML
-
-  - `"nal"` - node-average log-likelihood
-
-  - `"pnal"` - penalised node-average log-likelihood
-
   **Continuous - Gaussian**
 
-  - `"loglik_g"`, `"aic_g"`, `"bic_g"`, `"ebic_g"`, `"pred_loglik_g"`
+  - `"aic_g"`, `"bic_g"`, `"ebic_g"`, `"loglik_g"`, `"pred_loglik_g"` -
+    gaussian versions of the respective scores for discrete data.
 
-  - `"bge"` - Gaussian posterior density
+  - `"bge"` - Gaussian posterior density.
 
-  - `"nal_g"` - node-average log-likelihood
+  - `"nal_g"` - node-average log-likelihood.
 
-  - `"pnal_g"` - penalised node-average log-likelihood
+  - `"pnal_g"` - penalised node-average log-likelihood.
+
+  **Discrete – categorical**
+
+  - `"aic"` - Akaike Information Criterion.
+
+  - `"bdla"` - locally averaged BDE.
+
+  - `"bde"` - Bayesian Dirichlet equivalent (uniform).
+
+  - `"bds"` - Bayesian Dirichlet score.
+
+  - `"bic"` - Bayesian Information Criterion.
+
+  - `"ebic"` - Extended BIC.
+
+  - `"fnml"` - factorised NML.
+
+  - `"k2"` - K2 score.
+
+  - `"loglik"` - log-likelihood.
+
+  - `"mbde"` - modified BDE.
+
+  - `"nal"` - node-average log-likelihood.
+
+  - `"pnal"` - penalised node-average log-likelihood.
+
+  - `"pred_loglik"` - predictive log-likelihood.
+
+  - `"qnml"` - quotient NML.
 
   **Mixed Discrete/Gaussian**
 
-  - `"loglik_cg"`, `"aic_cg"`, `"bic_cg"`, `"ebic_cg"`,
-    `"pred_loglik_cg"`, `"nal_cg"`, `"pnal_cg"`
+  - `"aic_cg"`, `"bic_cg"`, `"ebic_cg"`, `"loglik_cg"`, `"nal_cg"`,
+    `"pnal_cg"`, `"pred_loglik_cg"` - conditional Gaussian versions of
+    the respective scores for discrete data.
 
 - `test`:
 
@@ -74,29 +76,51 @@ An R6 object with the methods documented below.
   used in bnlearn, e.g. "mi-adf") are also accepted and automatically
   translated to snake_case. Recognised values are:
 
+  **Continuous - Gaussian**
+
+  - `"cor"` – Pearson correlation
+
+  - `"fisher_z"` / `"zf"` – Fisher Z test
+
+  - `"mc_cor"` – Monte Carlo Pearson correlation
+
+  - `"mc_mi_g"` – Monte Carlo mutual information (Gaussian)
+
+  - `"mc_zf"` – Monte Carlo Fisher Z
+
+  - `"mi_g"` – mutual information (Gaussian)
+
+  - `"mi_g_sh"` – mutual information (Gaussian, shrinkage)
+
+  - `"smc_cor"` – sequential Monte Carlo Pearson correlation
+
+  - `"smc_mi_g"` – sequential Monte Carlo mutual information (Gaussian)
+
+  - `"smc_zf"` – sequential Monte Carlo Fisher Z
+
   **Discrete – categorical**
+
+  - `"mc_mi"` – Monte Carlo mutual information
+
+  - `"mc_x2"` – Monte Carlo chi-squared
 
   - `"mi"` – mutual information
 
   - `"mi_adf"` – mutual information with adjusted d.f.
 
-  - `"mc_mi"` – Monte Carlo mutual information
+  - `"mi_sh"` – mutual information (shrinkage)
 
   - `"smc_mi"` – sequential Monte Carlo mutual information
 
+  - `"smc_x2"` – sequential Monte Carlo chi-squared
+
   - `"sp_mi"` – semi-parametric mutual information
 
-  - `"mi_sh"` – mutual information (shrinkage)
+  - `"sp_x2"` – semi-parametric chi-squared
 
   - `"x2"` – chi-squared
 
   - `"x2_adf"` – chi-squared with adjusted d.f.
-
-  - `"mc_x2"` – Monte Carlo chi-squared
-
-  - `"smc_x2"` – sequential Monte Carlo chi-squared
-
-  - `"sp_x2"` – semi-parametric chi-squared
 
   **Discrete – ordered factors**
 
@@ -105,28 +129,6 @@ An R6 object with the methods documented below.
   - `"mc_jt"` – Monte Carlo Jonckheere–Terpstra
 
   - `"smc_jt"` – sequential Monte Carlo Jonckheere–Terpstra
-
-  **Continuous - Gaussian**
-
-  - `"cor"` – Pearson correlation
-
-  - `"mc_cor"` – Monte Carlo Pearson correlation
-
-  - `"smc_cor"` – sequential Monte Carlo Pearson correlation
-
-  - `"zf"` / `"fisher_z"` – Fisher Z test
-
-  - `"mc_zf"` – Monte Carlo Fisher Z
-
-  - `"smc_zf"` – sequential Monte Carlo Fisher Z
-
-  - `"mi_g"` – mutual information (Gaussian)
-
-  - `"mc_mi_g"` – Monte Carlo mutual information (Gaussian)
-
-  - `"smc_mi_g"` – sequential Monte Carlo mutual information (Gaussian)
-
-  - `"mi_g_sh"` – mutual information (Gaussian, shrinkage)
 
   **Mixed Discrete/Gaussian**
 
@@ -141,45 +143,45 @@ An R6 object with the methods documented below.
 
   **Constraint-based**
 
-  - `"pc"` – PC-stable algorithm
+  - `"fast_iamb"` – Fast-IAMB
 
   - `"gs"` – Grow-Shrink
 
   - `"iamb"` – Incremental Association Markov Blanket
 
-  - `"fast_iamb"` – Fast-IAMB
+  - `"iamb_fdr"` – IAMB with FDR control
 
   - `"inter_iamb"` – Interleaved-IAMB
 
-  - `"iamb_fdr"` – IAMB with FDR control
+  - `"pc"` – PC-stable algorithm
+
+  **Hybrid**
+
+  - `"h2pc"` – Hybrid HPC–PC
+
+  - `"mmhc"` – Max–Min Hill-Climbing
+
+  - `"rsmax2"` – Restricted Maximisation (two-stage)
 
   **Local / skeleton discovery**
+
+  - `"hpc"` – Hybrid Parents and Children
 
   - `"mmpc"` – Max–Min Parents and Children
 
   - `"si_hiton_pc"` – Semi-Interleaved HITON-PC
 
-  - `"hpc"` – Hybrid Parents and Children
+  **Pairwise mutual-information learners**
+
+  - `"aracne"` – ARACNE network
+
+  - `"chow_liu"` – Chow–Liu tree
 
   **Score-based**
 
   - `"hc"` – Hill-Climbing
 
   - `"tabu"` – Tabu search
-
-  **Hybrid**
-
-  - `"mmhc"` – Max–Min Hill-Climbing
-
-  - `"rsmax2"` – Restricted Maximisation (two-stage)
-
-  - `"h2pc"` – Hybrid HPC–PC
-
-  **Pairwise mutual-information learners**
-
-  - `"chow_liu"` – Chow–Liu tree
-
-  - `"aracne"` – ARACNE network
 
 - `params`:
 

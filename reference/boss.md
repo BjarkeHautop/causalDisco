@@ -42,6 +42,21 @@ engine, see:
 - [`TetradSearch`](https://bjarkehautop.github.io/causalDisco/reference/TetradSearch.md)
   for Tetrad.
 
+## See also
+
+Other causal discovery algorithms:
+[`boss_fci()`](https://bjarkehautop.github.io/causalDisco/reference/boss_fci.md),
+[`fci()`](https://bjarkehautop.github.io/causalDisco/reference/fci.md),
+[`ges()`](https://bjarkehautop.github.io/causalDisco/reference/ges.md),
+[`gfci()`](https://bjarkehautop.github.io/causalDisco/reference/gfci.md),
+[`grasp()`](https://bjarkehautop.github.io/causalDisco/reference/grasp.md),
+[`grasp_fci()`](https://bjarkehautop.github.io/causalDisco/reference/grasp_fci.md),
+[`pc()`](https://bjarkehautop.github.io/causalDisco/reference/pc.md),
+[`sp_fci()`](https://bjarkehautop.github.io/causalDisco/reference/sp_fci.md),
+[`tfci()`](https://bjarkehautop.github.io/causalDisco/reference/tfci.md),
+[`tges()`](https://bjarkehautop.github.io/causalDisco/reference/tges.md),
+[`tpc()`](https://bjarkehautop.github.io/causalDisco/reference/tpc.md)
+
 ## Examples
 
 ``` r
@@ -147,7 +162,7 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 #> 
 #>   from      edge  to       
 #>   <chr>     <chr> <chr>    
-#> 1 child_x2  -->   child_x1 
+#> 1 child_x1  -->   child_x2 
 #> 2 child_x2  -->   oldage_x5
 #> 3 child_x2  -->   youth_x4 
 #> 4 oldage_x5 -->   oldage_x6

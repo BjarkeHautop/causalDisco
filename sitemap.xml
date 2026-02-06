@@ -8,8 +8,10 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/articles/knowledge.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/articles/visualization.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/authors.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/bnlearn-algs.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/index.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/news/index.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/pcalg-algs.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/BnlearnSearch.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/CausalDiscoSearch.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/PcalgSearch.html</loc></url>
@@ -54,6 +56,7 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/generate_dag_data.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/ges.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/get_tiers.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/reference/gfci.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/grasp.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/grasp_fci.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/index.html</loc></url>
@@ -90,6 +93,7 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/seq_tiers.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/set_knowledge.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/sim_dag.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/reference/sp_fci.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/specificity.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/summary.knowledge.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/summary.knowledgeable_caugi.html</loc></url>
@@ -101,5 +105,6 @@
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/tpc_example.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/tpc_run.html</loc></url>
 <url><loc>https://bjarkehautop.github.io/causalDisco/reference/unfreeze.html</loc></url>
+<url><loc>https://bjarkehautop.github.io/causalDisco/tetrad-algs.html</loc></url>
 </urlset>
 
