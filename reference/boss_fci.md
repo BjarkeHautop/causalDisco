@@ -182,8 +182,7 @@ if (check_tetrad_install()$installed && check_tetrad_install()$java_ok) {
 #> 
 #>   from     edge  to       
 #>   <chr>    <chr> <chr>    
-#> 1 child_x2 o-o   child_x1 
-#> 2 youth_x4 o-o   oldage_x6
+#> 1 child_x2 o-o   oldage_x5
 #> ── Nodes ──
 #> 
 #>   name     
