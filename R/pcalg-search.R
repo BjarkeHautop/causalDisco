@@ -408,6 +408,7 @@ PcalgSearch <- R6::R6Class(
           } else {
             labels = colnames(self$data)
           }
+          browser()
           result <- self$alg(
             suffStat = self$suff_stat,
             labels = labels

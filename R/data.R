@@ -211,3 +211,23 @@
 #' @seealso [num_data]
 #' @concept dataset
 "num_data_latent"
+
+#' US National Longitudinal Survey of Youth 1997
+#'
+#' A subset of data from the US National Longitudinal Survey of Youth 1997 (NLSY97).
+#'
+#' @format
+#' A data frame with 6,315 rows and 9 columns:
+#' \describe{
+#'   \item{r1_mcollege}{Did biological mother attend college? (Yes / No). Measured in Round 1, 1997.}
+#'   \item{r1_urban}{Urban status (Urban / Non-urban). Measured in Round 1, 1997.}
+#'   \item{r1_hhchildren}{Number of household members younger than 18. Measured in Round 1, 1997.}
+#'   \item{r6_depressed}{Having felt depressed during the last month (Sometimes / No). Measured in Round 6, 2002.}
+#'   \item{r6_docvisits}{Number of doctor’s visits during the last year. Measured in Round 6, 2002.}
+#'   \item{r6_exercise}{Days with 30+ minutes exercise / week. Measured in Round 6, 2002.}
+#'   \item{r12_depressed}{Having felt depressed during the last month (Sometimes / No). Measured in Round 12, 2008.}
+#'   \item{r12_docvisits}{Number of doctor’s visits during the last year. Measured in Round 12, 2008.}
+#'   \item{r12_health}{Perception of own health (Good / Poor). Measured in Round 12, 2008.}
+#' }
+#' @source <https://www.nlsinfo.org/investigator/pages/search?s=NLSY97>
+"nlsdata"

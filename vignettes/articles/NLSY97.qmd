@@ -1,0 +1,55 @@
+---
+title: "NLSY97"
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: '#>'
+    fig.align: "center"
+---
+
+```{r}
+#| label: setup
+library(causalDisco)
+```
+
+We will analyze this dataset
+
+```{r}
+data(nlsdata)
+summary(nlsdata)
+```
+
+A description of the dataset is given below
+
+Table: Survey variables overview
+
+| Variable name | Tier | Type    | Description |
+|---------------|------|---------|-------------|
+| r1_hhchildren | R1   | Numeric | Number of household members younger than 18 |
+| r1_urban      | R1   | Binary  | Urban status (Urban / Non-urban) |
+| r1_mcollege   | R1   | Binary  | Did biological mother attend college? (Yes / No) |
+| r6_exercise   | R6   | Numeric | Days with 30+ minutes exercise / week |
+| r6_depressed  | R6   | Binary  | Having felt depressed during the last month (Sometimes / No) |
+| r6_docvisits  | R6   | Numeric | Number of doctor’s visits during the last year |
+| r12_health    | R12  | Binary  | Perception of own health (Good / Poor) |
+| r12_depressed | R12  | Binary  | Having felt depressed during the last month (Sometimes / No) |
+| r12_docvisits | R12  | Numeric | Number of doctor’s visits during the last year |
+
+Convert the two columns which are integer to numeric (should be done in the dataset...)
+
+```{r}
+nlsdata$r1_hhchildren <- as.numeric(nlsdata$r1_hhchildren)
+nlsdata$r6_exercise <- as.numeric(nlsdata$r6_exercise)
+```
+
+
+We are mainly interested in understanding what affects whether a person is depressed.
+
+We start by using the PC algorithm with the mutual information (conditional Gaussian) test from bnlearn
+
+```{r}
+my_pc <- pc(engine = "bnlearn", test = "mi_cg")
+res_pc <- disco(data = nlsdata, method = my_pc)
+plot(res_pc)
+```
+
