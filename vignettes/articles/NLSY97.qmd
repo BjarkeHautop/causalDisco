@@ -42,14 +42,23 @@ nlsdata$r1_hhchildren <- as.numeric(nlsdata$r1_hhchildren)
 nlsdata$r6_exercise <- as.numeric(nlsdata$r6_exercise)
 ```
 
-
 We are mainly interested in understanding what affects whether a person is depressed.
 
 We start by using the PC algorithm with the mutual information (conditional Gaussian) test from bnlearn
 
 ```{r}
-my_pc <- pc(engine = "bnlearn", test = "mi_cg")
-res_pc <- disco(data = nlsdata, method = my_pc)
-plot(res_pc)
+pc_bnlearn <- pc(engine = "bnlearn", test = "mi_cg")
+res_pc_bnlearn <- disco(data = nlsdata, method = pc_bnlearn)
+plot(res_pc_bnlearn, layout = "kamada-kawai")
 ```
+
+Similar, we could try the same for Tetrad
+
+```{r}
+pc_tetrad <- pc(engine = "tetrad", test = "conditional_gaussian")
+res_pc_tetrad <- disco(data = nlsdata, method = pc_tetrad)
+plot(res_pc_tetrad, layout = "kamada-kawai")
+```
+
+
 
