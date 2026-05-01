@@ -52,7 +52,7 @@ res_pc_bnlearn <- disco(data = nlsdata, method = pc_bnlearn)
 plot(res_pc_bnlearn, layout = "kamada-kawai")
 ```
 
-Similar, we could try the same for Tetrad
+Similar, we could try the same for Tetrad.
 
 ```{r}
 pc_tetrad <- pc(engine = "tetrad", test = "conditional_gaussian")
@@ -60,5 +60,59 @@ res_pc_tetrad <- disco(data = nlsdata, method = pc_tetrad)
 plot(res_pc_tetrad, layout = "kamada-kawai")
 ```
 
+We see Tetrad has much fewer orientations, which is what one usually sees when compared to bnlearn
+(it orients too much?).
+
+If we don't believe in the conditional gaussian assumption, we could use more general notions. Here we use
+the Generalized Independence Noise test.
+
+```{r}
+pc_tetrad <- pc(engine = "tetrad", test = "gin")
+res_pc_tetrad <- disco(data = nlsdata, method = pc_tetrad)
+plot(res_pc_tetrad, layout = "kamada-kawai")
+```
+
+use BOSS instead/also?
 
 
+# Temporal Knowledge
+
+We by definition have a temporal ordering of the variables, which we encode below
+
+```{r}
+kn <- knowledge(
+  nlsdata,
+  tier(
+    r1 ~ starts_with("r1_"),
+    r6 ~ starts_with("r6_"),
+    r12 ~ starts_with("r12_")
+  )
+)
+plot(kn)
+```
+
+Now we can use this knowledge in the algorithms from above
+
+```{r}
+pc_bnlearn <- pc(engine = "bnlearn", test = "mi_cg")
+res_pc_bnlearn <- disco(data = nlsdata, method = pc_bnlearn, knowledge = kn)
+plot(res_pc_bnlearn)
+```
+
+Similar, we could try the same for Tetrad.
+
+```{r}
+pc_tetrad <- pc(engine = "tetrad", test = "conditional_gaussian")
+res_pc_tetrad <- disco(data = nlsdata, method = pc_tetrad, knowledge = kn)
+plot(res_pc_tetrad)
+```
+
+
+If we don't believe in the conditional gaussian assumption, we could use more general notions. Here we use
+the Generalized Independence Noise test.
+
+```{r}
+pc_tetrad <- pc(engine = "tetrad", test = "gin")
+res_pc_tetrad <- disco(data = nlsdata, method = pc_tetrad, knowledge = kn)
+plot(res_pc_tetrad)
+```
