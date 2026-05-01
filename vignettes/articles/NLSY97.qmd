@@ -35,13 +35,6 @@ Table: Survey variables overview
 | r12_depressed | R12  | Binary  | Having felt depressed during the last month (Sometimes / No) |
 | r12_docvisits | R12  | Numeric | Number of doctor’s visits during the last year |
 
-Convert the two columns which are integer to numeric (should be done in the dataset...)
-
-```{r}
-nlsdata$r1_hhchildren <- as.numeric(nlsdata$r1_hhchildren)
-nlsdata$r6_exercise <- as.numeric(nlsdata$r6_exercise)
-```
-
 We are mainly interested in understanding what affects whether a person is depressed.
 
 We start by using the PC algorithm with the mutual information (conditional Gaussian) test from bnlearn
@@ -63,8 +56,8 @@ plot(res_pc_tetrad, layout = "kamada-kawai")
 We see Tetrad has much fewer orientations, which is what one usually sees when compared to bnlearn
 (it orients too much?).
 
-If we don't believe in the conditional gaussian assumption, we could use more general notions. Here we use
-the Generalized Independence Noise test.
+If we don't believe in the conditional gaussian assumption, we could use more general tests for independence.
+Here we use the Generalized Independence Noise test.
 
 ```{r}
 pc_tetrad <- pc(engine = "tetrad", test = "gin")
@@ -73,7 +66,6 @@ plot(res_pc_tetrad, layout = "kamada-kawai")
 ```
 
 use BOSS instead/also?
-
 
 # Temporal Knowledge
 
@@ -108,8 +100,24 @@ plot(res_pc_tetrad)
 ```
 
 
-If we don't believe in the conditional gaussian assumption, we could use more general notions. Here we use
-the Generalized Independence Noise test.
+```{r}
+boss_tetrad <- boss(engine = "tetrad", score = "conditional_gaussian")
+res_boss_tetrad <- disco(data = nlsdata, method = boss_tetrad, knowledge = kn)
+plot(res_boss_tetrad)
+```
+
+Allow for latent confounding:
+
+```{r}
+fci_tetrad <- fci(engine = "tetrad", test = "gin")
+res_fci_tetrad <- disco(data = nlsdata, method = fci_tetrad, knowledge = kn)
+plot(res_fci_tetrad)
+```
+
+
+
+If we don't believe in the conditional gaussian assumption, we could use more general tests for independence.
+Here we use the Generalized Independence Noise test.
 
 ```{r}
 pc_tetrad <- pc(engine = "tetrad", test = "gin")
