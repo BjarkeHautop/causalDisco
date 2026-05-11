@@ -49,7 +49,7 @@ tikz_tiered_kn <- make_tikz(
 cat(tikz_tiered_kn)
 
 
-################# Convert disco to Tikz ################
+################# Convert Disco to Tikz ################
 
 data(num_data)
 kn <- knowledge(
