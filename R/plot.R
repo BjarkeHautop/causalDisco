@@ -380,9 +380,11 @@ plot_caugi_common <- function(
 
   # Prepare plot arguments
   plot_args <- list(cg, edge_style = merged_edge_styles)
-  if (has_tiers && !any_na_tiers) {
+
+  user_supplied_layout <- !is.null(dots$layout)
+  if (has_tiers && !any_na_tiers && !user_supplied_layout) {
     plot_args$tiers <- tiers
-  } else if (has_tiers && any_na_tiers) {
+  } else if (has_tiers && any_na_tiers && !user_supplied_layout) {
     warning(
       "Not all nodes are assigned to tiers. Tiered plotting not implemented for partial tiers. \nDefaulting to untiered plotting.",
       call. = FALSE

@@ -324,3 +324,17 @@ test_that("Plotting with explicit edge style overriden per node works", {
     )
   )
 })
+
+test_that("Plotting tiered knowledge with custom layout", {
+  data(tpc_example)
+  kn <- knowledge(
+    tpc_example,
+    tier(
+      child ~ starts_with("child"),
+      youth ~ starts_with("youth"),
+      old ~ starts_with("old")
+    )
+  )
+
+  plot(kn, layout = "kamada-kawai")
+})
