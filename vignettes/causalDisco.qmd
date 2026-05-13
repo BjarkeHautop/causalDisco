@@ -28,7 +28,7 @@ demonstrating how to run causal discovery algorithms. It contains 5 numerical
 variables, `X1, X2, X3, Z`, and `Y`.
 
 ```{r}
-#| label: load data
+#| label: load-data
 
 data(num_data)
 head(num_data)
@@ -38,7 +38,7 @@ To make the different causal graphs easier to interpret, we define a custom
 fixed layout for plotting the results:
 
 ```{r}
-#| label: plot layout
+#| label: plot-layout
 
 plot_layout <- data.frame(
   name = c("Z", "X3", "X1", "X2", "Y"),
@@ -53,7 +53,7 @@ the data. Below we demonstrate this process using the Peter-Clark (PC) algorithm
 from bnlearn with Fisher's Z test:
 
 ```{r}
-#| label: pc algorithm fisher z bnlearn
+#| label: pc-algorithm-fisher-z-bnlearn
 
 pc_bnlearn <- pc(
   engine = "bnlearn", # Use the bnlearn implementation
@@ -66,7 +66,7 @@ pc_result_bnlearn <- disco(data = num_data, method = pc_bnlearn)
 We can visualize the results using `plot()`:
 
 ```{r}
-#| label: pc algorithm fisher z bnlearn plot
+#| label: pc-algorithm-fisher-z-bnlearn-plot
 
 plot(pc_result_bnlearn, layout = plot_layout, main = "PC Fisher Z (bnlearn)")
 ```
@@ -84,7 +84,7 @@ argument. Instead of using bnlearn, we can also use the PC implementation from
 the pcalg package with the same test:
 
 ```{r}
-#| label: pc algorithm fisher z pcalg
+#| label: pc-algorithm-fisher-z-pcalg
 
 pc_pcalg <- pc(
   engine = "pcalg", # Use the pcalg implementation
@@ -116,7 +116,9 @@ For a simpler setup, we recommend using the rJavaEnv package, which provides a c
 configure the environment automatically for rJava. You can install Java using the `rJavaEnv::java_quick_install()`
 function:
 
-```{r install java, eval=FALSE}
+```{r}
+#| label: install-rJavaEnv
+#| eval: false
 # Use the development version of rJavaEnv from GitHub
 # pak::pak("e-kotov/rJavaEnv")
 rJavaEnv::java_quick_install(version = 25, distribution = "Temurin")
@@ -124,14 +126,16 @@ rJavaEnv::java_quick_install(version = 25, distribution = "Temurin")
 
 Once you have Java JDK set up correctly, the current supported version of Tetrad can then be installed by calling
 
-```{r install tetrad, eval=FALSE}
+```{r}
+#| label: install-tetrad
+#| eval: false
 install_tetrad()
 ```
 
 To verify everything is set up correctly you can run `verify_tetrad()`:
 
 ```{r}
-#| label: check tetrad install
+#| label: check-tetrad-install
 verify_tetrad()
 ```
 
@@ -140,7 +144,7 @@ Now you should be able to use Tetrad as an engine for the GES algorithm as shown
 </details>
 
 ```{r}
-#| label: ges algorithm ebic tetrad
+#| label: ges-algorithm-ebic-tetrad
 
 if (verify_tetrad()$installed && verify_tetrad()$java_ok) {
   ges_tetrad <- ges(
@@ -157,7 +161,7 @@ arguments to `plot()`. For example, to change the appearance of the nodes, you
 can use the `node_style` argument:
 
 ```{r}
-#| label: custom plot
+#| label: custom-plot
 
 plot(
   pc_result_bnlearn,
@@ -180,7 +184,7 @@ Instead of using `plot()`, another way to view and analyze the results is to use
 the `print()` or `summary()` functions:
 
 ```{r}
-#| label: view results
+#| label: view-results
 
 print(pc_result_bnlearn)
 summary(pc_result_bnlearn)
@@ -193,7 +197,7 @@ variables, which are measured at three different life stages: childhood, youth,
 and old age.
 
 ```{r}
-#| label: load tpc example data
+#| label: load-tpc-example-data
 
 data(tpc_example)
 head(tpc_example)
@@ -212,7 +216,7 @@ function. Here, we illustrate this by creating a tiered knowledge structure
 based on life stages:
 
 ```{r}
-#| label: prior knowledge
+#| label: prior-knowledge
 
 kn <- knowledge(
   tpc_example,
@@ -230,7 +234,7 @@ vignette](knowledge.html).
 You can view the `Knowledge` object using `print()`, `summary()` or `plot()`:
 
 ```{r}
-#| label: view knowledge
+#| label: view-knowledge
 
 print(kn)
 summary(kn)
@@ -246,7 +250,7 @@ function. Here we use the Temporal Peter-Clark (tpc) algorithm from causalDisco
 with the regression-based information loss test:
 
 ```{r}
-#| label: tpc algorithm with knowledge
+#| label: tpc-algorithm-with-knowledge
 
 tpc_method <- tpc(
   engine = "causalDisco", # Use the causalDisco implementation
@@ -258,7 +262,7 @@ tpc_result <- disco(data = tpc_example, method = tpc_method, knowledge = kn)
 Similarly, we can view the results using `print()`, `summary()` or `plot()`:
 
 ```{r}
-#| label: view tpc results
+#| label: view-tpc-results
 
 print(tpc_result)
 summary(tpc_result)

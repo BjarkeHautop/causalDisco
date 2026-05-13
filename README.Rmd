@@ -62,7 +62,7 @@ install.packages("causalDisco")
 or the development version of causalDisco from GitHub using pak:
 
 ```{r}
-#| label: pak install
+#| label: pak-install
 #| eval: false
 
 pak::pak("disco-coders/causalDisco")
@@ -95,7 +95,7 @@ for rJava. You can install Java using the `rJavaEnv::java_quick_install()`
 function:
 
 ```{r}
-#| label: install java
+#| label: install-java
 #| eval: false
 
 # Use the development version of rJavaEnv from GitHub
@@ -107,7 +107,7 @@ Once you have Java JDK set up correctly, the current supported version of Tetrad
 can then be installed by calling
 
 ```{r}
-#| label: install tetrad
+#| label: install-tetrad
 #| eval: false
 
 causalDisco::install_tetrad()
@@ -116,7 +116,7 @@ causalDisco::install_tetrad()
 To verify everything is set up correctly you can run `verify_tetrad()`:
 
 ```{r}
-#| label: check tetrad install
+#| label: check-tetrad-install
 
 causalDisco::verify_tetrad()
 ```
@@ -150,7 +150,7 @@ variables. We use tidyselect syntax to select variables for each tier, but you
 can also use explicit variable names or regular expressions.
 
 ```{r}
-#| label: knowledge example
+#| label: knowledge-example
 
 kn <- knowledge(
   tpc_example,
@@ -185,7 +185,7 @@ as described in the installation instructions above. Then you can specify the
 Tetrad engine in the same way as for the other backends:
 
 ```{r}
-#| label: tetrad pc
+#| label: tetrad-pc
 
 if (verify_tetrad()$installed && verify_tetrad()$java_ok) {
   tetrad_pc <- pc(

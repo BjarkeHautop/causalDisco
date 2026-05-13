@@ -49,7 +49,7 @@ An example of a custom CI test is a partial correlation test based on the Fisher
 Z-transform, which can be implemented as follows:
 
 ```{r}
-#| label: my_custom_test
+#| label: my-custom-test
 
 my_test <- function(x, y, conditioning_set, suff_stat) {
   C <- suff_stat$C
@@ -79,7 +79,7 @@ my_suff_stat <- function(data) {
 This can then be used with the causalDisco engine as follows:
 
 ```{r}
-#| label: using_my_custom_test_causalDisco
+#| label: using-my-custom-test-causalDisco
 
 data(num_data)
 
@@ -96,7 +96,7 @@ plot(result)
 or the pcalg engine as follows:
 
 ```{r}
-#| label: using_my_custom_test_pcalg
+#| label: using-my-custom-test-pcalg
 
 my_pc <- pc(
   engine = "pcalg",
@@ -133,7 +133,7 @@ bnlearn requires the first element (the test statistic), but it is not used. If
 you return only the p-value, a dummy statistic will be automatically injected.
 
 ```{r}
-#| label: my_custom_test_bnlearn
+#| label: my-custom-test-bnlearn
 
 my_test_bnlearn <- function(x, y, conditioning_set, suff_stat, args = list()) {
   not_used <- args$not_used

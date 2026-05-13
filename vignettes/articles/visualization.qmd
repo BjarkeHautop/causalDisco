@@ -32,7 +32,7 @@ numeric variables (`X1`, `X2`, `X3`, `Y`, and `Z`). We start by creating a
 simple `Knowledge` object and visualizing it with `plot()`.
 
 ```{r}
-#| label: knowledge plot
+#| label: knowledge-plot
 
 data(num_data)
 kn <- knowledge(
@@ -49,7 +49,7 @@ By default, required edges are shown in blue and forbidden edges in red. You can
 customize these colors using the `required_col` and `forbidden_col` arguments:
 
 ```{r}
-#| label: knowledge plot different colors
+#| label: knowledge-plot-different-colors
 
 plot(kn, required_col = "skyblue", forbidden_col = "orange")
 ```
@@ -68,7 +68,7 @@ Here we use the `"fruchterman-reingold"` layout and customize node and edge
 styles:
 
 ```{r}
-#| label: knowledge plot custom styles
+#| label: knowledge-plot-custom-styles
 
 plot(
   kn,
@@ -96,7 +96,7 @@ the `edge_style` argument. For example, to make the required edge from `X1` to
 other edges use the default colors, we can do:
 
 ```{r}
-#| label: knowledge plot edge by edge
+#| label: knowledge-plot-edge-by-edge
 
 plot(
   kn,
@@ -129,7 +129,7 @@ plot(
 You can also pass a custom layout to `plot()`:
 
 ```{r}
-#| label: knowledge plot custom layout
+#| label: knowledge-plot-custom-layout
 
 my_layout <- data.frame(
   name = c("X1", "X2", "X3", "Y", "Z"),
@@ -145,7 +145,7 @@ We can also visualize tiered knowledge structures. Here is an example using a
 dataset with variables measured at different life stages:
 
 ```{r}
-#| label: tiered knowledge plot
+#| label: tiered-knowledge-plot
 
 data(tpc_example)
 kn_tiered <- knowledge(
@@ -172,7 +172,7 @@ We can then plot this combined object to see both the prior knowledge and the
 learned relationships
 
 ```{r}
-#| label: knowledgeable caugi plot
+#| label: knowledgeable-caugi-plot
 
 data(num_data)
 kn <- knowledge(
@@ -194,7 +194,7 @@ confusion and clutter).
 With tiered knowledge, the plotting works similarly:
 
 ```{r}
-#| label: knowledgeable caugi tiered plot
+#| label: knowledgeable-caugi-tiered-plot
 
 data(tpc_example)
 kn_tiered <- knowledge(
@@ -236,7 +236,7 @@ supported by `causalDisco::plot()` and `caugi::plot()`.
 We first demonstrate TikZ export for a `Knowledge` object.
 
 ```{r}
-#| label: tikz export knowledge
+#| label: tikz-export-knowledge
 
 data(num_data)
 kn <- knowledge(
@@ -268,7 +268,7 @@ straight style edge overlaps the node `youth_x3`, while the bent edge avoids
 this overlap:
 
 ```{r}
-#| label: tikz bend edges
+#| label: tikz-bend-edges
 
 data(tpc_example)
 kn_tiered <- knowledge(
@@ -296,7 +296,7 @@ cat(tikz_bent_tiered)
 The TikZ plot can be seen here:
 
 ```{r}
-#| label: tikz tier plot
+#| label: tikz-tier-plot
 #| echo: false
 
 knitr::include_graphics("tikz-tier-plot.png")
@@ -308,7 +308,7 @@ The output of `disco()` gives a `Disco` object, which can also be exported to
 TikZ:
 
 ```{r}
-#| label: tikz export knowledgeable caugi
+#| label: tikz-export-knowledgeable-caugi
 
 data(tpc_example)
 kn_tiered <- knowledge(
@@ -340,7 +340,7 @@ cat(tikz_snippet)
 The same export mechanism also applies to standard `caugi::caugi` objects:
 
 ```{r}
-#| label: tikz export caugi
+#| label: tikz-export-caugi
 
 cg <- caugi::caugi(
   A %-->% B + C

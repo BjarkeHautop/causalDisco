@@ -37,7 +37,7 @@ test.
 The code for the `hpc()` function is as follows:
 
 ```{r}
-#| label: hpc function
+#| label: hpc-function
 
 hpc <- function(
   engine = c("bnlearn"),
@@ -69,7 +69,7 @@ causalDisco. We first construct the method using `hpc()`, and then pass it to
 `disco()`. Here we demonstrate using the included `tpc_example` dataset:
 
 ```{r}
-#| label: hpc example
+#| label: hpc-example
 
 data(tpc_example)
 hpc_bnlearn <- hpc(engine = "bnlearn", test = "fisher_z", alpha = 0.05)
@@ -117,7 +117,7 @@ relevant Java classes are located under:
 https://github.com/cmu-phil/tetrad/tree/development/tetrad-lib/src/main/java
 
 ```{r}
-#| label: register algorithm
+#| label: register-algorithm
 
 register_tetrad_algorithm(
   "my_boss_variant",
@@ -154,7 +154,7 @@ algorithm, so it accepts a `score` argument. The algorithm returns a PDAG, so we
 set the `graph_class` attribute to `"PDAG"`.
 
 ```{r}
-#| label: my_boss_variant function
+#| label: my_boss_variant-function
 
 my_boss_variant <- function(
   engine = "tetrad",
@@ -181,7 +181,7 @@ my_boss_variant <- function(
 We can now run `my_boss_variant()` like any other method in causalDisco.
 
 ```{r}
-#| label: my_boss_variant example
+#| label: my_boss_variant-example
 
 # Ensure Tetrad is installed and Java is working before running the algorithm
 if (verify_tetrad()$installed && verify_tetrad()$java_ok) {
