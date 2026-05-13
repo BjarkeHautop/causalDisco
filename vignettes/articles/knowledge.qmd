@@ -9,6 +9,7 @@ knitr:
 
 ```{r}
 #| label: setup
+
 library(causalDisco)
 ```
 
@@ -48,6 +49,7 @@ from B to C:
 
 ```{r}
 #| label: required and forbidden knowledge
+
 kn_1 <- knowledge(
   A %-->% c(B, C), # Require edges from A to B and A to C
   B %!-->% C # Forbid edge from B to C
@@ -58,6 +60,7 @@ This `Knowledge` object can be visualized:
 
 ```{r}
 #| label: plot required and forbidden knowledge
+
 plot(kn_1)
 ```
 
@@ -70,6 +73,7 @@ example, to remove the required edge from A to B:
 
 ```{r}
 #| label: remove required edge
+
 kn_1_removed <- remove_edge(kn_1, from = A, to = B)
 plot(kn_1_removed)
 ```
@@ -81,6 +85,7 @@ examples. The dataset contains 6 variables, as shown below:
 
 ```{r}
 #| label: dataset required and forbidden knowledge
+
 data(tpc_example)
 head(tpc_example)
 ```
@@ -91,6 +96,7 @@ pass the dataset as the first argument to `knowledge()`.
 
 ```{r}
 #| label: required and forbidden knowledge with data
+
 kn_2 <- knowledge(
   tpc_example,
   child_x1 %-->% youth_x3, # Require edge from child_x1 to youth_x3
@@ -103,6 +109,7 @@ for better appearance):
 
 ```{r}
 #| label: plot required and forbidden knowledge with data
+
 cg <- knowledge_to_caugi(kn_2)$caugi
 layout <- caugi::caugi_layout_sugiyama(cg)
 layout[6, 2] <- layout[4, 2]
@@ -120,6 +127,7 @@ To make specifying variables easier, you can use tidyselect helpers such as
 
 ```{r}
 #| label: required and forbidden knowledge with tidyselect
+
 kn_3 <- knowledge(
   tpc_example,
   starts_with("child") %-->% starts_with("youth"),
@@ -133,6 +141,7 @@ can have edges to any variables starting with "youth". We can visualize this:
 
 ```{r}
 #| label: plot required and forbidden knowledge with tidyselect
+
 plot(kn_3)
 ```
 
@@ -169,6 +178,7 @@ The following specifications encode the same tier structure:
 
 ```{r}
 #| label: tier knowledge
+
 kn <- knowledge(
   tier(
     1 ~ c(A1, A2),
@@ -218,6 +228,7 @@ We can visualize the tiers:
 
 ```{r}
 #| label: plot tier knowledge
+
 plot(kn)
 ```
 
@@ -229,6 +240,7 @@ using `convert_tiers_to_forbidden()`:
 
 ```{r}
 #| label: convert tiers to forbidden
+
 kn_converted <- convert_tiers_to_forbidden(kn)
 print(kn_converted)
 plot(kn_converted)
@@ -242,6 +254,7 @@ combining tidyselect helpers on the variables in the `tpc_example` dataset:
 
 ```{r}
 #| label: tier knowledge with tidyselect
+
 kn_tier_tidyselect <- knowledge(
   tpc_example,
   tier(
@@ -266,6 +279,7 @@ checked for existence and selected correctly:
 
 ```{r}
 #| label: exogenous knowledge
+
 kn_exo_1 <- knowledge(
   tpc_example,
   exogenous("child_x1")
@@ -277,6 +291,7 @@ Instead of `exogenous()`, you can also use the shorthand function `exo()`. This
 
 ```{r}
 #| label: plot exogenous knowledge
+
 plot(kn_exo_1)
 ```
 
@@ -285,6 +300,7 @@ tidyselect helpers:
 
 ```{r}
 #| label: exogenous knowledge with tidyselect
+
 kn_exo_2 <- knowledge(
   tpc_example,
   exo(starts_with("child"))
@@ -299,6 +315,7 @@ For example, we can combine tiered knowledge with required and forbidden edges:
 
 ```{r}
 #| label: combined knowledge
+
 kn_combined <- knowledge(
   tpc_example,
   tier(
@@ -323,6 +340,7 @@ providing tiered knowledge:
 
 ```{r}
 #| label: causal discovery with tier knowledge
+
 kn <- knowledge(
   tpc_example,
   tier(
@@ -341,6 +359,7 @@ given the constraints specified in the `Knowledge` object.
 
 ```{r}
 #| label: plot causal discovery with tier knowledge
+
 plot(disco_cd_tges)
 ```
 
@@ -362,6 +381,7 @@ background knowledge.
 
 ```{r}
 #| label: bnlearn
+
 data(tpc_example)
 
 kn <- knowledge(
@@ -377,6 +397,7 @@ The resulting causal graph will still respect the provided knowledge.
 
 ```{r}
 #| label: plot bnlearn
+
 plot(output)
 ```
 
@@ -394,6 +415,7 @@ below:
 
 ```{r}
 #| label: pcalg
+
 data(tpc_example)
 kn <- knowledge(
   tpc_example,

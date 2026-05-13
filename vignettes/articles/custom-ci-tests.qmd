@@ -9,6 +9,7 @@ knitr:
 
 ```{r}
 #| label: setup
+
 library(causalDisco)
 ```
 
@@ -49,6 +50,7 @@ Z-transform, which can be implemented as follows:
 
 ```{r}
 #| label: my_custom_test
+
 my_test <- function(x, y, conditioning_set, suff_stat) {
   C <- suff_stat$C
   n <- suff_stat$n
@@ -78,6 +80,7 @@ This can then be used with the causalDisco engine as follows:
 
 ```{r}
 #| label: using_my_custom_test_causalDisco
+
 data(num_data)
 
 my_tpc <- tpc(
@@ -94,6 +97,7 @@ or the pcalg engine as follows:
 
 ```{r}
 #| label: using_my_custom_test_pcalg
+
 my_pc <- pc(
   engine = "pcalg",
   test = my_test,
@@ -130,6 +134,7 @@ you return only the p-value, a dummy statistic will be automatically injected.
 
 ```{r}
 #| label: my_custom_test_bnlearn
+
 my_test_bnlearn <- function(x, y, conditioning_set, suff_stat, args = list()) {
   not_used <- args$not_used
   C <- cor(suff_stat)

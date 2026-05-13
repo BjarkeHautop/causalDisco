@@ -8,20 +8,20 @@ be removed. Notes include score/test requirements, and nonstandard outputs.
 
 **Local / skeleton discovery**
 
-- `hpc` – Hybrid Parents and Children
-- `mmpc` – Max–Min Parents and Children
-- `si_hiton_pc` – Semi-Interleaved HITON-PC
+- `hpc` -- Hybrid Parents and Children
+- `mmpc` -- Max--Min Parents and Children
+- `si_hiton_pc` -- Semi-Interleaved HITON-PC
 
 since skeleton discovery isn't that useful.
 
 **Pairwise mutual-information learners**
 
-- `aracne` – ARACNE network
-- `chow_liu` – Chow–Liu tree
+- `aracne` -- ARACNE network
+- `chow_liu` -- Chow--Liu tree
 
 since they learn undirected dependency structures based solely on pairwise
 mutual information, rather than DAGs or CPDAGs, and therefore fall outside the
-project’s focus on directed graphical model structure learning.
+project's focus on directed graphical model structure learning.
 
 **Score-based**
 
@@ -35,6 +35,6 @@ infer).
 
 **Hybrid**
 
-- `h2pc` – Hybrid HPC–PC
-- `mmhc` – Max–Min Hill-Climbing
-- `rsmax2` – Restricted Maximisation (two-stage)
+- `h2pc` -- Hybrid HPC--PC
+- `mmhc` -- Max--Min Hill-Climbing
+- `rsmax2` -- Restricted Maximisation (two-stage)

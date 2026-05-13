@@ -14,10 +14,10 @@ You can contribute in many ways, including:
 
 ## Issues
 
-If you’ve found a bug, please open an issue and provide a minimal working
+If you've found a bug, please open an issue and provide a minimal working
 example (MWE; see also [reprex](https://reprex.tidyverse.org/)) when possible.
 
-If you’re planning to add a new feature or make a significant change, it’s a
+If you're planning to add a new feature or make a significant change, it's a
 good idea to open an issue first to discuss it before starting work. This helps
 ensure alignment and avoids duplicate effort.
 

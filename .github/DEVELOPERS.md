@@ -19,13 +19,13 @@ own R6 class. The R6 class is responsible for:
 The Tetrad integration is implemented via `rJava`. Relevant Java source
 locations in the Tetrad repository are:
 
-- **Tests**  
+- **Tests**\
   https://github.com/cmu-phil/tetrad/tree/development/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/independence
 
-- **Scores**  
+- **Scores**\
   https://github.com/cmu-phil/tetrad/tree/development/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/score
 
-- **Algorithms**  
+- **Algorithms**\
   https://github.com/cmu-phil/tetrad/tree/development/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm
 
 These classes define what is available to be wrapped on the R side. Always
@@ -52,16 +52,14 @@ new score. Only score registration is documented here.
 When adding a new score, it must be registered in **three places** in the
 engine-specific R6 class:
 
-1. **Public field `score`**  
+1. **Public field `score`**\
    Add the score name so it is visible to users.
 
-2. **`set_score()`method**  
-   Add a new case that maps the score name to the
-   corresponding private method.
+2. **`set_score()`method**\
+   Add a new case that maps the score name to the corresponding private method.
 
-3. **`...`argument of `set_score()`**  
-   Document and validate any additional
-   parameters accepted by the score.
+3. **`...`argument of `set_score()`**\
+   Document and validate any additional parameters accepted by the score.
 
 In the `set_score()` method, add an entry of the form:
 
@@ -111,7 +109,7 @@ format-on-save in your editor.
   that mirrors upstream terminology.
 - If the external library does not use `snake_case` for argument names, users
   should supply arguments in `snake_case`.
-- Where feasible, also allow the underlying library’s native naming conventions
+- Where feasible, also allow the underlying library's native naming conventions
   (e.g., kebab-case) for convenience.
 
 See, for example,

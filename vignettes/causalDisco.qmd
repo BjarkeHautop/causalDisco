@@ -7,18 +7,19 @@ vignette: >
 knitr:
   opts_chunk:
     collapse: true
-    comment: '#>'
+    comment: "#>"
 ---
 
 ```{r}
 #| label: setup
+
 library(causalDisco)
 ```
 
-This vignette provides an overview of the causalDisco package, which offers tools
-for causal discovery from observational data. It covers the main features of the
-package, including various causal discovery algorithms, knowledge incorporation,
-and result visualization.
+This vignette provides an overview of the causalDisco package, which offers
+tools for causal discovery from observational data. It covers the main features
+of the package, including various causal discovery algorithms, knowledge
+incorporation, and result visualization.
 
 # Running causal discovery algorithms
 
@@ -28,6 +29,7 @@ variables, `X1, X2, X3, Z`, and `Y`.
 
 ```{r}
 #| label: load data
+
 data(num_data)
 head(num_data)
 ```
@@ -37,6 +39,7 @@ fixed layout for plotting the results:
 
 ```{r}
 #| label: plot layout
+
 plot_layout <- data.frame(
   name = c("Z", "X3", "X1", "X2", "Y"),
   x = c(0.00, 0.50, 0.00, 0.50, 0.25),
@@ -51,6 +54,7 @@ from bnlearn with Fisher's Z test:
 
 ```{r}
 #| label: pc algorithm fisher z bnlearn
+
 pc_bnlearn <- pc(
   engine = "bnlearn", # Use the bnlearn implementation
   test = "fisher_z", # Use Fisher's Z test for conditional independence
@@ -63,6 +67,7 @@ We can visualize the results using `plot()`:
 
 ```{r}
 #| label: pc algorithm fisher z bnlearn plot
+
 plot(pc_result_bnlearn, layout = plot_layout, main = "PC Fisher Z (bnlearn)")
 ```
 
@@ -80,6 +85,7 @@ the pcalg package with the same test:
 
 ```{r}
 #| label: pc algorithm fisher z pcalg
+
 pc_pcalg <- pc(
   engine = "pcalg", # Use the pcalg implementation
   test = "fisher_z", # Use Fisher's Z test for conditional independence
@@ -135,6 +141,7 @@ Now you should be able to use Tetrad as an engine for the GES algorithm as shown
 
 ```{r}
 #| label: ges algorithm ebic tetrad
+
 if (verify_tetrad()$installed && verify_tetrad()$java_ok) {
   ges_tetrad <- ges(
     engine = "tetrad", # Use the Tetrad implementation
@@ -151,6 +158,7 @@ can use the `node_style` argument:
 
 ```{r}
 #| label: custom plot
+
 plot(
   pc_result_bnlearn,
   layout = plot_layout,
@@ -173,6 +181,7 @@ the `print()` or `summary()` functions:
 
 ```{r}
 #| label: view results
+
 print(pc_result_bnlearn)
 summary(pc_result_bnlearn)
 ```
@@ -185,6 +194,7 @@ and old age.
 
 ```{r}
 #| label: load tpc example data
+
 data(tpc_example)
 head(tpc_example)
 ```
@@ -203,6 +213,7 @@ based on life stages:
 
 ```{r}
 #| label: prior knowledge
+
 kn <- knowledge(
   tpc_example,
   tier(
@@ -220,6 +231,7 @@ You can view the `Knowledge` object using `print()`, `summary()` or `plot()`:
 
 ```{r}
 #| label: view knowledge
+
 print(kn)
 summary(kn)
 plot(kn, main = "Temporal Knowledge")
@@ -235,6 +247,7 @@ with the regression-based information loss test:
 
 ```{r}
 #| label: tpc algorithm with knowledge
+
 tpc_method <- tpc(
   engine = "causalDisco", # Use the causalDisco implementation
   test = "reg" # Use the regression-based information loss test
@@ -246,6 +259,7 @@ Similarly, we can view the results using `print()`, `summary()` or `plot()`:
 
 ```{r}
 #| label: view tpc results
+
 print(tpc_result)
 summary(tpc_result)
 plot(tpc_result, main = "TPC reg_test with Temporal Knowledge (causalDisco)")

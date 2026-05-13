@@ -7,6 +7,7 @@ output: github_document
 ```{r}
 #| label: setup
 #| include: false
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -46,7 +47,7 @@ Time to hit the disco 🪩
 
 causalDisco depends on
 [caugi](https://github.com/frederikfabriciusbjerre/caugi), which requires Rust
-to build from source. If you don’t have Rust installed, you can either install
+to build from source. If you don't have Rust installed, you can either install
 it (instructions below) or use a binary version of caugi.
 
 You can install the stable version of causalDisco from CRAN with:
@@ -54,6 +55,7 @@ You can install the stable version of causalDisco from CRAN with:
 ```{r}
 #| label: install
 #| eval: false
+
 install.packages("causalDisco")
 ```
 
@@ -62,6 +64,7 @@ or the development version of causalDisco from GitHub using pak:
 ```{r}
 #| label: pak install
 #| eval: false
+
 pak::pak("disco-coders/causalDisco")
 ```
 
@@ -94,6 +97,7 @@ function:
 ```{r}
 #| label: install java
 #| eval: false
+
 # Use the development version of rJavaEnv from GitHub
 # pak::pak("e-kotov/rJavaEnv")
 rJavaEnv::java_quick_install(version = 25, distribution = "Temurin")
@@ -105,6 +109,7 @@ can then be installed by calling
 ```{r}
 #| label: install tetrad
 #| eval: false
+
 causalDisco::install_tetrad()
 ```
 
@@ -112,6 +117,7 @@ To verify everything is set up correctly you can run `verify_tetrad()`:
 
 ```{r}
 #| label: check tetrad install
+
 causalDisco::verify_tetrad()
 ```
 
@@ -125,6 +131,7 @@ to incorporate tiered background knowledge.
 
 ```{r}
 #| label: example
+
 library(causalDisco)
 
 # Load data
@@ -144,6 +151,7 @@ can also use explicit variable names or regular expressions.
 
 ```{r}
 #| label: knowledge example
+
 kn <- knowledge(
   tpc_example,
   tier(
@@ -178,6 +186,7 @@ Tetrad engine in the same way as for the other backends:
 
 ```{r}
 #| label: tetrad pc
+
 if (verify_tetrad()$installed && verify_tetrad()$java_ok) {
   tetrad_pc <- pc(
     engine = "tetrad", # Use the Tetrad implementation
@@ -197,6 +206,7 @@ You can visualize the resulting causal graph using the `plot()` function:
 ```{r}
 #| label: plot
 #| fig-alt: "A causal graph with the known tiers indicated by vertical positioning of the nodes."
+
 plot(disco_cd_tpc)
 ```
 

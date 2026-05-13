@@ -9,6 +9,7 @@ knitr:
 
 ```{r}
 #| label: setup
+
 library(causalDisco)
 ```
 
@@ -32,6 +33,7 @@ simple `Knowledge` object and visualizing it with `plot()`.
 
 ```{r}
 #| label: knowledge plot
+
 data(num_data)
 kn <- knowledge(
   num_data,
@@ -48,6 +50,7 @@ customize these colors using the `required_col` and `forbidden_col` arguments:
 
 ```{r}
 #| label: knowledge plot different colors
+
 plot(kn, required_col = "skyblue", forbidden_col = "orange")
 ```
 
@@ -66,6 +69,7 @@ styles:
 
 ```{r}
 #| label: knowledge plot custom styles
+
 plot(
   kn,
   layout = "fruchterman-reingold",
@@ -93,6 +97,7 @@ other edges use the default colors, we can do:
 
 ```{r}
 #| label: knowledge plot edge by edge
+
 plot(
   kn,
   layout = "fruchterman-reingold",
@@ -125,6 +130,7 @@ You can also pass a custom layout to `plot()`:
 
 ```{r}
 #| label: knowledge plot custom layout
+
 my_layout <- data.frame(
   name = c("X1", "X2", "X3", "Y", "Z"),
   x = c(1, 2, 3, 4, 5),
@@ -140,6 +146,7 @@ dataset with variables measured at different life stages:
 
 ```{r}
 #| label: tiered knowledge plot
+
 data(tpc_example)
 kn_tiered <- knowledge(
   tpc_example,
@@ -166,6 +173,7 @@ learned relationships
 
 ```{r}
 #| label: knowledgeable caugi plot
+
 data(num_data)
 kn <- knowledge(
   num_data,
@@ -187,6 +195,7 @@ With tiered knowledge, the plotting works similarly:
 
 ```{r}
 #| label: knowledgeable caugi tiered plot
+
 data(tpc_example)
 kn_tiered <- knowledge(
   tpc_example,
@@ -228,6 +237,7 @@ We first demonstrate TikZ export for a `Knowledge` object.
 
 ```{r}
 #| label: tikz export knowledge
+
 data(num_data)
 kn <- knowledge(
   num_data,
@@ -259,6 +269,7 @@ this overlap:
 
 ```{r}
 #| label: tikz bend edges
+
 data(tpc_example)
 kn_tiered <- knowledge(
   tpc_example,
@@ -287,6 +298,7 @@ The TikZ plot can be seen here:
 ```{r}
 #| label: tikz tier plot
 #| echo: false
+
 knitr::include_graphics("tikz-tier-plot.png")
 ```
 
@@ -297,6 +309,7 @@ TikZ:
 
 ```{r}
 #| label: tikz export knowledgeable caugi
+
 data(tpc_example)
 kn_tiered <- knowledge(
   tpc_example,
@@ -328,6 +341,7 @@ The same export mechanism also applies to standard `caugi::caugi` objects:
 
 ```{r}
 #| label: tikz export caugi
+
 cg <- caugi::caugi(
   A %-->% B + C
 )

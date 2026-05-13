@@ -9,6 +9,7 @@ knitr:
 
 ```{r}
 #| label: setup
+
 library(causalDisco)
 ```
 
@@ -29,6 +30,7 @@ Suppose we have this DAG:
 
 ```{r}
 #| label: dag
+
 cg <- caugi::caugi(
   Z %-->% X1,
   X3 %-->% X2,
@@ -41,6 +43,7 @@ We define a layout which we will use for plotting the graphs in this article:
 
 ```{r}
 #| label: plot dag
+
 layout <- caugi::caugi_layout_sugiyama(cg)
 plot(cg, layout = layout, main = "True DAG")
 ```
@@ -54,6 +57,7 @@ log-uniform distribution between 0.3 and 2.
 
 ```{r}
 #| label: simple causal discovery
+
 data_linear <- generate_dag_data(
   cg,
   n = 10000,
@@ -69,6 +73,7 @@ frame:
 
 ```{r}
 #| label: generating model
+
 attr(data_linear, "generating_model")
 ```
 
@@ -89,6 +94,7 @@ data.
 
 ```{r}
 #| label: pc algorithm simple
+
 pc_pcalg <- pc(engine = "pcalg", test = "fisher_z", alpha = 0.05)
 pc_result_pcalg <- disco(data = data_linear, method = pc_pcalg)
 ```
@@ -98,6 +104,7 @@ provide the layout defined above so graphs are easier to compare.
 
 ```{r}
 #| label: plot pc results simple
+
 plot(pc_result_pcalg, layout = layout, main = "PC (pcalg)")
 ```
 
@@ -119,6 +126,7 @@ above and applying the PC algorithm to the resulting data set.
 
 ```{r}
 #| label: pc algorithm reversed
+
 cg_reverse <- caugi::caugi(
   Z %-->% X1,
   X2 %-->% X3,
@@ -149,6 +157,7 @@ unobserved confounder `U` between `X1` and `X2`:
 
 ```{r}
 #| label: dag unobserved confounder
+
 cg_unobserved <- caugi::caugi(
   Z %-->% X1,
   X3 %-->% X2,
@@ -163,6 +172,7 @@ dashed edges to indicate that it is unobserved:
 
 ```{r}
 #| label: plot dag unobserved confounder
+
 plot(
   cg_unobserved,
   edge_style = list(
@@ -184,6 +194,7 @@ afterwards remove the unobserved variable `U` from the data frame:
 
 ```{r}
 #| label: data unobserved confounder
+
 data_unobserved <- generate_dag_data(
   cg_unobserved,
   n = 10000,
@@ -199,6 +210,7 @@ We can then apply the PC algorithm as before:
 
 ```{r}
 #| label: pc algorithm unobserved confounder
+
 pc_pcalg_unobserved <- pc(engine = "pcalg", test = "fisher_z", alpha = 0.05)
 pc_result_unobserved <- disco(
   data = data_unobserved,
