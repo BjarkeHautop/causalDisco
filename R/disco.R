@@ -38,11 +38,9 @@
 #'
 #' @example inst/roxygen-examples/disco-example.R
 #'
-#' @returns
-#' A `Disco` object (a list) containing the following components:
+#' @return A `Disco` object (a list) containing the following components:
 #' \itemize{
-#'   \item `knowledge` A `Knowledge` object with the background knowledge
-#'   used in the causal discovery algorithm.
+#'   \item `knowledge` A `Knowledge` object with the background knowledge used in the causal discovery algorithm.
 #'   \item `caugi` A [caugi::caugi] object representing the learned causal graph from the causal discovery algorithm.
 #' }
 #' @export

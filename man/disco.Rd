@@ -35,8 +35,7 @@ for how to create a \code{Knowledge} object.}
 \value{
 A \code{Disco} object (a list) containing the following components:
 \itemize{
-\item \code{knowledge} A \code{Knowledge} object with the background knowledge
-used in the causal discovery algorithm.
+\item \code{knowledge} A \code{Knowledge} object with the background knowledge used in the causal discovery algorithm.
 \item \code{caugi} A \link[caugi:caugi]{caugi::caugi} object representing the learned causal graph from the causal discovery algorithm.
 }
 }

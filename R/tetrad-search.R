@@ -1601,7 +1601,7 @@ TetradSearch <- R6Class(
   ),
 
   # Setting scores and tests is done through private functions,
-  # and should be this should be done through set_score() and set_test().
+  # and should be done through set_score() and set_test().
   private = list(
     # Scores
     use_basis_function_bic_score = function(
