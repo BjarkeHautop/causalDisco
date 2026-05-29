@@ -11,7 +11,7 @@
 #' internally, when using the [disco()] function with knowledge given.
 #' @param kn A `Knowledge` object.
 #'
-#' @returns A Java `edu.cmu.tetrad.data.Knowledge` object.
+#' @return A Java `edu.cmu.tetrad.data.Knowledge` object.
 #'
 #' @example inst/roxygen-examples/as_tetrad_knowledge-example.R
 #'
@@ -82,7 +82,7 @@ as_tetrad_knowledge <- function(kn) {
 #'   \code{TRUE}, we automatically mirror every directed edge into
 #'   an undirected constraint.
 #'
-#' @returns A list with two elements, each an \code{n × n} logical matrix
+#' @return A list with two elements, each an \code{n × n} logical matrix
 #' corresponding to \pkg{pcalg} `fixed_gaps` and `fixed_edges` arguments.
 #'
 #' @section Errors:
@@ -217,7 +217,7 @@ as_pcalg_constraints <- function(
 #'
 #' @param kn A `Knowledge` object.  Must have no tier information.
 #'
-#' @returns A list with two elements, `whitelist` and `blacklist`, each a data
+#' @return A list with two elements, `whitelist` and `blacklist`, each a data
 #' frame containing the edges in a `from`, `to` format.
 #'
 #' @example inst/roxygen-examples/as_bnlearn_knowledge-example.R
@@ -261,7 +261,7 @@ as_bnlearn_knowledge <- function(kn) {
 #'
 #' @param kn A `Knowledge` object.
 #'
-#' @returns A list with the [caugi::caugi] object alongside information about the knowledge (tiers, required and
+#' @return A list with the [caugi::caugi] object alongside information about the knowledge (tiers, required and
 #' forbidden edges) that can be used for plotting.
 #'
 #' @examples
@@ -352,7 +352,7 @@ knowledge_to_caugi <- function(kn) {
 #' Combine Knowledge and caugi object
 #' @param cg A [caugi::caugi] object.
 #' @param kn A `Knowledge` object.
-#' @returns A list with the updated [caugi::caugi] object alongside information.
+#' @return A list with the updated [caugi::caugi] object alongside information.
 #' @keywords internal
 #' @noRd
 combine_knowledge_and_caugi <- function(cg, kn) {

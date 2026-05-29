@@ -12,7 +12,7 @@
 #' @param kn A `Knowledge` object. Default is an empty `Knowledge` object.
 #' @param class A string describing the graph class.
 #'
-#' @returns A `Disco` object containing a [caugi::caugi] and a `Knowledge` object in a list.
+#' @return A `Disco` object containing a [caugi::caugi] and a `Knowledge` object in a list.
 #'
 #' @seealso [caugi::caugi()]
 #' @keywords internal
@@ -28,7 +28,7 @@ as_disco <- function(graph, kn = knowledge(), class = "PDAG") {
 #'
 #' @param cg A [caugi::caugi] object
 #' @param kn A `Knowledge` object
-#' @returns A `Disco` object containing the [caugi::caugi] and `Knowledge` objects.
+#' @return A `Disco` object containing the [caugi::caugi] and `Knowledge` objects.
 #' @keywords internal
 #' @noRd
 new_disco <- function(cg, kn) {
@@ -185,7 +185,7 @@ as_disco.EssGraph <- function(
 #' @title Print a Disco Object
 #' @param x A `Disco` object.
 #' @inheritParams print.Knowledge
-#' @returns Invisibly returns the `Disco` object.
+#' @return Invisibly returns the `Disco` object.
 #' @examples
 #' data(tpc_example)
 #' kn <- knowledge(
@@ -238,7 +238,7 @@ print.Disco <- function(
 #' @title Summarize a Disco Object
 #' @param object A `Disco` object.
 #' @param ... Additional arguments (not used).
-#' @returns Invisibly returns the `Disco` object.
+#' @return Invisibly returns the `Disco` object.
 #' @examples
 #' data(tpc_example)
 #' kn <- knowledge(
@@ -296,7 +296,7 @@ knowledge.Disco <- function(x) {
 #'
 #' @param x An object
 #'
-#' @returns `TRUE` if the object is of class `Disco`, `FALSE` otherwise.
+#' @return `TRUE` if the object is of class `Disco`, `FALSE` otherwise.
 #' @keywords internal
 #' @noRd
 is_disco <- function(x) {

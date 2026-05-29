@@ -166,7 +166,7 @@ make_tikz <- function(
 
 #' @title Core TikZ Generation Logic
 #' @inheritParams make_tikz
-#' @returns A character string containing LaTeX TikZ code.
+#' @return A character string containing LaTeX TikZ code.
 #' @keywords internal
 #' @noRd
 .make_tikz_core <- function(
@@ -350,7 +350,7 @@ make_tikz <- function(
 
 #' @title Generate TikZ Code from a Standard Caugi Plot
 #' @inheritParams make_tikz
-#' @returns A character string containing LaTeX TikZ code.
+#' @return A character string containing LaTeX TikZ code.
 #' @keywords internal
 #' @noRd
 make_tikz_standard <- function(
@@ -372,7 +372,7 @@ make_tikz_standard <- function(
 
 #' @title Generate TikZ Code from a Tiered Caugi Plot
 #' @inheritParams make_tikz
-#' @returns A character string containing LaTeX TikZ code.
+#' @return A character string containing LaTeX TikZ code.
 #' @keywords internal
 #' @noRd
 make_tikz_tiered <- function(

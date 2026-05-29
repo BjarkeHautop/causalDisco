@@ -10,7 +10,7 @@
 #' @param adaptDF logical for discrete tests
 #' @param nlev optional integer vector of levels for discrete tests
 #'
-#' @returns `list(method = function, suff_stat = object)`
+#' @return `list(method = function, suff_stat = object)`
 #' @noRd
 #' @keywords internal
 .get_pcalg_test_from_string <- function(

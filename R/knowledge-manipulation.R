@@ -103,7 +103,7 @@
 #' @param by_index If `TRUE`, treat `order` as the positions instead of
 #'  labels. Defaults to `FALSE`.
 #'
-#' @returns The same `Knowledge` object with tiers rearranged.
+#' @return The same `Knowledge` object with tiers rearranged.
 #'
 #' @example inst/roxygen-examples/reorder_tiers-example.R
 #'
@@ -203,7 +203,7 @@ reorder_tiers <- function(kn, order, by_index = FALSE) {
 #' @param after Exactly one of these must be supplied and must identify
 #'  another existing tier.
 #'
-#' @returns The updated `Knowledge` object.
+#' @return The updated `Knowledge` object.
 #'
 #' @example inst/roxygen-examples/reorder_tiers-example.R
 #'

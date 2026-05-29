@@ -102,7 +102,7 @@ init_java <- function(heap = default_heap()) {
 #' This function parses a heap size string and returns the size in gigabytes.
 #'
 #' @param x A string representing the heap size, e.g., "4g" or "4096m".
-#' @returns A numeric value representing the heap size in gigabytes.
+#' @return A numeric value representing the heap size in gigabytes.
 #'
 #' @example inst/roxygen-examples/parse_heap_gb-example.R
 #' @noRd
@@ -138,7 +138,7 @@ parse_heap_gb <- function(x) {
 #' This function retrieves the current Java heap size in gigabytes (based on
 #' rough calculation).
 #'
-#' @returns A numeric value representing the current heap size in gigabytes.
+#' @return A numeric value representing the current heap size in gigabytes.
 #'
 #' @example inst/roxygen-examples/current_heap_gb-example.R
 #' @noRd
@@ -164,7 +164,7 @@ current_heap_gb <- function() {
 #' @param function_name Name of the function requiring the packages (string).
 #' @param class_name Name of the R6 class requiring the packages (string).
 #'
-#' @returns Invisibly returns TRUE if all packages are installed,
+#' @return Invisibly returns TRUE if all packages are installed,
 #'   otherwise stops or warns.
 #'
 #' @example inst/roxygen-examples/dot-check_if_pkgs_are_installed-example.R

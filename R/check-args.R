@@ -13,7 +13,7 @@
 #' (e.g., "pc", "fci", "ges", etc.).
 #' @param test The independence test to be used (if applicable).
 #' @param score The scoring method to be used (if applicable).
-#' @returns A list containing the distributed arguments for the algorithm, test,
+#' @return A list containing the distributed arguments for the algorithm, test,
 #' and score.
 #'
 #' @example inst/roxygen-examples/check_args-example.R

@@ -8,7 +8,7 @@
 #' @param vars Character vector of variable names.  Defaults to empty.
 #' @param frozen Logical. If `TRUE`, no new variables can be added. Defaults to `FALSE`.
 #'
-#' @returns An S3 object of class `"Knowledge"`.
+#' @return An S3 object of class `"Knowledge"`.
 #'
 #' @example inst/roxygen-examples/dot-new_knowledge-example.R
 #' @noRd
@@ -147,7 +147,7 @@
 #' @param remove_self_loops Logical. If `TRUE`, self-loops are removed.
 #' Defaults to `FALSE`.
 #'
-#' @returns The updated `Knowledge` object.
+#' @return The updated `Knowledge` object.
 #'
 #' @example inst/roxygen-examples/dot-add_edges-example.R
 #' @noRd

@@ -60,7 +60,7 @@
 #'     - `exogenous()` / `exo()`: Variable names or tidyselect selectors.
 #'     Arguments are evaluated in order; only these calls are allowed.
 #'
-#' @returns A populated `Knowledge` object.
+#' @return A populated `Knowledge` object.
 #'
 #' @importFrom tidyselect eval_select everything starts_with ends_with
 #' @importFrom tidyselect starts_with ends_with contains matches num_range
@@ -425,7 +425,7 @@ knowledge <- function(...) {
 #'
 #' @param lhs Left-hand side variable(s).
 #' @param rhs Right-hand side variable(s).
-#' @returns An object of class `required_edge`.
+#' @return An object of class `required_edge`.
 #' @keywords internal
 #' @noRd
 `%-->%` <- function(lhs, rhs) {
@@ -441,7 +441,7 @@ knowledge <- function(...) {
 #'
 #' @param lhs Left-hand side variable(s).
 #' @param rhs Right-hand side variable(s).
-#' @returns An object of class `forbidden_edge`.
+#' @return An object of class `forbidden_edge`.
 #' @keywords internal
 #' @noRd
 `%!-->%` <- function(lhs, rhs) {
@@ -458,7 +458,7 @@ knowledge <- function(...) {
 #' @param compact Logical. If `TRUE`, prints a more compact summary.
 #' @param wide_vars Logical. If `TRUE`, prints the variables in a wide format.
 #' @param ... Additional arguments (not used).
-#' @returns Invisibly returns the `Knowledge` object.
+#' @return Invisibly returns the `Knowledge` object.
 #' @examples
 #' kn <- knowledge(
 #'   tpc_example,
@@ -596,7 +596,7 @@ print.Knowledge <- function(x, compact = FALSE, wide_vars = FALSE, ...) {
 #' @title Summarize a Knowledge Object
 #' @param object A `Knowledge` object.
 #' @param ... Additional arguments (not used).
-#' @returns Invisibly returns the `Knowledge` object.
+#' @return Invisibly returns the `Knowledge` object.
 #' @examples
 #' kn <- knowledge(
 #'   tpc_example,
@@ -671,7 +671,7 @@ is_knowledge <- function(x) {
 #' (used as the first argument to `knowledge()`).  If `NULL`,
 #' `knowledge()` is called with no data frame.
 #'
-#' @returns A single string (with newlines) of R code.
+#' @return A single string (with newlines) of R code.
 #'
 #' @example inst/roxygen-examples/deparse_knowledge-example.R
 #'

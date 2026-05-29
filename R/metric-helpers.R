@@ -10,7 +10,7 @@
 #' For PDAGs, the adjacency matrix will use `1` to indicate the presence of an edge and `0` for no edge.
 #'
 #' @param x A [caugi::caugi] object.
-#' @returns An adjacency matrix.
+#' @return An adjacency matrix.
 #' @keywords internal
 #' @noRd
 amat <- function(x) {

@@ -8,7 +8,7 @@
 #' @param kn A `Knowledge` object.
 #' @param vars A character vector of variable names to add.
 #'
-#' @returns The updated `Knowledge` object.
+#' @return The updated `Knowledge` object.
 #'
 #' @example inst/roxygen-examples/knowledge_verbs-example.R
 #'
@@ -57,7 +57,7 @@ add_vars <- function(kn, vars) {
 #'  tier index, or variable.  Once the `Knowledge` object already
 #'  has >= 1 tier, you must supply **exactly one** of these.
 #'
-#' @returns The updated `Knowledge` object.
+#' @return The updated `Knowledge` object.
 #'
 #' @example inst/roxygen-examples/knowledge_verbs-example.R
 #'
@@ -187,7 +187,7 @@ add_tier <- function(kn, tier, before = NULL, after = NULL) {
 #' @param kn A `Knowledge` object.
 #' @param ...  One or more two-sided formulas `tier ~ vars`.
 #'
-#' @returns The updated `Knowledge` object.
+#' @return The updated `Knowledge` object.
 #'
 #' @example inst/roxygen-examples/knowledge_verbs-example.R
 #'
@@ -289,7 +289,7 @@ add_to_tier <- function(kn, ...) {
 #' @param kn  A `Knowledge` object.
 #' @param ...  One or more two-sided formulas.
 #'
-#' @returns The updated `Knowledge` object.
+#' @return The updated `Knowledge` object.
 #'
 #' @example inst/roxygen-examples/knowledge_verbs-example.R
 #'
@@ -324,7 +324,7 @@ forbid_edge <- function(kn, ...) {
 #' may only be given in *one* direction (`X ~ Y` **or** `Y ~ X`, not both).
 #'
 #' @inheritParams forbid_edge
-#' @returns The updated `Knowledge` object.
+#' @return The updated `Knowledge` object.
 #'
 #' @example inst/roxygen-examples/knowledge_verbs-example.R
 #'
@@ -361,7 +361,7 @@ require_edge <- function(kn, ...) {
 #' @param kn A `Knowledge` object.
 #' @param vars Tidyselect specification or character vector of variables.
 #'
-#' @returns Updated `Knowledge` object.
+#' @return Updated `Knowledge` object.
 #'
 #' @example inst/roxygen-examples/knowledge_verbs-example.R
 #'
@@ -386,7 +386,7 @@ add_exo <- add_exogenous
 #' constructor `knowledge()`.
 #'
 #' @param kn A `Knowledge` object.
-#' @returns The same `Knowledge` object with the `frozen` attribute set to
+#' @return The same `Knowledge` object with the `frozen` attribute set to
 #' `FALSE`.
 #'
 #' @example inst/roxygen-examples/unfreeze-example.R
@@ -409,7 +409,7 @@ unfreeze <- function(kn) {
 #'
 #' @param kn A `Knowledge` object.
 #'
-#' @returns A tibble with the tiers.
+#' @return A tibble with the tiers.
 #'
 #' @example inst/roxygen-examples/get_tiers-example.R
 #'
@@ -432,7 +432,7 @@ get_tiers <- function(kn) {
 #' @param kn A `Knowledge` object.
 #' @param ... Unquoted variable names or tidy‐select helpers.
 #'
-#' @returns An updated `Knowledge` object.
+#' @return An updated `Knowledge` object.
 #'
 #' @example inst/roxygen-examples/remove_from_knowledge-example.R
 #'
@@ -485,7 +485,7 @@ remove_vars <- function(kn, ...) {
 #' @param from  The source node (unquoted or character).
 #' @param to    The target node (unquoted or character).
 #'
-#' @returns The updated `Knowledge` object.
+#' @return The updated `Knowledge` object.
 #'
 #' @example inst/roxygen-examples/remove_from_knowledge-example.R
 #'
@@ -535,7 +535,7 @@ remove_edge <- function(kn, from, to) {
 #' @param kn   A `Knowledge` object.
 #' @param ...   Tier labels (unquoted or character) or numeric indices.
 #'
-#' @returns An updated `Knowledge` object.
+#' @return An updated `Knowledge` object.
 #'
 #' @example inst/roxygen-examples/remove_from_knowledge-example.R
 #'
@@ -586,7 +586,7 @@ remove_tiers <- function(kn, ...) {
 #' into a lower-numbered tier.
 #'
 #' @param kn A `Knowledge` object.
-#' @returns The same `Knowledge` object with new forbidden edges added.
+#' @return The same `Knowledge` object with new forbidden edges added.
 #'
 #' @example inst/roxygen-examples/forbid_tier_violations-example.R
 #'
@@ -647,7 +647,7 @@ forbid_tier_violations <- function(kn) {
 #' @title Convert Tiered Knowledge to Forbidden Knowledge
 #' @description Converts tier assignments into forbidden edges, and drops tiers in the output.
 #' @param kn A `Knowledge` object.
-#' @returns A `Knowledge` object with forbidden edges added, tiers removed.
+#' @return A `Knowledge` object with forbidden edges added, tiers removed.
 #'
 #' @examples
 #' kn <- knowledge(
@@ -704,7 +704,7 @@ convert_tiers_to_forbidden <- function(kn) {
 #'   placeholder will be substituted and the resulting call used as the
 #'   right‐hand side of a formula.
 #'
-#' @returns
+#' @return
 #'   A list of two‐sided formulas, each of class \code{"tier_bundle"}.
 #'   You can pass this list directly to \code{tier()} (which will expand it
 #'   automatically).

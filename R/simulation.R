@@ -204,7 +204,7 @@ generate_dag_data <- function(
 #' @param p Numeric in `[0,1]`. Probability of edge creation. Exactly one of
 #' `m` or `p` must be supplied.
 #'
-#' @returns The sampled `caugi` object.
+#' @return The sampled `caugi` object.
 #' @examples
 #' # Simulate a DAG with 5 nodes and 3 edges
 #' sim_dag(n = 5, m = 3)

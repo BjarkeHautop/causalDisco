@@ -1,7 +1,7 @@
 #' @title Convert R Color to TikZ Color Specification
 #'
 #' @param r_col A color name or hex code in R.
-#' @returns A list with two elements:
+#' @return A list with two elements:
 #' * `tikz`: The TikZ color specification string.
 #' * `r_col`: The original R color if a custom RGB specification was used, otherwise `NULL`.
 #' @keywords internal
@@ -48,7 +48,7 @@ rcolor_to_tikz <- function(r_col) {
 #' @title Extract TikZ Node Information
 #' @param node_grob_children A list of node grob children.
 #' @param scale Numeric scalar. Scaling factor for node coordinates.
-#' @returns A list of node objects with `name`, `x`, `y`, `style`, and `label`.
+#' @return A list of node objects with `name`, `x`, `y`, `style`, and `label`.
 #' @keywords internal
 #' @noRd
 extract_nodes <- function(node_grob_children, scale) {
@@ -89,7 +89,7 @@ extract_nodes <- function(node_grob_children, scale) {
 #' @title Compute Global Color for Nodes or Edges
 #' @param nodes A list of node or edge objects with `style`.
 #' @param color_type A character string, either `"fill"` or `"draw"`.
-#' @returns The most common TikZ color specification for the given `color_type`,
+#' @return The most common TikZ color specification for the given `color_type`,
 #' or `NULL` if no color is specified.
 #' @keywords internal
 #' @noRd
@@ -114,7 +114,7 @@ compute_global_color <- function(nodes, color_type) {
 
 #' @title Escape LaTeX Special Characters
 #' @param x A character string.
-#' @returns The input string with LaTeX special characters escaped.
+#' @return The input string with LaTeX special characters escaped.
 #' @keywords internal
 #' @noRd
 latex_escape <- function(x) {
@@ -131,7 +131,7 @@ latex_escape <- function(x) {
 #' @param global_node_fill Global fill color for nodes.
 #' @param global_node_draw Global draw color for nodes.
 #'
-#' @returns A character vector of TikZ node lines.
+#' @return A character vector of TikZ node lines.
 #' @keywords internal
 #' @noRd
 build_node_lines <- function(nodes, global_node_fill, global_node_draw) {
@@ -177,7 +177,7 @@ build_node_lines <- function(nodes, global_node_fill, global_node_draw) {
 #' @title Get Anchor and Offset for Tier Labels
 #' @param pos A character string specifying the position: "above", "below", "left", or "right".
 #' @param offset Numeric scalar. Offset distance for the label.
-#' @returns A list with `anchor`, `anchor_point`, `dx`, and `dy` for positioning the label.
+#' @return A list with `anchor`, `anchor_point`, `dx`, and `dy` for positioning the label.
 #' @keywords internal
 #' @noRd
 get_anchor_and_offset <- function(pos, offset = 0.2) {
@@ -203,7 +203,7 @@ get_anchor_and_offset <- function(pos, offset = 0.2) {
 #' @param global_node_draw Global draw color for nodes.
 #' @param global_edge_color Global color for edges.
 #'
-#' @returns A character string with TikZ global style settings.
+#' @return A character string with TikZ global style settings.
 #' @keywords internal
 #' @noRd
 build_tikz_globals <- function(
@@ -254,7 +254,7 @@ build_tikz_globals <- function(
 #' @param bend_angle Numeric scalar. Angle in degrees for bending arrows.
 #' @param global_edge_color Global color for edges.
 #'
-#' @returns A list with two elements:
+#' @return A list with two elements:
 #' * `edge_lines`: A character vector of TikZ edge lines.
 #' * `global_arrow_length`: The global arrow length used.
 #' * `col`: The color used for edges.
@@ -370,7 +370,7 @@ extract_edges <- function(
 #'
 #' @param coord A numeric coordinate.
 #'
-#' @returns A character string rounded to at most 3 decimal places,
+#' @return A character string rounded to at most 3 decimal places,
 #'   with trailing zeros (and any trailing decimal point) removed.
 #' @keywords internal
 #' @noRd
