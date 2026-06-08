@@ -90,8 +90,8 @@ confusion <- function(truth, est, type = c("adj", "dir")) {
 #' @title Evaluate Causal Graph Estimates
 #'
 #' @description
-#' Computes various metrics to evaluate the difference between estimated
-#' and truth causal graph. Designed primarily for assessing the
+#' Computes various metrics to evaluate the difference between the estimated
+#' and true causal graph. Designed primarily for assessing the
 #' performance of causal discovery algorithms.
 #'
 #' Metrics are supplied as a list with three slots: \code{$adj}, \code{$dir}, and \code{$other}.

@@ -266,7 +266,7 @@ TEssGraph <- setRefClass(
 #'
 #' The class implements a score which scores all edges contradicting the ordering
 #' (edge going from a later tier to an earlier) to minus \eqn{\infty}{∞}. If the
-#' edges does not contradict, the score is equal to that of the standard BIC.
+#' edges do not contradict, the score is equal to that of the standard BIC.
 #' The class implements an \eqn{\ell_0}{ℓ0}-penalized Gaussian maximum
 #' likelihood estimator. The penalization is a constant (specified by
 #' the argument \code{lambda} in the constructor) times the number of
@@ -429,7 +429,7 @@ TemporalBIC <- setRefClass(
 #'
 #' The class implements a score which scores all edges contradicting the ordering
 #' (edge going from a later tier to an earlier) to minus \eqn{\infty}{∞}. If the
-#' the edges does not contradict, the score is equal to that of the standard BDeu.
+#' edges do not contradict, the score is equal to that of the standard BDeu.
 #'
 #' @section Extends:
 #' Class \code{Score-class} from \pkg{pcalg}, directly.

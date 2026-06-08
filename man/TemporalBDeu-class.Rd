@@ -30,7 +30,7 @@ data; it is used in the causal discovery function \code{\link[=tges]{tges()}}.
 \details{
 The class implements a score which scores all edges contradicting the ordering
 (edge going from a later tier to an earlier) to minus \eqn{\infty}{∞}. If the
-the edges does not contradict, the score is equal to that of the standard BDeu.
+edges do not contradict, the score is equal to that of the standard BDeu.
 }
 
 \section{Extends}{

@@ -18,8 +18,8 @@ A data.frame with one column for each computed metric. Adjacency metrics are pre
 orientation metrics are prefixed with "dir_", other metrics do not get a prefix.
 }
 \description{
-Computes various metrics to evaluate the difference between estimated
-and truth causal graph. Designed primarily for assessing the
+Computes various metrics to evaluate the difference between the estimated
+and true causal graph. Designed primarily for assessing the
 performance of causal discovery algorithms.
 
 Metrics are supplied as a list with three slots: \code{$adj}, \code{$dir}, and \code{$other}.

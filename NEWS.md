@@ -23,10 +23,10 @@
   Tetrad algorithms.
 
 - Allows the user to specify custom conditional independence tests for use with
-  for the engines bnlearn, causalDisco, and pcalg. The custom test should have
-  the signature `function(x, y, conditioning_set, suff_stat)` (optionally with
-  an additional `args` argument for additional parameters), and return a
-  p-value. See the documentation and the associated vignette for details.
+  the engines bnlearn, causalDisco, and pcalg. The custom test should have the
+  signature `function(x, y, conditioning_set, suff_stat)` (optionally with an
+  additional `args` argument for additional parameters), and return a p-value.
+  See the documentation and the associated vignette for details.
 
 - Added support for micd tests such as `micd::gaussCItestMI()` for pcalg and
   causalDisco engine. See all the new available tests in `?PcalgSearch` and

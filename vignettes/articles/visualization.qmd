@@ -61,9 +61,6 @@ documentation for `causalDisco::plot()`, as well as the underlying
 `caugi::plot()` function and its visualization vignette
 (`vignette("visualization", "caugi")`).
 
-In this example, we use the `"fruchterman-reingold"` layout and customize both
-node and edge styles:
-
 Here we use the `"fruchterman-reingold"` layout and customize node and edge
 styles:
 
@@ -261,8 +258,8 @@ tikzpicture environment, which is convenient for inclusion inside an existing
 LaTeX document.
 
 The TikZ export also supports edge bending, which can substantially improve
-readability when edges passes thorugh other nodes, as can easily happen in
-tiered knowledge structures. This feature is not available in the standard
+readability when edges pass through other nodes, as can easily happen in tiered
+knowledge structures. This feature is not available in the standard
 `caugi::plot()` function. Here is an example, where the edge using the standard
 straight style edge overlaps the node `youth_x3`, while the bent edge avoids
 this overlap:
