@@ -120,7 +120,10 @@
       list(C = stats::cor(X_num), n = nrow(X_num))
     },
     "fisher_z_twd" = {
-      X
+      # micd::getSuff uses X[, i] internally; tibbles return a single-column
+      # tibble there instead of a vector. See
+      # https://github.com/bips-hb/micd/pull/10
+      as.data.frame(X)
     },
     "fisher_z_mi" = {
       if (inherits(X, "mids")) {
@@ -146,6 +149,10 @@
       list(dm = out$dm, adaptDF = adaptDF)
     },
     "g_square_mi" = {
+      # micd::getSuff uses X[, i] internally; tibbles return a single-column
+      # tibble there instead of a vector. See
+      # https://github.com/bips-hb/micd/pull/10
+      as.data.frame(X)
       if (inherits(X, "mids")) {
         if (!requireNamespace("mice", quietly = TRUE)) {
           stop("Package 'mice' is required but not installed.", call. = FALSE)
@@ -160,10 +167,13 @@
 
     # mixed
     "conditional_gaussian" = {
-      X
+      # micd::getSuff uses X[, i] internally; tibbles return a single-column
+      # tibble there instead of a vector. See
+      # https://github.com/bips-hb/micd/pull/10
+      as.data.frame(X)
     },
     "conditional_gaussian_twd" = {
-      X
+      as.data.frame(X)
     },
     "conditional_gaussian_mi" = {
       if (inherits(X, "mids")) {
