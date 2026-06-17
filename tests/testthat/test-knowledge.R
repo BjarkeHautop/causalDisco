@@ -41,6 +41,18 @@ test_that("Knowledge object is created correctly using mini-DSL", {
   )
 })
 
+test_that("infix edges before tier() do not drop variables from tier() (no data frame)", {
+  kn <- knowledge(
+    A %-->% C, C %!-->% D,
+    tier(
+      1 ~ A + B,
+      2 ~ C + D
+    )
+  )
+  expect_equal(sort(kn$vars$var), c("A", "B", "C", "D"))
+  expect_equal(kn$vars$tier[kn$vars$var == "B"], "1")
+})
+
 # seeding with data frame
 test_that("seeding Knowledge object with a my_df, matrix, or tibble works", {
   my_df <- data.frame(X1 = 1, X2 = 2, X3 = 3, X4 = 4, check.names = FALSE)

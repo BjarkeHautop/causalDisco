@@ -286,6 +286,12 @@
   if (rlang::is_call(spec, "+")) {
     lhs <- .vars_from_spec(kn, spec[[2]])
     rhs <- .vars_from_spec(kn, spec[[3]])
+    if (!length(lhs) && rlang::is_symbol(spec[[2]])) {
+      lhs <- rlang::as_string(spec[[2]])
+    }
+    if (!length(rhs) && rlang::is_symbol(spec[[3]])) {
+      rhs <- rlang::as_string(spec[[3]])
+    }
     return(unique(c(lhs, rhs)))
   }
 

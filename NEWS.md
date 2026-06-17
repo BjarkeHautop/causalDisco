@@ -5,6 +5,13 @@
 - Added support for the RFCI algorithm via `rfci()`, interfacing with
   implementations from pcalg and Tetrad.
 
+## Bug fixes
+
+- Fixed `knowledge()` dropping variables from `tier()` formulas when infix edge
+  operators (`%-->%`, `%!-->%`) appeared before the `tier()` call and had
+  already registered some (but not all) of the tier's variables. This only
+  affected the no-data-frame form of `knowledge()`.
+
 ## Improvements
 
 - Improved the documentation.
