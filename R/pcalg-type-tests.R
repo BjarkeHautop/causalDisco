@@ -123,7 +123,7 @@
       # micd::getSuff uses X[, i] internally; tibbles return a single-column
       # tibble there instead of a vector. See
       # https://github.com/bips-hb/micd/pull/10
-      as.data.frame(X)
+      if (inherits(X, "tbl_df")) as.data.frame(X) else X
     },
     "fisher_z_mi" = {
       if (inherits(X, "mids")) {
@@ -149,10 +149,6 @@
       list(dm = out$dm, adaptDF = adaptDF)
     },
     "g_square_mi" = {
-      # micd::getSuff uses X[, i] internally; tibbles return a single-column
-      # tibble there instead of a vector. See
-      # https://github.com/bips-hb/micd/pull/10
-      as.data.frame(X)
       if (inherits(X, "mids")) {
         if (!requireNamespace("mice", quietly = TRUE)) {
           stop("Package 'mice' is required but not installed.", call. = FALSE)
@@ -170,10 +166,10 @@
       # micd::getSuff uses X[, i] internally; tibbles return a single-column
       # tibble there instead of a vector. See
       # https://github.com/bips-hb/micd/pull/10
-      as.data.frame(X)
+      if (inherits(X, "tbl_df")) as.data.frame(X) else X
     },
     "conditional_gaussian_twd" = {
-      as.data.frame(X)
+      if (inherits(X, "tbl_df")) as.data.frame(X) else X
     },
     "conditional_gaussian_mi" = {
       if (inherits(X, "mids")) {
