@@ -1,4 +1,4 @@
-﻿#' @title Disco Object
+#' @title Disco Object
 #'
 #' @description
 #' This S3 class wraps [caugi::caugi] graph object and a `Knowledge` object. It is the
@@ -225,17 +225,29 @@ print.Disco <- function(x, ...) {
   if (n_tiers > 0L) {
     kn_parts <- c(kn_parts, paste0(n_tiers, " tier", if (n_tiers != 1L) "s"))
   }
-  if (n_required > 0L) kn_parts <- c(kn_parts, paste0(n_required, " required"))
-  if (n_forbidden > 0L) kn_parts <- c(kn_parts, paste0(n_forbidden, " forbidden"))
+  if (n_required > 0L) {
+    kn_parts <- c(kn_parts, paste0(n_required, " required"))
+  }
+  if (n_forbidden > 0L) {
+    kn_parts <- c(kn_parts, paste0(n_forbidden, " forbidden"))
+  }
   kn_str <- if (length(kn_parts) > 0L) {
     paste0(" | Knowledge: ", paste(kn_parts, collapse = ", "))
   } else {
     ""
   }
 
-  cat(sprintf("<Disco %s: %d nodes | %d edges%s>\n", graph_class, n_nodes, n_edges, kn_str))
+  cat(sprintf(
+    "<Disco %s: %d nodes | %d edges%s>\n",
+    graph_class,
+    n_nodes,
+    n_edges,
+    kn_str
+  ))
 
-  if (kn_has_content) cat("Learned graph:\n")
+  if (kn_has_content) {
+    cat("Learned graph:\n")
+  }
   .print_item_line("nodes", nd$name)
   if (n_edges > 0L) {
     .print_item_line("edges", paste0(ed$from, ed$edge, ed$to))
@@ -250,7 +262,9 @@ print.Disco <- function(x, ...) {
 }
 
 .print_item_line <- function(label, items, max_items = 10L) {
-  if (!length(items)) return(invisible())
+  if (!length(items)) {
+    return(invisible())
+  }
   width <- getOption("width", 80L)
   prefix <- paste0("  ", label, ": ")
   pad <- strrep(" ", nchar(prefix))
