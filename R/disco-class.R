@@ -1,4 +1,4 @@
-#' @title Disco Object
+﻿#' @title Disco Object
 #'
 #' @description
 #' This S3 class wraps [caugi::caugi] graph object and a `Knowledge` object. It is the
@@ -184,7 +184,7 @@ as_disco.EssGraph <- function(
 
 #' @title Print a Disco Object
 #' @param x A `Disco` object.
-#' @inheritParams print.Knowledge
+#' @param ... Additional arguments (not used).
 #' @returns Invisibly returns the `Disco` object.
 #' @examples
 #' data(tpc_example)
@@ -199,40 +199,85 @@ as_disco.EssGraph <- function(
 #' cd_tges <- tpc(engine = "causalDisco", test = "fisher_z")
 #' disco_cd_tges <- disco(data = tpc_example, method = cd_tges, knowledge = kn)
 #' print(disco_cd_tges)
-#' print(disco_cd_tges, wide_vars = TRUE)
-#' print(disco_cd_tges, compact = TRUE)
 #'
 #' @exportS3Method print Disco
-print.Disco <- function(
-  x,
-  compact = FALSE,
-  wide_vars = FALSE,
-  ...
-) {
+print.Disco <- function(x, ...) {
   .check_if_pkgs_are_installed(
-    pkgs = c("cli", "tibble"),
+    pkgs = c("cli"),
     function_name = "print.Disco"
   )
 
-  cli::cli_h1("caugi graph")
-
-  # Graph info
-  graph_class <- x$caugi@graph_class
-
-  cli::cli_text("Graph class: {.strong {graph_class}}")
-
   cg <- x$caugi
-  if (compact) {
-    cli::cli_text("{nrow(edges(cg))} edges, {nrow(nodes(cg))} nodes")
+  graph_class <- cg@graph_class
+  nd <- nodes(cg)
+  ed <- edges(cg)
+  n_nodes <- nrow(nd)
+  n_edges <- nrow(ed)
+
+  kn <- x$knowledge
+  n_tiers <- if (!is.null(kn$tiers)) nrow(kn$tiers) else 0L
+  n_vars <- if (!is.null(kn$vars)) nrow(kn$vars) else 0L
+  n_required <- sum(kn$edges$status == "required", na.rm = TRUE)
+  n_forbidden <- sum(kn$edges$status == "forbidden", na.rm = TRUE)
+  kn_has_content <- n_tiers > 0L || n_required > 0L || n_forbidden > 0L
+
+  kn_parts <- character(0)
+  if (n_tiers > 0L) {
+    kn_parts <- c(kn_parts, paste0(n_tiers, " tier", if (n_tiers != 1L) "s"))
+  }
+  if (n_required > 0L) kn_parts <- c(kn_parts, paste0(n_required, " required"))
+  if (n_forbidden > 0L) kn_parts <- c(kn_parts, paste0(n_forbidden, " forbidden"))
+  kn_str <- if (length(kn_parts) > 0L) {
+    paste0(" | Knowledge: ", paste(kn_parts, collapse = ", "))
   } else {
-    print_section("Edges", edges(cg))
-    print_section("Nodes", nodes(cg))
+    ""
   }
 
-  # Knowledge info
-  print.Knowledge(x$knowledge, compact = compact, wide_vars = wide_vars, ...)
+  cat(sprintf("<Disco %s: %d nodes | %d edges%s>\n", graph_class, n_nodes, n_edges, kn_str))
+
+  if (kn_has_content) cat("Learned graph:\n")
+  .print_item_line("nodes", nd$name)
+  if (n_edges > 0L) {
+    .print_item_line("edges", paste0(ed$from, ed$edge, ed$to))
+  }
+
+  if (kn_has_content) {
+    cat("Knowledge:\n")
+    .print_knowledge_body(kn)
+  }
 
   invisible(x)
+}
+
+.print_item_line <- function(label, items, max_lines = 3L) {
+  if (!length(items)) return(invisible())
+  width <- getOption("width", 80L)
+  prefix <- paste0("  ", label, ": ")
+  pad <- strrep(" ", nchar(prefix))
+
+  lines <- character(0)
+  cur <- prefix
+  n_continuation <- 0L
+
+  for (i in seq_along(items)) {
+    chunk <- if (i == 1L) items[[i]] else paste0(", ", items[[i]])
+
+    if (i > 1L && nchar(cur) + nchar(chunk) > width) {
+      n_continuation <- n_continuation + 1L
+      if (n_continuation > max_lines) {
+        remaining <- length(items) - i + 1L
+        cur <- paste0(cur, ", ... and ", remaining, " more")
+        break
+      }
+      lines <- c(lines, cur)
+      cur <- paste0(pad, items[[i]])
+    } else {
+      cur <- paste0(cur, chunk)
+    }
+  }
+
+  lines <- c(lines, cur)
+  cat(paste(lines, collapse = "\n"), "\n", sep = "")
 }
 
 #' @title Summarize a Disco Object
@@ -255,16 +300,7 @@ print.Disco <- function(
 #'
 #' @exportS3Method summary Disco
 summary.Disco <- function(object, ...) {
-  cg <- object$caugi
-  # Graph info
-  cli::cli_h1("caugi graph summary")
-  cli::cli_text("Graph class: {.strong {cg@graph_class}}")
-  cli::cli_text("Nodes: {.strong {nrow(nodes(cg))}}")
-  cli::cli_text("Edges: {.strong {nrow(edges(cg))}}")
-
-  # Knowledge info
-  summary.Knowledge(object$knowledge, ...)
-
+  print(object, ...)
   invisible(object)
 }
 
