@@ -43,7 +43,8 @@ test_that("Knowledge object is created correctly using mini-DSL", {
 
 test_that("infix edges before tier() do not drop variables from tier() (no data frame)", {
   kn <- knowledge(
-    A %-->% C, C %!-->% D,
+    A %-->% C,
+    C %!-->% D,
     tier(
       1 ~ A + B,
       2 ~ C + D
@@ -1311,4 +1312,58 @@ test_that("print and summary method for no tier knowledge works", {
   print(kn, wide = TRUE, compact = TRUE)
   summary(kn)
   expect_true(TRUE)
+})
+
+# ──────────────────────────────────────────────────────────────────────────────
+# + syntax for infix edge operators
+# ──────────────────────────────────────────────────────────────────────────────
+
+test_that("+ on RHS of %-->% is equivalent to c()", {
+  kn_plus <- knowledge(V1 %-->% V2 + V3)
+  kn_c <- knowledge(V1 %-->% c(V2, V3))
+  expect_equal(kn_plus$edges, kn_c$edges)
+})
+
+test_that("+ on RHS of %!-->% is equivalent to c()", {
+  kn_plus <- knowledge(V1 %!-->% V2 + V3)
+  kn_c <- knowledge(V1 %!-->% c(V2, V3))
+  expect_equal(kn_plus$edges, kn_c$edges)
+})
+
+test_that("+ on LHS of %-->% is equivalent to c()", {
+  kn_plus <- knowledge(V1 + V2 %-->% V3)
+  kn_c <- knowledge(c(V1, V2) %-->% V3)
+  expect_equal(kn_plus$edges, kn_c$edges)
+})
+
+test_that("+ on LHS of %!-->% is equivalent to c()", {
+  kn_plus <- knowledge(V1 + V2 %!-->% V3)
+  kn_c <- knowledge(c(V1, V2) %!-->% V3)
+  expect_equal(kn_plus$edges, kn_c$edges)
+})
+
+test_that("+ on both sides of %-->% is equivalent to c()", {
+  kn_plus <- knowledge(V1 + V2 %-->% V3 + V4)
+  kn_c <- knowledge(c(V1, V2) %-->% c(V3, V4))
+  expect_equal(kn_plus$edges, kn_c$edges)
+})
+
+test_that("+ on both sides of %!-->% is equivalent to c()", {
+  kn_plus <- knowledge(V1 + V2 %!-->% V3 + V4)
+  kn_c <- knowledge(c(V1, V2) %!-->% c(V3, V4))
+  expect_equal(kn_plus$edges, kn_c$edges)
+})
+
+test_that("+ syntax with data and multiple edge lines matches c() syntax", {
+  kn_plus <- knowledge(
+    tpc_example,
+    child_x1 + youth_x4 %-->% child_x2 + youth_x3,
+    child_x2 %!-->% youth_x3 + oldage_x5
+  )
+  kn_c <- knowledge(
+    tpc_example,
+    c(child_x1, youth_x4) %-->% c(child_x2, youth_x3),
+    child_x2 %!-->% c(youth_x3, oldage_x5)
+  )
+  expect_equal(kn_plus$edges, kn_c$edges)
 })

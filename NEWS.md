@@ -5,6 +5,10 @@
 - Added support for the RFCI algorithm via `rfci()`, interfacing with
   implementations from pcalg and Tetrad.
 
+- The infix edge operators `%-->%` and `%!-->%` in `knowledge()` now accept `+`
+  on both sides to specify multiple variables, e.g.
+  `A + B %-->% C + D` is equivalent to `c(A, B) %-->% c(C, D)`.
+
 ## Bug fixes
 
 - Fixed `knowledge()` dropping variables from `tier()` formulas when infix edge

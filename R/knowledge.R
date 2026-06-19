@@ -362,6 +362,75 @@ knowledge <- function(...) {
       fun <- as.character(expr[[1]])
     }
 
+    # Handle expressions like A + B %-->% C + D where + mixes with edge ops.
+    # R parses %any% before +, so A + B %-->% C + D becomes A + (B %-->% C) + D.
+    # Flatten the whole + chain into terms, find
+    # the single edge-op term, then attach left/right node-terms to its LHS/RHS.
+    if (is.call(expr) && identical(expr[[1]], as.name("+"))) {
+      .split_terms <- function(e) {
+        if (is.call(e) && identical(e[[1L]], as.name("+"))) {
+          c(.split_terms(e[[2L]]), .split_terms(e[[3L]]))
+        } else {
+          list(e)
+        }
+      }
+      .join_plus <- function(ts) Reduce(function(a, b) call("+", a, b), ts)
+
+      terms <- .split_terms(expr)
+      is_edge_term <- vapply(
+        terms,
+        function(t) {
+          is.call(t) && as.character(t[[1L]]) %in% c("%-->%", "%!-->%")
+        },
+        logical(1L)
+      )
+
+      if (any(is_edge_term)) {
+        if (sum(is_edge_term) > 1L) {
+          stop(
+            "Only one edge operator per + expression is supported.\n",
+            "Expression: ",
+            deparse(expr),
+            call. = FALSE
+          )
+        }
+        i <- which(is_edge_term)
+        edge_term <- terms[[i]]
+        left_terms <- terms[seq_len(i - 1L)]
+        right_terms <- if (i < length(terms)) {
+          terms[seq(i + 1L, length(terms))]
+        } else {
+          list()
+        }
+
+        natural_lhs <- edge_term[[2L]]
+        natural_rhs <- edge_term[[3L]]
+
+        new_lhs <- if (length(left_terms)) {
+          call("+", .join_plus(left_terms), natural_lhs)
+        } else {
+          natural_lhs
+        }
+        new_rhs <- if (length(right_terms)) {
+          call("+", natural_rhs, .join_plus(right_terms))
+        } else {
+          natural_rhs
+        }
+
+        new_edge <- edge_term
+        new_edge[[2L]] <- new_lhs
+        new_edge[[3L]] <- new_rhs
+
+        status <- if (identical(edge_term[[1L]], as.name("%-->%"))) {
+          "required"
+        } else {
+          "forbidden"
+        }
+        add_edge_infix(new_edge, status)
+        next
+      }
+    }
+
     # Infix required
     if (is.call(expr) && identical(expr[[1]], as.name("%-->%"))) {
       add_edge_infix(expr, "required")
@@ -518,8 +587,11 @@ print.Knowledge <- function(x, ...) {
       .print_item_line(paste0("tier(", lbl, ")"), tier_vars)
     }
     if (n_tiers > max_tiers) {
-      cat(sprintf("  ... and %d more tier%s\n", n_tiers - max_tiers,
-                  if (n_tiers - max_tiers != 1L) "s" else ""))
+      cat(sprintf(
+        "  ... and %d more tier%s\n",
+        n_tiers - max_tiers,
+        if (n_tiers - max_tiers != 1L) "s" else ""
+      ))
     }
   }
 
@@ -537,14 +609,18 @@ print.Knowledge <- function(x, ...) {
     for (status in c("required", "forbidden")) {
       op <- if (status == "required") "%-->%" else "%!-->%"
       grp <- x$edges[x$edges$status == status, , drop = FALSE]
-      if (nrow(grp) == 0L) next
+      if (nrow(grp) == 0L) {
+        next
+      }
       by_from <- split(grp$to, grp$from)
       for (from_var in names(by_from)) {
         if (n_shown >= max_edge_groups) {
           n_total_groups <- length(unique(x$edges$from))
-          cat(sprintf("  ... and %d more edge group%s\n",
-                      n_total_groups - n_shown,
-                      if (n_total_groups - n_shown != 1L) "s" else ""))
+          cat(sprintf(
+            "  ... and %d more edge group%s\n",
+            n_total_groups - n_shown,
+            if (n_total_groups - n_shown != 1L) "s" else ""
+          ))
           return(invisible())
         }
         to_vars <- by_from[[from_var]]
