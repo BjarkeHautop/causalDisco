@@ -624,11 +624,7 @@ print.Knowledge <- function(x, ...) {
           return(invisible())
         }
         to_vars <- by_from[[from_var]]
-        rhs <- if (length(to_vars) == 1L) {
-          to_vars
-        } else {
-          paste0("c(", paste(to_vars, collapse = ", "), ")")
-        }
+        rhs <- paste(to_vars, collapse = " + ")
         cat(sprintf("  %s %s %s\n", from_var, op, rhs))
         n_shown <- n_shown + 1L
       }
