@@ -249,30 +249,30 @@ print.Disco <- function(x, ...) {
   invisible(x)
 }
 
-.print_item_line <- function(label, items, max_lines = 3L) {
+.print_item_line <- function(label, items, max_items = 10L) {
   if (!length(items)) return(invisible())
   width <- getOption("width", 80L)
   prefix <- paste0("  ", label, ": ")
   pad <- strrep(" ", nchar(prefix))
 
+  n_omitted <- max(0L, length(items) - max_items)
+  shown <- if (n_omitted > 0L) items[seq_len(max_items)] else items
+  if (n_omitted > 0L) {
+    shown <- c(shown, sprintf("... and %d more", n_omitted))
+  }
+
   lines <- character(0)
   cur <- prefix
-  n_continuation <- 0L
+  first <- TRUE
 
-  for (i in seq_along(items)) {
-    chunk <- if (i == 1L) items[[i]] else paste0(", ", items[[i]])
-
-    if (i > 1L && nchar(cur) + nchar(chunk) > width) {
-      n_continuation <- n_continuation + 1L
-      if (n_continuation > max_lines) {
-        remaining <- length(items) - i + 1L
-        cur <- paste0(cur, ", ... and ", remaining, " more")
-        break
-      }
+  for (item in shown) {
+    chunk <- if (first) item else paste0(", ", item)
+    if (!first && nchar(cur) + nchar(chunk) > width) {
       lines <- c(lines, cur)
-      cur <- paste0(pad, items[[i]])
+      cur <- paste0(pad, item)
     } else {
       cur <- paste0(cur, chunk)
+      first <- FALSE
     }
   }
 

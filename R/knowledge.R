@@ -504,7 +504,7 @@ print.Knowledge <- function(x, ...) {
   invisible(x)
 }
 
-.print_knowledge_body <- function(x) {
+.print_knowledge_body <- function(x, max_tiers = 5L, max_edge_groups = 8L) {
   n_tiers <- if (!is.null(x$tiers)) nrow(x$tiers) else 0L
   n_vars <- if (!is.null(x$vars)) nrow(x$vars) else 0L
   n_required <- sum(x$edges$status == "required", na.rm = TRUE)
@@ -512,9 +512,14 @@ print.Knowledge <- function(x, ...) {
 
   # ---- Tiers ----
   if (n_tiers > 0L) {
-    for (lbl in x$tiers$label) {
+    show <- min(n_tiers, max_tiers)
+    for (lbl in x$tiers$label[seq_len(show)]) {
       tier_vars <- x$vars$var[!is.na(x$vars$tier) & x$vars$tier == lbl]
       .print_item_line(paste0("tier(", lbl, ")"), tier_vars)
+    }
+    if (n_tiers > max_tiers) {
+      cat(sprintf("  ... and %d more tier%s\n", n_tiers - max_tiers,
+                  if (n_tiers - max_tiers != 1L) "s" else ""))
     }
   }
 
@@ -528,12 +533,20 @@ print.Knowledge <- function(x, ...) {
 
   # ---- Edges ----
   if (n_required > 0L || n_forbidden > 0L) {
+    n_shown <- 0L
     for (status in c("required", "forbidden")) {
       op <- if (status == "required") "%-->%" else "%!-->%"
       grp <- x$edges[x$edges$status == status, , drop = FALSE]
       if (nrow(grp) == 0L) next
       by_from <- split(grp$to, grp$from)
       for (from_var in names(by_from)) {
+        if (n_shown >= max_edge_groups) {
+          n_total_groups <- length(unique(x$edges$from))
+          cat(sprintf("  ... and %d more edge group%s\n",
+                      n_total_groups - n_shown,
+                      if (n_total_groups - n_shown != 1L) "s" else ""))
+          return(invisible())
+        }
         to_vars <- by_from[[from_var]]
         rhs <- if (length(to_vars) == 1L) {
           to_vars
@@ -541,6 +554,7 @@ print.Knowledge <- function(x, ...) {
           paste0("c(", paste(to_vars, collapse = ", "), ")")
         }
         cat(sprintf("  %s %s %s\n", from_var, op, rhs))
+        n_shown <- n_shown + 1L
       }
     }
   }
