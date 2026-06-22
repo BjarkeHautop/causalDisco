@@ -1,0 +1,139 @@
+---
+title: "US National Longitudinal Survey of Youth 1997"
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: '#>'
+    fig.align: "center"
+---
+
+```{r}
+#| label: setup
+library(causalDisco)
+```
+
+We will analyze this dataset
+
+```{r}
+#| label: load-data
+data(nlsy97)
+summary(nlsy97)
+```
+
+A short description of the dataset is given below
+
+Table: Survey variables overview
+
+| Variable name | Tier | Type    | Description |
+|---------------|------|---------|-------------|
+| r1_hhchildren | R1   | Numeric | Number of household members younger than 18. |
+| r1_mcollege   | R1   | Binary  | Did biological mother attend college? Levels: No, Yes. |
+| r1_urban      | R1   | Binary  | Residence in an urban or a rural area. Levels: Rural, Urban. |
+| r6_depressed  | R6   | Binary  | Depressive feelings during the last month. Binary factor derived from 4-point scale (levels: Any = 1–3, None = 4). |
+| r6_docvisits  | R6   | Numeric | Number of doctor’s visits during the last year. |
+| r6_exercise   | R6   | Numeric | Days with 30+ minutes exercise / week. |
+| r12_depressed | R12  | Binary  | Depressive feelings during the last month. Binary factor derived from 4-point scale (levels: Any = 1–3, None = 4). |
+| r12_docvisits | R12  | Numeric | Number of doctor’s visits during the last year. |
+| r12_health    | R12  | Binary  | Perception of own health. Binary factor derived from 5-point scale (levels: Good = 1–3, Poor = 4–5). |
+
+We are mainly interested in understanding what affects whether a person is depressed.
+
+For now we do complete-case-analysis on the data:
+
+```{r}
+nlsy97_cc <- nlsy97[complete.cases(nlsy97), ]
+```
+
+We start by using the PC algorithm with the mutual information (conditional Gaussian) test from bnlearn
+
+```{r}
+#| label: pc-bnlearn
+pc_bnlearn <- pc(engine = "bnlearn", test = "mi_cg")
+res_pc_bnlearn <- disco(data = nlsy97_cc, method = pc_bnlearn)
+plot(res_pc_bnlearn, layout = "kamada-kawai")
+```
+
+Similar, we could try the same for Tetrad.
+
+```{r}
+#| label: pc-tetrad
+pc_tetrad <- pc(engine = "tetrad", test = "conditional_gaussian")
+res_pc_tetrad <- disco(data = nlsy97_cc, method = pc_tetrad)
+plot(res_pc_tetrad, layout = "kamada-kawai")
+```
+
+We see Tetrad has much fewer orientations, which is what one usually sees when compared to bnlearn
+(it orients too much?).
+
+If we don't believe in the conditional gaussian assumption, we could use more general tests for independence.
+Here we use the Generalized Independence Noise test.
+
+```{r}
+#| label: pc-tetrad-gin
+pc_tetrad <- pc(engine = "tetrad", test = "gin")
+res_pc_tetrad <- disco(data = nlsy97_cc, method = pc_tetrad)
+plot(res_pc_tetrad, layout = "kamada-kawai")
+```
+
+use BOSS instead/also?
+
+# Temporal Knowledge
+
+We by definition have a temporal ordering of the variables, which we encode below
+
+```{r}
+#| label: knowledge
+kn <- knowledge(
+  nlsy97_cc,
+  tier(
+    r1 ~ starts_with("r1_"),
+    r6 ~ starts_with("r6_"),
+    r12 ~ starts_with("r12_")
+  )
+)
+plot(kn)
+```
+
+Now we can use this knowledge in the algorithms from above
+
+```{r}
+#| label: pc-bnlearn-knowledge
+pc_bnlearn <- pc(engine = "bnlearn", test = "mi_cg")
+res_pc_bnlearn <- disco(data = nlsy97_cc, method = pc_bnlearn, knowledge = kn)
+plot(res_pc_bnlearn)
+```
+
+Similar, we could try the same for Tetrad.
+
+```{r}
+#| label: pc-tetrad-knowledge
+pc_tetrad <- pc(engine = "tetrad", test = "conditional_gaussian")
+res_pc_tetrad <- disco(data = nlsy97_cc, method = pc_tetrad, knowledge = kn)
+plot(res_pc_tetrad)
+```
+
+```{r}
+#| label: boss-tetrad-knowledge
+boss_tetrad <- boss(engine = "tetrad", score = "conditional_gaussian")
+res_boss_tetrad <- disco(data = nlsy97_cc, method = boss_tetrad, knowledge = kn)
+plot(res_boss_tetrad)
+```
+
+Allow for latent confounding:
+
+```{r}
+#| label: fci-tetrad-gin
+fci_tetrad <- fci(engine = "tetrad", test = "gin")
+res_fci_tetrad <- disco(data = nlsy97_cc, method = fci_tetrad, knowledge = kn)
+plot(res_fci_tetrad)
+```
+
+If we don't believe in the conditional Gaussian assumption, we could use more general tests for independence.
+Here we use the Generalized Independence Noise test.
+
+```{r}
+#| label: pc-tetrad-knowledge-gin
+pc_tetrad <- pc(engine = "tetrad", test = "gin")
+res_pc_tetrad <- disco(data = nlsy97_cc, method = pc_tetrad, knowledge = kn)
+plot(res_pc_tetrad)
+```
