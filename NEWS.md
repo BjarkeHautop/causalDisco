@@ -6,8 +6,17 @@
   implementations from pcalg and Tetrad.
 
 - The infix edge operators `%-->%` and `%!-->%` in `knowledge()` now accept `+`
-  on both sides to specify multiple variables, e.g.
-  `A + B %-->% C + D` is equivalent to `c(A, B) %-->% c(C, D)`.
+  on both sides to specify multiple variables, e.g. `A + B %-->% C + D` is
+  equivalent to `c(A, B) %-->% c(C, D)`.
+
+- The infix edge operators `%-->%` and `%!-->%` in `knowledge()` now support
+  tidyselect set operations such as `!`, `&`, and `|` on either side, e.g.
+  `child_x1 %!-->% !starts_with("child")`.
+
+## Deprecated
+
+- The `summary()` methods for `Knowledge` and `Disco` objects are deprecated;
+  use `print()` instead.
 
 ## Bug fixes
 
@@ -17,6 +26,12 @@
   affected the no-data-frame form of `knowledge()`.
 
 ## Improvements
+
+- The `print()` methods for `Knowledge` and `Disco` objects now give a more
+  concise and readable summary.
+
+- `Disco` objects now report the actual learned graph class when printed (e.g.
+  `CPDAG`, `MPDAG`, or `PAG`) rather than the internal storage class.
 
 - Improved the documentation.
 
