@@ -145,6 +145,19 @@ can have edges to any variables starting with "youth". We can visualize this:
 plot(kn_3)
 ```
 
+The tidyselect set operations `!` (negation), `&` (intersection), and `|`
+(union) are also supported. For example, to forbid an edge from `child_x1` to
+every variable that is *not* a "child" variable:
+
+```{r}
+#| label: required-and-forbidden-knowledge-with-tidyselect-set-ops
+
+kn_4 <- knowledge(
+  tpc_example,
+  child_x1 %!-->% !starts_with("child")
+)
+```
+
 For a list of all available tidyselect helpers we refer to the [tidyselect
 reference documentation](https://tidyselect.r-lib.org/reference/index.html).
 

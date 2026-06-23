@@ -1367,3 +1367,51 @@ test_that("+ syntax with data and multiple edge lines matches c() syntax", {
   )
   expect_equal(kn_plus$edges, kn_c$edges)
 })
+
+# ──────────────────────────────────────────────────────────────────────────────
+# tidyselect helpers in edge operators
+# ──────────────────────────────────────────────────────────────────────────────
+
+test_that("tidyselect helpers select on both sides of edge operators", {
+  df <- data.frame(child_x1 = 1, child_x2 = 2, youth_x3 = 3, youth_x4 = 4)
+
+  kn_sel <- knowledge(df, starts_with("child") %!-->% starts_with("youth"))
+  kn_expl <- knowledge(
+    df,
+    child_x1 + child_x2 %!-->% youth_x3 + youth_x4
+  )
+  expect_equal(kn_sel$edges, kn_expl$edges)
+})
+
+test_that("tidyselect helpers mix with bare names and + in edge operators", {
+  df <- data.frame(child_x1 = 1, child_x2 = 2, youth_x3 = 3, old_x5 = 5)
+
+  kn_sel <- knowledge(df, starts_with("child") + old_x5 %-->% youth_x3)
+  kn_expl <- knowledge(df, child_x1 + child_x2 + old_x5 %-->% youth_x3)
+  expect_equal(kn_sel$edges, kn_expl$edges)
+})
+
+test_that("tidyselect set operations (! and &) work in edge operators", {
+  df <- data.frame(child_x1 = 1, child_x2 = 2, youth_x3 = 3, youth_x4 = 4)
+
+  # Negation: child_x1 -> everything that is not a "child" variable.
+  kn_neg <- knowledge(df, child_x1 %-->% !starts_with("child"))
+  kn_neg_expl <- knowledge(df, child_x1 %-->% youth_x3 + youth_x4)
+  expect_equal(kn_neg$edges, kn_neg_expl$edges)
+
+  # Intersection: only youth_x3 matches both selectors.
+  kn_and <- knowledge(
+    df,
+    child_x1 %-->% (starts_with("youth") & ends_with("x3"))
+  )
+  kn_and_expl <- knowledge(df, child_x1 %-->% youth_x3)
+  expect_equal(kn_and$edges, kn_and_expl$edges)
+})
+
+test_that("edge operator errors when a tidyselect helper matches nothing", {
+  df <- data.frame(child_x1 = 1, youth_x3 = 3)
+  expect_error(
+    knowledge(df, child_x1 %-->% starts_with("nope")),
+    "no variables matched"
+  )
+})

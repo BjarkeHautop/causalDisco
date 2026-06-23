@@ -332,18 +332,20 @@
     return(character(0))
   }
 
-  # character vector --> wrap in all_of()
+  # character vector --> wrap in all_of() so external names match strictly.
+  # Any other expression is a tidy-select expression that eval_select() can
+  # evaluate directly, which preserves set operations such as `!`, `&`, `|`,
+  # and `-`.
   if (is.character(spec)) {
-    q <- rlang::quo(dplyr::all_of(spec))
+    q <- rlang::quo(dplyr::all_of(!!spec))
   } else {
-    # 5) otherwise, a tidy-select expression → leave it as a quosure
     q <- rlang::as_quosure(spec, env = parent.frame())
   }
 
   # fall back to tidyselect
   vars <- tryCatch(
     names(tidyselect::eval_select(
-      rlang::expr(dplyr::all_of(!!q)), # !!q unquotes the symbol/variable
+      q,
       rlang::set_names(seq_along(kn$vars$var), kn$vars$var)
     )),
     error = function(e) character(0)
