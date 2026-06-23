@@ -197,7 +197,7 @@ test_that("as_disco print and summary methods", {
   print(kcg, wide = TRUE)
   print(kcg, compact = TRUE)
   print(kcg, wide = TRUE, compact = TRUE)
-  summary(kcg)
+  lifecycle::expect_deprecated(summary(kcg))
   expect_true(TRUE)
 })
 
@@ -209,6 +209,6 @@ test_that("as_disco print and summary methods works for empty kcg", {
   print(kcg, wide = TRUE)
   print(kcg, compact = TRUE)
   print(kcg, wide = TRUE, compact = TRUE)
-  summary(kcg)
+  lifecycle::expect_deprecated(summary(kcg))
   expect_true(TRUE)
 })

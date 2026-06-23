@@ -1290,7 +1290,7 @@ test_that("print and summary method for knowledge", {
   print(kn, wide = TRUE)
   print(kn, compact = TRUE)
   print(kn, wide = TRUE, compact = TRUE)
-  summary(kn)
+  lifecycle::expect_deprecated(summary(kn))
   expect_true(TRUE)
 })
 
@@ -1300,7 +1300,7 @@ test_that("print and summary method for empty knowledge works", {
   print(kn, wide = TRUE)
   print(kn, compact = TRUE)
   print(kn, wide = TRUE, compact = TRUE)
-  summary(kn)
+  lifecycle::expect_deprecated(summary(kn))
   expect_true(TRUE)
 })
 
@@ -1310,7 +1310,7 @@ test_that("print and summary method for no tier knowledge works", {
   print(kn, wide = TRUE)
   print(kn, compact = TRUE)
   print(kn, wide = TRUE, compact = TRUE)
-  summary(kn)
+  lifecycle::expect_deprecated(summary(kn))
   expect_true(TRUE)
 })
 
