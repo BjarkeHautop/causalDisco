@@ -1,5 +1,5 @@
 library(causalDisco)
-library(micd) # Gives access to the conditional_gaussian test for pcalg and causalDisco
+# install.packages(micd)# Gives access to the conditional_gaussian test for pcalg and causalDisco
 
 ########## 3.1. Method objects
 data("tpc_example")
@@ -57,18 +57,26 @@ summary(nlsy97)
 nlsy97_cc <- nlsy97[complete.cases(nlsy97), ]
 
 # PC algorithm via pcalg with the conditional Gaussian test.
-pc_pcalg <- pc(engine = "pcalg", test = "conditional_gaussian", alpha = 0.05)
-result_pcalg <- disco(nlsy97_cc, pc_pcalg)
+pc_bnlearn <- pc(engine = "bnlearn", test = "mi_cg", alpha = 0.05)
+fit_pcalg <- disco(nlsy97_cc, pc_bnlearn)
 
-pdf(file.path(fig_dir, "pc-pcalg.pdf"), width = 7, height = 6)
-plot(result_pcalg)
+pdf(file.path(fig_dir, "pc-bnlearn.pdf"), width = 7, height = 6)
+plot(
+  fit_pcalg,
+  node_style = list(size = 0.8),
+  label_style = list(fontsize = 10)
+)
 dev.off()
 
 
 # The same algorithm and test via the Tetrad backend.
 # Requires having set up Tetrad to run. See package README for instructions.
-pc_tetrad <- pc(engine = "tetrad", test = "conditional_gaussian", alpha = 0.05)
-disco(nlsy97_cc, pc_tetrad)
+pc_tetrad <- pc(
+  engine = "tetrad",
+  test = "conditional_gaussian",
+  alpha = 0.05
+)
+res_tetrad <- disco(nlsy97_cc, pc_tetrad)
 
 
 # Score-based search: GES via Tetrad with the conditional Gaussian BIC score.
@@ -91,13 +99,13 @@ kn <- knowledge(
 )
 
 # Re-run PC with the temporal tiers as background knowledge.
-pc_pcalg <- tpc(
+tpc_cd <- tpc(
   engine = "causalDisco",
   test = "conditional_gaussian",
   alpha = 0.05
 )
-result_pcalg_kn <- disco(nlsy97_cc, pc_pcalg, knowledge = kn)
+fit_cd_kn <- disco(nlsy97_cc, tpc_cd, knowledge = kn)
 
-pdf(file.path(fig_dir, "pc-pcalg-kn.pdf"), width = 7, height = 6)
-plot(result_pcalg_kn)
+pdf(file.path(fig_dir, "tpc-causalDisco-kn.pdf"), width = 7, height = 6)
+plot(fit_cd_kn)
 dev.off()
