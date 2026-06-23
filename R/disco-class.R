@@ -295,6 +295,12 @@ print.Disco <- function(x, ...) {
 }
 
 #' @title Summarize a Disco Object
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `summary()` for `Disco` objects is deprecated. Use [print()] instead.
+#'
 #' @param object A `Disco` object.
 #' @param ... Additional arguments (not used).
 #' @returns Invisibly returns the `Disco` object.
@@ -310,10 +316,15 @@ print.Disco <- function(x, ...) {
 #' )
 #' cd_tges <- tpc(engine = "causalDisco", test = "fisher_z")
 #' disco_cd_tges <- disco(data = tpc_example, method = cd_tges, knowledge = kn)
-#' summary(disco_cd_tges)
+#' print(disco_cd_tges)
 #'
 #' @exportS3Method summary Disco
 summary.Disco <- function(object, ...) {
+  lifecycle::deprecate_warn(
+    when = "1.2.0",
+    what = "summary.Disco()",
+    with = "print.Disco()"
+  )
   print(object, ...)
   invisible(object)
 }

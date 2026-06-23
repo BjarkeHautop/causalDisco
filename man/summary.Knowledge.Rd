@@ -15,7 +15,9 @@
 Invisibly returns the \code{Knowledge} object.
 }
 \description{
-Summarize a Knowledge Object
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{summary()} for \code{Knowledge} objects is deprecated. Use \code{\link[=print]{print()}} instead.
 }
 \examples{
 kn <- knowledge(
@@ -26,6 +28,6 @@ kn <- knowledge(
     old ~ starts_with("old")
   )
 )
-summary(kn)
+print(kn)
 
 }

@@ -633,6 +633,12 @@ print.Knowledge <- function(x, ...) {
 }
 
 #' @title Summarize a Knowledge Object
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `summary()` for `Knowledge` objects is deprecated. Use [print()] instead.
+#'
 #' @param object A `Knowledge` object.
 #' @param ... Additional arguments (not used).
 #' @returns Invisibly returns the `Knowledge` object.
@@ -645,10 +651,15 @@ print.Knowledge <- function(x, ...) {
 #'     old ~ starts_with("old")
 #'   )
 #' )
-#' summary(kn)
+#' print(kn)
 #'
 #' @exportS3Method summary Knowledge
 summary.Knowledge <- function(object, ...) {
+  lifecycle::deprecate_warn(
+    when = "1.2.0",
+    what = "summary.Knowledge()",
+    with = "print.Knowledge()"
+  )
   print(object, ...)
   invisible(object)
 }

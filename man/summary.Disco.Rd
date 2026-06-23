@@ -15,7 +15,9 @@
 Invisibly returns the \code{Disco} object.
 }
 \description{
-Summarize a Disco Object
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{summary()} for \code{Disco} objects is deprecated. Use \code{\link[=print]{print()}} instead.
 }
 \examples{
 data(tpc_example)
@@ -29,6 +31,6 @@ kn <- knowledge(
 )
 cd_tges <- tpc(engine = "causalDisco", test = "fisher_z")
 disco_cd_tges <- disco(data = tpc_example, method = cd_tges, knowledge = kn)
-summary(disco_cd_tges)
+print(disco_cd_tges)
 
 }
