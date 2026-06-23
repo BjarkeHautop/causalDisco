@@ -212,3 +212,57 @@ test_that("as_disco print and summary methods works for empty kcg", {
   lifecycle::expect_deprecated(summary(kcg))
   expect_true(TRUE)
 })
+
+test_that(".disco_graph_type maps storage class to semantic class", {
+  expect_equal(.disco_graph_type("PDAG", has_knowledge = FALSE), "CPDAG")
+  expect_equal(.disco_graph_type("PDAG", has_knowledge = TRUE), "MPDAG")
+  expect_equal(.disco_graph_type("PAG", has_knowledge = FALSE), "PAG")
+  expect_equal(.disco_graph_type("PAG", has_knowledge = TRUE), "PAG")
+  expect_equal(.disco_graph_type("RFCI-PAG", has_knowledge = FALSE), "RFCI-PAG")
+  expect_equal(.disco_graph_type(NULL, has_knowledge = FALSE), "UNKNOWN")
+})
+
+test_that(".knowledge_has_content detects tiers, required, and forbidden edges", {
+  df <- data.frame(A = 1, B = 2, C = 3)
+  expect_false(.knowledge_has_content(NULL))
+  expect_false(.knowledge_has_content(knowledge()))
+  expect_true(.knowledge_has_content(knowledge(df, tier(1 ~ A, 2 ~ B))))
+  expect_true(.knowledge_has_content(knowledge(df, A %-->% B)))
+  expect_true(.knowledge_has_content(knowledge(df, A %!-->% B)))
+})
+
+test_that("disco records semantic graph class for print", {
+  skip_if_not_installed("pcalg")
+  data(tpc_example)
+
+  cpdag <- disco(
+    data = tpc_example,
+    method = pc(engine = "pcalg", test = "fisher_z")
+  )
+  expect_equal(cpdag$graph_type, "CPDAG")
+  expect_match(
+    paste(utils::capture.output(print(cpdag)), collapse = "\n"),
+    "<Disco CPDAG"
+  )
+
+  kn <- knowledge(
+    tpc_example,
+    tier(
+      child ~ starts_with("child"),
+      youth ~ starts_with("youth"),
+      old ~ starts_with("old")
+    )
+  )
+  mpdag <- disco(
+    data = tpc_example,
+    method = tpc(engine = "causalDisco", test = "fisher_z"),
+    knowledge = kn
+  )
+  expect_equal(mpdag$graph_type, "MPDAG")
+
+  pag <- disco(
+    data = tpc_example,
+    method = fci(engine = "pcalg", test = "fisher_z")
+  )
+  expect_equal(pag$graph_type, "PAG")
+})

@@ -38,6 +38,8 @@ A \code{Disco} object (a list) containing the following components:
 \item \code{knowledge} A \code{Knowledge} object with the background knowledge
 used in the causal discovery algorithm.
 \item \code{caugi} A \link[caugi:caugi]{caugi::caugi} object representing the learned causal graph from the causal discovery algorithm.
+\item \code{graph_type} A string with the semantic class of the learned graph
+(e.g. \code{"CPDAG"}, \code{"MPDAG"}, or \code{"PAG"}).
 }
 }
 \description{

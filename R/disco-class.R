@@ -208,7 +208,10 @@ print.Disco <- function(x, ...) {
   )
 
   cg <- x$caugi
-  graph_class <- cg@graph_class
+  graph_class <- x$graph_type
+  if (is.null(graph_class)) {
+    graph_class <- cg@graph_class
+  }
   nd <- nodes(cg)
   ed <- edges(cg)
   n_nodes <- nrow(nd)
@@ -259,6 +262,29 @@ print.Disco <- function(x, ...) {
   }
 
   invisible(x)
+}
+
+.knowledge_has_content <- function(kn) {
+  if (is.null(kn)) {
+    return(FALSE)
+  }
+  n_tiers <- if (!is.null(kn$tiers)) nrow(kn$tiers) else 0L
+  n_required <- sum(kn$edges$status == "required", na.rm = TRUE)
+  n_forbidden <- sum(kn$edges$status == "forbidden", na.rm = TRUE)
+  n_tiers > 0L || n_required > 0L || n_forbidden > 0L
+}
+
+.disco_graph_type <- function(graph_class, has_knowledge) {
+  if (is.null(graph_class)) {
+    return("UNKNOWN")
+  }
+  switch(
+    graph_class,
+    PDAG = if (has_knowledge) "MPDAG" else "CPDAG",
+    PAG = "PAG",
+    `RFCI-PAG` = "RFCI-PAG",
+    graph_class
+  )
 }
 
 .print_item_line <- function(label, items, max_items = 10L) {

@@ -44,11 +44,14 @@
 #'   \item `knowledge` A `Knowledge` object with the background knowledge
 #'   used in the causal discovery algorithm.
 #'   \item `caugi` A [caugi::caugi] object representing the learned causal graph from the causal discovery algorithm.
+#'   \item `graph_type` A string with the semantic class of the learned graph
+#'   (e.g. `"CPDAG"`, `"MPDAG"`, or `"PAG"`).
 #' }
 #' @export
 disco <- function(data, method, knowledge = NULL) {
   engine <- attr(method, "engine")
-  graph_class <- attr(method, "graph_class")
+  method_graph_class <- attr(method, "graph_class")
+  graph_class <- method_graph_class
 
   if (is.null(graph_class)) {
     graph_class <- "UNKNOWN"
@@ -113,5 +116,12 @@ disco <- function(data, method, knowledge = NULL) {
   if (!is.null(knowledge)) {
     out <- set_knowledge(out, knowledge)
   }
+
+  # Record the semantic graph class so that print.Disco can report the actual
+  # class the algorithm produced.
+  out$graph_type <- .disco_graph_type(
+    method_graph_class,
+    .knowledge_has_content(knowledge)
+  )
   out
 }
