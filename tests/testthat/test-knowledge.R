@@ -1415,3 +1415,26 @@ test_that("edge operator errors when a tidyselect helper matches nothing", {
     "no variables matched"
   )
 })
+
+test_that("required edges that form a directed cycle are rejected", {
+  df <- data.frame(A = 1, B = 1, C = 1)
+  # 3-cycle
+  expect_error(
+    knowledge(df, A %-->% B, B %-->% C, C %-->% A),
+    "directed cycle"
+  )
+  # longer cycle
+  df2 <- data.frame(A = 1, B = 1, C = 1, D = 1)
+  expect_error(
+    knowledge(df2, A %-->% B, B %-->% C, C %-->% D, D %-->% A),
+    "directed cycle"
+  )
+})
+
+test_that("acyclic required edges and forbidden cycles are accepted", {
+  df <- data.frame(A = 1, B = 1, C = 1)
+  # an acyclic chain of required edges is fine
+  expect_no_error(knowledge(df, A %-->% B, B %-->% C))
+  # forbidden edges impose no orientation, so a "cycle" of forbidden edges is fine
+  expect_no_error(knowledge(df, A %!-->% B, B %!-->% C, C %!-->% A))
+})

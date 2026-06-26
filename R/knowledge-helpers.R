@@ -192,7 +192,70 @@
 
   # validate again for safety
   .validate_forbidden_required(kn$edges)
+  # required edges must not form a directed cycle: no DAG could satisfy them
+  .validate_no_required_cycle(kn$edges)
   kn
+}
+
+#' @title Reject Required Edges That Form a Directed Cycle
+#'
+#' @description
+#' Required edges are directed constraints, so a directed cycle among them
+#' (e.g. `A %-->% B`, `B %-->% C`, `C %-->% A`) cannot be satisfied by any DAG.
+#' This helper detects such cycles and errors. Forbidden edges impose no
+#' orientation and are ignored.
+#'
+#' @param edges The `edges` tibble of a `Knowledge` object.
+#' @returns Invisibly `NULL`; called for its side effect of erroring on a cycle.
+#' @keywords internal
+#' @noRd
+.validate_no_required_cycle <- function(edges) {
+  req <- edges[!is.na(edges$status) & edges$status == "required", , drop = FALSE]
+  if (nrow(req) < 2L) {
+    return(invisible(NULL))
+  }
+
+  nodes <- unique(c(req$from, req$to))
+  adj <- split(req$to, factor(req$from, levels = nodes))
+  # iterative DFS; state 0 = unvisited, 1 = on stack, 2 = done
+  state <- stats::setNames(integer(length(nodes)), nodes)
+  has_cycle <- FALSE
+
+  visit <- function(u) {
+    state[[u]] <<- 1L
+    for (v in adj[[u]]) {
+      sv <- state[[v]]
+      if (sv == 1L) {
+        has_cycle <<- TRUE
+        return(invisible())
+      }
+      if (sv == 0L) {
+        visit(v)
+        if (has_cycle) {
+          return(invisible())
+        }
+      }
+    }
+    state[[u]] <<- 2L
+  }
+
+  for (n in nodes) {
+    if (state[[n]] == 0L) {
+      visit(n)
+      if (has_cycle) {
+        break
+      }
+    }
+  }
+
+  if (has_cycle) {
+    stop(
+      "Required edges form a directed cycle, so no DAG can satisfy them. ",
+      "Remove or redirect the conflicting required edge(s).",
+      call. = FALSE
+    )
+  }
+  invisible(NULL)
 }
 
 #' @title Handle forbid_edge() / require_edge() calls
