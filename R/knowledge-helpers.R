@@ -210,7 +210,11 @@
 #' @keywords internal
 #' @noRd
 .validate_no_required_cycle <- function(edges) {
-  req <- edges[!is.na(edges$status) & edges$status == "required", , drop = FALSE]
+  req <- edges[
+    !is.na(edges$status) & edges$status == "required",
+    ,
+    drop = FALSE
+  ]
   if (nrow(req) < 2L) {
     return(invisible(NULL))
   }
