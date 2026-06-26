@@ -222,6 +222,115 @@ test_that(".disco_graph_type maps storage class to semantic class", {
   expect_equal(.disco_graph_type(NULL, has_knowledge = FALSE), "UNKNOWN")
 })
 
+test_that(".validate_graph_type keeps the label for valid CPDAGs/MPDAGs", {
+  valid_cpdag <- caugi::caugi(
+    from = c("A", "B"), edge = c("-->", "-->"), to = c("C", "C"),
+    nodes = c("A", "B", "C"), class = "PDAG"
+  )
+  valid_mpdag <- caugi::caugi(
+    from = "A", edge = "-->", to = "B",
+    nodes = c("A", "B"), class = "PDAG"
+  )
+
+  expect_silent(
+    expect_equal(
+      .validate_graph_type(valid_cpdag, "CPDAG", has_knowledge = FALSE),
+      "CPDAG"
+    )
+  )
+  expect_silent(
+    expect_equal(
+      .validate_graph_type(valid_mpdag, "MPDAG", has_knowledge = TRUE),
+      "MPDAG"
+    )
+  )
+})
+
+test_that(".validate_graph_type downgrades invalid CPDAGs/MPDAGs to PDAG with a warning", {
+  # A single directed edge is a valid MPDAG but not a valid CPDAG.
+  not_cpdag <- caugi::caugi(
+    from = "A", edge = "-->", to = "B",
+    nodes = c("A", "B"), class = "PDAG"
+  )
+  expect_warning(
+    res <- .validate_graph_type(not_cpdag, "CPDAG", has_knowledge = FALSE),
+    "not a valid CPDAG"
+  )
+  expect_equal(res, "PDAG")
+
+  # The seed-202 knowledge-conflict graph is a PDAG but not a valid MPDAG.
+  not_mpdag <- caugi::caugi(
+    from = c("child_x1", "child_x2", "child_x2", "oldage_x5", "oldage_x5", "youth_x4"),
+    edge = c("-->", "---", "-->", "-->", "---", "-->"),
+    to = c("youth_x3", "oldage_x6", "youth_x3", "child_x1", "youth_x3", "child_x1"),
+    nodes = c("child_x1", "child_x2", "youth_x3", "youth_x4", "oldage_x5", "oldage_x6"),
+    class = "PDAG"
+  )
+  expect_warning(
+    res2 <- .validate_graph_type(not_mpdag, "MPDAG", has_knowledge = TRUE),
+    "background knowledge conflicts"
+  )
+  expect_equal(res2, "PDAG")
+})
+
+test_that(".pcalg_amat_to_edges decodes directed, undirected, and bidirected edges", {
+  nodes <- c("A", "B", "C", "D")
+  # pcalg cpdag coding:
+  #   amat[i,j]=1, amat[j,i]=0  =>  j -> i
+  #   amat[i,j]=1, amat[j,i]=1  =>  i -- j
+  #   amat[i,j]=2, amat[j,i]=2  =>  i <-> j
+  amat <- matrix(
+    c(
+      0, 0, 2, 0, # A: amat[A,C]=2  (with amat[C,A]=2) -> A <-> C
+      1, 0, 0, 0, # B: amat[B,A]=1  (amat[A,B]=0)       -> A -> B
+      2, 0, 0, 1, # C: amat[C,D]=1
+      0, 0, 1, 0  # D: amat[D,C]=1  (amat[C,D]=1)       -> C -- D
+    ),
+    nrow = 4, byrow = TRUE, dimnames = list(nodes, nodes)
+  )
+
+  ed <- .pcalg_amat_to_edges(amat, nodes)
+  keyed <- ifelse(
+    ed$edge == "-->",
+    paste0(ed$from, "->", ed$to),
+    paste0(pmin(ed$from, ed$to), ed$edge, pmax(ed$from, ed$to))
+  )
+  expect_setequal(keyed, c("A->B", "A<->C", "C---D"))
+})
+
+test_that(".pcalg_amat_to_edges returns an empty frame for an empty graph", {
+  nodes <- c("A", "B")
+  amat <- matrix(0, 2, 2, dimnames = list(nodes, nodes))
+  ed <- .pcalg_amat_to_edges(amat, nodes)
+  expect_equal(nrow(ed), 0L)
+})
+
+test_that(".validate_graph_type reports UNKNOWN when the graph is not even a valid PDAG", {
+  # A directed cycle is neither a CPDAG/MPDAG nor a PDAG (e.g. Tetrad with
+  # conflict_rule = 2 can emit such graphs).
+  cyclic <- caugi::caugi(
+    from = c("A", "B", "C"), edge = c("-->", "-->", "-->"), to = c("B", "C", "A"),
+    nodes = c("A", "B", "C"), class = "AUTO"
+  )
+  expect_false(caugi::is_pdag(cyclic))
+
+  expect_warning(
+    res <- .validate_graph_type(cyclic, "CPDAG", has_knowledge = FALSE),
+    "reported as UNKNOWN"
+  )
+  expect_equal(res, "UNKNOWN")
+})
+
+test_that(".validate_graph_type passes non-CPDAG/MPDAG classes through unchecked", {
+  g <- caugi::caugi(
+    from = "A", edge = "-->", to = "B",
+    nodes = c("A", "B"), class = "PDAG"
+  )
+  expect_equal(.validate_graph_type(g, "PAG", has_knowledge = FALSE), "PAG")
+  expect_equal(.validate_graph_type(g, "RFCI-PAG", has_knowledge = FALSE), "RFCI-PAG")
+  expect_equal(.validate_graph_type(g, "UNKNOWN", has_knowledge = FALSE), "UNKNOWN")
+})
+
 test_that(".knowledge_has_content detects tiers, required, and forbidden edges", {
   df <- data.frame(A = 1, B = 2, C = 3)
   expect_false(.knowledge_has_content(NULL))

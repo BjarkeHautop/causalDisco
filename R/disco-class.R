@@ -73,8 +73,83 @@ as_disco.pcAlgo <- function(
   if (!is_knowledge(kn)) {
     stop("`kn` must be a Knowledge object.", call. = FALSE)
   }
-  cg <- caugi::as_caugi(graph@graph, collapse = TRUE, class = class)
+  # Convert via the adjacency matrix rather than the `graphNEL` slot so that
+  # bidirected conflict edges (\pkg{pcalg} amat code 2, produced with
+  # `solve.confl = TRUE`) are preserved as `<->` instead of being collapsed to
+  # undirected edges.
+  amat <- methods::as(graph, "amat")
+  nodes <- colnames(amat)
+  edges <- .pcalg_amat_to_edges(amat, nodes)
+
+  if (nrow(edges) == 0L) {
+    cg <- caugi::caugi(nodes = nodes, class = class)
+  } else {
+    cg_class <- if (any(edges$edge == "<->")) "UNKNOWN" else class
+    cg <- caugi::caugi(
+      from = edges$from,
+      edge = edges$edge,
+      to = edges$to,
+      nodes = nodes,
+      class = cg_class
+    )
+  }
   new_disco(cg, kn)
+}
+
+#' @title Convert a \pkg{pcalg} CPDAG Adjacency Matrix to caugi Edges
+#'
+#' @description
+#' Decodes a \pkg{pcalg} `amat` of type `"cpdag"` into a data frame of caugi
+#' edge triplets. The \pkg{pcalg} coding for an unordered pair `(i, j)` is:
+#' `amat[i,j] = 1, amat[j,i] = 0` means `j -> i`; `amat[i,j] = 1, amat[j,i] = 1`
+#' means `i -- j`; and `amat[i,j] = 2, amat[j,i] = 2` (only with
+#' `solve.confl = TRUE`) means the bidirected conflict edge `i <-> j`.
+#'
+#' @param amat A \pkg{pcalg} adjacency matrix of type `"cpdag"`.
+#' @param nodes The node names (column names of `amat`).
+#' @returns A data frame with character columns `from`, `edge`, and `to`.
+#' @keywords internal
+#' @noRd
+.pcalg_amat_to_edges <- function(amat, nodes) {
+  from <- character(0)
+  edge <- character(0)
+  to <- character(0)
+  np <- length(nodes)
+
+  if (np >= 2L) {
+    for (i in seq_len(np - 1L)) {
+      for (j in seq(i + 1L, np)) {
+        a <- amat[i, j]
+        b <- amat[j, i]
+        if (a == 0 && b == 0) {
+          next
+        }
+        ni <- nodes[i]
+        nj <- nodes[j]
+        if (a == 2 || b == 2) {
+          from <- c(from, ni)
+          edge <- c(edge, "<->")
+          to <- c(to, nj)
+        } else if (a == 1 && b == 1) {
+          from <- c(from, ni)
+          edge <- c(edge, "---")
+          to <- c(to, nj)
+        } else if (a == 1 && b == 0) {
+          # amat[i,j] = 1, amat[j,i] = 0  =>  j -> i
+          from <- c(from, nj)
+          edge <- c(edge, "-->")
+          to <- c(to, ni)
+        } else {
+          # amat[i,j] = 0, amat[j,i] = 1  =>  i -> j
+          from <- c(from, ni)
+          edge <- c(edge, "-->")
+          to <- c(to, nj)
+        }
+      }
+    }
+  }
+
+  data.frame(from = from, edge = edge, to = to, stringsAsFactors = FALSE)
 }
 
 #' @inheritParams as_disco
@@ -285,6 +360,59 @@ print.Disco <- function(x, ...) {
     `RFCI-PAG` = "RFCI-PAG",
     graph_class
   )
+}
+
+#' @title Verify the Semantic Graph Class of a Learned Graph
+#'
+#' @description
+#' Constraint-based algorithms may output graphs that are not valid CPDAGs/MPDAGs due to statistical errors in
+#' finite samples, violations of faithfulness, or latent confounding. This helper checks the claimed
+#' semantic class against the actual graph and, when the claim does not hold, warns then downgrades
+#' the reported class to:
+#' `"PDAG"` if the graph is at least a valid PDAG, otherwise to `"UNKNOWN"`.
+#'
+#' @param cg A [caugi::caugi] object.
+#' @param claimed The semantic class proposed by `.disco_graph_type()`.
+#' @param has_knowledge Whether background knowledge was supplied.
+#'
+#' @returns The verified semantic class: `claimed` if valid, otherwise `"PDAG"`
+#'   or `"UNKNOWN"`.
+#' @keywords internal
+#' @noRd
+.validate_graph_type <- function(cg, claimed, has_knowledge) {
+  if (!claimed %in% c("CPDAG", "MPDAG")) {
+    return(claimed)
+  }
+
+  valid <- tryCatch(
+    if (claimed == "CPDAG") caugi::is_cpdag(cg) else caugi::is_mpdag(cg),
+    error = function(e) NA
+  )
+  if (isTRUE(valid)) {
+    return(claimed)
+  }
+
+  is_valid_pdag <- tryCatch(caugi::is_pdag(cg), error = function(e) NA)
+  fallback <- if (isTRUE(is_valid_pdag)) "PDAG" else "UNKNOWN"
+
+  reason <- if (has_knowledge) {
+    "the background knowledge conflicts with the structure learned from the data"
+  } else {
+    "of conflicting edge orientations in finite samples"
+  }
+  warning(
+    sprintf(
+      paste0(
+        "The learned graph is not a valid %s because %s; it is reported as ",
+        "%s instead."
+      ),
+      claimed,
+      reason,
+      fallback
+    ),
+    call. = FALSE
+  )
+  fallback
 }
 
 .print_item_line <- function(label, items, max_items = 10L) {

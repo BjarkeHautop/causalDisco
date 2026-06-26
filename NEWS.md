@@ -30,8 +30,11 @@
 - The `print()` methods for `Knowledge` and `Disco` objects now give a more
   concise and readable summary.
 
-- `Disco` objects now report the actual learned graph class when printed (e.g.
-  `CPDAG`, `MPDAG`, or `PAG`) rather than the internal storage class.
+- `Disco` objects now store an attribute `graph_class` of the actual learned
+  graph class.
+  
+- `Knowledge` objects generated from `knowledge()` now verifies the knowledge
+  for requires edges doesn't contain a directed cycle.
 
 - Improved the documentation.
 

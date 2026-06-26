@@ -47,6 +47,10 @@
 #'   \item `graph_type` A string with the semantic class of the learned graph
 #'   (e.g. `"CPDAG"`, `"MPDAG"`, or `"PAG"`).
 #' }
+#'
+#' Constraint-based algorithms may output graphs that are not valid CPDAGs/MPDAGs due to statistical errors in finite
+#' samples, violations of faithfulness, or latent confounding. In that case `disco()` emits a warning and downgrades
+#' `graph_type`.
 #' @export
 disco <- function(data, method, knowledge = NULL) {
   engine <- attr(method, "engine")
@@ -96,15 +100,18 @@ disco <- function(data, method, knowledge = NULL) {
         caugi::mutate_caugi(out$caugi, graph_class)
       },
       error = function(e) {
-        cycle_msg <- ""
+        detail <- ""
         if (identical(graph_class, "PDAG")) {
-          cycle_msg <- " The graph contains a directed cycle."
+          detail <- paste0(
+            " The graph is not a valid PDAG (it may contain a directed cycle ",
+            "or bidirected conflict edges)."
+          )
         }
         warning(
           sprintf(
             "Cannot mutate graph to class '%s'.%s",
             graph_class,
-            cycle_msg
+            detail
           ),
           call. = FALSE
         )
@@ -118,10 +125,15 @@ disco <- function(data, method, knowledge = NULL) {
   }
 
   # Record the semantic graph class so that print.Disco can report the actual
-  # class the algorithm produced.
-  out$graph_type <- .disco_graph_type(
-    method_graph_class,
-    .knowledge_has_content(knowledge)
-  )
+  # class the algorithm produced. The claimed class (CPDAG/MPDAG) is verified
+  # against the graph and downgraded to "PDAG" with a warning if it does not
+  # hold (e.g. finite-sample conflicts or contradictory background knowledge).
+  has_knowledge <- .knowledge_has_content(knowledge)
+  claimed_type <- .disco_graph_type(method_graph_class, has_knowledge)
+  out$graph_type <- if (!is.null(out$caugi)) {
+    .validate_graph_type(out$caugi, claimed_type, has_knowledge)
+  } else {
+    claimed_type
+  }
   out
 }
