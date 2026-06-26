@@ -20,10 +20,14 @@
 #'
 #' @details
 #' The first argument can be a data frame, which will be used to populate the
-#' `Knowledge` object with variable names. If you later add variables with
+#' `Knowledge` object with variable names. Supplying a data frame also gives
+#' \pkg{tidyselect} helpers (e.g. [tidyselect::starts_with()]), a set of column
+#' names to resolve against, so they can be used throughout the mini-DSL, for example
+#' `tier(1 ~ starts_with("V"))` or `everything() %-->% Y`. If you later add
+#' variables with
 #' `add_*` verbs, this will throw a warning, since the `Knowledge` object will
 #' be *frozen*. You can unfreeze a `Knowledge` object by using the function
-#' `unfreeze(knowledge)`.
+#' [unfreeze()].
 #'
 #' If no data frame is provided, the object is initially empty. Variables can
 #' then be added via `tier()`, `forbidden()`, `required()`, infix operators, or `add_vars()`.

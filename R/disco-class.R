@@ -367,7 +367,7 @@ print.Disco <- function(x, ...) {
 #' @description
 #' Constraint-based algorithms may output graphs that are not valid CPDAGs/MPDAGs due to statistical errors in
 #' finite samples, violations of faithfulness, or latent confounding. This helper checks the claimed
-#' semantic class against the actual graph and, when the claim does not hold, warns then downgrades
+#' semantic class against the actual graph and, when the claim does not hold, emits a message then downgrades
 #' the reported class to:
 #' `"PDAG"` if the graph is at least a valid PDAG, otherwise to `"UNKNOWN"`.
 #'
@@ -398,9 +398,9 @@ print.Disco <- function(x, ...) {
   reason <- if (has_knowledge) {
     "the background knowledge conflicts with the structure learned from the data"
   } else {
-    "of conflicting edge orientations in finite samples"
+    "of conflicting edge orientations, which can happen due to statistical errors in finite samples, violations of faithfulness, or latent confounding"
   }
-  warning(
+  message(
     sprintf(
       paste0(
         "The learned graph is not a valid %s because %s; it is reported as ",
@@ -409,8 +409,7 @@ print.Disco <- function(x, ...) {
       claimed,
       reason,
       fallback
-    ),
-    call. = FALSE
+    )
   )
   fallback
 }

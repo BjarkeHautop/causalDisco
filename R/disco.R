@@ -49,7 +49,7 @@
 #' }
 #'
 #' Constraint-based algorithms may output graphs that are not valid CPDAGs/MPDAGs due to statistical errors in finite
-#' samples, violations of faithfulness, or latent confounding. In that case `disco()` emits a warning and downgrades
+#' samples, violations of faithfulness, or latent confounding. In that case `disco()` emits a message and downgrades
 #' `graph_type`.
 #' @export
 disco <- function(data, method, knowledge = NULL) {
@@ -126,7 +126,7 @@ disco <- function(data, method, knowledge = NULL) {
 
   # Record the semantic graph class so that print.Disco can report the actual
   # class the algorithm produced. The claimed class (CPDAG/MPDAG) is verified
-  # against the graph and downgraded to "PDAG" with a warning if it does not
+  # against the graph and downgraded to "PDAG" with a message if it does not
   # hold (e.g. finite-sample conflicts or contradictory background knowledge).
   has_knowledge <- .knowledge_has_content(knowledge)
   claimed_type <- .disco_graph_type(method_graph_class, has_knowledge)

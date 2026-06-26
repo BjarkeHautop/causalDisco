@@ -43,7 +43,7 @@ used in the causal discovery algorithm.
 }
 
 Constraint-based algorithms may output graphs that are not valid CPDAGs/MPDAGs due to statistical errors in finite
-samples, violations of faithfulness, or latent confounding. In that case \code{disco()} emits a warning and downgrades
+samples, violations of faithfulness, or latent confounding. In that case \code{disco()} emits a message and downgrades
 \code{graph_type}.
 }
 \description{
