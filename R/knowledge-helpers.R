@@ -215,44 +215,23 @@
     ,
     drop = FALSE
   ]
-  if (nrow(req) < 2L) {
+  if (nrow(req) == 0L) {
     return(invisible(NULL))
   }
 
-  nodes <- unique(c(req$from, req$to))
-  adj <- split(req$to, factor(req$from, levels = nodes))
-  # iterative DFS; state 0 = unvisited, 1 = on stack, 2 = done
-  state <- stats::setNames(integer(length(nodes)), nodes)
-  has_cycle <- FALSE
+  acyclic <- tryCatch(
+    caugi::is_acyclic(
+      caugi::caugi(
+        from = req$from,
+        edge = rep("-->", nrow(req)),
+        to = req$to,
+        class = "UNKNOWN"
+      )
+    ),
+    error = function(e) FALSE
+  )
 
-  visit <- function(u) {
-    state[[u]] <<- 1L
-    for (v in adj[[u]]) {
-      sv <- state[[v]]
-      if (sv == 1L) {
-        has_cycle <<- TRUE
-        return(invisible())
-      }
-      if (sv == 0L) {
-        visit(v)
-        if (has_cycle) {
-          return(invisible())
-        }
-      }
-    }
-    state[[u]] <<- 2L
-  }
-
-  for (n in nodes) {
-    if (state[[n]] == 0L) {
-      visit(n)
-      if (has_cycle) {
-        break
-      }
-    }
-  }
-
-  if (has_cycle) {
+  if (!isTRUE(acyclic)) {
     stop(
       "Required edges form a directed cycle, so no DAG can satisfy them. ",
       "Remove or redirect the conflicting required edge(s).",

@@ -1418,6 +1418,10 @@ test_that("edge operator errors when a tidyselect helper matches nothing", {
 
 test_that("required edges that form a directed cycle are rejected", {
   df <- data.frame(A = 1, B = 1, C = 1)
+  expect_error(
+    knowledge(df, A %-->% B, B %-->% A),
+    "required in both directions"
+  )
   # 3-cycle
   expect_error(
     knowledge(df, A %-->% B, B %-->% C, C %-->% A),
