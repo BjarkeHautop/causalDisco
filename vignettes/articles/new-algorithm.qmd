@@ -85,6 +85,78 @@ rather than `test` and `alpha`. A **hybrid** algorithm would accept `test`,
 To implement an algorithm from pcalg rather than bnlearn, we would follow the
 same structure but change all instances of `"bnlearn"` to `"pcalg"`.
 
+# A fully custom algorithm implemented in R
+
+Sometimes you want an algorithm that doesn't wrap a bnlearn, pcalg, or Tetrad
+implementation at all, but is just a plain R function you wrote yourself. The
+`causalDisco` engine's `CausalDiscoSearch$set_alg()` accepts such a function
+directly, so you can reuse its data/knowledge/test handling while swapping out
+only the search procedure.
+
+A **constraint-based** custom algorithm has the signature
+`function(data, knowledge, suff_stat)`, mirroring `tpc_run()`/`tfci_run()`. A
+**score-based** custom algorithm instead has the signature `function(score)`,
+mirroring `tges_run()`; pass `type = "score"` to `set_alg()` for these. Here we
+implement a (trivial) constraint-based algorithm that just calls `tpc_run()`
+with a specific test:
+
+```{r}
+#| label: my-custom-alg
+
+my_alg <- function(data, knowledge, suff_stat) {
+  tpc_run(
+    data = data,
+    knowledge = knowledge,
+    suff_stat = suff_stat,
+    test = reg_test
+  )
+}
+```
+
+To wire this into `disco()`, with the same knowledge injection and return type
+as the built-in algorithms, wrap a `CausalDiscoSearch` object in
+`make_method()`, exactly as we did for `hpc()` above:
+
+```{r}
+#| label: my-alg-method
+
+my_engine_fn <- function(...) {
+  search <- CausalDiscoSearch$new()
+  search$set_test("reg")
+  search$set_alg(my_alg)
+
+  list(
+    set_knowledge = function(knowledge) search$set_knowledge(knowledge),
+    run = function(data) search$run_search(data)
+  )
+}
+
+my_method <- make_method(
+  method_name = "my_alg",
+  engine = "causalDisco",
+  engine_fns = list(causalDisco = my_engine_fn),
+  graph_class = "PDAG"
+)
+```
+
+`my_method` can now be used exactly like any built-in method:
+
+```{r}
+#| label: my-alg-example
+
+data(tpc_example)
+kn <- knowledge(
+  tpc_example,
+  tier(
+    child ~ tidyselect::starts_with("child"),
+    youth ~ tidyselect::starts_with("youth"),
+    oldage ~ tidyselect::starts_with("oldage")
+  )
+)
+result <- disco(data = tpc_example, method = my_method, knowledge = kn)
+plot(result)
+```
+
 # Tetrad
 
 We will illustrate how to make a custom version (which actually does the same as

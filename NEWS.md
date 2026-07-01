@@ -13,6 +13,11 @@
   tidyselect set operations such as `!`, `&`, and `|` on either side, e.g.
   `child_x1 %!-->% !starts_with("child")`.
 
+- You can now plug a fully custom, user-written search algorithm into the
+  causalDisco engine and run it through `disco()` (via
+  `CausalDiscoSearch$set_alg()` and `make_method()`). See the "Extending
+  causalDisco with new algorithms" article for a worked example.
+
 ## Deprecated
 
 - The `summary()` methods for `Knowledge` and `Disco` objects are deprecated;
@@ -32,7 +37,7 @@
 
 - `Disco` objects now store an attribute `graph_class` of the actual learned
   graph class.
-  
+
 - `Knowledge` objects generated from `knowledge()` now verifies the knowledge
   for requires edges doesn't contain a directed cycle.
 
