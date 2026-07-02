@@ -87,59 +87,64 @@ same structure but change all instances of `"bnlearn"` to `"pcalg"`.
 
 # A fully custom algorithm implemented in R
 
-Sometimes you want an algorithm that doesn't wrap a bnlearn, pcalg, or Tetrad
-implementation at all, but is just a plain R function you wrote yourself. The
-`causalDisco` engine's `CausalDiscoSearch$set_alg()` accepts such a function
-directly, so you can reuse its data/knowledge/test handling while swapping out
-only the search procedure.
+Here we show how to use a plain R function you wrote yourself as an algorithm,
+instead of from a package. The `causalDisco` engine's
+`CausalDiscoSearch$set_alg()` accepts such a function directly, so you can reuse
+its data/knowledge/test handling while swapping out only the search procedure.
 
 A **constraint-based** custom algorithm has the signature
 `function(data, knowledge, suff_stat)`, mirroring `tpc_run()`/`tfci_run()`. A
 **score-based** custom algorithm instead has the signature `function(score)`,
 mirroring `tges_run()`; pass `type = "score"` to `set_alg()` for these. Here we
 implement a (trivial) constraint-based algorithm that just calls `tpc_run()`
-with a specific test:
-
-```{r}
-#| label: my-custom-alg
-
-my_alg <- function(data, knowledge, suff_stat) {
-  tpc_run(
-    data = data,
-    knowledge = knowledge,
-    suff_stat = suff_stat,
-    test = reg_test
-  )
-}
-```
+with whatever test the search object was configured with.
 
 To wire this into `disco()`, with the same knowledge injection and return type
 as the built-in algorithms, wrap a `CausalDiscoSearch` object in
-`make_method()`, exactly as we did for `hpc()` above:
+`make_method()`, exactly as we did for `hpc()` above. One thing to watch out
+for: `search$set_test()` doesn't just resolve the test to a function (afterwards
+available as `search$test`), it also computes the sufficient statistic that
+`run_search()` passes into your algorithm's `suff_stat` argument. So your custom
+algorithm should read the test off `search$test` rather than hardcoding one, to
+keep the two in sync.
 
 ```{r}
 #| label: my-alg-method
 
-my_engine_fn <- function(...) {
-  search <- CausalDiscoSearch$new()
-  search$set_test("reg")
-  search$set_alg(my_alg)
+my_alg <- function(test = "fisher_z", alpha = 0.05, ...) {
+  make_method(
+    method_name = "my_alg",
+    engine = "causalDisco",
+    engine_fns = list(
+      causalDisco = function(test, alpha, ...) {
+        search <- CausalDiscoSearch$new()
+        search$set_test(test, alpha)
 
-  list(
-    set_knowledge = function(knowledge) search$set_knowledge(knowledge),
-    run = function(data) search$run_search(data)
+        my_search_alg <- function(data, knowledge, suff_stat) {
+          tpc_run(
+            data = data,
+            knowledge = knowledge,
+            suff_stat = suff_stat,
+            test = search$test
+          )
+        }
+        search$set_alg(my_search_alg)
+
+        list(
+          set_knowledge = function(knowledge) search$set_knowledge(knowledge),
+          run = function(data) search$run_search(data)
+        )
+      }
+    ),
+    test = test,
+    alpha = alpha,
+    graph_class = "PDAG",
+    ...
   )
 }
-
-my_method <- make_method(
-  method_name = "my_alg",
-  engine = "causalDisco",
-  engine_fns = list(causalDisco = my_engine_fn),
-  graph_class = "PDAG"
-)
 ```
 
-`my_method` can now be used exactly like any built-in method:
+`my_alg()` can now be used exactly like any built-in method:
 
 ```{r}
 #| label: my-alg-example
@@ -153,7 +158,11 @@ kn <- knowledge(
     oldage ~ tidyselect::starts_with("oldage")
   )
 )
-result <- disco(data = tpc_example, method = my_method, knowledge = kn)
+result <- disco(
+  data = tpc_example,
+  method = my_alg(test = "fisher_z"),
+  knowledge = kn
+)
 plot(result)
 ```
 
