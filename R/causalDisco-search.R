@@ -476,15 +476,9 @@ CausalDiscoSearch <- R6::R6Class(
         }
         self$score <- private$score_function()
 
-        if (!is.null(self$knowledge)) {
-          res <- self$alg(
-            score = self$score
-          )
-        } else {
-          res <- self$alg(
-            score = self$score
-          )
-        }
+        res <- self$alg(
+          score = self$score
+        )
         res
       }
     }

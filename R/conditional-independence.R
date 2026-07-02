@@ -89,7 +89,6 @@ reg_test_each_dir <- function(x, y, conditioning_set, suff_stat) {
   y <- vnames[y]
   conditioning_set_bin <- vnames[bin_conditioning_set]
   conditioning_set_num <- vnames[num_conditioning_set]
-  # allS <- c(conditioning_set_bin, conditioning_set_num) # TODO: Not used
 
   # add spline to num x, factor to binary x
   if (!binx) {
