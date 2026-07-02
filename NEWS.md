@@ -18,6 +18,10 @@
   `CausalDiscoSearch$set_alg()` and `make_method()`). See the "Extending
   causalDisco with new algorithms" article for a worked example.
 
+- Added `register_engine()`, which lets you plug in an entirely new engine
+  backend (i.e. one not built on bnlearn, causalDisco, pcalg, or Tetrad) so. See
+  the "Extending causalDisco with new algorithms" article for a worked example.
+
 ## Deprecated
 
 - The `summary()` methods for `Knowledge` and `Disco` objects are deprecated;

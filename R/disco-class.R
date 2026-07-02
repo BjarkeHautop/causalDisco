@@ -1,8 +1,10 @@
-#' @title Disco Object
+#' @title Wrap a Graph as a Disco Object
 #'
 #' @description
-#' This S3 class wraps [caugi::caugi] graph object and a `Knowledge` object. It is the
-#' output object of causal discovery methods used in \pkg{causalDisco}.
+#' Wraps a causal graph object (e.g. a [caugi::caugi] graph, or a graph object
+#' from \pkg{pcalg} or \pkg{bnlearn}) and a `Knowledge` object into a `Disco`
+#' object, which is the output object of causal discovery methods used in
+#' \pkg{causalDisco}.
 #'
 #' @details
 #' The conversion from any graph type to a [caugi::caugi] is handled by the \pkg{caugi}
@@ -15,8 +17,9 @@
 #' @returns A `Disco` object containing a [caugi::caugi] and a `Knowledge` object in a list.
 #'
 #' @seealso [caugi::caugi()]
-#' @keywords internal
-#' @noRd
+#' @family Extending causalDisco
+#' @concept extending_causalDisco
+#' @export
 as_disco <- function(graph, kn = knowledge(), class = "PDAG") {
   UseMethod("as_disco")
 }

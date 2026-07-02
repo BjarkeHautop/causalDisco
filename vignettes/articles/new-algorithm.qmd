@@ -278,10 +278,91 @@ Finally, we clean up the custom registered Tetrad algorithm
 reset_tetrad_alg_registry()
 ```
 
+# A brand-new engine
+
+Everything above adds a new *algorithm* to one of the built-in engines
+(`"bnlearn"`, `"causalDisco"`, `"pcalg"`, `"tetrad"`). This section shows how to
+add a new *engine* to causalDisco.
+
+`register_engine()` takes an engine name, a `make_runner_fn`, and the packages
+it depends on. `make_runner_fn` must accept `alg` and `...`, and must return a
+*runner*: a list with a `set_knowledge()` function and a `run()` function. This
+is the same runner shape returned by `make_runner()` itself, and by the
+`engine_fns` we wrote by hand in the "fully custom algorithm" example above.
+`run()` should return its graph wrapped with `as_disco()`, which is what
+`disco()`, `print()`, and `plot()` expect.
+
+Here we register a (trivial) `"always_empty"` engine that ignores its input and
+always returns the empty graph over the columns of the input data, to show the
+registration mechanics.
+
+```{r}
+#| label: register-engine
+
+always_empty_runner <- function(alg, ...) {
+  kn <- knowledge()
+  list(
+    set_knowledge = function(knowledge) kn <<- knowledge,
+    run = function(data) {
+      cg <- caugi::caugi(
+        from = character(0),
+        edge = character(0),
+        to = character(0),
+        nodes = names(data),
+        class = "PDAG"
+      )
+      as_disco(cg, kn)
+    }
+  )
+}
+
+register_engine("always_empty", always_empty_runner)
+```
+
+With the engine registered, we can wire up a method for it with `make_method()`
+and `make_runner()`, just like `hpc()` and `my_boss_variant()` above:
+
+```{r}
+#| label: empty-alg-function
+
+empty_alg <- function(engine = "always_empty", ...) {
+  engine <- match.arg(engine)
+
+  make_method(
+    method_name = "empty_alg",
+    engine = engine,
+    engine_fns = list(
+      always_empty = function(...) {
+        make_runner(engine = "always_empty", alg = "empty_alg", ...)
+      }
+    ),
+    graph_class = "PDAG",
+    ...
+  )
+}
+```
+
+```{r}
+#| label: empty-alg-example
+
+disco(tpc_example, empty_alg())
+```
+
+You can view all registered engines with `list_registered_engines()`, and clear
+them with `reset_engine_registry()`:
+
+```{r}
+#| label: cleanup-engine
+
+list_registered_engines()
+reset_engine_registry()
+```
+
 # Conclusion
 
 In this article, we have illustrated how to add new algorithms to causalDisco,
-both from the R packages pcalg and bnlearn and from Tetrad.
+both from the R packages pcalg and bnlearn and from Tetrad, as well as how to
+register an entirely new engine backend.
 
 If you have any feedback or suggestions for improvement on the API and
 functionality for extending causalDisco, please let us know by opening an issue
